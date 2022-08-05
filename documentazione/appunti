@@ -1,0 +1,68 @@
+I lavoratori non ricoprono un ruolo nel sistema, perchè fanno solo riferimento ai dipendenti dell'agenzia e non fanno accesso diretto al sistema.
+Solo i responsabili possono inserire/modificare dati dei lavoratori(lavoratore nel database), quando il lavoratore ne fa richiesta.
+
+(Assunzione -> si suppone la modifica solo dei dati riguardanti i lavori svolti)
+
+Dati lavoratori:
+    - Anagrafica:
+        * Nome (Assunzione -> almeno una)
+        * Cognome (Assunzione -> almeno una)
+        * Luogo e data di nascita (Assunzione -> città (controllo?), data gg/mm/aa)
+        * Nazionalità (Assunzione -> almeno una)
+    - Indirizzo (Assunzione -> solo uno obbligatorio, abitazione principale)
+    - Recapito telefonico personale (opzionale) (Assunzione -> controllo sintassi numero telefonico)
+    - Email (Assunzione -> solo uno obbligatorio + controllo sintassi mail)
+    - Eventuali specializzazioni / esperienze precedenti: (Assunzione -> specializzazione /= esperienza precedente?, può anche non averla)
+        * Bagnino
+        * Barman
+        * Instruttore di nuoto
+        * Viticultore
+        * Floricultore
+    - Lingue parlate (Assunzione -> almeno una)
+    - Tipo di patente di guida (Assunzione -> può anche non averla)
+    - Automunito (opzionale)
+    - Disponibilità (Assunzione -> può cambiare nel tempo, il lavoratore può anche non essere disponibile)
+        * Periodi (Assunzione -> formato mm/aa inizio - mm/aa fine, ce ne possono essere di più per ogni lavoratore che non si accavallano fra loro. Ogni periodo è associato ad un certo comune. Minimo un mese, massimo tempo indefinito.)
+        * Comuni
+    - Contatti urgenti (almeno una persona obbligatoria) (Assunzione -> ogni campo è richiesto)
+        * Nome
+        * Cognome
+        * Telefono
+        * Email
+
+(Assunzione -> il login è necessario per tutte le operazioni, necessario ai responsabili dell'agenzia)
+
+Dati dipendenti agenzia:
+    - Anagrafica:
+        * Nome (Assunzione -> almeno una)
+        * Cognome (Assunzione -> almeno una)
+        * Luogo e data di nascita (Assunzione -> città (controllo?), data gg/mm/aa)
+        * Nazionalità (Assunzione -> almeno una)
+    - Recapito telefonico personale (opzionale) (Assunzione -> controllo sintassi numero telefonico)
+    - Email (Assunzione -> solo uno obbligatorio + controllo sintassi mail)
+    - Credenziali: (Assunzione -> Forniti dall'azienda ai dipendenti)
+        * Login (Assunzione -> qualsiasi stringa)
+        * Password (Assunzione -> qualsiasi stringa)
+
+Esperienze lavoratori passate (5 anni, possono essere modificate):
+    - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
+    - Nome dell'azienda
+    - Mansioni svolte (Assunzione -> minimo 1, massimo 5. E' direttamente collegata con il profilo del lavoratore)
+        * Bagnino
+        * Barman
+        * Instruttore di nuoto
+        * Viticultore
+        * Floricultore
+    - Luogo di lavoro (Assunzione -> un comune obbligatorio)
+    - Retribuzione lorda giornaliera
+
+Ricerca:
+    - Per lavoratore (Assunzione -> ricerca in base ai campi dell'anagrafica)
+    - Per lingue parlate
+    - Per periodo di disponibilità
+    - Per mansioni indicate
+    - Per luogo di residenza
+    - Per disponibilità automunito (Assunzione -> basta che ce l'abbia)
+    - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
+
+(Assunzione -> la ricerca viene fatta in AND oppure OR fra i diversi campi, sia interni ad un tipo di dato che esterni)

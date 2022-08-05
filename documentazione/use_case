@@ -1,0 +1,45 @@
+# Accedere con login
+Attori: Dipendente
+Precondizioni: Nessuna
+Passi:
+    1. Il dipendente è introdotto con l'interfaccia di login
+    2. Il dipendente inserisce il proprio username
+    3. Il dipendente inserisce la propria password
+    4. Il dipendente conferma l'inserimento delle credenziali
+Postcondizioni: il dipendente è entrato nel sistema
+
+# Effettuare ricerca
+(Il dipendente esegue una ricarca nel sistema)
+Attori: Dipendente
+Precondizioni: Il dipendente deve essere autenticato
+Passi:
+    1. Il dipendente accede alla parte del sistema dove viene effettuata la ricerca
+    2. Il dipendente è introdotto all'interfaccia con cui è possibile effettuare ricerche
+    3. Il dipendente inserisce i dati della ricerca
+    4. Il dipendente seleziona l'operatore di ricerca (AND oppure OR)
+    5. Il dipendente conferma la ricerca
+Postcondizioni: il dipendente visualizza i risultati della ricerca
+
+# Inserire dati lavoratori 
+(Il dipendente inserire nel sistema i dati di un nuovo lavoratore)
+Attori:  Dipendente
+Precondizioni: Il dipendente deve essere autenticato
+Passi:
+    1. Il dipendente accede alla parte del sistema in cui inserire i dati di un nuovo lavoratore
+    2. Il dipendente è introdotto all'interfaccia con cui è possibile aggiungere un nuovo lavoratore
+    3. Il dipendente inserisce tutti i dati del nuovo lavoratore (dati anagrafici e altri dati)
+    4. Il dipendente conferma l'inserimento dei dati
+Postcondizioni: Inserimento dei dati del nuovo lavoratore
+
+# Aggiornare lavori
+(Il dipendente modifica e/o aggiunge i lavori già svolti che si riferiscono ad un lavoratore)
+Attori: Dipendente
+Precondizioni: Il dipendente deve essere autenticato
+Passi:
+    1. Il dipendente accede alla parte del sistema in cui modificare i lavori dei lavoratori
+    2. Il dipendente è introdotto all'interfaccia con cui è possibile operare le modifiche
+    3. 
+        (a) Il dipendente inserisce i dati riguardante i lavori svolti in passato da quel determinato lavoratore 
+        (b) Il dipendente aggiorna i dati riguardante i lavori svolti in passato da quel determinato lavoratore
+    4. Il dipendente conferma le modifiche eseguite
+Postcondizioni: Aggiornamento dei dati dei lavori svolti di quel lavoratore ultimato

@@ -47,7 +47,7 @@ Dati dipendenti agenzia:
 Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
     - Nome dell'azienda
-    - Mansioni svolte (Assunzione -> minimo 1, massimo 5. E' direttamente collegata con il profilo del lavoratore)
+    - Mansioni svolte (Assunzione -> minimo 1, massimo 5)
         * Bagnino
         * Barman
         * Instruttore di nuoto
@@ -57,7 +57,7 @@ Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Retribuzione lorda giornaliera
 
 Ricerca:
-    - Per lavoratore (Assunzione -> ricerca in base ai campi dell'anagrafica)
+    (Assunzione -> non ricerchiamo in base ai campi dell'anagrafica, non costituiscono campi utili per la ricerca di un lavoratore)
     - Per lingue parlate
     - Per periodo di disponibilità
     - Per mansioni indicate

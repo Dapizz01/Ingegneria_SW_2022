@@ -1,0 +1,14 @@
+Domanda 1: Come funzionano i filtri AND e OR nella ricerca
+
+Per quanto riguarda la traccia 3 (Lavoratori stagionali), il sistema di filtri nella ricerca prevede l'uso di operatori AND e OR.
+
+L'uso degli operatori AND ed OR è da applicare solo fra categorie diverse (lingue parlate AND / OR automunito) supponendo che la combinazione sia sempre AND dentro la stessa categoria, oppure è necessario specificare la combinazione anche all'interno della categoria stessa (Italiano AND / OR Francese).
+
+Ad esempio, è possibile la seguente combinazione di filtri?
+(Francese AND / OR Tedesco) OR Automunito
+
+oppure è sufficiente gestire la casistica:
+(Francese AND Tedesco) OR Automunito
+----------------------
+    (Lingue parlate)   OR Automunito
+

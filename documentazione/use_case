@@ -31,15 +31,13 @@ Passi:
     4. Il dipendente conferma l'inserimento dei dati
 Postcondizioni: Inserimento dei dati del nuovo lavoratore
 
-# Aggiornare lavori
-(Il dipendente modifica e/o aggiunge i lavori già svolti che si riferiscono ad un lavoratore)
+# Aggiornare Lavoratore
+(Il dipendente modifica i dati di un lavoratore)
 Attori: Dipendente
 Precondizioni: Il dipendente deve essere autenticato
 Passi:
-    1. Il dipendente accede alla parte del sistema in cui modificare i lavori dei lavoratori
-    2. Il dipendente è introdotto all'interfaccia con cui è possibile operare le modifiche
-    3. 
-        (a) Il dipendente inserisce i dati riguardante i lavori svolti in passato da quel determinato lavoratore 
-        (b) Il dipendente aggiorna i dati riguardante i lavori svolti in passato da quel determinato lavoratore
+    1. Il dipendente accede alla parte del sistema in cui modificare i dati del lavoratore
+    2. Il dipendente è introdotto all'interfaccia in cui deve inserire i dati del lavoratore da ricercare(se corretti escono tutti i dati del lavoratore cercato(visualizzati come nell'inserimento))
+    3. Il dipendente aggiorna i dati riguardante i lavori svolti in passato da quel determinato lavoratore
     4. Il dipendente conferma le modifiche eseguite
-Postcondizioni: Aggiornamento dei dati dei lavori svolti di quel lavoratore ultimato
+Postcondizioni: Aggiornamento dei dati di quel lavoratore ultimato

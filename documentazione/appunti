@@ -66,5 +66,3 @@ Ricerca:
     - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
 
 (Assunzione -> la ricerca viene fatta in AND oppure OR fra i diversi campi, sia interni ad un tipo di dato che esterni)
-
-

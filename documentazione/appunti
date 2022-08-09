@@ -9,10 +9,10 @@ Dati lavoratori:
         * Cognome (Assunzione -> almeno una)
         * Luogo e data di nascita (Assunzione -> città (controllo?), data gg/mm/aa)
         * Nazionalità (Assunzione -> almeno una)
-    - Indirizzo (Assunzione -> solo uno obbligatorio, abitazione principale)
+    - Indirizzo (Assunzione -> solo uno obbligatorio e soltanto uno da specificare, abitazione principale)
     - Recapito telefonico personale (opzionale) (Assunzione -> controllo sintassi numero telefonico)
     - Email (Assunzione -> solo uno obbligatorio + controllo sintassi mail)
-    - Eventuali specializzazioni / esperienze precedenti: (Assunzione -> specializzazione /= esperienza precedente?, può anche non averla)
+    - Eventuali specializzazioni / esperienze precedenti: (Assunzione -> le specializzazioni sono derivate dalle esperienze precedenti, può anche non averne)
         * Bagnino
         * Barman
         * Instruttore di nuoto

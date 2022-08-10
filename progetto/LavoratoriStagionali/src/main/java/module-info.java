@@ -1,8 +1,8 @@
-module it.univr.lavoratoristagionali.lavoratoristagionali {
+module it.univr.lavoratoristagionali {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens it.univr.lavoratoristagionali.lavoratoristagionali to javafx.fxml;
-    exports it.univr.lavoratoristagionali.lavoratoristagionali;
+    opens it.univr.lavoratoristagionali to javafx.fxml;
+    exports it.univr.lavoratoristagionali;
 }

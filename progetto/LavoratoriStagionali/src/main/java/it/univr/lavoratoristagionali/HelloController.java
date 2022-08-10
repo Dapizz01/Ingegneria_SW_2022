@@ -1,4 +1,4 @@
-package it.univr.lavoratoristagionali.lavoratoristagionali;
+package it.univr.lavoratoristagionali;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

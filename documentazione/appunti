@@ -7,9 +7,9 @@ Dati lavoratori:
     - Anagrafica:
         * Nome (Assunzione -> almeno una)
         * Cognome (Assunzione -> almeno una)
-        * Luogo e data di nascita (Assunzione -> città (controllo?), data gg/mm/aa)
+        * Luogo e data di nascita (Assunzione -> comune di nascita, data gg/mm/aa)
         * Nazionalità (Assunzione -> almeno una)
-    - Indirizzo (Assunzione -> solo uno obbligatorio e soltanto uno da specificare, abitazione principale)
+    - Indirizzo (Assunzione -> solo uno obbligatorio e soltanto uno da specificare, comune abitazione principale)
     - Recapito telefonico personale (opzionale) (Assunzione -> controllo sintassi numero telefonico)
     - Email (Assunzione -> solo uno obbligatorio + controllo sintassi mail)
     - Eventuali specializzazioni / esperienze precedenti: (Assunzione -> le specializzazioni sono derivate dalle esperienze precedenti, può anche non averne)
@@ -66,3 +66,64 @@ Ricerca:
     - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
 
 (Assunzione -> la ricerca viene fatta in AND oppure OR fra i diversi campi, sia interni ad un tipo di dato che esterni)
+
+// Formato classi
+
+class Lavoratore{
+    int ID_Lavoratore;
+    String nomeLavoratore;
+    String cognomeLavoratore;
+    Comune comuneNascita;
+    Comune comuneAbitazione;
+    Date dataNascita;
+    Nazione nazionalità;
+    String email;
+    String telefono;
+    boolean automunito;
+    List<Esperienza> esperienze;
+    List<Lingua> lingueParlate;
+    List<Contatti> contatti;
+    List<Patente> patenti;
+}
+
+class Contatto{
+    int ID_Contatto;
+    String nome;
+    String cognome;
+    String telefono;
+    String email;
+}
+
+class Esperienza{
+    int ID_Esperienza;
+    String nomeAzienda;
+    int retribuzioneGiornaliera;
+    Date inizioPeriodo;
+    Date finePeriodo;
+    int ID_Comune;
+}
+
+class Patente{
+    int ID_Patente;
+    String nomePatente;
+}
+
+class Comune{
+    int ID_Comune;
+    String nomeComune;
+}
+
+class Specializzazione{
+    int ID_Specializzazione;
+    String nomeSpecializzazione;
+}
+
+class Lingua{
+    int ID_Lingua;
+    String nomeLingua;
+}
+
+class Nazione{
+    int ID_Nazione;
+    String nomeNazione;
+}

@@ -12,3 +12,6 @@ oppure è sufficiente gestire la casistica:
 ----------------------
     (Lingue parlate)   OR Automunito
 
+###
+
+Risposta (assunzione nostra): nella lezione 19, il prof dice che una query d'esempio è "Tedesco AND/OR Automunito", quindi assumiamo che non ci siano scelte multiple all'interno di ogni categoria e che il filtro per ogni categoria sia solamente AND oppure OR. Cioè non potrei selezionare sia Francese che Tedesco e neanche che ci sia l'AND e l'OR nella stessa ricerca.

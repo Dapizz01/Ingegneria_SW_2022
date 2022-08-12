@@ -1,0 +1,4 @@
+Nello stesso path dei file .java:
+>javac MainDemo.java
+>java -classpath ".;sqlite-jdbc-3.27.2.1.jar" MainDemo.java su Windows
+>java -classpath ".:sqlite-jdbc-3.27.2.1.jar" MainDemo.java su Linux/MAC

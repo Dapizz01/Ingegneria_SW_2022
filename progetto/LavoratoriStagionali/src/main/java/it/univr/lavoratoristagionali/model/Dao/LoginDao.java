@@ -1,4 +1,4 @@
-package it.univr.lavoratoristagionali.controller;
+package it.univr.lavoratoristagionali.model.Dao;
 
 public interface LoginDao {
     

@@ -5,4 +5,6 @@ module it.univr.lavoratoristagionali {
 
     opens it.univr.lavoratoristagionali to javafx.fxml;
     exports it.univr.lavoratoristagionali;
+    exports it.univr.lavoratoristagionali.controller;
+    opens it.univr.lavoratoristagionali.controller to javafx.fxml;
 }

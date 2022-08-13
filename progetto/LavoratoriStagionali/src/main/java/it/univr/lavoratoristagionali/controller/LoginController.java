@@ -1,5 +1,7 @@
 package it.univr.lavoratoristagionali.controller;
 
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,11 +18,11 @@ import java.io.IOException;
 public class LoginController extends Controller{
 
     @FXML
-    private TextField usernameField;
+    private MFXTextField usernameField;
     @FXML
-    private PasswordField passwordField;
+    private MFXPasswordField passwordField;
     @FXML
-    private Button submitButton;
+    private MFXButton submitButton;
     @FXML
     private Label loginTitleLabel;
     @FXML
@@ -43,17 +46,6 @@ public class LoginController extends Controller{
             displayError(true);
         }
     }
-
-    /*private void goToMenu(Stage currentStage) {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/menuView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-            currentStage.setScene(scene);
-        }
-        catch(IOException ioe){
-            System.out.println("Failed to locate resource \"fxml/menuView.fxml\" in the project");
-        }
-    }*/
 
     private void displayError(boolean status){
         errorLabel.setVisible(status);

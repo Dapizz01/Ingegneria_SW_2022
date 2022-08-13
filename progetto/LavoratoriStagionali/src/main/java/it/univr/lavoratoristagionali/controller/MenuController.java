@@ -1,18 +1,19 @@
 package it.univr.lavoratoristagionali.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public class MenuController extends Controller{
     @FXML
-    private Button modificaLavoratoreButton;
+    private MFXButton modificaLavoratoreButton;
     @FXML
-    private Button effettuaRicercaButton;
+    private MFXButton effettuaRicercaButton;
     @FXML
-    private Button esciButton;
+    private MFXButton esciButton;
     @FXML
-    private Button inserisciLavoratoreButton;
+    private MFXButton inserisciLavoratoreButton;
 
     public MenuController(){}
 

@@ -7,18 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
-   <TextField fx:id="usernameLabel" layoutX="215.0" layoutY="129.0" promptText="Username"/>
-   <PasswordField fx:id="passwordLabel" layoutX="215.0" layoutY="188.0" promptText="Password"/>
-   <Button fx:id="submitButton" layoutX="269.0" layoutY="244.0" mnemonicParsing="false" onAction="#loginEvent"
-           text="Invio"/>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
+   <TextField fx:id="usernameField" layoutX="215.0" layoutY="129.0" promptText="Username" />
+   <PasswordField fx:id="passwordField" layoutX="215.0" layoutY="188.0" promptText="Password" />
+   <Button fx:id="submitButton" layoutX="269.0" layoutY="244.0" mnemonicParsing="false" onAction="#loginEvent" text="Invio" />
    <Label fx:id="loginTitleLabel" layoutX="260.0" layoutY="61.0" text="Login">
       <font>
-         <Font size="25.0"/>
+         <Font size="25.0" />
       </font>
    </Label>
-   <Label fx:id="errorLabel" disable="true" layoutX="215.0" layoutY="303.0" text="Credenziali non corrette"
-          textFill="#cd2424"/>
+   <Label fx:id="errorLabel" layoutX="215.0" layoutY="303.0" text="Credenziali non corrette" textFill="#cd2424" visible="false" />
 </Pane>

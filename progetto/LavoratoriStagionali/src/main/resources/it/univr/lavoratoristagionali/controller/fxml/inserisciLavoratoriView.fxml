@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckListView?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.univr.lavoratoristagionali.controllerInserisciLavoratoriView"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<MFXScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.InserisciLavoratoriController">
+   <content>
+      <AnchorPane prefHeight="856.0" prefWidth="585.0">
+         <children>
+            <Text fx:id="anagraficaTitle" layoutX="262.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anagrafica" />
+            <MFXCheckListView fx:id="nazionalita" layoutX="232.0" layoutY="100.0" prefHeight="252.0" prefWidth="143.0" />
+            <MFXDatePicker fx:id="dataNascita" floatMode="BORDER" floatingText="Data nascita" layoutX="49.0" layoutY="233.0" prefHeight="48.0" prefWidth="144.0" />
+            <MFXTextField fx:id="cognomeTextField" floatMode="BORDER" floatingText="Cognome" layoutX="49.0" layoutY="166.0" prefHeight="52.0" prefWidth="143.0" />
+            <MFXTextField fx:id="nomeTextField" floatMode="BORDER" floatingText="Nome" layoutX="48.0" layoutY="104.0" prefHeight="52.0" prefWidth="144.0" />
+            <MFXCheckListView fx:id="lingua" layoutX="417.0" layoutY="96.0" prefHeight="252.0" prefWidth="143.0" />
+            <MFXFilterComboBox fx:id="comuneNascita" floatMode="BORDER" floatingText="Comune nascita" layoutX="50.0" layoutY="293.0" prefHeight="55.0" prefWidth="136.0" />
+            <MFXButton fx:id="indietroButton" layoutX="45.0" layoutY="25.0" onAction="#ritornaMenu" text="Indietro" wrapText="true" />
+            <Text fx:id="contattiTitle" layoutX="270.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contatti" />
+            <MFXTextField fx:id="telefonoTextField" floatMode="BORDER" floatingText="Telefono" layoutX="223.0" layoutY="404.0" prefHeight="52.0" prefWidth="144.0" />
+            <MFXTextField fx:id="indirizzoTextField" floatMode="BORDER" floatingText="Indirizzo" layoutX="51.0" layoutY="403.0" prefHeight="52.0" prefWidth="144.0" />
+            <MFXTextField fx:id="emailTextField" floatMode="BORDER" floatingText="Email" layoutX="396.0" layoutY="404.0" prefHeight="52.0" prefWidth="144.0" />
+            <MFXCheckbox fx:id="automunitoCheckBox" layoutX="106.0" layoutY="629.0" />
+            <Text fx:id="informazioniGeneraliTitle" layoutX="235.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informazioni generali" />
+            <MFXCheckListView fx:id="lingueParlate" layoutX="234.0" layoutY="512.0" prefHeight="252.0" prefWidth="143.0" />
+            <MFXCheckListView fx:id="patenti" layoutX="415.0" layoutY="509.0" prefHeight="252.0" prefWidth="143.0" />
+            <Text fx:id="automunitoTitle" layoutX="82.0" layoutY="619.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Automunito" />
+         </children>
+      </AnchorPane>
+   </content>
+</MFXScrollPane>

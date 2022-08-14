@@ -12,10 +12,11 @@ public class Controller {
     public void switchScene(Stage stage, View target){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+            Scene scene = new Scene(fxmlLoader.load(), 320, 240); // TODO: incrementare dimensioni pagina di default
             stage.setScene(scene);
         }
         catch(IOException ioe){
+            ioe.printStackTrace();
             System.out.println("Failed to locate resource \"" + target.getLabel() + "\" in the project");
         }
     }

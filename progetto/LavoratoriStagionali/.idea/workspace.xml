@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Comune.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Contatto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lavoratore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lingua.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Patente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Specializzazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../documentazione/appunti" beforeDir="false" afterPath="$PROJECT_DIR$/../../documentazione/appunti" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" afterDir="false" />
     </list>
-    <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDaoImpl.java" afterDir="false" />
-    </list>
+    <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,15 +29,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LoginDaoImpl.java">
-      <ranges>
-        <range start1="2" end1="2" start2="2" end2="4" changelist="1b293c2b-1d61-406d-96ea-13047626f3e9" />
-        <range start1="7" end1="8" start2="9" end2="10" changelist="1b293c2b-1d61-406d-96ea-13047626f3e9" />
-        <range start1="35" end1="36" start2="37" end2="38" changelist="35fc1118-d0cb-40cb-8ed2-90645ff23b40" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -149,7 +125,7 @@
       <workItem from="1660393246099" duration="6271000" />
       <workItem from="1660467748028" duration="7373000" />
       <workItem from="1660505482280" duration="3158000" />
-      <workItem from="1660566743880" duration="5147000" />
+      <workItem from="1660566743880" duration="6139000" />
     </task>
     <servers />
   </component>

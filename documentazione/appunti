@@ -132,6 +132,9 @@ class Nazione{
 Non importa libreria:
 Tasto dx su pom.xml -> analyze dependencies -> reload
 
+Non va un modulo:
+Disinstallare e reinstallare modulo
+
 // DA FARE
 Controller:
     - Sistemare layout inserisci lavoratore

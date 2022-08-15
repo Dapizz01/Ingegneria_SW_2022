@@ -75,7 +75,7 @@ class Lavoratore{
     String cognomeLavoratore;
     Comune comuneNascita;
     Comune comuneAbitazione;
-    Date dataNascita;
+    int dataNascita; // numero di secondi dalla Unix epoch
     Nazione nazionalità;
     String email;
     String telefono;
@@ -98,8 +98,8 @@ class Esperienza{
     int ID_Esperienza;
     String nomeAzienda;
     int retribuzioneGiornaliera;
-    Date inizioPeriodo;
-    Date finePeriodo;
+    int inizioPeriodo; // numero di secondi dalla Unix epoch
+    int finePeriodo; // numero di secondi dalla Unix epoch
     int ID_Comune;
 }
 
@@ -131,3 +131,13 @@ class Nazione{
 // APPUNTI INTELLIJ IDEA
 Non importa libreria:
 Tasto dx su pom.xml -> analyze dependencies -> reload
+
+// DA FARE
+Controller:
+    - Sistemare layout inserisci lavoratore
+    - Aggiungere dati fake (da sostituire poi con i dati veri del model)
+    - Simulare inserimento dati e scrittura dati su console
+
+Model:
+    - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;
+    - Costruire addLavoratore(Lavoratore)

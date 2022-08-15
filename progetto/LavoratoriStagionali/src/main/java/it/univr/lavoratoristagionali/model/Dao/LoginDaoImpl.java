@@ -1,11 +1,13 @@
 package it.univr.lavoratoristagionali.model.Dao;
 
+import it.univr.lavoratoristagionali.types.Login;
+
 import java.sql.*;
 
 public class LoginDaoImpl implements LoginDao {
 
     @Override
-    public boolean verificaLogin(String userDaVerificare, String passwordDaVerificare) {
+    public boolean verificaLogin(Login login) {
         Connection c = null;
         Statement stmt = null;
 
@@ -33,7 +35,7 @@ public class LoginDaoImpl implements LoginDao {
                 System.out.println("Password = " + password);
                 System.out.println();
 
-                if ( (userDaVerificare.equals(user) && passwordDaVerificare.equals(password)) && verifica == false) {
+                if ( (login.getUser().equals(user) && login.getPassword().equals(password)) && verifica == false) {
                     verifica = true;
                 }
             }

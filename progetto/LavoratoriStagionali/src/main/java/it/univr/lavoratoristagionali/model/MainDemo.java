@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.model;
 
+import it.univr.lavoratoristagionali.types.Login;
 import it.univr.lavoratoristagionali.model.Dao.LoginDao;
 import it.univr.lavoratoristagionali.model.Dao.LoginDaoImpl;
 
@@ -67,7 +68,7 @@ public class MainDemo {
         String password = keyboard.nextLine();
 
         LoginDao loginDao = new LoginDaoImpl();
-        boolean v = loginDao.verificaLogin(user,password);
+        boolean v = loginDao.verificaLogin(new Login(user, password));
 
         System.out.println("Risultato: " + v);
 

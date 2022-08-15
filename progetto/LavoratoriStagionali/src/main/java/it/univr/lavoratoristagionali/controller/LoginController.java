@@ -3,6 +3,9 @@ package it.univr.lavoratoristagionali.controller;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import it.univr.lavoratoristagionali.types.Login;
+import it.univr.lavoratoristagionali.model.Dao.LoginDao;
+import it.univr.lavoratoristagionali.model.Dao.LoginDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,7 +33,8 @@ public class LoginController extends Controller{
         System.out.println("loginEvent fired");
         String username = usernameField.getText();
         String password = passwordField.getText();
-        if(username.equals(password)){ // TODO: sostituire controllo con controllo da Model
+        LoginDao loginDao = new LoginDaoImpl();
+        if(loginDao.verificaLogin(new Login(username, password))){ // TODO: sostituire controllo con controllo da Model
             displayError(false);
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
         }

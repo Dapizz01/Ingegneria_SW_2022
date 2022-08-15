@@ -127,3 +127,7 @@ class Nazione{
     int ID_Nazione;
     String nomeNazione;
 }
+
+// APPUNTI INTELLIJ IDEA
+Non importa libreria:
+Tasto dx su pom.xml -> analyze dependencies -> reload

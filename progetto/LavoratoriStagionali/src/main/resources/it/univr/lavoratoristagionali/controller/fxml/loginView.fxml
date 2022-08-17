@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
-   <Label fx:id="loginTitleLabel" layoutX="260.0" layoutY="61.0" style="-fx-text-fill: rgb(28, 56, 121);" text="Login">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
+   <Label fx:id="loginTitleLabel" layoutX="606.0" layoutY="189.0" prefHeight="50.0" prefWidth="68.0" style="-fx-text-fill: rgb(28, 56, 121);" text="Login" textAlignment="CENTER">
       <font>
          <Font size="25.0" />
       </font>
    </Label>
    <Label fx:id="errorLabel" layoutX="212.0" layoutY="303.0" prefHeight="24.0" prefWidth="170.0" text="Credenziali non corrette" textAlignment="CENTER" textFill="#cd2424" visible="false" wrapText="true" />
-   <MFXTextField fx:id="usernameField" floatingText="Username" layoutX="215.0" layoutY="118.0" prefHeight="50.0" prefWidth="170.0" />
-   <MFXPasswordField fx:id="passwordField" floatingText="Password" layoutX="215.0" layoutY="190.0" prefHeight="50.0" prefWidth="170.0" />
-   <MFXButton fx:id="submitButton" layoutX="270.0" layoutY="261.0" onAction="#loginEvent" rippleAnimateShadow="true" text="Invio" textAlignment="CENTER" />
+   <MFXTextField fx:id="usernameField" floatMode="BORDER" floatingText="Username" layoutX="521.0" layoutY="264.0" prefHeight="50.0" prefWidth="239.0" />
+   <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Password" layoutX="520.0" layoutY="344.0" prefHeight="50.0" prefWidth="239.0" />
+   <MFXButton fx:id="submitButton" layoutX="607.0" layoutY="426.0" onAction="#loginEvent" prefHeight="43.0" prefWidth="68.0" rippleAnimateShadow="true" text="Invio" textAlignment="CENTER" />
 </Pane>

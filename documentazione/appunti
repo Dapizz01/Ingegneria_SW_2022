@@ -84,6 +84,13 @@ class Lavoratore{
     List<Lingua> lingueParlate;
     List<Contatti> contatti;
     List<Patente> patenti;
+    List<Disponibilita> disponibilita;
+}
+
+class Disponibilita{
+    int inizioPeriodo;
+    int finePeriodo;
+    Comune comune;
 }
 
 class Contatto{

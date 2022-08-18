@@ -28,24 +28,30 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXListView<Contatto> listaContattoUrgente;
 
     @FXML
-    private MFXDatePicker dataNascita;
+    private MFXDatePicker dataNascita, inizioPeriodoDisponibilita, finePeriodoDisponibilita, inizioPeriodoEsperienza, finePeriodoEsperienza;
 
     @FXML
-    private MFXTextField nomeTextField, cognomeTextField, telefonoTextField, indirizzoTextField, emailTextField, nomeContattoUrgente, cognomeContattoUrgente, telefonoContattoUrgente, emailContattoUrgente;
+    private MFXTextField nomeTextField, cognomeTextField, telefonoTextField, indirizzoTextField, emailTextField, nomeContattoUrgente, cognomeContattoUrgente, telefonoContattoUrgente, emailContattoUrgente, retribuzioneEsperienza, aziendaEsperienza;
 
     @FXML
-    private MFXFilterComboBox<Comune> comuneNascita;
+    private MFXFilterComboBox<Comune> comuneNascita, comuneDisponibilita, comuneEsperienza;
 
     @FXML
     private Text anagraficaTitle, contattiTitle, informazioniGeneraliTitle, automunitoTitle;
 
     @FXML
-    private MFXButton indietroButton, inviaLavoratoreButton, contattoUrgenteButton;
+    private MFXButton indietroButton, inviaLavoratoreButton, contattoUrgenteButton, eliminaContattoButton, eliminaDisponibilitaButton, aggiungiDisponibilitaButton, aggiungiEsperienzaButton, eliminaEsperienzaButton;
 
     @FXML
     private MFXCheckbox automunitoCheckBox;
 
-    private List<Contatto> contatti;
+    @FXML
+    private MFXListView<Disponibilita> listaDisponibilita;
+
+    @FXML
+    private MFXListView<Esperienza> listaEsperienze;
+
+    private ObservableList<Contatto> contatti;
 
     public InserisciLavoratoriController(){
 
@@ -68,7 +74,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
         });*/
 
-        contatti = new ArrayList<>();
+        contatti = FXCollections.observableArrayList(new ArrayList<>());
+        listaContattoUrgente.setItems(contatti);
     }
 
     @FXML
@@ -87,21 +94,52 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     @FXML
     private void onClickUrgenteButton(ActionEvent actionEvent) {
-        // System.out.println(new Contatto(0, nomeContattoUrgente.getText(), cognomeContattoUrgente.getText(), telefonoContattoUrgente.getText(), emailContattoUrgente.getText()));
         Contatto nuovoContatto = new Contatto(-1, nomeContattoUrgente.getText(), cognomeContattoUrgente.getText(), telefonoContattoUrgente.getText(), emailContattoUrgente.getText());
         contatti.add(nuovoContatto);
-        listaContattoUrgente.setItems(FXCollections.observableArrayList(contatti));
 
-        // Funzionamento:
-            // 1. Utente inserisce dati
-            // 2. Se utente seleziona un contatto dalla lista dei contatti
-                // 2.1. Entra in modalità di modifica, cambia il label del tasto in "aggiorna contatto" e i campi vengono riempiti con i dati del contatto
-                // 2.2. Una volta che l'utente clicca "aggiorna contatto", si torna alla modalità di modifica, rimuovendo la selezione dalla lista dei contatti e svuotando i campi.
-        // Osservazioni: è necessario dare un ID temporaneo ai contatti (NON USATO NEL MODEL)
+        nomeContattoUrgente.clear();
+        cognomeContattoUrgente.clear();
+        telefonoContattoUrgente.clear();
+        emailContattoUrgente.clear();
     }
 
     @FXML
     private void testEvent(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent);
+        // Se è stato cliccato un label del ListView
+        if(mouseEvent.getTarget() instanceof Text) {
+            /*Contatto contattoSelezionato = listaContattoUrgente.getSelectionModel().getSelectedValues().get(0);
+            // System.out.println(contattoSelezionato);
+            nomeContattoUrgente.setText(contattoSelezionato.getNome());
+            cognomeContattoUrgente.setText(contattoSelezionato.getCognome());
+            telefonoContattoUrgente.setText(contattoSelezionato.getTelefono());
+            emailContattoUrgente.setText(contattoSelezionato.getEmail());
+            ObservableMap<Integer, Contatto> map = listaContattoUrgente.getSelectionModel().getSelection();
+            System.out.println(map);*/
+        }
+    }
+
+    @FXML
+    private void eliminaContatto(ActionEvent actionEvent){
+        for(int key : listaContattoUrgente.getSelectionModel().getSelection().keySet()){
+            contatti.remove(listaContattoUrgente.getSelectionModel().getSelection().get(key));
+        }
+        listaContattoUrgente.getSelectionModel().clearSelection();
+        System.out.println(contatti);
+    }
+
+    @FXML
+    private void eliminaDisponibilita(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void aggiungiDisponibilita(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void aggiungiEsperienza(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void eliminaEsperienza(ActionEvent actionEvent) {
     }
 }

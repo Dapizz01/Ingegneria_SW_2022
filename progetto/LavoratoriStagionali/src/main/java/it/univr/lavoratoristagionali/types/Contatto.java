@@ -37,7 +37,7 @@ public class Contatto {
 
     public String toString() {
         return "Nominativo: " + nome + " " + cognome +
-                "\nTelefono: " + telefono +
-                "\nE-mail: " + email;
+                " - Telefono: " + telefono +
+                " - E-mail: " + email;
     }
 }

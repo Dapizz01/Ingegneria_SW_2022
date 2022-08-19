@@ -53,7 +53,7 @@
             <MFXDatePicker fx:id="inizioPeriodoEsperienza" floatMode="BORDER" floatingText="Inizio periodo" layoutX="119.0" layoutY="910.0" prefHeight="48.0" prefWidth="148.0" />
             <MFXDatePicker fx:id="finePeriodoEsperienza" floatMode="BORDER" floatingText="Fine periodo" layoutX="121.0" layoutY="966.0" prefHeight="48.0" prefWidth="144.0" />
             <MFXFilterComboBox fx:id="comuneEsperienza" floatMode="BORDER" floatingText="Comune" layoutX="120.0" layoutY="1026.0" prefHeight="55.0" prefWidth="144.0" />
-            <MFXListView fx:id="listaEsperienze" layoutX="309.0" layoutY="797.0" prefHeight="275.0" prefWidth="324.0" />
+            <MFXListView fx:id="listaEsperienze" layoutX="309.0" layoutY="797.0" prefHeight="275.0" prefWidth="544.0" />
             <MFXButton fx:id="aggiungiEsperienzaButton" layoutX="208.0" layoutY="1097.0" onAction="#aggiungiEsperienza" text="Aggiungi esperienza" />
             <MFXButton fx:id="eliminaEsperienzaButton" layoutX="402.0" layoutY="1097.0" onAction="#eliminaEsperienza" text="Elimina esperienza" />
          </children>

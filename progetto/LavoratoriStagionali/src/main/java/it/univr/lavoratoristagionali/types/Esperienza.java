@@ -1,5 +1,7 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
+
 public class Esperienza {
     private final int ID_Esperienza;
     private final String nomeAzienda;
@@ -39,5 +41,9 @@ public class Esperienza {
 
     public Comune getComune(){
         return comune;
+    }
+
+    public String toString(){
+        return "Svolta presso " + nomeAzienda + " a " + comune + " dal " + LocalDate.ofEpochDay(inizioPeriodo) + " al " + LocalDate.ofEpochDay(finePeriodo) + ", retribuzione di €" + retribuzioneLordaGiornaliera;
     }
 }

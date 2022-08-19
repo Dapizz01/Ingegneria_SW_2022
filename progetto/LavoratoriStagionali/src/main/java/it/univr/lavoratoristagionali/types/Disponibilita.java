@@ -1,5 +1,7 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
+
 public class Disponibilita{
     private final int inizioPeriodo;
     private final int finePeriodo;
@@ -21,5 +23,9 @@ public class Disponibilita{
 
     public Comune getComune(){
         return comune;
+    }
+
+    public String toString(){
+        return "Dal " + LocalDate.ofEpochDay(inizioPeriodo) + " al " + LocalDate.ofEpochDay(finePeriodo) + " nel comune di " + comune;
     }
 }

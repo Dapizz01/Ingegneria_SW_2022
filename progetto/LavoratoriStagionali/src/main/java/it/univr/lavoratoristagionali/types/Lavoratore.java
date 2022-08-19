@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Lavoratore {
@@ -9,7 +10,7 @@ public class Lavoratore {
     private final Comune comuneNascita;
     private final Comune comuneAbitazione;
     private final int dataNascita;
-    private final Lingua nazionalita;
+    private final Lingua nazionalita; // TODO: ma un lavoratore non potrebbe avere più cittadinanze?
     private final String email;
     private final String telefono;
     private final boolean automunito;
@@ -96,5 +97,20 @@ public class Lavoratore {
 
     public List<Disponibilita> getDisponibilita() {
         return disponibilita;
+    }
+
+    public String toString(){
+        return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
+                "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + "a " + getComuneNascita() +
+                "\nAbita a " + comuneAbitazione +
+                "\nE-mail: " + getEmail() +
+                "\nTelefono: " + getTelefono() +
+                "\nAutomunito: " + isAutomunito() +
+                "\nEsperienze: " + getEsperienze() +
+                "\nLingue: " + getLingue() +
+                "\nDisponibilita: " + getDisponibilita() +
+                "\nPatenti: " + getPatenti() +
+                "\nContatti urgenti: " + getContatti() +
+                "\n";
     }
 }

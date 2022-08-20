@@ -8,54 +8,188 @@
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<MFXScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1158.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.InserisciLavoratoriController">
+<MFXScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1452.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.InserisciLavoratoriController">
    <content>
-      <AnchorPane prefHeight="1145.0" prefWidth="1266.0">
+      <AnchorPane prefHeight="1433.0" prefWidth="1266.0">
          <children>
-            <Text fx:id="anagraficaTitle" layoutX="259.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anagrafica" />
-            <MFXCheckListView fx:id="nazionalitaLavoratore" layoutX="312.0" layoutY="96.0" prefHeight="252.0" prefWidth="143.0" />
-            <MFXDatePicker fx:id="dataNascita" floatMode="BORDER" floatingText="Data nascita" layoutX="124.0" layoutY="233.0" prefHeight="48.0" prefWidth="144.0" />
-            <MFXTextField fx:id="cognomeTextField" floatMode="BORDER" floatingText="Cognome" layoutX="125.0" layoutY="165.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXTextField fx:id="nomeTextField" floatMode="BORDER" floatingText="Nome" layoutX="124.0" layoutY="96.0" prefHeight="52.0" prefWidth="144.0" />
-            <MFXFilterComboBox fx:id="comuneNascita" floatMode="BORDER" floatingText="Comune nascita" layoutX="123.0" layoutY="293.0" prefHeight="55.0" prefWidth="136.0" />
-            <MFXButton fx:id="indietroButton" layoutX="45.0" layoutY="25.0" onAction="#ritornaMenu" text="Indietro" wrapText="true" />
-            <Text fx:id="contattiTitle" layoutX="609.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contatti" />
-            <MFXTextField fx:id="telefonoTextField" floatMode="BORDER" floatingText="Telefono" layoutX="561.0" layoutY="166.0" prefHeight="52.0" prefWidth="144.0" />
-            <MFXTextField fx:id="indirizzoTextField" floatMode="BORDER" floatingText="Indirizzo" layoutX="561.0" layoutY="96.0" prefHeight="52.0" prefWidth="144.0" />
-            <MFXTextField fx:id="emailTextField" floatMode="BORDER" floatingText="Email" layoutX="561.0" layoutY="231.0" prefHeight="52.0" prefWidth="144.0" />
-            <MFXCheckbox fx:id="automunitoCheckBox" layoutX="1172.0" layoutY="128.0" prefHeight="20.0" prefWidth="5.0" />
-            <Text fx:id="informazioniGeneraliTitle" layoutX="972.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informazioni generali" />
-            <MFXCheckListView fx:id="lingueParlate" layoutX="800.0" layoutY="96.0" prefHeight="252.0" prefWidth="143.0" />
-            <MFXCheckListView fx:id="patentiPossedute" layoutX="963.0" layoutY="96.0" prefHeight="252.0" prefWidth="143.0" />
-            <Text fx:id="automunitoTitle" layoutX="1151.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Automunito" />
-            <MFXButton fx:id="inviaLavoratoreButton" layoutX="917.0" layoutY="914.0" onAction="#inviaLavoratore" text="Invia" />
-            <Text layoutX="326.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contatti urgenti" />
-            <MFXTextField fx:id="nomeContattoUrgente" floatMode="BORDER" floatingText="Nome" layoutX="125.0" layoutY="428.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXTextField fx:id="cognomeContattoUrgente" floatMode="BORDER" floatingText="Cognome" layoutX="125.0" layoutY="490.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXTextField fx:id="telefonoContattoUrgente" floatMode="BORDER" floatingText="Telefono" layoutX="125.0" layoutY="554.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXTextField fx:id="emailContattoUrgente" floatMode="BORDER" floatingText="E-mail" layoutX="126.0" layoutY="614.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXButton fx:id="contattoUrgenteButton" layoutX="217.0" layoutY="713.0" onAction="#onClickUrgenteButton" text="Aggiungi contatto" />
-            <MFXListView fx:id="listaContattoUrgente" layoutX="312.0" layoutY="428.0" onMouseClicked="#testEvent" prefHeight="252.0" prefWidth="308.0" />
-            <MFXButton fx:id="eliminaContattoButton" layoutX="414.0" layoutY="713.0" onAction="#eliminaContatto" text="Elimina contatto" />
-            <Text layoutX="922.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilità" />
-            <MFXListView fx:id="listaDisponibilita" layoutX="912.0" layoutY="423.0" prefHeight="261.0" prefWidth="304.0" />
-            <MFXDatePicker fx:id="inizioPeriodoDisponibilita" floatMode="BORDER" floatingText="Inizio periodo" layoutX="722.0" layoutY="430.0" prefHeight="48.0" prefWidth="144.0" />
-            <MFXDatePicker fx:id="finePeriodoDisponibilita" floatMode="BORDER" floatingText="Fine periodo" layoutX="720.0" layoutY="497.0" prefHeight="48.0" prefWidth="144.0" />
-            <MFXFilterComboBox fx:id="comuneDisponibilita" floatMode="BORDER" floatingText="Comune" layoutX="721.0" layoutY="565.0" prefHeight="55.0" prefWidth="144.0" />
-            <MFXButton fx:id="eliminaDisponibilitaButton" layoutX="1028.0" layoutY="714.0" onAction="#eliminaDisponibilita" text="Elimina disponibilita" />
-            <MFXButton fx:id="aggiungiDisponibilitaButton" layoutX="807.0" layoutY="715.0" onAction="#aggiungiDisponibilita" text="Aggiungi disponibilita" />
-            <Text layoutX="321.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esperienze passate" />
-            <MFXTextField fx:id="aziendaEsperienza" floatMode="BORDER" floatingText="Nome azienda" layoutX="125.0" layoutY="789.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXTextField fx:id="retribuzioneEsperienza" floatMode="BORDER" floatingText="Retribuzione" layoutX="123.0" layoutY="849.0" prefHeight="52.0" prefWidth="143.0" />
-            <MFXDatePicker fx:id="inizioPeriodoEsperienza" floatMode="BORDER" floatingText="Inizio periodo" layoutX="119.0" layoutY="910.0" prefHeight="48.0" prefWidth="148.0" />
-            <MFXDatePicker fx:id="finePeriodoEsperienza" floatMode="BORDER" floatingText="Fine periodo" layoutX="121.0" layoutY="966.0" prefHeight="48.0" prefWidth="144.0" />
-            <MFXFilterComboBox fx:id="comuneEsperienza" floatMode="BORDER" floatingText="Comune" layoutX="120.0" layoutY="1026.0" prefHeight="55.0" prefWidth="144.0" />
-            <MFXListView fx:id="listaEsperienze" layoutX="309.0" layoutY="797.0" prefHeight="275.0" prefWidth="544.0" />
-            <MFXButton fx:id="aggiungiEsperienzaButton" layoutX="208.0" layoutY="1097.0" onAction="#aggiungiEsperienza" text="Aggiungi esperienza" />
-            <MFXButton fx:id="eliminaEsperienzaButton" layoutX="402.0" layoutY="1097.0" onAction="#eliminaEsperienza" text="Elimina esperienza" />
+            <MFXButton fx:id="ritornaMenu" layoutX="45.0" layoutY="25.0" onAction="#onClickRitornaMenu" text="Indietro" wrapText="true" />
+            <MFXCheckListView fx:id="lingueParlate" layoutX="850.0" layoutY="110.0" prefHeight="275.0" prefWidth="130.0" />
+            <MFXCheckListView fx:id="patentiPossedute" layoutX="998.0" layoutY="112.0" prefHeight="271.0" prefWidth="126.0" />
+            <MFXButton fx:id="inviaLavoratore" layoutX="642.0" layoutY="1341.0" onAction="#onClickInviaLavoratore" text="Invia" />
+            <MFXButton fx:id="aggiungiContatto" layoutX="170.0" layoutY="759.0" onAction="#onClickAggiungiContatto" text="Aggiungi contatto" />
+            <MFXListView fx:id="listaContattoUrgente" layoutX="279.0" layoutY="467.0" onMouseClicked="#testEvent" prefHeight="275.0" prefWidth="322.0" />
+            <MFXButton fx:id="eliminaContatto" layoutX="372.0" layoutY="759.0" onAction="#onClickEliminaContatto" text="Elimina contatto" />
+            <MFXListView fx:id="listaDisponibilita" layoutX="851.0" layoutY="464.0" prefHeight="279.0" prefWidth="362.0" />
+            <MFXButton fx:id="eliminaDisponibilita" layoutX="1034.0" layoutY="759.0" onAction="#onClickEliminaDisponibilita" text="Elimina disponibilita" />
+            <MFXButton fx:id="aggiungiDisponibilita" layoutX="796.0" layoutY="759.0" onAction="#onClickAggiungiDisponibilita" text="Aggiungi disponibilita" />
+            <MFXListView fx:id="listaEsperienze" layoutX="359.0" layoutY="876.0" prefHeight="346.0" prefWidth="857.0" />
+            <MFXButton fx:id="aggiungiEsperienza" layoutX="361.0" layoutY="1240.0" onAction="#onClickAggiungiEsperienza" text="Aggiungi esperienza" />
+            <MFXButton fx:id="eliminaEsperienza" layoutX="851.0" layoutY="1240.0" onAction="#onClickEliminaEsperienza" text="Elimina esperienza" />
+            <VBox layoutX="74.0" layoutY="111.0" prefHeight="279.0" prefWidth="191.0">
+               <children>
+                  <VBox prefHeight="70.0" prefWidth="144.0">
+                     <children>
+                        <MFXTextField fx:id="nomeLavoratore" floatMode="BORDER" floatingText="Nome" prefHeight="52.0" prefWidth="174.0" />
+                        <Label fx:id="nomeLavoratoreError" prefHeight="16.0" prefWidth="166.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="10.0" prefHeight="70.0" prefWidth="144.0">
+                     <children>
+                        <MFXTextField fx:id="cognomeLavoratore" floatMode="BORDER" floatingText="Cognome" prefHeight="52.0" prefWidth="172.0" />
+                        <Label fx:id="cognomeLavoratoreError" prefHeight="16.0" prefWidth="240.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="86.0" prefHeight="70.0" prefWidth="144.0">
+                     <children>
+                        <MFXDatePicker fx:id="dataNascitaLavoratore" floatMode="BORDER" floatingText="Data nascita" prefHeight="48.0" prefWidth="177.0" />
+                        <Label fx:id="dataNascitaLavoratoreError" prefHeight="18.0" prefWidth="161.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="152.0" prefHeight="65.0" prefWidth="157.0">
+                     <children>
+                        <MFXFilterComboBox fx:id="comuneNascitaLavoratore" floatMode="BORDER" floatingText="Comune nascita" prefHeight="49.0" prefWidth="164.0" />
+                        <Label fx:id="comuneNascitaLavoratoreError" prefHeight="16.0" prefWidth="180.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+            <MFXCheckListView fx:id="nazionalitaLavoratore" layoutX="274.0" layoutY="111.0" prefHeight="277.0" prefWidth="169.0" />
+            <VBox layoutX="550.0" layoutY="111.0" prefHeight="275.0" prefWidth="184.0">
+               <children>
+                  <VBox prefHeight="73.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="indirizzoLavoratore" floatMode="BORDER" floatingText="Indirizzo" prefHeight="52.0" prefWidth="166.0" />
+                        <Label fx:id="indirizzoLavoratoreError" prefHeight="16.0" prefWidth="224.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="73.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="telefonoLavoratore" floatMode="BORDER" floatingText="Telefono" prefHeight="52.0" prefWidth="173.0" />
+                        <Label fx:id="telefonoLavoratoreError" prefHeight="16.0" prefWidth="223.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="73.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="emailLavoratore" floatMode="BORDER" floatingText="Email" prefHeight="52.0" prefWidth="162.0" />
+                        <Label fx:id="emailLavoratoreError" prefHeight="16.0" prefWidth="204.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="73.0" layoutY="468.0" prefHeight="268.0" prefWidth="194.0">
+               <children>
+                  <VBox prefHeight="67.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="nomeContatto" floatMode="BORDER" floatingText="Nome" prefHeight="52.0" prefWidth="172.0" />
+                        <Label fx:id="nomeContattoError" prefHeight="16.0" prefWidth="242.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="10.0" prefHeight="67.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="cognomeContatto" floatMode="BORDER" floatingText="Cognome" prefHeight="52.0" prefWidth="178.0" />
+                        <Label fx:id="cognomeContattoError" prefHeight="16.0" prefWidth="266.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="77.0" prefHeight="67.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="telefonoContatto" floatMode="BORDER" floatingText="Telefono" prefHeight="52.0" prefWidth="182.0" />
+                        <Label fx:id="telefonoContattoError" prefHeight="16.0" prefWidth="208.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="25.0" layoutY="144.0" prefHeight="67.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="emailContatto" floatMode="BORDER" floatingText="E-mail" prefHeight="52.0" prefWidth="180.0" />
+                        <Label fx:id="emailContattoError" prefWidth="208.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="674.0" layoutY="463.0" prefHeight="270.0" prefWidth="153.0">
+               <children>
+                  <VBox prefHeight="66.0" prefWidth="136.0">
+                     <children>
+                        <MFXDatePicker fx:id="inizioDisponibilita" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="48.0" prefWidth="167.0" />
+                        <Label fx:id="inizioDisponibilitaError" prefHeight="16.0" prefWidth="187.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="66.0" prefWidth="136.0">
+                     <children>
+                        <MFXDatePicker fx:id="fineDisponibilita" floatMode="BORDER" floatingText="Fine periodo" prefHeight="48.0" prefWidth="164.0" />
+                        <Label fx:id="fineDisponibilitaError" prefHeight="16.0" prefWidth="321.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="131.0" prefHeight="66.0" prefWidth="136.0">
+                     <children>
+                        <MFXFilterComboBox fx:id="comuneDisponibilita" floatMode="BORDER" floatingText="Comune" prefHeight="50.0" prefWidth="169.0" />
+                        <Label fx:id="comuneDisponibilitaError" prefHeight="16.0" prefWidth="249.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox layoutX="69.0" layoutY="876.0" prefHeight="337.0" prefWidth="255.0">
+               <children>
+                  <VBox prefHeight="70.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="aziendaEsperienza" floatMode="BORDER" floatingText="Nome azienda" prefHeight="52.0" prefWidth="269.0" />
+                        <Label fx:id="aziendaEsperienzaError" prefHeight="16.0" prefWidth="284.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="100.0">
+                     <children>
+                        <MFXTextField fx:id="retribuzioneEsperienza" floatMode="BORDER" floatingText="Retribuzione" prefHeight="52.0" prefWidth="279.0" />
+                        <Label fx:id="retribuzioneEsperienzaError" prefHeight="16.0" prefWidth="360.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="80.0" prefHeight="70.0" prefWidth="100.0">
+                     <children>
+                        <MFXDatePicker fx:id="inizioEsperienza" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="48.0" prefWidth="276.0" />
+                        <Label fx:id="inizioEsperienzaError" prefHeight="16.0" prefWidth="451.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="150.0" prefHeight="70.0" prefWidth="100.0">
+                     <children>
+                        <MFXDatePicker fx:id="fineEsperienza" floatMode="BORDER" floatingText="Fine periodo" prefHeight="48.0" prefWidth="298.0" />
+                        <Label fx:id="fineEsperienzaError" prefHeight="16.0" prefWidth="307.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="220.0" prefHeight="70.0" prefWidth="100.0">
+                     <children>
+                        <MFXFilterComboBox fx:id="comuneEsperienza" floatMode="BORDER" floatingText="Comune" prefHeight="52.0" prefWidth="327.0" />
+                        <Label fx:id="comuneEsperienzaError" prefHeight="16.0" prefWidth="321.0" text="OK" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+            <Label layoutX="287.0" layoutY="429.0" text="Contatti urgenti" />
+            <Label layoutX="947.0" layoutY="429.0" text="Disponibilità" />
+            <Label layoutX="279.0" layoutY="80.0" text="Anagrafica" />
+            <HBox layoutX="1132.0" layoutY="234.0" prefHeight="28.0" prefWidth="114.0">
+               <children>
+                  <MFXCheckbox fx:id="automunito" prefHeight="46.0" prefWidth="28.0" textAlignment="CENTER" />
+                  <Label prefHeight="34.0" prefWidth="76.0" text="Automunito" />
+               </children>
+            </HBox>
+            <Label layoutX="630.0" layoutY="838.0" text="Esperienze passate" />
+            <Label layoutX="607.0" layoutY="80.0" text="Contatti" />
+            <Label layoutX="992.0" layoutY="80.0" text="Informazioni generali" />
          </children>
       </AnchorPane>
    </content>

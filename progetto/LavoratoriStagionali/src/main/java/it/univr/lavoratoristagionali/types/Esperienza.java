@@ -9,14 +9,16 @@ public class Esperienza {
     private final int inizioPeriodo;
     private final int finePeriodo;
     private final Comune comune;
+    private final Esperienza esperienza;
 
-    public Esperienza(int ID_Esperienza, String nomeAzienda, int retribuzioneLordaGiornaliera, int inizioPeriodo, int finePeriodo, Comune comune) {
+    public Esperienza(int ID_Esperienza, String nomeAzienda, int retribuzioneLordaGiornaliera, int inizioPeriodo, int finePeriodo, Comune comune, Esperienza esperienza) {
         this.ID_Esperienza = ID_Esperienza;
         this.nomeAzienda = nomeAzienda;
         this.retribuzioneLordaGiornaliera = retribuzioneLordaGiornaliera;
         this.inizioPeriodo = inizioPeriodo;
         this.finePeriodo = finePeriodo;
         this.comune = comune;
+        this.esperienza = esperienza;
     }
 
     public int getID(){
@@ -41,6 +43,10 @@ public class Esperienza {
 
     public Comune getComune(){
         return comune;
+    }
+
+    public Esperienza getEsperienza(){
+        return esperienza;
     }
 
     public String toString(){

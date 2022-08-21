@@ -47,7 +47,7 @@ Dati dipendenti agenzia:
 Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
     - Nome dell'azienda
-    - Mansioni svolte (Assunzione -> minimo 1, massimo 5)
+    - Mansioni svolte (Assunzione -> solo 1 per esperienza)
         * Bagnino
         * Barman
         * Instruttore di nuoto
@@ -144,10 +144,30 @@ Disinstallare e reinstallare modulo
 
 // DA FARE
 Controller:
-    - Sistemare layout inserisci lavoratore
-    - Aggiungere dati fake (da sostituire poi con i dati veri del model)
-    - Simulare inserimento dati e scrittura dati su console
+    - Sistemare layout inserisci lavoratore (usare più spazio, far si che si vedano bene i label degli errori)
+    - Sistemare la segnalazione di errore nei MFXListView
+    - Aggiungere comune di abitazione
+    - Aggiungere specializzazione alle esperienze
+    - Fare controllo data inizio < data fine in disponibilita
 
 Model:
     - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;
     - Costruire addLavoratore(Lavoratore)
+
+Controlli Controller:
+    - Data di nascita almeno 18 anni prima di ora
+    - Nazionalità almeno una
+    - Indirizzo non vuoto
+    - Telefono -> solo numeri, non vuoto, 10 cifre
+    - Email -> controllo non vuoto, contenga @
+    - Lingue -> almeno una lingua
+    - Contatti urgenti
+        - Ogni campo non vuoto, mail e telfono come gli altri, almeno un contatto urgente
+    - Disponibilità
+        - Ogni campo non vuoto all'inserimento, anche nessuna disponibilità
+        - Periodo, per ogni comune non deve sovrapporsi e deve durare almeno un mese
+    - Esperienze
+        - Nome azienda non vuoto
+        - Retribuzione solo numeri
+        - Periodo, controllare che non sia nel futuro (minimo 1 mese, max 2 anni) (ci possono essere più lavori contemporaneamente)
+        - Aggiungere specializzazione

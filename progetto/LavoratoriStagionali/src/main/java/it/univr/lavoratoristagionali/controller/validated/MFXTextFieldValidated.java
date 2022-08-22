@@ -57,7 +57,7 @@ public class MFXTextFieldValidated extends MFXTextField {
             return false;
         }
         else{
-            showCorrect();
+            showDefault();
             return true;
         }
     }

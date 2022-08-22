@@ -39,12 +39,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXDatePicker dataNascitaLavoratore;
     private MFXDatePickerValidated dataNascitaLavoratoreValidated;
     @FXML
-    private MFXFilterComboBox<Comune> comuneNascitaLavoratore;
+    private MFXFilterComboBox<Comune> comuneNascitaLavoratore, comuneAbitazioneLavoratore;
     private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated;
     @FXML
     private MFXCheckListView<Lingua> nazionalitaLavoratore;
     @FXML
-    private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError;
+    private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError, comuneAbitazioneLavoratoreError;
 
     // CONTATTO LAVORATORE
     @FXML
@@ -55,12 +55,14 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     // INFORMAZIONI GENERALI
     @FXML
-    private MFXCheckListView<Lingua> lingueParlate;
+    private MFXCheckListView<Lingua> lingueLavoratore;
     // TODO: MFXCheckListViewValidated<T>
     @FXML
-    private MFXCheckListView<Patente> patentiPossedute;
+    private MFXCheckListView<Patente> patentiLavoratore;
     @FXML
     private MFXCheckbox automunito;
+    @FXML
+    private Label nazionalitaLavoratoreError, patentiLavoratoreError, lingueLavoratoreError;
 
     // CONTATTI URGENTI
     @FXML
@@ -71,7 +73,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private MFXListView<Contatto> listaContattoUrgente;
     @FXML
-    private Label nomeContattoError, cognomeContattoError, telefonoContattoError, emailContattoError;
+    private Label nomeContattoError, cognomeContattoError, telefonoContattoError, emailContattoError, listaContattoUrgenteError;
 
     // DISPONIBILITA
     @FXML
@@ -85,7 +87,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private MFXListView<Disponibilita> listaDisponibilita;
     @FXML
-    private Label inizioDisponibilitaError, fineDisponibilitaError, comuneDisponibilitaError;
+    private Label inizioDisponibilitaError, fineDisponibilitaError, comuneDisponibilitaError, listaDisponibilitaError;
 
     // ESPERIENZE
     @FXML
@@ -98,11 +100,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXFilterComboBox<Comune> comuneEsperienza;
     private MFXFilterComboBoxValidated<Comune> comuneEsperienzaValidated;
     @FXML
+    private MFXFilterComboBox<Specializzazione> specializzazioneEsperienza;
+    @FXML
     private MFXButton aggiungiEsperienza, eliminaEsperienza;
     @FXML
     private MFXListView<Esperienza> listaEsperienze;
     @FXML
-    private Label aziendaEsperienzaError, retribuzioneEsperienzaError, inizioEsperienzaError, fineEsperienzaError, comuneEsperienzaError;
+    private Label aziendaEsperienzaError, retribuzioneEsperienzaError, inizioEsperienzaError, fineEsperienzaError, comuneEsperienzaError, specializzazioneEsperienzaError, listaEsperienzeError;
 
     // ... il resto
     @FXML
@@ -248,6 +252,11 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
         boolean periodInvalid = false;
         if(inizioDisponibilitaValidated.checkValid() && fineDisponibilitaValidated.checkValid() && comuneDisponibilitaValidated.checkValid()){ // TODO: aggiungere controllo data inizio / fine, dove inizio < fine
+
+            if(fineDisponibilita.getValue().toEpochDay() <= inizioDisponibilita.getValue().toEpochDay()){
+                fineDisponibilitaValidated.showError("La data di fine deve essere successiva alla data di inizio");
+                return;
+            }
 
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){

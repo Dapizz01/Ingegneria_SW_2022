@@ -144,11 +144,11 @@ Disinstallare e reinstallare modulo
 
 // DA FARE
 Controller:
-    - Sistemare layout inserisci lavoratore (usare più spazio, far si che si vedano bene i label degli errori)
-    - Sistemare la segnalazione di errore nei MFXListView
-    - Aggiungere comune di abitazione
-    - Aggiungere specializzazione alle esperienze
-    - Fare controllo data inizio < data fine in disponibilita
+    - Sistemare layout inserisci lavoratore (usare più spazio, far si che si vedano bene i label degli errori) [V]
+    - Sistemare la segnalazione di errore nei MFXListView [V] (fatto campo, da implementare funzionalità)
+    - Aggiungere comune di abitazione [V] (fatto FXML, da implementare funzionalità)
+    - Aggiungere specializzazione alle esperienze [V] (fatto FXML, da implementare funzionalità)
+    - Fare controllo data inizio < data fine in disponibilita [V]
 
 Model:
     - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;

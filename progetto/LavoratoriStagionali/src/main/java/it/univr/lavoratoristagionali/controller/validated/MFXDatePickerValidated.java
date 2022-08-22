@@ -31,15 +31,24 @@ public class MFXDatePickerValidated extends MFXDatePicker {
                     .setSeverity(Severity.ERROR)
                     .setMessage(flag.getLabel())
                     .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
+                        case NON_EMPTY:
+                            yield datePicker.getValue() != null;
                         case UP_TO_NOW:
-                            yield datePicker.getValue().toEpochDay() < LocalDate.now().toEpochDay();
+                            if(datePicker.getValue() != null)
+                                yield datePicker.getValue().toEpochDay() < LocalDate.now().toEpochDay();
+                            else
+                                yield true;
                         case FROM_NOW:
-                            yield datePicker.getValue().toEpochDay() >= LocalDate.now().toEpochDay();
+                            if(datePicker.getValue() != null)
+                                yield datePicker.getValue().toEpochDay() >= LocalDate.now().toEpochDay();
+                            else
+                                yield true;
                         case MUST_BE_ADULT:
-                            yield datePicker.getValue().toEpochDay() <= (LocalDate.now().toEpochDay() - (18 * 365));
-                            case NON_EMPTY:
-                                    yield datePicker.getValue() != null;
-                                    default:
+                            if(datePicker.getValue() != null)
+                                yield datePicker.getValue().toEpochDay() <= (LocalDate.now().toEpochDay() - (18 * 365));
+                            else
+                                yield true;
+                            default:
                                     yield true;
                             }, datePicker.textProperty())
                     ).get());
@@ -57,7 +66,7 @@ public class MFXDatePickerValidated extends MFXDatePicker {
             return false;
         }
         else{
-            showCorrect();
+            showDefault();
             return true;
         }
     }

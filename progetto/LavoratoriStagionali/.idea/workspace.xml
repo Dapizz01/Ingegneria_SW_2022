@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../documentazione/appunti" beforeDir="false" afterPath="$PROJECT_DIR$/../../documentazione/appunti" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Errore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Errore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" afterDir="false" />
     </list>
     <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,6 +142,7 @@
       <workItem from="1660923453894" duration="14313000" />
       <workItem from="1660991227264" duration="9824000" />
       <workItem from="1661071380724" duration="24731000" />
+      <workItem from="1661167693951" duration="3172000" />
     </task>
     <servers />
   </component>

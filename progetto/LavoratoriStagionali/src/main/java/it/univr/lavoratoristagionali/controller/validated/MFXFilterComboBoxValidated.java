@@ -51,7 +51,7 @@ public class MFXFilterComboBoxValidated<T> extends MFXFilterComboBox<T> {
             return false;
         }
         else{
-            showCorrect();
+            showDefault();
             return true;
         }
     }

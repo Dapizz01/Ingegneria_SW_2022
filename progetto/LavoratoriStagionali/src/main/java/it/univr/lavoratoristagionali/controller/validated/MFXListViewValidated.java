@@ -30,7 +30,7 @@ public class MFXListViewValidated<T> extends MFXListView<T> {
             return false;
         }
         else{
-            showCorrect();
+            showDefault();
             return true;
         }
     }

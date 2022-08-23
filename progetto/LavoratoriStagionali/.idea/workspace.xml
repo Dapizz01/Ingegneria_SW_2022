@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/exception/EmptyFieldException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/exception/FormatMismatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/exception/InputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/exception/InvalidDateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/exception/InvalidPeriodException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXValidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" afterDir="false" />
     </list>
     <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +30,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -143,6 +150,7 @@
       <workItem from="1660991227264" duration="9824000" />
       <workItem from="1661071380724" duration="24731000" />
       <workItem from="1661167693951" duration="3172000" />
+      <workItem from="1661242383968" duration="24808000" />
     </task>
     <servers />
   </component>
@@ -171,5 +179,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

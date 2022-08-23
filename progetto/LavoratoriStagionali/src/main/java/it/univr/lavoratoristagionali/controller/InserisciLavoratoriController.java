@@ -4,8 +4,11 @@ import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
+import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
 import it.univr.lavoratoristagionali.controller.validated.MFXDatePickerValidated;
 import it.univr.lavoratoristagionali.controller.validated.MFXFilterComboBoxValidated;
+import it.univr.lavoratoristagionali.controller.validated.MFXListViewValidated;
 import it.univr.lavoratoristagionali.controller.validated.MFXTextFieldValidated;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.beans.binding.Bindings;
@@ -31,8 +34,6 @@ import java.util.ResourceBundle;
 public class InserisciLavoratoriController extends Controller implements Initializable {
     // ANAGRAFICA
     @FXML
-    private Text anagraficaTitle;
-    @FXML
     private MFXTextField nomeLavoratore, cognomeLavoratore;
     private MFXTextFieldValidated nomeLavoratoreValidated, cognomeLavoratoreValidated;
     @FXML
@@ -40,7 +41,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXDatePickerValidated dataNascitaLavoratoreValidated;
     @FXML
     private MFXFilterComboBox<Comune> comuneNascitaLavoratore, comuneAbitazioneLavoratore;
-    private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated;
+    private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated, comuneAbitazioneLavoratoreValidated;
     @FXML
     private MFXCheckListView<Lingua> nazionalitaLavoratore;
     @FXML
@@ -49,7 +50,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     // CONTATTO LAVORATORE
     @FXML
     private MFXTextField indirizzoLavoratore, telefonoLavoratore, emailLavoratore;
-    private MFXTextFieldValidated indirizzoLavoratoreValidated, telefonoLavoratoreValidated, emailLavoratoreValidated;
+    private MFXTextFieldValidated indirizzoLavoratoreValidated, telefonoLavoratoreValidated, emailLavoratoreValidated; // TODO: togliere indirizzoLavoratore, è superfluo
     @FXML
     private Label indirizzoLavoratoreError, telefonoLavoratoreError, emailLavoratoreError;
 
@@ -72,6 +73,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXButton aggiungiContatto, eliminaContatto;
     @FXML
     private MFXListView<Contatto> listaContattoUrgente;
+    private MFXListViewValidated<Contatto> listaContattoUrgenteValidated;
     @FXML
     private Label nomeContattoError, cognomeContattoError, telefonoContattoError, emailContattoError, listaContattoUrgenteError;
 
@@ -86,6 +88,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXButton aggiungiDisponibilita, eliminaDisponibilita;
     @FXML
     private MFXListView<Disponibilita> listaDisponibilita;
+    private MFXListViewValidated<Disponibilita> listaDisponibilitaValidated;
     @FXML
     private Label inizioDisponibilitaError, fineDisponibilitaError, comuneDisponibilitaError, listaDisponibilitaError;
 
@@ -101,10 +104,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXFilterComboBoxValidated<Comune> comuneEsperienzaValidated;
     @FXML
     private MFXFilterComboBox<Specializzazione> specializzazioneEsperienza;
+    private MFXFilterComboBoxValidated<Specializzazione> specializzazioneEsperienzaValidated;
     @FXML
     private MFXButton aggiungiEsperienza, eliminaEsperienza;
     @FXML
     private MFXListView<Esperienza> listaEsperienze;
+    private MFXListViewValidated<Esperienza> listaEsperienzeValidated;
     @FXML
     private Label aziendaEsperienzaError, retribuzioneEsperienzaError, inizioEsperienzaError, fineEsperienzaError, comuneEsperienzaError, specializzazioneEsperienzaError, listaEsperienzeError;
 
@@ -129,11 +134,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
         List<Comune> comuni = List.of(new Comune(1, "comune1"), new Comune(2, "comune2"), new Comune(3, "comune3"));
         List<Lingua> nazionalita = List.of(new Lingua(1, "nazionalità1"), new Lingua(2, "nazionalità2"), new Lingua(3, "nazionalità3"));
         List<Patente> patenti = List.of(new Patente(1, "patente1"), new Patente(2, "patente2"), new Patente(3, "patente3"));
+        List<Specializzazione> specializzazioni = List.of(new Specializzazione(1, "bagnino"), new Specializzazione(2, "test2"), new Specializzazione(3, "test3"));
 
         nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Errore.MUST_BE_ADULT, Errore.NON_EMPTY);
         comuneNascitaLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
+        comuneAbitazioneLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneAbitazioneLavoratore, comuneAbitazioneLavoratoreError, Errore.NON_EMPTY);
         indirizzoLavoratoreValidated = new MFXTextFieldValidated(indirizzoLavoratore, indirizzoLavoratoreError, Errore.NON_EMPTY);
         telefonoLavoratoreValidated = new MFXTextFieldValidated(telefonoLavoratore, telefonoLavoratoreError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
         emailLavoratoreValidated = new MFXTextFieldValidated(emailLavoratore, emailLavoratoreError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
@@ -142,23 +149,29 @@ public class InserisciLavoratoriController extends Controller implements Initial
         cognomeContattoValidated = new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         emailContattoValidated = new MFXTextFieldValidated(emailContatto, emailContattoError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
         telefonoContattoValidated = new MFXTextFieldValidated(telefonoContatto, telefonoContattoError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
+        listaContattoUrgenteValidated = new MFXListViewValidated<Contatto>(listaContattoUrgente, listaContattoUrgenteError, Errore.NON_EMPTY);
 
         inizioDisponibilitaValidated = new MFXDatePickerValidated(inizioDisponibilita, inizioDisponibilitaError, Errore.FROM_NOW, Errore.NON_EMPTY);
         fineDisponibilitaValidated = new MFXDatePickerValidated(fineDisponibilita, fineDisponibilitaError, Errore.FROM_NOW, Errore.NON_EMPTY);
         comuneDisponibilitaValidated = new MFXFilterComboBoxValidated<Comune>(comuneDisponibilita, comuneDisponibilitaError, Errore.NON_EMPTY);
+        listaDisponibilitaValidated = new MFXListViewValidated<Disponibilita>(listaDisponibilita, listaDisponibilitaError, (Errore) null);
 
         aziendaEsperienzaValidated = new MFXTextFieldValidated(aziendaEsperienza, aziendaEsperienzaError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         retribuzioneEsperienzaValidated = new MFXTextFieldValidated(retribuzioneEsperienza, retribuzioneEsperienzaError, Errore.NUMBERS_ONLY, Errore.NON_EMPTY);
         inizioEsperienzaValidated = new MFXDatePickerValidated(inizioEsperienza, inizioEsperienzaError, Errore.UP_TO_NOW, Errore.NON_EMPTY);
         fineEsperienzaValidated = new MFXDatePickerValidated(fineEsperienza, fineEsperienzaError, Errore.UP_TO_NOW, Errore.NON_EMPTY);
         comuneEsperienzaValidated = new MFXFilterComboBoxValidated<Comune>(comuneEsperienza, comuneEsperienzaError, Errore.NON_EMPTY);
+        specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Errore.NON_EMPTY);
+        listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Errore) null);
 
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
-        lingueParlate.setItems(FXCollections.observableArrayList(lingue));
+        comuneAbitazioneLavoratore.setItems(FXCollections.observableArrayList(comuni));
+        lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
         nazionalitaLavoratore.setItems(FXCollections.observableArrayList(nazionalita));
-        patentiPossedute.setItems(FXCollections.observableArrayList(patenti));
+        patentiLavoratore.setItems(FXCollections.observableArrayList(patenti));
         comuneEsperienza.setItems(FXCollections.observableArrayList(comuni));
         comuneDisponibilita.setItems(FXCollections.observableArrayList(comuni));
+        specializzazioneEsperienza.setItems(FXCollections.observableArrayList(specializzazioni));
 
         contatti = FXCollections.observableArrayList(new ArrayList<>());
         listaContattoUrgente.setItems(contatti);
@@ -192,26 +205,49 @@ public class InserisciLavoratoriController extends Controller implements Initial
         System.out.println(patentiPossedute.getSelectionModel().getSelectedValues());
         System.out.println(comuneNascita.getSelectionModel().getSelectedItem());*/
 
-        if(nomeLavoratoreValidated.checkValid() && cognomeLavoratoreValidated.checkValid() && comuneNascitaLavoratoreValidated.checkValid() && dataNascitaLavoratoreValidated.checkValid() && emailLavoratoreValidated.checkValid() && telefonoLavoratoreValidated.checkValid()){
-            Lavoratore lavoratore = new Lavoratore(-1, nomeLavoratore.getText(), cognomeLavoratore.getText(), comuneNascitaLavoratore.getValue(), null, (int) dataNascitaLavoratore.getValue().toEpochDay(), nazionalitaLavoratore.getSelectionModel().getSelection().get(0), emailLavoratore.getText(), telefonoLavoratore.getText(), automunito.isSelected(), listaEsperienze.getSelectionModel().getSelectedValues(), lingueParlate.getItems(), listaContattoUrgente.getItems(), patentiPossedute.getSelectionModel().getSelectedValues(), listaDisponibilita.getItems());
+        Lavoratore lavoratore;
+
+        try{
+            lavoratore = new Lavoratore(-1,
+                    nomeLavoratoreValidated.getText(),
+                    cognomeLavoratoreValidated.getText(),
+                    comuneNascitaLavoratoreValidated.getSelectedItem(),
+                    comuneAbitazioneLavoratoreValidated.getSelectedItem(),
+                    dataNascitaLavoratoreValidated.getEpochDays(),
+                    nazionalitaLavoratore.getSelectionModel().getSelection().get(0), // TODO: da sostituire con quello validated
+                    emailLavoratoreValidated.getText(),
+                    telefonoLavoratoreValidated.getText(),
+                    automunito.isSelected(),
+                    listaEsperienzeValidated.getSelectedItems(),
+                    lingueLavoratore.getItems(), // TODO: da sostituire con quello validated
+                    listaContattoUrgenteValidated.getSelectedItems(),
+                    patentiLavoratore.getSelectionModel().getSelectedValues(), // TODO: da sostituire con quello validated
+                    listaDisponibilitaValidated.getSelectedItems());
             System.out.println(lavoratore);
         }
+        catch (InputException inputException){
+            return;
+        }
+
+        System.out.println(lavoratore);
+
         // TODO: aggiungere comune di abitazione
     }
 
     @FXML
     private void onClickAggiungiContatto(ActionEvent actionEvent) {
-        boolean valid = true;
-        if(nomeContattoValidated.checkValid() && cognomeContattoValidated.checkValid() && telefonoContattoValidated.checkValid() && emailContattoValidated.checkValid()){
-            Contatto nuovoContatto = new Contatto(-1, nomeContatto.getText(), cognomeContatto.getText(), telefonoContatto.getText(), emailContatto.getText());
-            contatti.add(nuovoContatto);
+        Contatto contatto;
+        try {
+            contatto = new Contatto(-1, nomeContattoValidated.getText(), cognomeContattoValidated.getText(), telefonoContattoValidated.getText(), emailContattoValidated.getText());
+            contatti.add(contatto);
 
             nomeContatto.clear();
             cognomeContatto.clear();
             telefonoContatto.clear();
             emailContatto.clear();
-
-            System.out.println(nomeLavoratore.validate());
+        }
+        catch (InputException inputException) {
+            return;
         }
     }
 
@@ -251,45 +287,47 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
         boolean periodInvalid = false;
-        if(inizioDisponibilitaValidated.checkValid() && fineDisponibilitaValidated.checkValid() && comuneDisponibilitaValidated.checkValid()){ // TODO: aggiungere controllo data inizio / fine, dove inizio < fine
-
-            if(fineDisponibilita.getValue().toEpochDay() <= inizioDisponibilita.getValue().toEpochDay()){
-                fineDisponibilitaValidated.showError("La data di fine deve essere successiva alla data di inizio");
-                return;
+        try{
+            if(fineDisponibilitaValidated.getEpochDays() <= inizioDisponibilitaValidated.getEpochDays()){
+                throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine deve essere successiva alla data di inizio");
             }
 
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){
-                    if((inizioDisponibilita.getValue().toEpochDay() <= disponibilita.getFinePeriodo() && inizioDisponibilita.getValue().toEpochDay() >= disponibilita.getInizioPeriodo()) ||
-                            (fineDisponibilita.getValue().toEpochDay() <= disponibilita.getFinePeriodo() && fineDisponibilita.getValue().toEpochDay() >= disponibilita.getInizioPeriodo())){
-                        listaDisponibilita.setStyle("-fx-border-color: -mfx-red"); // TODO: not working
-                        periodInvalid = true;
+                    if((inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && inizioDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo()) ||
+                            (fineDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())){
+                        throw new InvalidPeriodException(listaDisponibilitaValidated, "Non è possibile inserire questa disponibilità, va in conflitto con altre disponibilità");
                     }
                 }
             }
 
-            System.out.println(disponibilita);
+            Disponibilita nuovaDisponibilita = new Disponibilita(inizioDisponibilitaValidated.getEpochDays(), fineDisponibilitaValidated.getEpochDays(), comuneDisponibilitaValidated.getSelectedItem());
+            disponibilita.add(nuovaDisponibilita);
 
-            if(!periodInvalid){
-
-                Disponibilita nuovaDisponibilita = new Disponibilita((int) inizioDisponibilita.getValue().toEpochDay(), (int) fineDisponibilita.getValue().toEpochDay(), comuneDisponibilita.getValue());
-                disponibilita.add(nuovaDisponibilita);
-
-                inizioDisponibilita.clear();
-                fineDisponibilita.clear();
-                comuneDisponibilita.clear();
-            }
-
+            inizioDisponibilita.clear();
+            fineDisponibilita.clear();
+            comuneDisponibilita.clear();
         }
-        /*System.out.println(disponibilita);
-        System.out.println(disponibilita.get(0).getInizioPeriodo());
-        System.out.println(disponibilita.get(0).getFinePeriodo());*/
+        catch (InputException inputException){
+            return;
+        }
     }
 
     @FXML
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
-        if(aziendaEsperienzaValidated.checkValid() && retribuzioneEsperienzaValidated.checkValid() && inizioEsperienzaValidated.checkValid() && fineEsperienzaValidated.checkValid() && comuneEsperienzaValidated.checkValid()){
-            Esperienza nuovaEsperienza = new Esperienza(-1, aziendaEsperienza.getText(), Integer.parseInt(retribuzioneEsperienza.getText()), (int) inizioEsperienza.getValue().toEpochDay(), (int) fineEsperienza.getValue().toEpochDay(), comuneEsperienza.getValue(), null);
+        try {
+            Esperienza nuovaEsperienza = new Esperienza(-1,
+                    aziendaEsperienzaValidated.getText(),
+                    Integer.parseInt(retribuzioneEsperienzaValidated.getText()),
+                    inizioEsperienzaValidated.getEpochDays(),
+                    fineEsperienzaValidated.getEpochDays(),
+                    comuneEsperienzaValidated.getSelectedItem(),
+                    specializzazioneEsperienzaValidated.getSelectedItem());
+
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays()){
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine deve essere successiva alla data di inizio");
+            }
+
             esperienze.add(nuovaEsperienza);
 
             aziendaEsperienza.clear();
@@ -297,6 +335,9 @@ public class InserisciLavoratoriController extends Controller implements Initial
             inizioEsperienza.clear();
             fineEsperienza.clear();
             comuneEsperienza.clear();
+        }
+        catch(InputException inputException) {
+            return;
         }
     }
 
@@ -308,7 +349,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         listaEsperienze.getSelectionModel().clearSelection();
     }
 
-    private void buildTextFieldValidator(MFXTextField textField, Label errorLabel, Errore ...flags){
+    /*private void buildTextFieldValidator(MFXTextField textField, Label errorLabel, Errore ...flags){
         List<Constraint> constraints = new ArrayList<Constraint>();
         for(Errore flag : flags){
             constraints.add(Constraint.Builder.build()
@@ -349,5 +390,5 @@ public class InserisciLavoratoriController extends Controller implements Initial
                 errorLabel.setVisible(false);
             }
         });
-    }
+    }*/
 }

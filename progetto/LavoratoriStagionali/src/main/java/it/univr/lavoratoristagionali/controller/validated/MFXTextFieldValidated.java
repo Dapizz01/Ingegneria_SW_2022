@@ -4,13 +4,14 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MFXTextFieldValidated extends MFXTextField {
+public class MFXTextFieldValidated implements MFXValidated {
 
     private final MFXTextField textField;
     private final Label errorLabel;
@@ -50,16 +51,27 @@ public class MFXTextFieldValidated extends MFXTextField {
         }
     }
 
-    public boolean checkValid(){
+    public String getText() throws InputException {
+        if(checkValid())
+            return textField.getText();
+        return null;
+    }
+
+    public boolean checkValid() throws InputException{
         List<Constraint> currentConstraints = textField.validate();
         if(!currentConstraints.isEmpty()){
-            showError(currentConstraints.get(0));
-            return false;
+            throw new InputException(this, currentConstraints.get(0));
         }
         else{
             showDefault();
             return true;
         }
+    }
+
+    public void showError(String message){
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+        textField.setStyle("-fx-border-color: -mfx-red");
     }
 
     private void showError(Constraint constraint){
@@ -68,7 +80,7 @@ public class MFXTextFieldValidated extends MFXTextField {
         textField.setStyle("-fx-border-color: -mfx-red");
     }
 
-    private void showCorrect(){
+    public void showCorrect(){
         errorLabel.setVisible(false);
         textField.setStyle("-fx-border-color: -mfx-green");
     }

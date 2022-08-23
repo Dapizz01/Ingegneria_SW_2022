@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MFXDatePickerValidated extends MFXDatePicker {
+public class MFXDatePickerValidated implements MFXValidated{
     private final MFXDatePicker datePicker;
     private final Label errorLabel;
     private final Errore[] flags;
@@ -59,11 +60,18 @@ public class MFXDatePickerValidated extends MFXDatePicker {
         }
     }
 
-    public boolean checkValid(){
+    public int getEpochDays() throws InputException{
+        if(checkValid()){
+            if(datePicker.getValue() != null)
+                return (int) datePicker.getValue().toEpochDay();
+        }
+        return 0;
+    }
+
+    public boolean checkValid() throws InputException{
         List<Constraint> currentConstraints = datePicker.validate();
         if(!currentConstraints.isEmpty()){
-            showError(currentConstraints.get(0));
-            return false;
+            throw new InputException(this, currentConstraints.get(0));
         }
         else{
             showDefault();
@@ -83,7 +91,7 @@ public class MFXDatePickerValidated extends MFXDatePicker {
         datePicker.setStyle("-fx-border-color: -mfx-red");
     }
 
-    private void showCorrect(){
+    public void showCorrect(){
         errorLabel.setVisible(false);
         datePicker.setStyle("-fx-border-color: -mfx-green");
     }

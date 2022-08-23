@@ -5,13 +5,15 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.exception.EmptyFieldException;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MFXFilterComboBoxValidated<T> extends MFXFilterComboBox<T> {
+public class MFXFilterComboBoxValidated<T> implements MFXValidated{
     private final MFXFilterComboBox<T> filterComboBox;
     private final Label errorLabel;
     private final Errore[] flags;
@@ -44,16 +46,27 @@ public class MFXFilterComboBoxValidated<T> extends MFXFilterComboBox<T> {
         }
     }
 
-    public boolean checkValid(){
+    public T getSelectedItem() throws InputException {
+        if(checkValid())
+            return filterComboBox.getSelectedItem();
+        return null;
+    }
+
+    public boolean checkValid() throws InputException{
         List<Constraint> currentConstraints = filterComboBox.validate();
         if(!currentConstraints.isEmpty()){
-            showError(currentConstraints.get(0));
-            return false;
+            throw new InputException(this, currentConstraints.get(0));
         }
         else{
             showDefault();
             return true;
         }
+    }
+
+    public void showError(String message){
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+        filterComboBox.setStyle("-fx-border-color: -mfx-red");
     }
 
     private void showError(Constraint constraint){
@@ -62,7 +75,7 @@ public class MFXFilterComboBoxValidated<T> extends MFXFilterComboBox<T> {
         filterComboBox.setStyle("-fx-border-color: -mfx-red");
     }
 
-    private void showCorrect(){
+    public void showCorrect(){
         errorLabel.setVisible(false);
         filterComboBox.setStyle("-fx-border-color: -mfx-green");
     }

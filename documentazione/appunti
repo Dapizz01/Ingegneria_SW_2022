@@ -47,7 +47,7 @@ Dati dipendenti agenzia:
 Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
     - Nome dell'azienda
-    - Mansioni svolte (Assunzione -> minimo 1, massimo 5)
+    - Mansioni svolte (Assunzione -> solo 1 e almeno 1)
         * Bagnino
         * Barman
         * Instruttore di nuoto
@@ -139,5 +139,6 @@ Controller:
     - Simulare inserimento dati e scrittura dati su console
 
 Model:
-    - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;
+    - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO; X
     - Costruire addLavoratore(Lavoratore)
+    -Dipendente fk ID_COMUNE da fare

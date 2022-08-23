@@ -7,14 +7,16 @@ public class Esperienza {
     private final int inizioPeriodo;
     private final int finePeriodo;
     private final Comune comune;
+    private final Specializzazione specializzazione;
 
-    public Esperienza(int ID_Esperienza, String nomeAzienda, int retribuzioneLordaGiornaliera, int inizioPeriodo, int finePeriodo, Comune comune) {
+    public Esperienza(int ID_Esperienza, String nomeAzienda, int retribuzioneLordaGiornaliera, int inizioPeriodo, int finePeriodo, Comune comune, Specializzazione specializzazione) {
         this.ID_Esperienza = ID_Esperienza;
         this.nomeAzienda = nomeAzienda;
         this.retribuzioneLordaGiornaliera = retribuzioneLordaGiornaliera;
         this.inizioPeriodo = inizioPeriodo;
         this.finePeriodo = finePeriodo;
         this.comune = comune;
+        this.specializzazione = specializzazione;
     }
 
     public int getID(){
@@ -37,7 +39,7 @@ public class Esperienza {
         return finePeriodo;
     }
 
-    public Comune getComune(){
-        return comune;
-    }
+    public Comune getComune() { return comune; }
+
+    public Specializzazione getSpecializzazione() {return specializzazione; }
 }

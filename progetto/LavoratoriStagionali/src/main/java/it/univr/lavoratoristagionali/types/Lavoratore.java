@@ -18,8 +18,10 @@ public class Lavoratore {
     private final List<Contatto> contatti;
     private final List<Patente> patenti;
 
+    private final List<Disponibilita> disponibilita;
 
-    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti) {
+
+    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
         ID_Lavoratore = id_lavoratore;
         this.nomeLavoratore = nomeLavoratore;
         this.cognomeLavoratore = cognomeLavoratore;
@@ -34,6 +36,7 @@ public class Lavoratore {
         this.lingue = lingue;
         this.contatti = contatti;
         this.patenti = patenti;
+        this.disponibilita = disponibilita;
     }
 
     public int getID() {
@@ -91,4 +94,9 @@ public class Lavoratore {
     public List<Patente> getPatenti() {
         return patenti;
     }
+
+    public List<Disponibilita> getDisponibilita() {
+        return disponibilita;
+    }
+
 }

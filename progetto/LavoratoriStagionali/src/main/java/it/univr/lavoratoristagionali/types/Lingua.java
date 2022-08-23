@@ -1,16 +1,10 @@
 package it.univr.lavoratoristagionali.types;
 
 public class Lingua {
-    private final int ID_Lingua;
     private final String nomeLingua;
 
-    public Lingua(int ID_Lingua, String nomeLingua) {
-        this.ID_Lingua = ID_Lingua;
+    public Lingua(String nomeLingua) {
         this.nomeLingua = nomeLingua;
-    }
-
-    public int getID() {
-        return ID_Lingua;
     }
 
     public String getNomeLingua(){

@@ -7,7 +7,7 @@ public class Contatto {
     private final String telefono;
     private final String email;
 
-    public Contatto(int ID_Contatto, String nome, String cognome, String telefono, String email){
+    public Contatto(int ID_Contatto, String nome, String cognome, String telefono, String email) {
         this.ID_Contatto = ID_Contatto;
         this.nome = nome;
         this.cognome = cognome;

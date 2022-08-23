@@ -13,8 +13,6 @@ Applications can choose to store dates and times in any of these formats and fre
 
 
             //------------------Selezione---------------
-            c.setAutoCommit(false);
-
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT * FROM Dipendenti;" );
 

@@ -18,11 +18,7 @@ public class LoginDaoImpl implements LoginDao {
             System.out.println("Opened database successfully");
             //------------------------------------------------
 
-            stmt = c.createStatement();
-
             //------------------Selezione---------------
-            c.setAutoCommit(false);
-
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT User, Password FROM Dipendenti;");
 
@@ -31,9 +27,9 @@ public class LoginDaoImpl implements LoginDao {
             while (rs.next()) {
                 String user = rs.getString("User");
                 String password = rs.getString("Password");
-                System.out.println("User = " + user);
-                System.out.println("Password = " + password);
-                System.out.println();
+                //System.out.println("User = " + user);
+                //System.out.println("Password = " + password);
+                //System.out.println();
 
                 if ( (login.getUser().equals(user) && login.getPassword().equals(password)) && verifica == false) {
                     verifica = true;

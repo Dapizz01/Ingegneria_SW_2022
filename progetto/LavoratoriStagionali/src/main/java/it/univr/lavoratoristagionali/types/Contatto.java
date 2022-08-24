@@ -19,11 +19,11 @@ public class Contatto {
         return ID_Contatto;
     }
 
-    public String getNome() {
+    public String getNomeContatto() {
         return nome;
     }
 
-    public String getCognome() {
+    public String getCognomeContatto() {
         return cognome;
     }
 

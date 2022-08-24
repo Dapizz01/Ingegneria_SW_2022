@@ -254,12 +254,12 @@ public class MainDemo {
         System.out.println("Primo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore));
 
         Lavoratore lavoratore2 = new Lavoratore(0/*ignored*/,
-              "Mirko",
-                "De Marchi",
-               comuniNelDb.get(5),
+              "Manuel",
+                "Isolan",
+               comuniNelDb.get(3),
                 comuniNelDb.get(2),
               5000,
-                lingueNelDb.get(0),
+                lingueNelDb.get(1),
                 "provaez@virgilio.it",
                 "1834567823",
                 true,
@@ -270,16 +270,62 @@ public class MainDemo {
               disponibilitaLista2);
         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
 
-        /*
+
         Scanner keyboard = new Scanner(System.in);
         System.out.print("Inserire NomeLavoratore da cercare nel db: ");
         String nomeLavoratore = keyboard.nextLine();
         System.out.print("Inserire e CognomeLavoratore da cercare nel db: ");
         String cognomeLavoratore = keyboard.nextLine();
-        System.out.println("Il lavoratore cercato ha ID: " + lavoratoriDao.getLavoratori(nomeLavoratore,cognomeLavoratore));
-        */
 
-        prova();
+        List<Lavoratore> lavoratoriCercati;
+        lavoratoriCercati = lavoratoriDao.getLavoratori(nomeLavoratore,cognomeLavoratore);
+
+        if(lavoratoriCercati.isEmpty())
+            System.out.println("Nessun lavoratore trovato con quel nome e cognome!");
+
+        for (Lavoratore lavoratore1 : lavoratoriCercati) {
+            System.out.println("ID_Lavoratore: " + lavoratore1.getID());
+            System.out.println("NomeLavoratore: " + lavoratore1.getNomeLavoratore());
+            System.out.println("ComuneNascita: " + lavoratore1.getComuneNascita().getNomeComune());
+            System.out.println();
+
+            System.out.println("Esperienze che ha fatto: ");
+            for (Esperienza esperienza : lavoratore1.getEsperienze()) {
+                System.out.println("ID_Esperienza: " + esperienza.getID());
+                System.out.println("NomeAzienda: " + esperienza.getNomeAzienda());
+                System.out.println("NomeComune: " + esperienza.getComune().getNomeComune());
+                System.out.println("Specializzazione: " + esperienza.getSpecializzazione().getNomeSpecializzazione());
+            }
+            System.out.println();
+
+            System.out.println("Contatti che possiede: ");
+            for (Contatto contatto : lavoratore1.getContatti()) {
+                System.out.println("ID_Contatto: " + contatto.getID());
+                System.out.println("NomeContatto: " + contatto.getNomeContatto());
+            }
+            System.out.println();
+
+            System.out.println("Lingue conosciute: ");
+            for (Lingua lingua : lavoratore1.getLingue()) {
+                System.out.println("Nome Lingua: " + lingua.getNomeLingua());
+            }
+            System.out.println();
+
+            System.out.println("Patenti possedute: ");
+            for (Patente patente : lavoratore1.getPatenti()) {
+                System.out.println("ID_Contatto: " + patente.getNomePatente());
+            }
+            System.out.println();
+
+            System.out.println("Le sue disponibilità: ");
+            for (Disponibilita disponibilita : lavoratore1.getDisponibilita()) {
+                System.out.println("ID_Comune: " + disponibilita.getComune().getNomeComune());
+                System.out.println("InizioPeriodo: " + disponibilita.getInizioPeriodo());
+            }
+            System.out.println();
+        }
+
+        //prova();
 
     }
 

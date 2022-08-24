@@ -139,8 +139,6 @@ Controller:
     - Simulare inserimento dati e scrittura dati su console
 
 Model:
-    - Costruire getLavoratori(String Nome,String Cognome): List<Lavoratore> con quel nome e cognome(anche vuota)
-    - Restituire una List nei metodi getComuni, etc... (Già apposto)
     - Se avanza tempo getLavoratore(Int ID): Lavoratore
     - Costruire deleteLavoratore(Int ID): boolean
     - Modifica lavoratore(probabile eliminarlo + riaggiungerlo)

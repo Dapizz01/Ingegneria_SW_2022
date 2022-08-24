@@ -17,7 +17,6 @@ public class Lavoratore {
     private final List<Lingua> lingue;
     private final List<Contatto> contatti;
     private final List<Patente> patenti;
-
     private final List<Disponibilita> disponibilita;
 
 

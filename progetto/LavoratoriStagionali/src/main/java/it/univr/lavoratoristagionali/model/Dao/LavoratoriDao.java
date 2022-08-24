@@ -7,5 +7,5 @@ import java.util.List;
 public interface LavoratoriDao {
     boolean addLavoratore(Lavoratore nuovoLavoratore);
 
-    //int getLavoratori(String nome, String cognome);
+    List<Lavoratore> getLavoratori(String nome, String cognome);
 }

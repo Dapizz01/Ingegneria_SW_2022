@@ -77,8 +77,8 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 sql = "INSERT INTO Contatti (NomeContatto,CognomeContatto,N_telefono,Email,ID_Lavoratore) VALUES (?,?,?,?,?)";
                 pstmt = c.prepareStatement(sql);
                 // il parametro 1 dovrebbe essere stato l'ID_Contatto che non viene toccato visto che è autoincrementale
-                pstmt.setString(1, nuovoContatto.getNome());
-                pstmt.setString(2, nuovoContatto.getCognome());
+                pstmt.setString(1, nuovoContatto.getNomeContatto());
+                pstmt.setString(2, nuovoContatto.getCognomeContatto());
                 pstmt.setString(3, nuovoContatto.getTelefono());
                 pstmt.setString(4, nuovoContatto.getEmail());
                 pstmt.setInt(5, idLavoratore);
@@ -124,5 +124,141 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
         }
 
         return false;
+    }
+
+    @Override
+    public List<Lavoratore> getLavoratori(String nome, String cognome) {
+        List<Lavoratore> lavoratori = new ArrayList<>();
+
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/getLavoratori>");
+            //------------------------------------------------
+
+            //---------------- Ricavo l'ID dei lavoratori cercati(per nome e cognome) -----------
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Lavoratori WHERE NomeLavoratore = '" + nome + "' AND CognomeLavoratore = '" + cognome + "';");
+
+            while (rs.next()) { // Cicla per ogni lavoratore trovato con quel nome e cognome
+                int idLavoratore = rs.getInt("ID_Lavoratore"); // serve per costruire le liste di Esperiene/Contatti/LingueParlate/PatentiPossedute/Disponibilità dei lavoratori con quel nome e cognome
+
+                //---------------- Costruisco le 5 liste di Lavoratore -----------------
+                List<Esperienza> esperienze = new ArrayList<>();
+                List<Contatto> contatti = new ArrayList<>();
+                List<Lingua> lingue = new ArrayList<>();
+                List<Patente> patenti = new ArrayList<>();
+                List<Disponibilita> disponibilitaLista = new ArrayList<>();
+
+                stmt = c.createStatement();
+                ResultSet rs2 = stmt.executeQuery("SELECT * FROM Esperienze WHERE ID_Lavoratore = '" + idLavoratore + "';"); // in base all'ID preso prima
+
+                while (rs2.next()) { // cicla in base al numero di esperienze del lavoratore con l'ID ricavato all'inizio
+                    // l'ID del lavoratore non mi serve nell'esperienza
+                    int idEsperienza = rs2.getInt("ID_Esperienza");
+                    String nomeAzienda = rs2.getString("NomeAzienda");
+                    int retribuzione = rs2.getInt("RetribuzioneGiornaliera");
+                    int inizioPeriodo = rs2.getInt("InizioPeriodo");
+                    int finePeriodo = rs2.getInt("FinePeriodo");
+                    String nomeComune = rs2.getString("NomeComune");
+                    String nomeSpecializzazione = rs2.getString("NomeSpecializzazione");
+
+                    Comune comune = new Comune(nomeComune);
+                    Specializzazione specializzazione = new Specializzazione(nomeSpecializzazione);
+
+                    Esperienza esperienza = new Esperienza(idEsperienza,nomeAzienda,retribuzione,inizioPeriodo,finePeriodo,comune,specializzazione);
+                    esperienze.add(esperienza);
+                }
+                rs2.close();
+
+                stmt = c.createStatement();
+                rs2 = stmt.executeQuery("SELECT * FROM Contatti WHERE ID_Lavoratore = '" + idLavoratore + "';");
+
+                while (rs2.next()) { // cicla in base al numero di esperienze del lavoratore con l'ID ricavato all'inizio
+                    int idContatto = rs2.getInt("ID_Contatto");
+                    String nomeContatto = rs2.getString("NomeContatto");
+                    String cognomeContatto = rs2.getString("CognomeContatto");
+                    String nTelefono = rs2.getString("N_telefono");
+                    String email = rs2.getString("Email");
+
+                    Contatto contatto = new Contatto(idContatto,nomeContatto,cognomeContatto,nTelefono,email);
+                    contatti.add(contatto);
+                }
+                rs2.close();
+
+                stmt = c.createStatement();
+                rs2 = stmt.executeQuery("SELECT * FROM LingueParlate WHERE ID_Lavoratore = '" + idLavoratore + "';");
+
+                while (rs2.next()) { // cicla in base al numero di lingue parlate dal lavoratore con l'ID ricavato all'inizio
+                    String nomeLingua = rs2.getString("NomeLingua");
+
+                    Lingua lingua = new Lingua(nomeLingua);
+                    lingue.add(lingua);
+                }
+                rs2.close();
+
+                stmt = c.createStatement();
+                rs2 = stmt.executeQuery("SELECT * FROM PatentiPossedute WHERE ID_Lavoratore = '" + idLavoratore + "';");
+
+                while (rs2.next()) { // cicla in base al numero di patenti possedute dal lavoratore con l'ID ricavato all'inizio
+                    String nomePatente = rs2.getString("NomePatente");
+
+                    Patente patente = new Patente(nomePatente);
+                    patenti.add(patente);
+                }
+                rs2.close();
+
+                stmt = c.createStatement();
+                rs2 = stmt.executeQuery("SELECT * FROM Disponibilita WHERE ID_Lavoratore = '" + idLavoratore + "';");
+
+                while (rs2.next()) { // cicla in base al numero di patenti possedute dal lavoratore con l'ID ricavato all'inizio
+                    String nomeComune = rs2.getString("NomeComune");
+                    int inizioPeriodo = rs2.getInt("InizioPeriodo");
+                    int finePeriodo = rs2.getInt("FinePeriodo");
+
+                    Comune comune = new Comune(nomeComune);
+
+                    Disponibilita disponibilitaSingola = new Disponibilita(comune,inizioPeriodo,finePeriodo);
+                    disponibilitaLista.add(disponibilitaSingola);
+                }
+                rs2.close();
+
+                // Ora che ho tutto posso creare la lista di lavoratori da ritornare con quel nome e cognome cercati
+                // Recupero le cose che mi mancavano del lavoratore
+                String nomeLavoratore = rs.getString("NomeLavoratore");
+                String cognomeLavoratore = rs.getString("CognomeLavoratore");
+                String comune1 = rs.getString("ComuneNascita");
+                String comune2 = rs.getString("ComuneAbitazione");
+                int dataNascita = rs.getInt("DataNascita");
+                String nazionalita1 = rs.getString("Nazionalita");
+                String email = rs.getString("Email");
+                String nTelefono = rs.getString("N_telefono");
+                boolean automunito = rs.getBoolean("Automunito");
+
+                Comune comuneNascita = new Comune(comune1);
+                Comune comuneAbitazione = new Comune(comune2);
+                Lingua nazionalita = new Lingua(nazionalita1);
+
+                Lavoratore lavoratore = new Lavoratore(idLavoratore,nomeLavoratore,cognomeLavoratore,comuneNascita,comuneAbitazione,dataNascita,nazionalita,email,nTelefono,automunito,esperienze,lingue,contatti,patenti,disponibilitaLista);
+                lavoratori.add(lavoratore);
+            }
+            //-------------------------------------------------------------
+
+            rs.close();
+            stmt.close();
+            c.close();
+
+            return lavoratori; // anche vuota va bene
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return lavoratori;
     }
 }

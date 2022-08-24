@@ -44,16 +44,21 @@ public class MFXListViewValidated<T> implements MFXValidated{
     public void showError(String message){
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        listView.setStyle("-fx-border-color: -mfx-red"); // TODO: non funzionano, generano warnings
+        // listView.setStyle("-fx-border-color: -mfx-red"); // TODO: non funzionano, generano warnings
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        listView.setStyle("-fx-border-color: -mfx-green");
+        // listView.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        listView.setStyle("-fx-border-color: -common-gradient");
+        // listView.setStyle("-fx-border-color: -common-gradient");
+    }
+
+    @Override
+    public void reset() {
+        // TODO
     }
 }

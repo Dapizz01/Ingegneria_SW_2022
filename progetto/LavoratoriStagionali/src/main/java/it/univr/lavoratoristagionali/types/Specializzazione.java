@@ -16,4 +16,8 @@ public class Specializzazione {
     public String getNomeSpecializzazione(){
         return nomeSpecializzazione;
     }
+
+    public String toString(){
+        return nomeSpecializzazione;
+    }
 }

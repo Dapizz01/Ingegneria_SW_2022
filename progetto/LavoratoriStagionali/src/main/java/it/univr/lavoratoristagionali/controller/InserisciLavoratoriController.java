@@ -1,33 +1,21 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.controls.cell.MFXListCell;
-import io.github.palexdev.materialfx.validation.Constraint;
-import io.github.palexdev.materialfx.validation.Severity;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
-import it.univr.lavoratoristagionali.controller.validated.MFXDatePickerValidated;
-import it.univr.lavoratoristagionali.controller.validated.MFXFilterComboBoxValidated;
-import it.univr.lavoratoristagionali.controller.validated.MFXListViewValidated;
-import it.univr.lavoratoristagionali.controller.validated.MFXTextFieldValidated;
+import it.univr.lavoratoristagionali.controller.validated.*;
 import it.univr.lavoratoristagionali.types.*;
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.text.Text;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,6 +32,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated, comuneAbitazioneLavoratoreValidated;
     @FXML
     private MFXCheckListView<Lingua> nazionalitaLavoratore;
+    private MFXCheckListViewValidated<Lingua> nazionalitaLavoratoreValidated;
     @FXML
     private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError, comuneAbitazioneLavoratoreError;
 
@@ -57,9 +46,11 @@ public class InserisciLavoratoriController extends Controller implements Initial
     // INFORMAZIONI GENERALI
     @FXML
     private MFXCheckListView<Lingua> lingueLavoratore;
+    private MFXCheckListViewValidated<Lingua> lingueLavoratoreValidated;
     // TODO: MFXCheckListViewValidated<T>
     @FXML
     private MFXCheckListView<Patente> patentiLavoratore;
+    private MFXCheckListViewValidated<Patente> patentiLavoratoreValidated;
     @FXML
     private MFXCheckbox automunito;
     @FXML
@@ -116,6 +107,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
     // ... il resto
     @FXML
     private MFXButton ritornaMenu, inviaLavoratore;
+    @FXML
+    private MFXScrollPane scrollPane;
 
     // Variabili del controller non legate ad FXML
     private ObservableList<Contatto> contatti;
@@ -123,6 +116,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private ObservableList<Esperienza> esperienze;
 
     private ObservableList<Disponibilita> disponibilita;
+
+    private static final int DAYS_IN_MONTH = 30;
+
+    private static final int DAYS_IN_YEAR = 365;
 
     public InserisciLavoratoriController(){
 
@@ -141,9 +138,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
         dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Errore.MUST_BE_ADULT, Errore.NON_EMPTY);
         comuneNascitaLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
         comuneAbitazioneLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneAbitazioneLavoratore, comuneAbitazioneLavoratoreError, Errore.NON_EMPTY);
+        nazionalitaLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(nazionalitaLavoratore, nazionalitaLavoratoreError, Errore.NON_EMPTY);
         indirizzoLavoratoreValidated = new MFXTextFieldValidated(indirizzoLavoratore, indirizzoLavoratoreError, Errore.NON_EMPTY);
         telefonoLavoratoreValidated = new MFXTextFieldValidated(telefonoLavoratore, telefonoLavoratoreError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
         emailLavoratoreValidated = new MFXTextFieldValidated(emailLavoratore, emailLavoratoreError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
+
+        lingueLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(lingueLavoratore, lingueLavoratoreError, Errore.NON_EMPTY);
+        patentiLavoratoreValidated = new MFXCheckListViewValidated<Patente>(patentiLavoratore, patentiLavoratoreError, (Errore) null);
 
         nomeContattoValidated = new MFXTextFieldValidated(nomeContatto, nomeContattoError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         cognomeContattoValidated = new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
@@ -182,6 +183,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
         disponibilita = FXCollections.observableArrayList(new ArrayList<>());
         listaDisponibilita.setItems(disponibilita);
 
+        listaDisponibilita.features().enableSmoothScrolling(1.2);
+        listaEsperienze.features().enableSmoothScrolling(1.2);
+        listaContattoUrgente.features().enableSmoothScrolling(1.2);
+
         /*buildFilterComboBoxValidator(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
         buildFilterComboBoxValidator(comuneDisponibilita, comuneDisponibilitaError, Errore.NON_EMPTY);
         buildFilterComboBoxValidator(comuneEsperienza, comuneEsperienzaError, Errore.NON_EMPTY);*/
@@ -214,14 +219,14 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     comuneNascitaLavoratoreValidated.getSelectedItem(),
                     comuneAbitazioneLavoratoreValidated.getSelectedItem(),
                     dataNascitaLavoratoreValidated.getEpochDays(),
-                    nazionalitaLavoratore.getSelectionModel().getSelection().get(0), // TODO: da sostituire con quello validated
+                    nazionalitaLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
                     emailLavoratoreValidated.getText(),
                     telefonoLavoratoreValidated.getText(),
                     automunito.isSelected(),
                     listaEsperienzeValidated.getSelectedItems(),
-                    lingueLavoratore.getItems(), // TODO: da sostituire con quello validated
+                    lingueLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
                     listaContattoUrgenteValidated.getSelectedItems(),
-                    patentiLavoratore.getSelectionModel().getSelectedValues(), // TODO: da sostituire con quello validated
+                    patentiLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
                     listaDisponibilitaValidated.getSelectedItems());
             System.out.println(lavoratore);
         }
@@ -241,10 +246,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
             contatto = new Contatto(-1, nomeContattoValidated.getText(), cognomeContattoValidated.getText(), telefonoContattoValidated.getText(), emailContattoValidated.getText());
             contatti.add(contatto);
 
-            nomeContatto.clear();
-            cognomeContatto.clear();
-            telefonoContatto.clear();
-            emailContatto.clear();
+            nomeContattoValidated.reset();
+            cognomeContattoValidated.reset();
+            telefonoContattoValidated.reset();
+            emailContattoValidated.reset();
         }
         catch (InputException inputException) {
             return;
@@ -288,9 +293,11 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
         boolean periodInvalid = false;
         try{
-            if(fineDisponibilitaValidated.getEpochDays() <= inizioDisponibilitaValidated.getEpochDays()){
+            if(inizioDisponibilitaValidated.getEpochDays()  >= fineDisponibilitaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine deve essere successiva alla data di inizio");
-            }
+
+            if(fineDisponibilitaValidated.getEpochDays() <= inizioDisponibilitaValidated.getEpochDays() + DAYS_IN_MONTH)
+                throw new InvalidPeriodException(fineDisponibilitaValidated, "La durata della disponibilita deve essere almeno di 1 mese");
 
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){
@@ -304,9 +311,9 @@ public class InserisciLavoratoriController extends Controller implements Initial
             Disponibilita nuovaDisponibilita = new Disponibilita(inizioDisponibilitaValidated.getEpochDays(), fineDisponibilitaValidated.getEpochDays(), comuneDisponibilitaValidated.getSelectedItem());
             disponibilita.add(nuovaDisponibilita);
 
-            inizioDisponibilita.clear();
-            fineDisponibilita.clear();
-            comuneDisponibilita.clear();
+            inizioDisponibilitaValidated.reset();
+            fineDisponibilitaValidated.reset();
+            comuneDisponibilitaValidated.reset();
         }
         catch (InputException inputException){
             return;
@@ -316,6 +323,16 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
         try {
+
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays())
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine deve essere successiva alla data di inizio");
+
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH)
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di almeno un mese");
+
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR)
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di massimo 2 anni");
+
             Esperienza nuovaEsperienza = new Esperienza(-1,
                     aziendaEsperienzaValidated.getText(),
                     Integer.parseInt(retribuzioneEsperienzaValidated.getText()),
@@ -324,17 +341,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     comuneEsperienzaValidated.getSelectedItem(),
                     specializzazioneEsperienzaValidated.getSelectedItem());
 
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays()){
-                throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine deve essere successiva alla data di inizio");
-            }
-
             esperienze.add(nuovaEsperienza);
 
-            aziendaEsperienza.clear();
-            retribuzioneEsperienza.clear();
-            inizioEsperienza.clear();
-            fineEsperienza.clear();
-            comuneEsperienza.clear();
+            aziendaEsperienzaValidated.reset();
+            retribuzioneEsperienzaValidated.reset();
+            inizioEsperienzaValidated.reset();
+            fineEsperienzaValidated.reset();
+            comuneEsperienzaValidated.reset();
         }
         catch(InputException inputException) {
             return;

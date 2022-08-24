@@ -88,16 +88,21 @@ public class MFXDatePickerValidated implements MFXValidated{
     private void showError(Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
-        datePicker.setStyle("-fx-border-color: -mfx-red");
+        // datePicker.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        datePicker.setStyle("-fx-border-color: -mfx-green");
+        // datePicker.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        datePicker.setStyle("-fx-border-color: -common-gradient");
+        // datePicker.setStyle("-fx-border-color: -common-gradient");
+    }
+
+    public void reset(){
+        datePicker.setValue(null);
+        datePicker.clear();
     }
 }

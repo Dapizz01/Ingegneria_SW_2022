@@ -12,7 +12,7 @@ public class Controller {
     public void switchScene(Stage stage, View target){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
-            Scene scene = new Scene(fxmlLoader.load(), 1280, 720); // TODO: incrementare dimensioni pagina di default
+            Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
             stage.setScene(scene);
         }
         catch(IOException ioe){

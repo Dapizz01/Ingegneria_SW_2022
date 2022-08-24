@@ -40,9 +40,11 @@ public class MFXTextFieldValidated implements MFXValidated {
                                     yield this.textField.getText().chars().allMatch(Character::isLetter);
                                     case TELEPHONE_FORMAT:
                                         yield this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10;
-                                        default:
-                                            yield true;
-                                            }, this.textField.textProperty())
+                        case EMAIL_FORMAT:
+                            yield this.textField.getText().contains("@");
+                            default:
+                                yield true;
+                                }, this.textField.textProperty())
                     ).get());
         }
 
@@ -77,16 +79,21 @@ public class MFXTextFieldValidated implements MFXValidated {
     private void showError(Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
-        textField.setStyle("-fx-border-color: -mfx-red");
+        // textField.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        textField.setStyle("-fx-border-color: -mfx-green");
+        // textField.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        textField.setStyle("-fx-border-color: -common-gradient");
+        // textField.setStyle("-fx-border-color: -common-gradient");
+    }
+
+    public void reset(){
+        textField.cut();
+        textField.clear();
     }
 }

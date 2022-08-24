@@ -10,7 +10,7 @@ public class Lavoratore {
     private final Comune comuneNascita;
     private final Comune comuneAbitazione;
     private final int dataNascita;
-    private final Lingua nazionalita; // TODO: ma un lavoratore non potrebbe avere più cittadinanze?
+    private final List<Lingua> nazionalita; // TODO: ma un lavoratore non potrebbe avere più cittadinanze?
     private final String email;
     private final String telefono;
     private final boolean automunito;
@@ -21,7 +21,7 @@ public class Lavoratore {
     private final List<Disponibilita> disponibilita;
 
 
-    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
+    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
         ID_Lavoratore = id_lavoratore;
         this.nomeLavoratore = nomeLavoratore;
         this.cognomeLavoratore = cognomeLavoratore;
@@ -63,7 +63,7 @@ public class Lavoratore {
         return dataNascita;
     }
 
-    public Lingua getNazionalita() {
+    public List<Lingua> getNazionalita() {
         return nazionalita;
     }
 
@@ -101,8 +101,8 @@ public class Lavoratore {
 
     public String toString(){
         return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
-                "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + "a " + getComuneNascita() +
-                "\nAbita a " + comuneAbitazione +
+                "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
+                "\nAbita a " + getComuneAbitazione() +
                 "\nE-mail: " + getEmail() +
                 "\nTelefono: " + getTelefono() +
                 "\nAutomunito: " + isAutomunito() +

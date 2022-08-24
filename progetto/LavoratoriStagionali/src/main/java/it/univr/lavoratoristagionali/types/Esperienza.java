@@ -50,6 +50,11 @@ public class Esperienza {
     }
 
     public String toString(){
-        return "Svolta presso " + nomeAzienda + " a " + comune + " dal " + LocalDate.ofEpochDay(inizioPeriodo) + " al " + LocalDate.ofEpochDay(finePeriodo) + ", retribuzione di €" + retribuzioneLordaGiornaliera;
+        return "Svolta presso " + getNomeAzienda() +
+                "con specializzazione " + getSpecializzazione() +
+                ", a " + getComune() +
+                ", dal " + LocalDate.ofEpochDay(getInizioPeriodo()) +
+                " al " + LocalDate.ofEpochDay(getFinePeriodo()) +
+                ", retribuzione di €" + getRetribuzioneLordaGiornaliera();
     }
 }

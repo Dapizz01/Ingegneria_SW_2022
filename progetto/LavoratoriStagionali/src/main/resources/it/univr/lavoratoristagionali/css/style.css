@@ -1,0 +1,15 @@
+* {
+    /*
+        Palette colori
+     */
+    -fx-background-1: "F7ECDE";
+    -fx-background-2: "E9DAC1";
+    -fx-active-1: "54BAB9";
+    -fx-active-2: "E9DAC1";
+    -fx-error-1: "F47C7C";
+    -fx-error-2: "EF9F9F";
+}
+
+.mfx-text-field{
+    -fx-border-color: -fx-error-1;
+}

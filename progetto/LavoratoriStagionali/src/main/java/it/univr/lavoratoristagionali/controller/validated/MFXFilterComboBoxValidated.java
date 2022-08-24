@@ -72,16 +72,21 @@ public class MFXFilterComboBoxValidated<T> implements MFXValidated{
     private void showError(Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
-        filterComboBox.setStyle("-fx-border-color: -mfx-red");
+        // filterComboBox.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        filterComboBox.setStyle("-fx-border-color: -mfx-green");
+        // filterComboBox.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        filterComboBox.setStyle("-fx-border-color: -common-gradient");
+        // filterComboBox.setStyle("-fx-border-color: -common-gradient");
+    }
+
+    public void reset(){
+        filterComboBox.clearSelection();
+        filterComboBox.clear();
     }
 }

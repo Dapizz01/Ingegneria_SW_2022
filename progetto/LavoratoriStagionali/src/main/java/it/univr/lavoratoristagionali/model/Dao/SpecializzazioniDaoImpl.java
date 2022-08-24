@@ -11,10 +11,10 @@ import java.util.List;
 
 public class SpecializzazioniDaoImpl implements SpecializzazioniDao {
 
-    List<Specializzazione> specializzazioni = new ArrayList<Specializzazione>();
-
     @Override
     public List<Specializzazione> getSpecializzazioni() {
+        List<Specializzazione> specializzazioni = new ArrayList<>();
+
         Connection c = null;
         Statement stmt = null;
 

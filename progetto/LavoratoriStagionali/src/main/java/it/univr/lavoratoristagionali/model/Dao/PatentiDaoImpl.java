@@ -11,10 +11,10 @@ import java.util.List;
 
 public class PatentiDaoImpl implements PatentiDao {
 
-    List<Patente> patenti = new ArrayList<Patente>();
-
     @Override
     public List<Patente> getPatenti() {
+        List<Patente> patenti = new ArrayList<>();
+
         Connection c = null;
         Statement stmt = null;
 

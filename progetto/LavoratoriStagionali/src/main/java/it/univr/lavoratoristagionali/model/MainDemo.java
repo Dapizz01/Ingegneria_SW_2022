@@ -76,8 +76,10 @@ public class MainDemo {
                     " FinePeriodo INTEGER, " +          //Numero di Giorni da 1970-01-01
                     " NomeComune VARCHAR(50), " +
                     " NomeSpecializzazione VARCHAR(20), " +
+                    " ID_Lavoratore INTEGER, " +
                     " FOREIGN KEY (NomeSpecializzazione) REFERENCES Specializzazioni(NomeSpecializzazione), " +
-                    " FOREIGN KEY (NomeComune) REFERENCES Comuni(NomeComune)) ";
+                    " FOREIGN KEY (NomeComune) REFERENCES Comuni(NomeComune), "+
+                    " FOREIGN KEY (ID_Lavoratore) REFERENCES Lavoratori(ID_Lavoratore)) ";
             stmt.executeUpdate(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS Contatti " +
@@ -85,7 +87,9 @@ public class MainDemo {
                     " NomeContatto VARCHAR(20)," +
                     " CognomeContatto VARCHAR(20), " +
                     " N_telefono CHAR(10), " +
-                    " Email VARCHAR(50)) ";
+                    " Email VARCHAR(50), " +
+                    " ID_Lavoratore INTEGER, " +
+                    " FOREIGN KEY(ID_Lavoratore) REFERENCES Lavoratori(ID_Lavoratore)) ";
             stmt.executeUpdate(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS Disponibilita " +
@@ -190,8 +194,8 @@ public class MainDemo {
         for(Specializzazione specializzazione : specializzazioniDao.getSpecializzazioni()) {
             System.out.println("NomeSpecializzaione: " + specializzazione.getNomeSpecializzazione());
         }
-        */
 
+        */
         ComuniDao comuniDao = new ComuniDaoImpl();
         List<Comune> comuniNelDb = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
         LingueDao lingueDao = new LingueDaoImpl();
@@ -224,7 +228,6 @@ public class MainDemo {
         List<Patente> patentiPossedute2 = new ArrayList<Patente>();
         patentiPossedute2.add(patentiNelDb.get(0));
         patentiPossedute2.add(patentiNelDb.get(1));
-
 
         List<Disponibilita> disponibilitaLista = new ArrayList<Disponibilita>();
         disponibilitaLista.add(new Disponibilita(comuniNelDb.get(0),8000,10000));
@@ -265,7 +268,16 @@ public class MainDemo {
                contatti2,
                patentiPossedute2,
               disponibilitaLista2);
-         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
+        System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
+
+        /*
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Inserire NomeLavoratore da cercare nel db: ");
+        String nomeLavoratore = keyboard.nextLine();
+        System.out.print("Inserire e CognomeLavoratore da cercare nel db: ");
+        String cognomeLavoratore = keyboard.nextLine();
+        System.out.println("Il lavoratore cercato ha ID: " + lavoratoriDao.getLavoratori(nomeLavoratore,cognomeLavoratore));
+        */
 
         prova();
 
@@ -304,13 +316,16 @@ public class MainDemo {
             }
             rs.close();
 
+
             rs = stmt.executeQuery("SELECT * FROM Esperienze;");
             while (rs.next()) {
+                int idLavoratore = rs.getInt("ID_Lavoratore");
                 int idEsperienza = rs.getInt("ID_Esperienza");
                 String nomeAzienda = rs.getString("NomeAzienda");
                 String nomeComune = rs.getString("NomeComune");
                 String nomeSpecializzazione = rs.getString("NomeSpecializzazione");
 
+                System.out.println("ID_Lavoratore: " + idLavoratore);
                 System.out.println("ID_Esperienza: " + idEsperienza);
                 System.out.println("NomeAzienda: " + nomeAzienda);
                 System.out.println("Svolta in: " + nomeComune);
@@ -330,9 +345,11 @@ public class MainDemo {
 
             rs = stmt.executeQuery("SELECT * FROM Contatti;");
             while (rs.next()) {
+                int idLavoratore = rs.getInt("ID_Lavoratore");
                 int idContatto = rs.getInt("ID_Contatto");
                 String nomeContatto = rs.getString("NomeContatto");
 
+                System.out.println("ID_Lavoratore: " + idLavoratore);
                 System.out.println("ID_Contatto: " + idContatto);
                 System.out.println("nomeContatto: " + nomeContatto);
             }

@@ -11,10 +11,10 @@ import java.util.List;
 
 public class ComuniDaoImpl implements ComuniDao {
 
-    List<Comune> comuni = new ArrayList<Comune>();
-
     @Override
     public List<Comune> getComuni() {
+        List<Comune> comuni = new ArrayList<>();
+
         Connection c = null;
         Statement stmt = null;
 

@@ -11,10 +11,10 @@ import java.util.List;
 
 public class LingueDaoImpl implements LingueDao {
 
-    List<Lingua> lingue = new ArrayList<Lingua>();
-
     @Override
     public List<Lingua> getLingue() {
+        List<Lingua> lingue = new ArrayList<>();
+
         Connection c = null;
         Statement stmt = null;
 

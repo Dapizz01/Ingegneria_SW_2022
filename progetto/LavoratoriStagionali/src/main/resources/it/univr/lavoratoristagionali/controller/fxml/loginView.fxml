@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
-   <Label fx:id="loginTitleLabel" layoutX="606.0" layoutY="189.0" prefHeight="50.0" prefWidth="68.0" style="-fx-text-fill: rgb(28, 56, 121);" text="Login" textAlignment="CENTER">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
+   <Label fx:id="loginTitleLabel" layoutX="606.0" layoutY="189.0" prefHeight="50.0" prefWidth="68.0" text="Login" textAlignment="CENTER">
       <font>
          <Font size="25.0" />
       </font>

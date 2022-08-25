@@ -1,3 +1,7 @@
+/*
+    Questo file va aggiunto agli FXML da Scene Builder.
+    In teoria basta aggiungerlo all'elemento root della scena, da verificare.
+ */
 * {
     /*
         Palette colori
@@ -11,5 +15,5 @@
 }
 
 .mfx-text-field{
-    -fx-border-color: -fx-error-1;
+    -fx-border-color: -fx-active-1;
 }

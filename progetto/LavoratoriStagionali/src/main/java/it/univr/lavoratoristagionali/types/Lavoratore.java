@@ -10,7 +10,7 @@ public class Lavoratore {
     private final Comune comuneNascita;
     private final Comune comuneAbitazione;
     private final int dataNascita;
-    private final List<Lingua> nazionalita; // TODO: ma un lavoratore non potrebbe avere più cittadinanze?
+    private final Lingua nazionalita;
     private final String email;
     private final String telefono;
     private final boolean automunito;
@@ -20,18 +20,7 @@ public class Lavoratore {
     private final List<Patente> patenti;
     private final List<Disponibilita> disponibilita;
 
-    private final List<Disponibilita> disponibilita;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
     public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
-=======
-    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
->>>>>>> InserimentoLavoratoreController
-=======
-    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
->>>>>>> InserimentoLavoratoreController
         ID_Lavoratore = id_lavoratore;
         this.nomeLavoratore = nomeLavoratore;
         this.cognomeLavoratore = cognomeLavoratore;
@@ -73,7 +62,7 @@ public class Lavoratore {
         return dataNascita;
     }
 
-    public List<Lingua> getNazionalita() {
+    public Lingua getNazionalita() {
         return nazionalita;
     }
 
@@ -109,11 +98,6 @@ public class Lavoratore {
         return disponibilita;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> InserimentoLavoratoreController
     public String toString(){
         return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
                 "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
@@ -128,8 +112,4 @@ public class Lavoratore {
                 "\nContatti urgenti: " + getContatti() +
                 "\n";
     }
-<<<<<<< HEAD
->>>>>>> InserimentoLavoratoreController
-=======
->>>>>>> InserimentoLavoratoreController
 }

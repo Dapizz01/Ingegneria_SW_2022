@@ -8,7 +8,7 @@ Dati lavoratori:
         * Nome (Assunzione -> almeno una)
         * Cognome (Assunzione -> almeno una)
         * Luogo e data di nascita (Assunzione -> comune di nascita, data gg/mm/aa)
-        * Nazionalità (Assunzione -> almeno una)
+        * Nazionalità (Assunzione -> solo una)
     - Indirizzo (Assunzione -> solo uno obbligatorio e soltanto uno da specificare, comune abitazione principale)
     - Recapito telefonico personale (opzionale) (Assunzione -> controllo sintassi numero telefonico)
     - Email (Assunzione -> solo uno obbligatorio + controllo sintassi mail)
@@ -47,15 +47,7 @@ Dati dipendenti agenzia:
 Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
     - Nome dell'azienda
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - Mansioni svolte (Assunzione -> solo 1 e almeno 1)
-=======
     - Mansioni svolte (Assunzione -> solo 1 per esperienza)
->>>>>>> InserimentoLavoratoreController
-=======
-    - Mansioni svolte (Assunzione -> solo 1 per esperienza)
->>>>>>> InserimentoLavoratoreController
         * Bagnino
         * Barman
         * Instruttore di nuoto
@@ -159,11 +151,6 @@ Controller:
     - Fare controllo data inizio < data fine in disponibilita [V]
 
 Model:
-<<<<<<< HEAD
-    - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO; X
-    - Costruire addLavoratore(Lavoratore)
-    -Dipendente fk ID_COMUNE da fare
-=======
     - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;
     - Costruire addLavoratore(Lavoratore)
 
@@ -183,9 +170,4 @@ Controlli Controller:
         - Nome azienda non vuoto
         - Retribuzione solo numeri
         - Periodo, controllare che non sia nel futuro (minimo 1 mese, max 2 anni) (ci possono essere più lavori contemporaneamente)
-<<<<<<< HEAD
         - Aggiungere specializzazione
->>>>>>> InserimentoLavoratoreController
-=======
-        - Aggiungere specializzazione
->>>>>>> InserimentoLavoratoreController

@@ -227,13 +227,13 @@ public class MainDemo {
 
 
         List<Disponibilita> disponibilitaLista = new ArrayList<Disponibilita>();
-        disponibilitaLista.add(new Disponibilita(comuniNelDb.get(0),8000,10000));
+        disponibilitaLista.add(new Disponibilita(8000,10000, comuniNelDb.get(0)));
         List<Disponibilita> disponibilitaLista2 = new ArrayList<Disponibilita>();
-        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(0),5000,6000));
-        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(1),7000,9000));
+        disponibilitaLista2.add(new Disponibilita(5000,6000, comuniNelDb.get(0)));
+        disponibilitaLista2.add(new Disponibilita(7000,9000, comuniNelDb.get(1)));
 
-        LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
-        Lavoratore lavoratore = new Lavoratore(0/*ignored*/,
+        /*LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+        Lavoratore lavoratore = new Lavoratore(0,
                "Manuel",
                "Isolan",
                 comuniNelDb.get(5),
@@ -250,7 +250,7 @@ public class MainDemo {
               disponibilitaLista);
         System.out.println("Primo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore));
 
-        Lavoratore lavoratore2 = new Lavoratore(0/*ignored*/,
+        Lavoratore lavoratore2 = new Lavoratore(0
               "Mirko",
                 "De Marchi",
                comuniNelDb.get(5),
@@ -265,9 +265,9 @@ public class MainDemo {
                contatti2,
                patentiPossedute2,
               disponibilitaLista2);
-         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
+         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));*/
 
-        prova();
+        // prova();
 
     }
 

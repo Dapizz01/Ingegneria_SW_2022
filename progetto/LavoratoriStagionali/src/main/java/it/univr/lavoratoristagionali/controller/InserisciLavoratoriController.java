@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.*;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
 import it.univr.lavoratoristagionali.controller.validated.*;
+import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXFilterComboBox<Comune> comuneNascitaLavoratore, comuneAbitazioneLavoratore;
     private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated, comuneAbitazioneLavoratoreValidated;
     @FXML
-    private MFXCheckListView<Lingua> nazionalitaLavoratore;
+    private MFXCheckListView<Lingua> nazionalitaLavoratore; // TODO: da cambiare con un MFXFilterComboBox<Lingua>
     private MFXCheckListViewValidated<Lingua> nazionalitaLavoratoreValidated;
     @FXML
     private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError, comuneAbitazioneLavoratoreError;
@@ -117,6 +118,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     private ObservableList<Disponibilita> disponibilita;
 
+    // TODO: aggiungere label di fine inserimento con successo / errore
+
     private static final int DAYS_IN_MONTH = 30;
 
     private static final int DAYS_IN_YEAR = 365;
@@ -127,11 +130,22 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<Lingua> lingue = List.of(new Lingua(1, "lingua1"), new Lingua(2, "lingua2"), new Lingua(3, "lingua3"));
+        /* List<Lingua> lingue = List.of(new Lingua("lingua1"), new Lingua("lingua2"), new Lingua("lingua3"));
         List<Comune> comuni = List.of(new Comune(1, "comune1"), new Comune(2, "comune2"), new Comune(3, "comune3"));
         List<Lingua> nazionalita = List.of(new Lingua(1, "nazionalità1"), new Lingua(2, "nazionalità2"), new Lingua(3, "nazionalità3"));
         List<Patente> patenti = List.of(new Patente(1, "patente1"), new Patente(2, "patente2"), new Patente(3, "patente3"));
-        List<Specializzazione> specializzazioni = List.of(new Specializzazione(1, "bagnino"), new Specializzazione(2, "test2"), new Specializzazione(3, "test3"));
+        List<Specializzazione> specializzazioni = List.of(new Specializzazione(1, "bagnino"), new Specializzazione(2, "test2"), new Specializzazione(3, "test3")); */
+
+        ComuniDao comuniDao = new ComuniDaoImpl();
+        LingueDao lingueDao = new LingueDaoImpl();
+        PatentiDao patentiDao = new PatentiDaoImpl();
+        SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
+
+        List<Comune> comuni = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
+        List<Lingua> lingue = lingueDao.getLingue();
+        List<Patente> patenti = patentiDao.getPatenti();
+        List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
+
 
         nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
@@ -168,7 +182,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
         comuneAbitazioneLavoratore.setItems(FXCollections.observableArrayList(comuni));
         lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
-        nazionalitaLavoratore.setItems(FXCollections.observableArrayList(nazionalita));
+        nazionalitaLavoratore.setItems(FXCollections.observableArrayList(lingue));
         patentiLavoratore.setItems(FXCollections.observableArrayList(patenti));
         comuneEsperienza.setItems(FXCollections.observableArrayList(comuni));
         comuneDisponibilita.setItems(FXCollections.observableArrayList(comuni));
@@ -219,7 +233,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     comuneNascitaLavoratoreValidated.getSelectedItem(),
                     comuneAbitazioneLavoratoreValidated.getSelectedItem(),
                     dataNascitaLavoratoreValidated.getEpochDays(),
-                    nazionalitaLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
+                    nazionalitaLavoratoreValidated.getSelectedItems().get(0), // TODO: da sostituire con quello validated
                     emailLavoratoreValidated.getText(),
                     telefonoLavoratoreValidated.getText(),
                     automunito.isSelected(),
@@ -229,6 +243,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     patentiLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
                     listaDisponibilitaValidated.getSelectedItems());
             System.out.println(lavoratore);
+            LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+            System.out.println(lavoratoriDao.addLavoratore(lavoratore));
+
+            // TODO: pulire campi dopo l'inserimento (se è avvenuto correttamente)
         }
         catch (InputException inputException){
             return;

@@ -41,18 +41,9 @@ public class Esperienza {
         return finePeriodo;
     }
 
-<<<<<<< HEAD
     public Comune getComune() { return comune; }
 
     public Specializzazione getSpecializzazione() {return specializzazione; }
-=======
-    public Comune getComune(){
-        return comune;
-    }
-
-    public Specializzazione getSpecializzazione(){
-        return specializzazione;
-    }
 
     public String toString(){
         return "Svolta presso " + getNomeAzienda() +
@@ -62,8 +53,4 @@ public class Esperienza {
                 " al " + LocalDate.ofEpochDay(getFinePeriodo()) +
                 ", retribuzione di €" + getRetribuzioneLordaGiornaliera();
     }
-<<<<<<< HEAD
->>>>>>> InserimentoLavoratoreController
-=======
->>>>>>> InserimentoLavoratoreController
 }

@@ -1,5 +1,7 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
+
 public class Esperienza {
     private final int ID_Esperienza;
     private final String nomeAzienda;
@@ -39,7 +41,26 @@ public class Esperienza {
         return finePeriodo;
     }
 
+<<<<<<< HEAD
     public Comune getComune() { return comune; }
 
     public Specializzazione getSpecializzazione() {return specializzazione; }
+=======
+    public Comune getComune(){
+        return comune;
+    }
+
+    public Specializzazione getSpecializzazione(){
+        return specializzazione;
+    }
+
+    public String toString(){
+        return "Svolta presso " + getNomeAzienda() +
+                "con specializzazione " + getSpecializzazione() +
+                ", a " + getComune() +
+                ", dal " + LocalDate.ofEpochDay(getInizioPeriodo()) +
+                " al " + LocalDate.ofEpochDay(getFinePeriodo()) +
+                ", retribuzione di €" + getRetribuzioneLordaGiornaliera();
+    }
+>>>>>>> InserimentoLavoratoreController
 }

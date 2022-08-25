@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Lavoratore {
@@ -9,7 +10,7 @@ public class Lavoratore {
     private final Comune comuneNascita;
     private final Comune comuneAbitazione;
     private final int dataNascita;
-    private final Lingua nazionalita;
+    private final List<Lingua> nazionalita; // TODO: ma un lavoratore non potrebbe avere più cittadinanze?
     private final String email;
     private final String telefono;
     private final boolean automunito;
@@ -17,11 +18,16 @@ public class Lavoratore {
     private final List<Lingua> lingue;
     private final List<Contatto> contatti;
     private final List<Patente> patenti;
+    private final List<Disponibilita> disponibilita;
 
     private final List<Disponibilita> disponibilita;
 
+<<<<<<< HEAD
 
     public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
+=======
+    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
+>>>>>>> InserimentoLavoratoreController
         ID_Lavoratore = id_lavoratore;
         this.nomeLavoratore = nomeLavoratore;
         this.cognomeLavoratore = cognomeLavoratore;
@@ -63,7 +69,7 @@ public class Lavoratore {
         return dataNascita;
     }
 
-    public Lingua getNazionalita() {
+    public List<Lingua> getNazionalita() {
         return nazionalita;
     }
 
@@ -99,4 +105,21 @@ public class Lavoratore {
         return disponibilita;
     }
 
+<<<<<<< HEAD
+=======
+    public String toString(){
+        return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
+                "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
+                "\nAbita a " + getComuneAbitazione() +
+                "\nE-mail: " + getEmail() +
+                "\nTelefono: " + getTelefono() +
+                "\nAutomunito: " + isAutomunito() +
+                "\nEsperienze: " + getEsperienze() +
+                "\nLingue: " + getLingue() +
+                "\nDisponibilita: " + getDisponibilita() +
+                "\nPatenti: " + getPatenti() +
+                "\nContatti urgenti: " + getContatti() +
+                "\n";
+    }
+>>>>>>> InserimentoLavoratoreController
 }

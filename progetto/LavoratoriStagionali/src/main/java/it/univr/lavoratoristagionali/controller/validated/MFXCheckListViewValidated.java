@@ -1,0 +1,62 @@
+package it.univr.lavoratoristagionali.controller.validated;
+
+import io.github.palexdev.materialfx.controls.MFXCheckListView;
+import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
+import it.univr.lavoratoristagionali.types.Lingua;
+import javafx.scene.control.Label;
+
+import java.util.List;
+
+public class MFXCheckListViewValidated<T> implements MFXValidated {
+
+    private final MFXCheckListView<T> checkListView;
+    private final Label errorLabel;
+    private final Errore[] flags;
+
+    public MFXCheckListViewValidated(MFXCheckListView<T> checkListView, Label errorLabel, Errore ...flags){
+        this.checkListView = checkListView;
+        this.errorLabel = errorLabel;
+        this.flags = flags;
+    }
+
+    public List<T> getSelectedItems() throws InputException{
+        if(checkValid())
+            return checkListView.getSelectionModel().getSelectedValues();
+        return null;
+    }
+
+    @Override
+    public boolean checkValid() throws InputException {
+        for(Errore flag : flags){
+            // Ignora qualsiasi flag che non sia Errore.NON_EMPTY
+            if(flag == Errore.NON_EMPTY && checkListView.getSelectionModel().getSelectedValues().isEmpty()){
+                throw new InputException(this, Errore.NON_EMPTY.getLabel());
+            }
+        }
+        showDefault();
+        return true;
+    }
+
+    @Override
+    public void showError(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+    }
+
+    @Override
+    public void showCorrect() {
+        errorLabel.setVisible(false);
+    }
+
+    @Override
+    public void showDefault() {
+        errorLabel.setVisible(false);
+    }
+
+    @Override
+    public void reset() {
+        checkListView.getSelectionModel().clearSelection();
+    }
+
+}

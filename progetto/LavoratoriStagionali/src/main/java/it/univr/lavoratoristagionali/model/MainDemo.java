@@ -217,11 +217,7 @@ public class MainDemo {
                 disponibilitaLista);
         System.out.println("Primo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore));
 
-        /*
-        Lavoratore lavoratore2 = new Lavoratore(0,
-                "Mirko",
                 "De Marchi",
-                comuniNelDb.get(3),
                 comuniNelDb.get(2),
                 5000,
                 lingueNelDb.get(1),
@@ -323,7 +319,7 @@ public class MainDemo {
                 disponibilitaLista2);
         System.out.println("Lavoratore modificato?: " + lavoratoriDao.updateLavoratore(lavoratore3));
 
-        prova();
+        // prova();
 
          */
 

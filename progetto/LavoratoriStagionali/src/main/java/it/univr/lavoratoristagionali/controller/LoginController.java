@@ -34,7 +34,7 @@ public class LoginController extends Controller{
         String username = usernameField.getText();
         String password = passwordField.getText();
         LoginDao loginDao = new LoginDaoImpl();
-        if(loginDao.verificaLogin(new Login(username, password))){ // TODO: sostituire controllo con controllo da Model
+        if(loginDao.verificaLogin(new Login(username, password))){
             displayError(false);
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
         }

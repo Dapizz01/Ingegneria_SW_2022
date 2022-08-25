@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.types;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Lavoratore {
@@ -18,7 +19,6 @@ public class Lavoratore {
     private final List<Contatto> contatti;
     private final List<Patente> patenti;
     private final List<Disponibilita> disponibilita;
-
 
     public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
         ID_Lavoratore = id_lavoratore;
@@ -98,4 +98,18 @@ public class Lavoratore {
         return disponibilita;
     }
 
+    public String toString(){
+        return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
+                "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
+                "\nAbita a " + getComuneAbitazione() +
+                "\nE-mail: " + getEmail() +
+                "\nTelefono: " + getTelefono() +
+                "\nAutomunito: " + isAutomunito() +
+                "\nEsperienze: " + getEsperienze() +
+                "\nLingue: " + getLingue() +
+                "\nDisponibilita: " + getDisponibilita() +
+                "\nPatenti: " + getPatenti() +
+                "\nContatti urgenti: " + getContatti() +
+                "\n";
+    }
 }

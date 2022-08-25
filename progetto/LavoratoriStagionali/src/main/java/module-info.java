@@ -3,6 +3,7 @@ module it.univr.lavoratoristagionali {
     requires javafx.fxml;
     requires java.sql;
     requires MaterialFX;
+    requires VirtualizedFX;
 
 
     opens it.univr.lavoratoristagionali to javafx.fxml;

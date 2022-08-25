@@ -10,4 +10,8 @@ public class Patente {
     public String getNomePatente(){
         return nomePatente;
     }
+
+    public String toString(){
+        return this.nomePatente;
+    }
 }

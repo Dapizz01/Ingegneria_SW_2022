@@ -10,4 +10,8 @@ public class Lingua {
     public String getNomeLingua(){
         return nomeLingua;
     }
+
+    public String toString(){
+        return this.nomeLingua;
+    }
 }

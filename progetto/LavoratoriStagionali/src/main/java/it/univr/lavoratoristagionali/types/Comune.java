@@ -10,4 +10,8 @@ public class Comune {
     public String getNomeComune(){
         return nomeComune;
     }
+
+    public String toString(){
+        return nomeComune;
+    }
 }

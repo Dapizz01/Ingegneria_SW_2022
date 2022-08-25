@@ -324,14 +324,19 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
         try {
 
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays())
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays()){
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine deve essere successiva alla data di inizio");
+            }
 
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH)
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH){
+                System.out.println("test1");
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di almeno un mese");
-
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR)
+            }
+            if(fineEsperienzaValidated.getEpochDays() >= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR){
+                System.out.println("test2");
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di massimo 2 anni");
+            }
+
 
             Esperienza nuovaEsperienza = new Esperienza(-1,
                     aziendaEsperienzaValidated.getText(),

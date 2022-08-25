@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/loginView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/css/style.css" afterDir="false" />
     </list>
@@ -144,6 +145,7 @@
       <workItem from="1661329978093" duration="11264000" />
       <workItem from="1661374561255" duration="7390000" />
       <workItem from="1661385621676" duration="437000" />
+      <workItem from="1661418508135" duration="2405000" />
     </task>
     <servers />
   </component>

@@ -16,4 +16,9 @@
 
 .mfx-text-field{
     -fx-border-color: -fx-active-1;
+    -fx-background-color: -fx-background-1;
+}
+
+.mfx-text-field .floating-text{
+    -fx-font-style: -fx-active-1;
 }

@@ -222,7 +222,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
 
                     Comune comune = new Comune(nomeComune);
 
-                    Disponibilita disponibilitaSingola = new Disponibilita(comune,inizioPeriodo,finePeriodo);
+                    Disponibilita disponibilitaSingola = new Disponibilita(inizioPeriodo, finePeriodo, comune);
                     disponibilitaLista.add(disponibilitaSingola);
                 }
                 rs2.close();

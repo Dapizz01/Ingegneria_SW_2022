@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LavoratoriDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/Dao/LavoratoriDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Disponibilita.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Disponibilita.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lavoratore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lavoratore.java" afterDir="false" />
     </list>
     <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -149,6 +146,8 @@
       <workItem from="1661385621676" duration="437000" />
       <workItem from="1661418508135" duration="2405000" />
       <workItem from="1661433097451" duration="1832000" />
+      <workItem from="1661437090934" duration="58000" />
+      <workItem from="1661437190349" duration="363000" />
     </task>
     <servers />
   </component>

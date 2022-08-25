@@ -23,8 +23,12 @@ public class Lavoratore {
     private final List<Disponibilita> disponibilita;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, Lingua nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
+=======
+    public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
+>>>>>>> InserimentoLavoratoreController
 =======
     public Lavoratore(int id_lavoratore, String nomeLavoratore, String cognomeLavoratore, Comune comuneNascita, Comune comuneAbitazione, int dataNascita, List<Lingua> nazionalita, String email, String telefono, boolean automunito, List<Esperienza> esperienze, List<Lingua> lingue, List<Contatto> contatti, List<Patente> patenti, List<Disponibilita> disponibilita) {
 >>>>>>> InserimentoLavoratoreController
@@ -106,7 +110,10 @@ public class Lavoratore {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> InserimentoLavoratoreController
     public String toString(){
         return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
                 "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
@@ -121,5 +128,8 @@ public class Lavoratore {
                 "\nContatti urgenti: " + getContatti() +
                 "\n";
     }
+<<<<<<< HEAD
+>>>>>>> InserimentoLavoratoreController
+=======
 >>>>>>> InserimentoLavoratoreController
 }

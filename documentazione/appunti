@@ -48,7 +48,11 @@ Esperienze lavoratori passate (5 anni, possono essere modificate):
     - Periodo (Assunzione -> formato mm/aa inizio - mm/aa fine. Minimo un mese, massimo 2 anni(perchè altrimenti non è stagionale).)
     - Nome dell'azienda
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Mansioni svolte (Assunzione -> solo 1 e almeno 1)
+=======
+    - Mansioni svolte (Assunzione -> solo 1 per esperienza)
+>>>>>>> InserimentoLavoratoreController
 =======
     - Mansioni svolte (Assunzione -> solo 1 per esperienza)
 >>>>>>> InserimentoLavoratoreController
@@ -179,5 +183,9 @@ Controlli Controller:
         - Nome azienda non vuoto
         - Retribuzione solo numeri
         - Periodo, controllare che non sia nel futuro (minimo 1 mese, max 2 anni) (ci possono essere più lavori contemporaneamente)
+<<<<<<< HEAD
+        - Aggiungere specializzazione
+>>>>>>> InserimentoLavoratoreController
+=======
         - Aggiungere specializzazione
 >>>>>>> InserimentoLavoratoreController

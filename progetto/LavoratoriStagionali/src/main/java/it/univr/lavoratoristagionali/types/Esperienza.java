@@ -62,5 +62,8 @@ public class Esperienza {
                 " al " + LocalDate.ofEpochDay(getFinePeriodo()) +
                 ", retribuzione di €" + getRetribuzioneLordaGiornaliera();
     }
+<<<<<<< HEAD
+>>>>>>> InserimentoLavoratoreController
+=======
 >>>>>>> InserimentoLavoratoreController
 }

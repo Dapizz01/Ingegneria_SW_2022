@@ -45,9 +45,15 @@
         </dependency>
         <dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
+=======
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>virtualizedfx</artifactId>
+            <version>11.2.6</version>
+>>>>>>> InserimentoLavoratoreController
 =======
             <groupId>io.github.palexdev</groupId>
             <artifactId>virtualizedfx</artifactId>

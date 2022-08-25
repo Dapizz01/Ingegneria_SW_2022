@@ -1,6 +1,7 @@
 package it.univr.lavoratoristagionali.types;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class Disponibilita {
     private Comune comune;
     private int inizioPeriodo;
@@ -23,6 +24,8 @@ public class Disponibilita {
         return finePeriodo;
     }
 =======
+=======
+>>>>>>> InserimentoLavoratoreController
 import java.time.LocalDate;
 
 public class Disponibilita{
@@ -51,5 +54,8 @@ public class Disponibilita{
     public String toString(){
         return "Dal " + LocalDate.ofEpochDay(inizioPeriodo) + " al " + LocalDate.ofEpochDay(finePeriodo) + " nel comune di " + comune;
     }
+<<<<<<< HEAD
+>>>>>>> InserimentoLavoratoreController
+=======
 >>>>>>> InserimentoLavoratoreController
 }

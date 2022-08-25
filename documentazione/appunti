@@ -139,6 +139,4 @@ Controller:
     - Simulare inserimento dati e scrittura dati su console
 
 Model:
-    - Se avanza tempo getLavoratore(Int ID): Lavoratore
-    - Costruire deleteLavoratore(Int ID): boolean
-    - Modifica lavoratore(probabile eliminarlo + riaggiungerlo)
+    - getLavoratore(Int ID): Lavoratore

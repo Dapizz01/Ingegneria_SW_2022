@@ -78,7 +78,7 @@ public class MainDemo {
                     " NomeSpecializzazione VARCHAR(20), " +
                     " ID_Lavoratore INTEGER, " +
                     " FOREIGN KEY (NomeSpecializzazione) REFERENCES Specializzazioni(NomeSpecializzazione), " +
-                    " FOREIGN KEY (NomeComune) REFERENCES Comuni(NomeComune), "+
+                    " FOREIGN KEY (NomeComune) REFERENCES Comuni(NomeComune), " +
                     " FOREIGN KEY (ID_Lavoratore) REFERENCES Lavoratori(ID_Lavoratore)) ";
             stmt.executeUpdate(sql);
 
@@ -126,13 +126,13 @@ public class MainDemo {
             // Gli autoincrement non vengono inseriti
             sql = "INSERT INTO Dipendenti (Nome,Cognome,DataNascita,N_telefono,Email,User,Password,ComuneNascita) " +
                     "VALUES ('Mario', 'Rossi', '2999', '1234567890', 'mariorossi@gmail.com', 'aaa', 'bbb', 'Legnago'), " +
-                           "('Marco', 'Dp', '1000', '1234567899', 'ciao123@gmail.com', 'ccc', 'ddd', 'Verona'), " +
-                           "('Nico', 'Modenese', '12000', '1231231231', 'ciao12345@gmail.com', 'eee', 'fff', 'Verona');";
+                    "('Marco', 'Dp', '1000', '1234567899', 'ciao123@gmail.com', 'ccc', 'ddd', 'Verona'), " +
+                    "('Nico', 'Modenese', '12000', '1231231231', 'ciao12345@gmail.com', 'eee', 'fff', 'Verona');";
             stmt.executeUpdate(sql);
 
             sql = "INSERT INTO Patenti (NomePatente)" +
                     "VALUES ('AM')," + "('A1')," + "('A2')," + "('A')," + "('B1')," + "('B')," + "('C1')," +
-                           "('C')," + "('D1')," + "('D')," + "('BE')," + "('C1E')," + "('CE')," + "('DE')," + "('D1E');";
+                    "('C')," + "('D1')," + "('D')," + "('BE')," + "('C1E')," + "('CE')," + "('DE')," + "('D1E');";
             stmt.executeUpdate(sql);
 
             sql = "INSERT INTO Lingue (NomeLingua)" +
@@ -154,48 +154,11 @@ public class MainDemo {
             //--------------------------------------------------
             c.close();
 
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
 
-        /*
-        Scanner keyboard = new Scanner(System.in);
-        System.out.print("Inseirire user da cercare nel db: ");
-        String user = keyboard.nextLine();
-        System.out.print("Inseirire password da cercare nel db: ");
-        String password = keyboard.nextLine();
-
-        LoginDao loginDao = new LoginDaoImpl();
-        boolean v = loginDao.verificaLogin(new Login(user, password));
-
-        System.out.println("Risultato: " + v);
-
-        PatentiDao patentiDao = new PatentiDaoImpl();
-
-        for(Patente patente : patentiDao.getPatenti()) {
-            System.out.println("NomePatente: " + patente.getNomePatente());
-        }
-
-        LingueDao lingueDao = new LingueDaoImpl();
-
-        for(Lingua lingua : lingueDao.getLingue()) {
-            System.out.println("NomeLingua: " + lingua.getNomeLingua());
-        }
-
-        ComuniDao comuniDao = new ComuniDaoImpl();
-
-        for(Comune comune : comuniDao.getComuni()) {
-            System.out.println("NomeComune: " + comune.getNomeComune());
-        }
-
-        SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
-
-        for(Specializzazione specializzazione : specializzazioniDao.getSpecializzazioni()) {
-            System.out.println("NomeSpecializzaione: " + specializzazione.getNomeSpecializzazione());
-        }
-
-        */
         ComuniDao comuniDao = new ComuniDaoImpl();
         List<Comune> comuniNelDb = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
         LingueDao lingueDao = new LingueDaoImpl();
@@ -206,10 +169,10 @@ public class MainDemo {
         List<Specializzazione> specializzazioniNelDb = specializzazioniDao.getSpecializzazioni();
 
         List<Esperienza> esperienze = new ArrayList<Esperienza>();
-        esperienze.add(new Esperienza(0/*ignored*/,"NST",50,1000,2000,comuniNelDb.get(0),specializzazioniNelDb.get(0)));
+        esperienze.add(new Esperienza(0, "NST", 50, 1000, 2000, comuniNelDb.get(0), specializzazioniNelDb.get(0)));
         List<Esperienza> esperienze2 = new ArrayList<Esperienza>();
-        esperienze2.add(new Esperienza(0/*ignored*/,"AIA",50,1000,2000,comuniNelDb.get(3),specializzazioniNelDb.get(0)));
-        esperienze2.add(new Esperienza(0/*ignored*/,"DBD",80,2000,3000,comuniNelDb.get(3),specializzazioniNelDb.get(1)));
+        esperienze2.add(new Esperienza(0, "AIA", 50, 1000, 2000, comuniNelDb.get(3), specializzazioniNelDb.get(0)));
+        esperienze2.add(new Esperienza(0, "DBD", 80, 2000, 3000, comuniNelDb.get(3), specializzazioniNelDb.get(1)));
 
         List<Lingua> lingueParlate = new ArrayList<Lingua>();
         lingueParlate.add(lingueNelDb.get(1));
@@ -218,10 +181,10 @@ public class MainDemo {
         lingueParlate2.add(lingueNelDb.get(1));
 
         List<Contatto> contatti = new ArrayList<Contatto>();
-        contatti.add(new Contatto(0/*ignored*/,"Maurizio","Merluzzo","1231234567","merlu@gmail.com"));
+        contatti.add(new Contatto(0, "Maurizio", "Merluzzo", "1231234567", "merlu@gmail.com"));
         List<Contatto> contatti2 = new ArrayList<Contatto>();
-        contatti2.add(new Contatto(0/*ignored*/,"Contattino","Merlu","1231234567","merlu@gmail.com"));
-        contatti2.add(new Contatto(0/*ignored*/,"Contattone","Merlo","1231234567","merlu@gmail.com"));
+        contatti2.add(new Contatto(0, "Contattino", "Merlu", "1231234567", "merlu@gmail.com"));
+        contatti2.add(new Contatto(0, "Contattone", "Merlo", "1231234567", "merlu@gmail.com"));
 
         List<Patente> patentiPossedute = new ArrayList<Patente>();
         patentiPossedute.add(patentiNelDb.get(0));
@@ -230,47 +193,52 @@ public class MainDemo {
         patentiPossedute2.add(patentiNelDb.get(1));
 
         List<Disponibilita> disponibilitaLista = new ArrayList<Disponibilita>();
-        disponibilitaLista.add(new Disponibilita(comuniNelDb.get(0),8000,10000));
+        disponibilitaLista.add(new Disponibilita(comuniNelDb.get(0), 8000, 10000));
         List<Disponibilita> disponibilitaLista2 = new ArrayList<Disponibilita>();
-        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(0),5000,6000));
-        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(1),7000,9000));
+        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(0), 5000, 6000));
+        disponibilitaLista2.add(new Disponibilita(comuniNelDb.get(1), 7000, 9000));
+
 
         LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
         Lavoratore lavoratore = new Lavoratore(0/*ignored*/,
-               "Manuel",
-               "Isolan",
+                "Mirko",
+                "De Marchi",
                 comuniNelDb.get(5),
                 comuniNelDb.get(2),
-               5000,
-               lingueNelDb.get(0),
+                5000,
+                lingueNelDb.get(0),
                 "prova123@virgilio.it",
                 "1231231231",
-               true,
-               esperienze,
-               lingueParlate,
-               contatti,
-               patentiPossedute,
-              disponibilitaLista);
+                true,
+                esperienze,
+                lingueParlate,
+                contatti,
+                patentiPossedute,
+                disponibilitaLista);
         System.out.println("Primo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore));
 
-        Lavoratore lavoratore2 = new Lavoratore(0/*ignored*/,
-              "Manuel",
-                "Isolan",
-               comuniNelDb.get(3),
+        /*
+        Lavoratore lavoratore2 = new Lavoratore(0,
+                "Mirko",
+                "De Marchi",
+                comuniNelDb.get(3),
                 comuniNelDb.get(2),
-              5000,
+                5000,
                 lingueNelDb.get(1),
-                "provaez@virgilio.it",
+                "mirko_demarchi@libero.it",
                 "1834567823",
                 true,
                 esperienze2,
-               lingueParlate2,
-               contatti2,
-               patentiPossedute2,
-              disponibilitaLista2);
+                lingueParlate2,
+                contatti2,
+                patentiPossedute2,
+                disponibilitaLista2);
         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
+        */
 
+        //prova();
 
+            /*
         Scanner keyboard = new Scanner(System.in);
         System.out.print("Inserire NomeLavoratore da cercare nel db: ");
         String nomeLavoratore = keyboard.nextLine();
@@ -278,9 +246,9 @@ public class MainDemo {
         String cognomeLavoratore = keyboard.nextLine();
 
         List<Lavoratore> lavoratoriCercati;
-        lavoratoriCercati = lavoratoriDao.getLavoratori(nomeLavoratore,cognomeLavoratore);
+        lavoratoriCercati = lavoratoriDao.getLavoratori(nomeLavoratore, cognomeLavoratore);
 
-        if(lavoratoriCercati.isEmpty())
+        if (lavoratoriCercati.isEmpty())
             System.out.println("Nessun lavoratore trovato con quel nome e cognome!");
 
         for (Lavoratore lavoratore1 : lavoratoriCercati) {
@@ -325,11 +293,43 @@ public class MainDemo {
             System.out.println();
         }
 
+        */
+
+        /*
+        Scanner keyboard = new Scanner(System.iùn);
+        System.out.print("Inserire ID del lavoratore che si vuole eliminare dal db: ");
+        int id = keyboard.nextInt();
+        System.out.println("Lavoratore eliminato?: " + lavoratoriDao.deleteLavoratore(id));
+        */
+
+
         //prova();
+
+        /*
+        Lavoratore lavoratore3 = new Lavoratore(1,
+                "Manuel",
+                "De Marchi",
+                comuniNelDb.get(3),
+                comuniNelDb.get(2),
+                5000,
+                lingueNelDb.get(1),
+                "mirko_demarchi@libero.it",
+                "1834567823",
+                true,
+                esperienze2,
+                lingueParlate2,
+                contatti2,
+                patentiPossedute2,
+                disponibilitaLista2);
+        System.out.println("Lavoratore modificato?: " + lavoratoriDao.updateLavoratore(lavoratore3));
+
+        prova();
+
+         */
 
     }
 
-    public static void prova() {
+    public static void prova() { // Per vedere cosa contengono tutte le tabelle del DB
         Connection c = null;
         Statement stmt = null;
 

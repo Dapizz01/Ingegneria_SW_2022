@@ -41,3 +41,41 @@ Applications can choose to store dates and times in any of these formats and fre
             rs.close();
             //----------------------------------------------------
             stmt.close();
+
+                    /*
+                    Scanner keyboard = new Scanner(System.in);
+                    System.out.print("Inseirire user da cercare nel db: ");
+                    String user = keyboard.nextLine();
+                    System.out.print("Inseirire password da cercare nel db: ");
+                    String password = keyboard.nextLine();
+
+                    LoginDao loginDao = new LoginDaoImpl();
+                    boolean v = loginDao.verificaLogin(new Login(user, password));
+
+                    System.out.println("Risultato: " + v);
+
+                    PatentiDao patentiDao = new PatentiDaoImpl();
+
+                    for(Patente patente : patentiDao.getPatenti()) {
+                        System.out.println("NomePatente: " + patente.getNomePatente());
+                    }
+
+                    LingueDao lingueDao = new LingueDaoImpl();
+
+                    for(Lingua lingua : lingueDao.getLingue()) {
+                        System.out.println("NomeLingua: " + lingua.getNomeLingua());
+                    }
+
+                    ComuniDao comuniDao = new ComuniDaoImpl();
+
+                    for(Comune comune : comuniDao.getComuni()) {
+                        System.out.println("NomeComune: " + comune.getNomeComune());
+                    }
+
+                    SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
+
+                    for(Specializzazione specializzazione : specializzazioniDao.getSpecializzazioni()) {
+                        System.out.println("NomeSpecializzaione: " + specializzazione.getNomeSpecializzazione());
+                    }
+
+                    */

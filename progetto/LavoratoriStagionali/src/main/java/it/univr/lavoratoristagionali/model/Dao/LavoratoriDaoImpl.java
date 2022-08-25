@@ -261,4 +261,75 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
 
         return lavoratori;
     }
+
+    @Override
+    public boolean deleteLavoratore(int idDaEliminare) {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/deleteLavoratore>");
+            //------------------------------------------------
+
+            c.setAutoCommit(false);
+
+            //--------------------- Eliminazione -------------------------
+            stmt = c.createStatement();
+            String sql = "DELETE FROM Lavoratori WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt = c.createStatement();
+            sql = "DELETE FROM Esperienze WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt = c.createStatement();
+            sql = "DELETE FROM Contatti WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt = c.createStatement();
+            sql = "DELETE FROM Disponibilita WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt = c.createStatement();
+            sql = "DELETE FROM LingueParlate WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt = c.createStatement();
+            sql = "DELETE FROM PatentiPossedute WHERE ID_Lavoratore = '" + idDaEliminare + "';";
+            stmt.executeUpdate(sql);
+            c.commit();
+            //----------------------------------------------------
+
+            stmt.close();
+            c.close();
+
+            System.out.println("Lavoratore eliminato correttamente");
+            return true; // Lavoratore eliminato correttamente dal db
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean updateLavoratore(Lavoratore lavoratoreDaModificare) {
+        System.out.println("<LavoratoriDaoImpl/updateLavoratore>");
+
+        if(deleteLavoratore(lavoratoreDaModificare.getID()))
+            if(addLavoratore(lavoratoreDaModificare))
+                return true; // Lavoratore modificato correttamente
+
+        return false;
+    }
 }

@@ -159,7 +159,7 @@ public class MainDemo {
             System.exit(0);
         }
 
-        /*
+
         ComuniDao comuniDao = new ComuniDaoImpl();
         List<Comune> comuniNelDb = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
         LingueDao lingueDao = new LingueDaoImpl();
@@ -234,7 +234,7 @@ public class MainDemo {
                 patentiPossedute2,
                 disponibilitaLista2);
         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
-*/
+
 
         //prova();
 

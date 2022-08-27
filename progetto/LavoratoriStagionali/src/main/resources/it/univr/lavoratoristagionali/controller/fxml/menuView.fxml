@@ -7,7 +7,7 @@
    <children>
       <MFXButton fx:id="esciButton" layoutX="31.0" layoutY="24.0" onAction="#exitEvent" prefHeight="49.0" prefWidth="71.0" text="Esci" />
       <MFXButton fx:id="inserisciLavoratoreButton" layoutX="187.0" layoutY="264.0" onAction="#goToInserisciLavoratore" prefHeight="192.0" prefWidth="191.0" text="Inserisci lavoratore" textAlignment="CENTER" wrapText="true" />
-      <MFXButton fx:id="modificaLavoratoreButton" layoutX="545.0" layoutY="264.0" prefHeight="192.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true" />
-      <MFXButton fx:id="effettuaRicercaButton" layoutX="896.0" layoutY="264.0" prefHeight="192.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true" />
+      <MFXButton fx:id="modificaLavoratoreButton" layoutX="545.0" layoutY="264.0" onAction="#goToMenuModificaLavoratore" prefHeight="192.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true" />
+      <MFXButton fx:id="effettuaRicercaButton" layoutX="896.0" layoutY="264.0" onAction="#goToEffettuaRicerca" prefHeight="192.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

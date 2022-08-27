@@ -3,7 +3,7 @@ package it.univr.lavoratoristagionali.controller.validated;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
-import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Errore;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;

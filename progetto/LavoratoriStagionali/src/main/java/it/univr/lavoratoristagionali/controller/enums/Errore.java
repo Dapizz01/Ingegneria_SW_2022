@@ -1,4 +1,4 @@
-package it.univr.lavoratoristagionali.controller;
+package it.univr.lavoratoristagionali.controller.enums;
 
 public enum Errore {
     NUMBERS_ONLY("Il campo può contenere solo numeri"),

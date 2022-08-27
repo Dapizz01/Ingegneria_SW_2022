@@ -5,7 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuModificaLavoratoreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/enums/ControllerMode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuModificaLavoratoreView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../documentazione/appunti" beforeDir="false" afterPath="$PROJECT_DIR$/../../documentazione/appunti" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Errore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/enums/Errore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/InserisciLavoratoriController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/enums/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXCheckListViewValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXCheckListViewValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXDatePickerValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXFilterComboBoxValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXListViewValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXTextFieldValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/model/MainDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lavoratore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Lavoratore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/inserisciLavoratoriView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuView.fxml" afterDir="false" />
     </list>
     <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +36,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -56,6 +76,7 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml" />
+      <recent name="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/forms" />
       <recent name="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller" />
       <recent name="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali" />
     </key>
@@ -70,7 +91,7 @@
       <module name="LavoratoriStagionali" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.univr.lavoratoristagionali.controller.*" />
+          <option name="PATTERN" value="it.univr.lavoratoristagionali.controller.enums.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -96,7 +117,7 @@
       <module name="LavoratoriStagionali" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.univr.lavoratoristagionali.controller.*" />
+          <option name="PATTERN" value="it.univr.lavoratoristagionali.controller.enums.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,7 +167,9 @@
       <workItem from="1661433097451" duration="1832000" />
       <workItem from="1661437090934" duration="58000" />
       <workItem from="1661437190349" duration="363000" />
-      <workItem from="1661437570959" duration="321000" />
+      <workItem from="1661437570959" duration="2197000" />
+      <workItem from="1661503285619" duration="10278000" />
+      <workItem from="1661606240545" duration="18220000" />
     </task>
     <servers />
   </component>

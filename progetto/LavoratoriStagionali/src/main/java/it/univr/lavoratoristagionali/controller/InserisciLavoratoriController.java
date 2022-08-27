@@ -1,6 +1,9 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
+import it.univr.lavoratoristagionali.controller.enums.ControllerMode;
+import it.univr.lavoratoristagionali.controller.enums.Errore;
+import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
 import it.univr.lavoratoristagionali.controller.validated.*;
@@ -32,15 +35,15 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXFilterComboBox<Comune> comuneNascitaLavoratore, comuneAbitazioneLavoratore;
     private MFXFilterComboBoxValidated<Comune> comuneNascitaLavoratoreValidated, comuneAbitazioneLavoratoreValidated;
     @FXML
-    private MFXCheckListView<Lingua> nazionalitaLavoratore; // TODO: da cambiare con un MFXFilterComboBox<Lingua>
-    private MFXCheckListViewValidated<Lingua> nazionalitaLavoratoreValidated;
+    private MFXFilterComboBox<Lingua> nazionalitaLavoratore;
+    private MFXFilterComboBoxValidated<Lingua> nazionalitaLavoratoreValidated;
     @FXML
     private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError, comuneAbitazioneLavoratoreError;
 
     // CONTATTO LAVORATORE
     @FXML
-    private MFXTextField indirizzoLavoratore, telefonoLavoratore, emailLavoratore;
-    private MFXTextFieldValidated indirizzoLavoratoreValidated, telefonoLavoratoreValidated, emailLavoratoreValidated; // TODO: togliere indirizzoLavoratore, è superfluo
+    private MFXTextField telefonoLavoratore, emailLavoratore;
+    private MFXTextFieldValidated telefonoLavoratoreValidated, emailLavoratoreValidated;
     @FXML
     private Label indirizzoLavoratoreError, telefonoLavoratoreError, emailLavoratoreError;
 
@@ -121,7 +124,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
     // TODO: aggiungere label di fine inserimento con successo / errore
 
     private static final int DAYS_IN_MONTH = 30;
-
     private static final int DAYS_IN_YEAR = 365;
 
     public InserisciLavoratoriController(){
@@ -130,6 +132,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(url);
+        System.out.println(resourceBundle);
         /* List<Lingua> lingue = List.of(new Lingua("lingua1"), new Lingua("lingua2"), new Lingua("lingua3"));
         List<Comune> comuni = List.of(new Comune(1, "comune1"), new Comune(2, "comune2"), new Comune(3, "comune3"));
         List<Lingua> nazionalita = List.of(new Lingua(1, "nazionalità1"), new Lingua(2, "nazionalità2"), new Lingua(3, "nazionalità3"));
@@ -152,8 +156,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Errore.MUST_BE_ADULT, Errore.NON_EMPTY);
         comuneNascitaLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
         comuneAbitazioneLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneAbitazioneLavoratore, comuneAbitazioneLavoratoreError, Errore.NON_EMPTY);
-        nazionalitaLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(nazionalitaLavoratore, nazionalitaLavoratoreError, Errore.NON_EMPTY);
-        indirizzoLavoratoreValidated = new MFXTextFieldValidated(indirizzoLavoratore, indirizzoLavoratoreError, Errore.NON_EMPTY);
+        nazionalitaLavoratoreValidated = new MFXFilterComboBoxValidated<Lingua>(nazionalitaLavoratore, nazionalitaLavoratoreError, Errore.NON_EMPTY);
         telefonoLavoratoreValidated = new MFXTextFieldValidated(telefonoLavoratore, telefonoLavoratoreError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
         emailLavoratoreValidated = new MFXTextFieldValidated(emailLavoratore, emailLavoratoreError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
 
@@ -201,11 +204,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
         listaEsperienze.features().enableSmoothScrolling(1.2);
         listaContattoUrgente.features().enableSmoothScrolling(1.2);
 
-        /*buildFilterComboBoxValidator(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
-        buildFilterComboBoxValidator(comuneDisponibilita, comuneDisponibilitaError, Errore.NON_EMPTY);
-        buildFilterComboBoxValidator(comuneEsperienza, comuneEsperienzaError, Errore.NON_EMPTY);*/
-
-
         // TODO: aggiungere stili css errori con label di errore associata
         // Link utili: https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/java/io/github/palexdev/materialfx/demo/controllers/TextFieldsController.java
         // https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/TextFields.css
@@ -233,14 +231,14 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     comuneNascitaLavoratoreValidated.getSelectedItem(),
                     comuneAbitazioneLavoratoreValidated.getSelectedItem(),
                     dataNascitaLavoratoreValidated.getEpochDays(),
-                    nazionalitaLavoratoreValidated.getSelectedItems().get(0), // TODO: da sostituire con quello validated
+                    nazionalitaLavoratoreValidated.getSelectedItem(),
                     emailLavoratoreValidated.getText(),
                     telefonoLavoratoreValidated.getText(),
                     automunito.isSelected(),
                     listaEsperienzeValidated.getSelectedItems(),
-                    lingueLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
+                    lingueLavoratoreValidated.getSelectedItems(),
                     listaContattoUrgenteValidated.getSelectedItems(),
-                    patentiLavoratoreValidated.getSelectedItems(), // TODO: da sostituire con quello validated
+                    patentiLavoratoreValidated.getSelectedItems(),
                     listaDisponibilitaValidated.getSelectedItems());
             System.out.println(lavoratore);
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
@@ -253,8 +251,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
 
         System.out.println(lavoratore);
-
-        // TODO: aggiungere comune di abitazione
     }
 
     @FXML

@@ -1,15 +1,10 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
-import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
-import io.github.palexdev.materialfx.validation.Constraint;
-import io.github.palexdev.materialfx.validation.Severity;
-import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Errore;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
-import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MFXListViewValidated<T> implements MFXValidated{

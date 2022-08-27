@@ -1,9 +1,8 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
 import io.github.palexdev.materialfx.controls.MFXCheckListView;
-import it.univr.lavoratoristagionali.controller.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Errore;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
-import it.univr.lavoratoristagionali.types.Lingua;
 import javafx.scene.control.Label;
 
 import java.util.List;

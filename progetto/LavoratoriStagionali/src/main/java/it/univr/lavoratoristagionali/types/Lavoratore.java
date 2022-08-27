@@ -102,6 +102,7 @@ public class Lavoratore {
         return "Nominativo: " + getNomeLavoratore() + " " + getCognomeLavoratore() +
                 "\nNato il " + LocalDate.ofEpochDay(getDataNascita()) + " a " + getComuneNascita() +
                 "\nAbita a " + getComuneAbitazione() +
+                "\nNazionalita: " + getNazionalita() +
                 "\nE-mail: " + getEmail() +
                 "\nTelefono: " + getTelefono() +
                 "\nAutomunito: " + isAutomunito() +

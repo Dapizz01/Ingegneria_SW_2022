@@ -3,6 +3,7 @@ package it.univr.lavoratoristagionali.controller;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.types.Login;
 import it.univr.lavoratoristagionali.model.Dao.LoginDao;
 import it.univr.lavoratoristagionali.model.Dao.LoginDaoImpl;

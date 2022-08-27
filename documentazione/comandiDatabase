@@ -79,3 +79,142 @@ Applications can choose to store dates and times in any of these formats and fre
                     }
 
                     */
+
+                                /*
+                            Scanner keyboard = new Scanner(System.in);
+                            System.out.print("Inserire NomeLavoratore da cercare nel db: ");
+                            String nomeLavoratore = keyboard.nextLine();
+                            System.out.print("Inserire e CognomeLavoratore da cercare nel db: ");
+                            String cognomeLavoratore = keyboard.nextLine();
+
+                            List<Lavoratore> lavoratoriCercati;
+                            lavoratoriCercati = lavoratoriDao.getLavoratori(nomeLavoratore, cognomeLavoratore);
+
+                            if (lavoratoriCercati.isEmpty())
+                                System.out.println("Nessun lavoratore trovato con quel nome e cognome!");
+
+                            for (Lavoratore lavoratore1 : lavoratoriCercati) {
+                                System.out.println("ID_Lavoratore: " + lavoratore1.getID());
+                                System.out.println("NomeLavoratore: " + lavoratore1.getNomeLavoratore());
+                                System.out.println("ComuneNascita: " + lavoratore1.getComuneNascita().getNomeComune());
+                                System.out.println();
+
+                                System.out.println("Esperienze che ha fatto: ");
+                                for (Esperienza esperienza : lavoratore1.getEsperienze()) {
+                                    System.out.println("ID_Esperienza: " + esperienza.getID());
+                                    System.out.println("NomeAzienda: " + esperienza.getNomeAzienda());
+                                    System.out.println("NomeComune: " + esperienza.getComune().getNomeComune());
+                                    System.out.println("Specializzazione: " + esperienza.getSpecializzazione().getNomeSpecializzazione());
+                                }
+                                System.out.println();
+
+                                System.out.println("Contatti che possiede: ");
+                                for (Contatto contatto : lavoratore1.getContatti()) {
+                                    System.out.println("ID_Contatto: " + contatto.getID());
+                                    System.out.println("NomeContatto: " + contatto.getNomeContatto());
+                                }
+                                System.out.println();
+
+                                System.out.println("Lingue conosciute: ");
+                                for (Lingua lingua : lavoratore1.getLingue()) {
+                                    System.out.println("Nome Lingua: " + lingua.getNomeLingua());
+                                }
+                                System.out.println();
+
+                                System.out.println("Patenti possedute: ");
+                                for (Patente patente : lavoratore1.getPatenti()) {
+                                    System.out.println("ID_Contatto: " + patente.getNomePatente());
+                                }
+                                System.out.println();
+
+                                System.out.println("Le sue disponibilità: ");
+                                for (Disponibilita disponibilita : lavoratore1.getDisponibilita()) {
+                                    System.out.println("ID_Comune: " + disponibilita.getComune().getNomeComune());
+                                    System.out.println("InizioPeriodo: " + disponibilita.getInizioPeriodo());
+                                }
+                                System.out.println();
+                            }
+
+                            */
+
+                            /*
+                            Scanner keyboard = new Scanner(System.iùn);
+                            System.out.print("Inserire ID del lavoratore che si vuole eliminare dal db: ");
+                            int id = keyboard.nextInt();
+                            System.out.println("Lavoratore eliminato?: " + lavoratoriDao.deleteLavoratore(id));
+
+                            prova();
+                            */
+
+                            /*
+                            prova();
+
+                            Lavoratore lavoratore3 = new Lavoratore(1,
+                                    "Manuel",
+                                    "De Marchi",
+                                    comuniNelDb.get(3),
+                                    comuniNelDb.get(2),
+                                    5000,
+                                    lingueNelDb.get(1),
+                                    "mirko_demarchi@libero.it",
+                                    "1834567823",
+                                    true,
+                                    esperienze2,
+                                    lingueParlate2,
+                                    contatti2,
+                                    patentiPossedute2,
+                                    disponibilitaLista2);
+                            System.out.println("Lavoratore modificato?: " + lavoratoriDao.updateLavoratore(lavoratore3));
+
+                            prova();
+                            */
+
+                                   /*
+                                    Scanner keyboard = new Scanner(System.in);
+                                    System.out.print("Inserire id del lavoratore da cercare nel db: ");
+                                    int id = keyboard.nextInt();
+                                    Lavoratore lavoratoreCercato = lavoratoriDao.getLavoratore(id);
+                                    if(lavoratoreCercato != null) {
+                                        System.out.println("ID_Lavoratore: " + lavoratoreCercato.getID());
+                                        System.out.println("NomeLavoratore: " + lavoratoreCercato.getNomeLavoratore());
+                                        System.out.println("ComuneNascita: " + lavoratoreCercato.getComuneNascita().getNomeComune());
+                                        System.out.println();
+
+                                        System.out.println("Esperienze che ha fatto: ");
+                                        for (Esperienza esperienza : lavoratoreCercato.getEsperienze()) {
+                                            System.out.println("ID_Esperienza: " + esperienza.getID());
+                                            System.out.println("NomeAzienda: " + esperienza.getNomeAzienda());
+                                            System.out.println("NomeComune: " + esperienza.getComune().getNomeComune());
+                                            System.out.println("Specializzazione: " + esperienza.getSpecializzazione().getNomeSpecializzazione());
+                                        }
+                                        System.out.println();
+
+                                        System.out.println("Contatti che possiede: ");
+                                        for (Contatto contatto : lavoratoreCercato.getContatti()) {
+                                            System.out.println("ID_Contatto: " + contatto.getID());
+                                            System.out.println("NomeContatto: " + contatto.getNomeContatto());
+                                        }
+                                        System.out.println();
+
+                                        System.out.println("Lingue conosciute: ");
+                                        for (Lingua lingua : lavoratoreCercato.getLingue()) {
+                                            System.out.println("Nome Lingua: " + lingua.getNomeLingua());
+                                        }
+                                        System.out.println();
+
+                                        System.out.println("Patenti possedute: ");
+                                        for (Patente patente : lavoratoreCercato.getPatenti()) {
+                                            System.out.println("ID_Contatto: " + patente.getNomePatente());
+                                        }
+                                        System.out.println();
+
+                                        System.out.println("Le sue disponibilità: ");
+                                        for (Disponibilita disponibilita : lavoratoreCercato.getDisponibilita()) {
+                                            System.out.println("ID_Comune: " + disponibilita.getComune().getNomeComune());
+                                            System.out.println("InizioPeriodo: " + disponibilita.getInizioPeriodo());
+                                        }
+                                        System.out.println();
+                                    }
+                                    else
+                                        System.out.println("L'ID cercato non esiste");
+                                    */

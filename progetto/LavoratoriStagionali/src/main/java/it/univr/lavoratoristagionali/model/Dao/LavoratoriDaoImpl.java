@@ -3,8 +3,7 @@ package it.univr.lavoratoristagionali.model.Dao;
 import it.univr.lavoratoristagionali.types.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LavoratoriDaoImpl implements LavoratoriDao {
     @Override
@@ -331,5 +330,353 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 return true; // Lavoratore modificato correttamente
 
         return false;
+    }
+
+    @Override
+    public Lavoratore getLavoratore(int idDaCercare) { // Se l'id non esiste ritornerà un Lavoratore a null
+        Lavoratore lavoratore = null;
+
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/getLavoratore>");
+            //------------------------------------------------
+
+            //---------------- Costruisco le 5 liste di Lavoratore -----------------
+            List<Esperienza> esperienze = new ArrayList<>();
+            List<Contatto> contatti = new ArrayList<>();
+            List<Lingua> lingue = new ArrayList<>();
+            List<Patente> patenti = new ArrayList<>();
+            List<Disponibilita> disponibilitaLista = new ArrayList<>();
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Esperienze WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                // l'ID del lavoratore non mi serve nell'esperienza
+                int idEsperienza = rs.getInt("ID_Esperienza");
+                String nomeAzienda = rs.getString("NomeAzienda");
+                int retribuzione = rs.getInt("RetribuzioneGiornaliera");
+                int inizioPeriodo = rs.getInt("InizioPeriodo");
+                int finePeriodo = rs.getInt("FinePeriodo");
+                String nomeComune = rs.getString("NomeComune");
+                String nomeSpecializzazione = rs.getString("NomeSpecializzazione");
+
+                Comune comune = new Comune(nomeComune);
+                Specializzazione specializzazione = new Specializzazione(nomeSpecializzazione);
+
+                Esperienza esperienza = new Esperienza(idEsperienza,nomeAzienda,retribuzione,inizioPeriodo,finePeriodo,comune,specializzazione);
+                esperienze.add(esperienza);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Contatti WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                int idContatto = rs.getInt("ID_Contatto");
+                String nomeContatto = rs.getString("NomeContatto");
+                String cognomeContatto = rs.getString("CognomeContatto");
+                String nTelefono = rs.getString("N_telefono");
+                String email = rs.getString("Email");
+
+                Contatto contatto = new Contatto(idContatto,nomeContatto,cognomeContatto,nTelefono,email);
+                contatti.add(contatto);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM LingueParlate WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) { // cicla in base al numero di lingue parlate dal lavoratore con l'ID ricavato all'inizio
+                String nomeLingua = rs.getString("NomeLingua");
+
+                Lingua lingua = new Lingua(nomeLingua);
+                lingue.add(lingua);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM PatentiPossedute WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) { // cicla in base al numero di patenti possedute dal lavoratore con l'ID ricavato all'inizio
+                String nomePatente = rs.getString("NomePatente");
+
+                Patente patente = new Patente(nomePatente);
+                patenti.add(patente);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Disponibilita WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                String nomeComune = rs.getString("NomeComune");
+                int inizioPeriodo = rs.getInt("InizioPeriodo");
+                int finePeriodo = rs.getInt("FinePeriodo");
+
+                Comune comune = new Comune(nomeComune);
+
+                Disponibilita disponibilitaSingola = new Disponibilita(inizioPeriodo, finePeriodo, comune);
+                disponibilitaLista.add(disponibilitaSingola);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Lavoratori WHERE ID_Lavoratore = '" + idDaCercare + "';");
+            while (rs.next()) {
+                String nomeLavoratore = rs.getString("NomeLavoratore");
+                String cognomeLavoratore = rs.getString("CognomeLavoratore");
+                String comune1 = rs.getString("ComuneNascita");
+                String comune2 = rs.getString("ComuneAbitazione");
+                int dataNascita = rs.getInt("DataNascita");
+                String nazionalita1 = rs.getString("Nazionalita");
+                String email = rs.getString("Email");
+                String nTelefono = rs.getString("N_telefono");
+                boolean automunito = rs.getBoolean("Automunito");
+
+                Comune comuneNascita = new Comune(comune1);
+                Comune comuneAbitazione = new Comune(comune2);
+                Lingua nazionalita = new Lingua(nazionalita1);
+
+                lavoratore = new Lavoratore(idDaCercare, nomeLavoratore, cognomeLavoratore, comuneNascita, comuneAbitazione, dataNascita, nazionalita, email, nTelefono, automunito, esperienze, lingue, contatti, patenti, disponibilitaLista);
+            }
+            rs.close();
+
+            stmt.close();
+            c.close();
+
+            return lavoratore;
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return lavoratore;
+    }
+
+
+    @Override
+    public List<Lavoratore> searchLavoratori(List<Lingua> lingue,String flagl, List<Comune> comuni,String flagc, String flag) {
+        List<Lavoratore> lavoratoriCercati = new ArrayList<>();
+        Set<Integer> idLavoratori = new TreeSet<>(); // tiene traccia degli id dei lavoratori idonei alla ricerca
+        Set<Integer> tracciaIdLingue = new TreeSet<>();
+        Set<Integer> tracciaIdComuni = new TreeSet<>();
+        List<Integer> and1 = new ArrayList<>();
+
+
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/searchLavoratori>");
+            //------------------------------------------------
+
+            //------------------ Ricerca -----------------
+            if(flag.equals("AND")) {
+                //-------Lingue
+                if(flagl.equals("AND")) { // Prendo solo gli id dei lavoratori che parlano tutte le lingue nella lista
+
+                    for(Lingua lingua : lingue) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore); // quel lavoratore parla quella lingua
+                        }
+                        rs.close();
+                    }
+
+                    // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di lingue, ovvero parlano tutte le lingue nella lista
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == lingue.size())
+                            tracciaIdLingue.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+
+                }
+                else { // flagl.equal("OR") // Prendo gli id dei lavoratori che parlano almeno una delle lingue nella lista
+                    for(Lingua lingua : lingue) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdLingue.add(idLavoratore);  // è un set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+                //-------Comuni
+                if(flagc.equals("AND")) { // Prendo solo gli id dei lavoratori che abitano in tutti i comuni della lista(impossibile)
+                    for(Comune comune : comuni) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE ComuneAbitazione ='" + comune.getNomeComune() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore);
+                        }
+                        rs.close();
+                    }
+
+                    // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di comuni
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == lingue.size())
+                            tracciaIdComuni.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+
+                }
+                else { // flagc.equal("OR") // Prendo gli id dei lavoratori che abitano in almeno un comune della lista
+                    for(Comune comune : comuni) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE ComuneAbitazione ='" + comune.getNomeComune() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdComuni.add(idLavoratore);  // è un set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+
+                //il flag era AND quindi devo tenere solo gli id che fanno parte sia delle lingue che dei comuni
+                for(Integer i : tracciaIdLingue) {
+                    if(tracciaIdComuni.contains(i))
+                        idLavoratori.add(i); // Trovato id idoneo alla ricerca
+                }
+            }
+            // ----------------- flag = "OR" -----------------------
+            else {
+                //------Lingue
+                if(flagl.equals("AND")) { // Prendo solo gli id dei lavoratori che parlano tutte le lingue nella lista
+
+                    for(Lingua lingua : lingue) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore); // quel lavoratore parla quella lingua
+                        }
+                        rs.close();
+                    }
+
+                    // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di lingue, ovvero parlano tutte le lingue nella lista
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == lingue.size())
+                            idLavoratori.add(val.getValue()); // questo id è già idoneo alla ricerca
+                    }
+
+                    hm.clear();
+                    and1.clear();
+
+                }
+                else { // flagl.equal("OR") // Prendo gli id dei lavoratori che parlano almeno una delle lingue nella lista
+                    for(Lingua lingua : lingue) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            idLavoratori.add(idLavoratore);  // è un set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+                //--------------------Comuni
+                if(flagc.equals("AND")) { // Prendo solo gli id dei lavoratori che abitano in tutti i comuni della lista(impossibile)
+                    for(Comune comune : comuni) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE ComuneAbitazione ='" + comune.getNomeComune() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore);
+                        }
+                        rs.close();
+                    }
+
+                    // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di comuni, ovvero abitano in tutti i comuni della lista
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == comuni.size())
+                            idLavoratori.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+                }
+                else { // flagc.equal("OR") // Prendo gli id dei lavoratori che abitano in almeno un comune della lista
+                    for(Comune comune : comuni) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE ComuneAbitazione ='" + comune.getNomeComune() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            idLavoratori.add(idLavoratore);  // è un set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+
+                // In OR non ho bisogno di controllare quali id sono presenti in entrabe le ricerca ma appena sauperano una delle condizioni vanno già bene
+            }
+            //----------------------------------------------------
+
+            for(int idTrovato : idLavoratori) { // Ogni id trovato corrisponde ad un lavoratore idoneo ai parametri di ricerca
+                Lavoratore lavoratore = getLavoratore(idTrovato); // Eestituisce un lavoratore cercato
+                lavoratoriCercati.add(lavoratore);                // Lista dei lavoratori cercati totale
+            }
+
+            // Non ha senso avere un AND nei comuni di abitazione visto che ogni lavoratore ne ha solo 1
+            stmt.close();
+            c.close();
+
+            return lavoratoriCercati;
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return null;
     }
 }

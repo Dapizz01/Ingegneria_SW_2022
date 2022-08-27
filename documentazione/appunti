@@ -60,12 +60,13 @@ Ricerca:
     (Assunzione -> non ricerchiamo in base ai campi dell'anagrafica, non costituiscono campi utili per la ricerca di un lavoratore)
     - Per lingue parlate
     - Per periodo di disponibilità
-    - Per mansioni indicate
+    - Per mansioni indicate(per la specializzazione di una sua esperienza)
     - Per luogo di residenza
     - Per disponibilità automunito (Assunzione -> basta che ce l'abbia)
     - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
 
 (Assunzione -> la ricerca viene fatta in AND oppure OR fra i diversi campi, sia interni ad un tipo di dato che esterni)
+Tipo (italiana OR/AND inglese) OR/AND (A1 OR/AND AM)
 
 // Formato classi
 

@@ -26,18 +26,20 @@ public class Controller {
         }
     }
 
-    public void switchSceneWithParameters(Stage stage, View target, Lavoratore lavoratore){
+    public void switchScene(Stage stage, View target, Lavoratore lavoratore){
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.FORM.getLabel()));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-            InserisciLavoratoriController view = fxmlLoader.getController();
-            // view.setControllerMode(mode, id_lavoratore);
+            // if(fxmlLoader.getController() instanceof ModificaLavoratoreController){
+                ModificaLavoratoreController view = fxmlLoader.getController();
+                view.setLavoratoreBase(lavoratore);
+            // }
             stage.setScene(scene);
         }
         catch(IOException ioe){
             ioe.printStackTrace();
             System.out.println(ioe.getMessage());
-            System.out.println("Failed to locate resource \"" + View.FORM.getLabel() + "\" in the project");
+            System.out.println("Failed to locate resource \"" + target.getLabel() + "\" in the project");
         }
     }
 

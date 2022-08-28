@@ -5,7 +5,8 @@ public enum View {
     MAIN_MENU("fxml/menuView.fxml"),
     INSERISCI_LAVORATORE("fxml/inserisciLavoratoriView.fxml"),
     FORM("fxml/inserisciLavoratoriView.fxml"),
-    MENU_MODIFICA_LAVORATORE("fxml/menuModificaLavoratoreView.fxml");
+    MENU_MODIFICA_LAVORATORE("fxml/menuModificaLavoratoreView.fxml"),
+    MODIFICA_LAVORATORE("fxml/modificaLavoratoreView.fxml");
 
     private final String label;
 

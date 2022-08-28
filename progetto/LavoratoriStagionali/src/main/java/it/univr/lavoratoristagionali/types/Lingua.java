@@ -1,6 +1,6 @@
 package it.univr.lavoratoristagionali.types;
 
-public class Lingua {
+public class Lingua{
     private final String nomeLingua;
 
     public Lingua(String nomeLingua) {
@@ -13,5 +13,10 @@ public class Lingua {
 
     public String toString(){
         return this.nomeLingua;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Lingua) ? getNomeLingua().equals(((Lingua) obj).getNomeLingua()) : false;
     }
 }

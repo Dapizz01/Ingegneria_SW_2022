@@ -47,7 +47,7 @@ public class Esperienza {
 
     public String toString(){
         return "Svolta presso " + getNomeAzienda() +
-                "con specializzazione " + getSpecializzazione() +
+                " con specializzazione " + getSpecializzazione() +
                 ", a " + getComune() +
                 ", dal " + LocalDate.ofEpochDay(getInizioPeriodo()) +
                 " al " + LocalDate.ofEpochDay(getFinePeriodo()) +

@@ -14,4 +14,9 @@ public class Comune {
     public String toString(){
         return nomeComune;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Comune) ? getNomeComune().equals(((Comune) obj).getNomeComune()) : false;
+    }
 }

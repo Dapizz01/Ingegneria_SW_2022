@@ -14,4 +14,9 @@ public class Patente {
     public String toString(){
         return this.nomePatente;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Patente) ? getNomePatente().equals(((Patente) obj).getNomePatente()) : false;
+    }
 }

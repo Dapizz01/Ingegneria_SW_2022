@@ -83,6 +83,8 @@ public class MenuModificaLavoratoreController extends Controller implements Init
 
     @FXML
     public void onClickModificaLavoratore(ActionEvent actionEvent) {
+        // TODO: aggiungere validated
+        switchScene(getStageFromEvent(actionEvent), View.MODIFICA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0));
     }
 
     @FXML

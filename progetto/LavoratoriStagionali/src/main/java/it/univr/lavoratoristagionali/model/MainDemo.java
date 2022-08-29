@@ -30,8 +30,8 @@ public class MainDemo {
                     " DataNascita    INTEGER, " + //Numero di Giorni da 1970-01-01
                     " N_telefono     CHAR(10)," +
                     " Email          VARCHAR(50), " +
-                    " User           VARCHAR(20) NOT NULL, " +
-                    " Password       VARCHAR(20) NOT NULL,  " +
+                    " User           VARCHAR(20), " +
+                    " Password       VARCHAR(20),  " +
                     " ComuneNascita  VARCHAR(50), " +
                     " FOREIGN KEY (ComuneNascita) REFERENCES Comuni (NomeComune)) ";
             stmt.executeUpdate(sql);

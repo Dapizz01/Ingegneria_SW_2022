@@ -58,10 +58,11 @@ Esperienze lavoratori passate (5 anni, possono essere modificate):
 
 Ricerca:
     (Assunzione -> non ricerchiamo in base ai campi dell'anagrafica, non costituiscono campi utili per la ricerca di un lavoratore)
-    - Per lingue parlate
+    - Per lingue parlate X
+    - Per età
     - Per periodo di disponibilità
     - Per mansioni indicate(per la specializzazione di una sua esperienza)
-    - Per luogo di residenza
+    - Per comune di Abitazione X
     - Per disponibilità automunito (Assunzione -> basta che ce l'abbia)
     - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
 
@@ -152,8 +153,8 @@ Controller:
     - Fare controllo data inizio < data fine in disponibilita [V]
 
 Model:
-    - Costruire get di Patente, Specializzazione, Lingue, Comuni dei DAO;
-    - Costruire addLavoratore(Lavoratore)
+    - DA FARE
+    - getLavroatori() risultatati solo per il nome(tutti cno quel nome o tutti con quel cognome)
 
 Controlli Controller:
     - Data di nascita almeno 18 anni prima di ora

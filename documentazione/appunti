@@ -171,4 +171,3 @@ Controlli Controller:
         - Retribuzione solo numeri
         - Periodo, controllare che non sia nel futuro (minimo 1 mese, max 2 anni) (ci possono essere più lavori contemporaneamente)
         - Aggiungere specializzazione
-        

@@ -89,5 +89,10 @@ public class MenuModificaLavoratoreController extends Controller implements Init
 
     @FXML
     public void onClickEliminaLavoratore(ActionEvent actionEvent) {
+        LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+        if(!listaLavoratori.getSelectionModel().getSelectedValues().isEmpty()){
+            lavoratoriDao.deleteLavoratore(listaLavoratori.getSelectionModel().getSelectedValues().get(0).getID());
+            lavoratori.clear();
+        }
     }
 }

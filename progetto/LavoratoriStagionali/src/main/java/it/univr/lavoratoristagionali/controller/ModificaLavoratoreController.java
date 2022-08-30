@@ -260,9 +260,10 @@ public class ModificaLavoratoreController extends Controller implements Initiali
                     listaDisponibilitaValidated.getSelectedItems());
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
             lavoratoriDao.updateLavoratore(lavoratore);
+            switchScene(getStageFromEvent(actionEvent), View.MENU_MODIFICA_LAVORATORE);
         }
         catch (InputException inputException){
-            return;
+            return; // TODO: mostrare errore
         }
     }
 

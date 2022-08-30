@@ -37,7 +37,7 @@ public class MFXTextFieldValidated implements MFXValidated {
                             case NUMBERS_ONLY:
                                 yield this.textField.getText().chars().allMatch(Character::isDigit);
                                 case LETTERS_ONLY:
-                                    yield this.textField.getText().chars().allMatch(Character::isAlphabetic);
+                                    yield this.textField.getText().chars().allMatch(c -> Character.isWhitespace(c) || Character.isLetter(c));
                                     case TELEPHONE_FORMAT:
                                         yield this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10;
                         case EMAIL_FORMAT:

@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.model.Dao;
 
+import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.types.Comune;
 import it.univr.lavoratoristagionali.types.Lavoratore;
 import it.univr.lavoratoristagionali.types.Lingua;
@@ -12,5 +13,5 @@ public interface LavoratoriDao {
     boolean deleteLavoratore(int idDaEliminare);
     boolean updateLavoratore(Lavoratore lavoratoreDaModificare);
     Lavoratore getLavoratore(int idDacCercare);
-    List<Lavoratore> searchLavoratori(List<Lingua> lingue, String flagl, List<Comune> comuni,String flagc, String flag);
+    List<Lavoratore> searchLavoratori(LingueFilter lingueFilter, ComuniFilter comuniFilter, PatentiFilter patentiFilter, SpecializzazioniFilter specializzazioniFilter, AutomunitoFilter automunitoFilter, DisponibilitaFilter disponibilitaFilter, DataNascitaFilter dataNascitaFilter, Flag flag);
 }

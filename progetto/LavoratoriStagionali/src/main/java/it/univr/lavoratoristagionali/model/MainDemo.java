@@ -1,8 +1,10 @@
 package it.univr.lavoratoristagionali.model;
 
+import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -227,7 +229,7 @@ public class MainDemo {
                 lingueNelDb.get(1),
                 "mirko_demarchi@libero.it",
                 "1834567823",
-                true,
+                false,
                 esperienze2,
                 lingueParlate2,
                 contatti2,
@@ -236,7 +238,7 @@ public class MainDemo {
         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
 
 
-        //prova();
+        prova();
 
 
         List<Lingua> lingueDacercare = new ArrayList<>();
@@ -246,48 +248,68 @@ public class MainDemo {
         comuniDacercare.add(comuniNelDb.get(0)); // Bonavigo
         comuniDacercare.add(comuniNelDb.get(1)); // Minerbe
 
+        // -----Ignored
+        List<Lingua> lingueVuota = new ArrayList<>();
+        List<Comune> comuniVuota = new ArrayList<>();
+        List<Patente> patentiVuota = new ArrayList<>();
+        List<Specializzazione> specializzazioniVuota = new ArrayList<>();
+
+        LingueFilter lingueFilterVuota = new LingueFilter(lingueVuota, Flag.OR);
+        ComuniFilter comuniFilterVuota = new ComuniFilter(comuniVuota, Flag.AND);
+        PatentiFilter patentiFilterVuota = new PatentiFilter(patentiVuota, Flag.OR);
+        SpecializzazioniFilter specializzazioniFilterVuota = new SpecializzazioniFilter(specializzazioniVuota, Flag.OR);
+        AutomunitoFilter automunitoFilterFalse = new AutomunitoFilter(false); // sia automuniti che non
+        DisponibilitaFilter disponibilitaFilterVuota = new DisponibilitaFilter(-1,-1);
+        DataNascitaFilter dataNascitaFilterVuota = new DataNascitaFilter(-1,Flag.OR);
+        // -------
+
+        LingueFilter lingueFilterAND = new LingueFilter(lingueDacercare, Flag.AND);
+        LingueFilter lingueFilterOR = new LingueFilter(lingueDacercare, Flag.OR);
+        ComuniFilter comuniFilterAND = new ComuniFilter(comuniDacercare, Flag.AND);
+        ComuniFilter comuniFilterOR = new ComuniFilter(comuniDacercare, Flag.OR);
+        AutomunitoFilter automunitoFilterTRUE = new AutomunitoFilter(true);
+
+
+
         List<Lavoratore> lavoratoriCercati;
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"AND",comuniDacercare,"OR","AND");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Prima ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"OR",comuniDacercare,"OR","AND");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Seconda ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"OR",comuniDacercare,"AND","AND");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Terza ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"OR",comuniDacercare,"OR","OR");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Quarta ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"AND",comuniDacercare,"OR","OR");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Quinta ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"OR",comuniDacercare,"AND","OR");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Sesta ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"AND",comuniDacercare,"AND","OR");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.OR);
         System.out.println("Settima ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueDacercare,"AND",comuniDacercare,"AND","AND");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Ottava ricerca: ");
         stampaRicerca(lavoratoriCercati);
         System.out.println();
-
     }
 
     public static void prova() { // Per vedere cosa contengono tutte le tabelle del DB
@@ -305,7 +327,7 @@ public class MainDemo {
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore,NomeLavoratore,Nazionalita,ComuneNascita,ComuneAbitazione FROM Lavoratori;");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Lavoratori;");
 
             while (rs.next()) {
                 int idLavoratore = rs.getInt("ID_Lavoratore");
@@ -313,6 +335,7 @@ public class MainDemo {
                 String nazionalita = rs.getString("Nazionalita");
                 String comuneNascita = rs.getString("ComuneNascita");
                 String comuneAbitazione = rs.getString("ComuneAbitazione");
+                boolean automunito = rs.getBoolean("Automunito");
 
 
                 System.out.println("ID_Lavoratore: " + idLavoratore);
@@ -320,6 +343,7 @@ public class MainDemo {
                 System.out.println("Nazionalità: " + nazionalita);
                 System.out.println("ComuneNascita: " + comuneNascita);
                 System.out.println("ComuneAbitazione: " + comuneAbitazione);
+                System.out.println("Automunito: " + automunito);
             }
             rs.close();
 
@@ -379,6 +403,16 @@ public class MainDemo {
 
                 System.out.println("ID_Lavoratore " + idLavoratore);
                 System.out.println("Da disponibilià nel comune: " + nomeComune);
+            }
+            rs.close();
+
+            System.out.println("Gli automuniti sono: ");
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE Automunito = TRUE;");
+            while (rs.next()) {
+                int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                System.out.println("ID_Lavoratore: " + idLavoratore);
             }
             rs.close();
             //-------------------------------------------------------

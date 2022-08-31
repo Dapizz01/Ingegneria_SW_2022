@@ -153,8 +153,7 @@ Controller:
     - Fare controllo data inizio < data fine in disponibilita [V]
 
 Model:
-    - DA FARE
-    - getLavroatori() risultatati solo per il nome(tutti cno quel nome o tutti con quel cognome)
+    - getLavoratori() risultatati solo per il nome(tutti cno quel nome o tutti con quel cognome)
 
 Controlli Controller:
     - Data di nascita almeno 18 anni prima di ora

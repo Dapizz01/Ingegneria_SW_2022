@@ -41,7 +41,7 @@ public class MenuController extends Controller{
 
     @FXML
     private void goToEffettuaRicerca(ActionEvent actionEvent) {
-        // switchScene(getStageFromEvent(actionEvent), View.MENU_MODIFICA_LAVORATORE);
+        switchScene(getStageFromEvent(actionEvent), View.MENU_RICERCA_LAVORATORE);
     }
 
 

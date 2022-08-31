@@ -4,9 +4,9 @@ public enum View {
     LOGIN("fxml/loginView.fxml"),
     MAIN_MENU("fxml/menuView.fxml"),
     INSERISCI_LAVORATORE("fxml/inserisciLavoratoriView.fxml"),
-    FORM("fxml/inserisciLavoratoriView.fxml"),
     MENU_MODIFICA_LAVORATORE("fxml/menuModificaLavoratoreView.fxml"),
-    MODIFICA_LAVORATORE("fxml/modificaLavoratoreView.fxml");
+    MODIFICA_LAVORATORE("fxml/modificaLavoratoreView.fxml"),
+    MENU_RICERCA_LAVORATORE("fxml/menuRicercaLavoratoreView.fxml");
 
     private final String label;
 

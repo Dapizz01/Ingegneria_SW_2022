@@ -243,6 +243,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
             System.out.println(lavoratore);
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
             System.out.println(lavoratoriDao.addLavoratore(lavoratore));
+            switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
 
             // TODO: pulire campi dopo l'inserimento (se è avvenuto correttamente)
         }

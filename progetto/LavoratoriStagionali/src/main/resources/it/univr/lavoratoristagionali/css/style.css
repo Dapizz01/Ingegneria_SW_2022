@@ -1,24 +1,150 @@
 /*
     Questo file va aggiunto agli FXML da Scene Builder.
-    In teoria basta aggiungerlo all'elemento root della scena, da verificare.
+    Da fare / idee:
+        - Mettere in rosso i button in cui si eliminano cose
+        - Inserire il titolo del programma come header (?)
  */
 * {
     /*
-        Palette colori
+        Palette colore 1
      */
-    -fx-background-1: "F7ECDE";
+    /* -fx-background-1: "F7ECDE";
     -fx-background-2: "E9DAC1";
     -fx-active-1: "54BAB9";
-    -fx-active-2: "E9DAC1";
+    -fx-active-2: "E9DAC1"; */
+
+    /* -fx-background: "#FFFFFF";
+    -fx-active-1: "00ADB5";
+    -fx-active-2: "7F5283";
+    -fx-dark: "222831"; */
+
+    -fx-light-blue: "#BBDEFB";
+    -fx-blue: "#2196F3";
+    -fx-dark-blue: "#1976D2";
+    -fx-white: "#FFFFFF";
+    -fx-black: "#212121";
+    -fx-gray: "#757575";
+    -fx-light-gray: "#BDBDBD";
+
     -fx-error-1: "F47C7C";
     -fx-error-2: "EF9F9F";
 }
 
+.root{
+    -fx-background-color: -fx-white;
+}
+
 .mfx-text-field{
-    -fx-border-color: -fx-active-1;
-    -fx-background-color: -fx-background-1;
+    /* -fx-border-color: -fx-gray;
+    -fx-border-width: 2px; */
+    -fx-background-color: -fx-white;
+    -fx-text-fill: -fx-gray;
+    /* -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); */
 }
 
 .mfx-text-field .floating-text{
-    -fx-font-style: -fx-active-1;
+    -fx-text-fill: -fx-gray;
+    -fx-background-color: -fx-white;
+    -fx-padding: 0px 5px;
 }
+
+.mfx-text-field:focus-within{
+    -fx-border-color: -fx-blue;
+}
+
+.mfx-text-field:focus-within .floating-text{
+    -fx-text-fill: -fx-blue;
+}
+
+.mfx-date-picker:focus-within .icon{
+    -mfx-color: -fx-blue;
+}
+
+.mfx-date-cell:current{
+    -fx-text-fill: -fx-blue;
+}
+
+.mfx-date-cell:selected{
+    -fx-background-color: -fx-blue;
+}
+
+.mfx-filter-combo-box:selected .caret{
+    -fx-text-fill: -fx-blue;
+}
+
+.mfx-filter-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:selected{
+    -fx-background-color: -fx-blue;
+}
+
+.mfx-filter-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:hover{
+    -fx-background-color: -fx-light-blue;
+}
+
+.mfx-filter-combo-box .combo-popup .virtual-flow .mfx-combo-box-cell:selected .data-label{
+    -fx-text-fill: -fx-white;
+}
+
+.mfx-button{
+    -fx-background-color: -fx-blue;
+    -fx-text-fill: -fx-white;
+}
+
+.mfx-button .mfx-ripple-generator{
+    -mfx-ripple-color: -fx-dark-blue;
+    -mfx-ripple-opacity: 0.9;
+}
+
+/*.mfx-check-list-view{
+    -fx-background-color: -fx-background;
+    -fx-border-color: -fx-dark;
+}
+
+.virtual-flow{
+    -fx-background-color: transparent;
+}
+
+.virtual-flow .mfx-check-list-cell{
+    -fx-background-color: transparent;
+} */
+
+/*.mfx-check-list-view {
+    -fx-background-color: "#7a0ed9";
+    -fx-background-radius: 10;
+    -fx-border-color: "#7a0ed9";
+    -fx-border-radius: 10;
+    -fx-padding: 4;
+}
+
+.mfx-check-list-view .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+.mfx-check-list-view:focused {
+    -fx-border-color: "#7a0ed9";
+}
+
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell {
+    -fx-background-color: "#B3E5FC";
+    -fx-border-color: "#B3E5FC";
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell .data-label {
+    -fx-text-fill: white;
+    -fx-background-color: "#B3E5FC";
+}
+
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell:hover,
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell .mfx-ripple-generator {
+    -mfx-auto-clip: true;
+}
+
+.mfx-check-list-view .virtual-flow .mfx-check-list-cell:selected .mfx-ripple-generator {
+    -mfx-paused: true;
+}
+*/

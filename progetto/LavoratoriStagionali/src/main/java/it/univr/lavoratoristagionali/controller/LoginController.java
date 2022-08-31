@@ -9,9 +9,16 @@ import it.univr.lavoratoristagionali.model.Dao.LoginDao;
 import it.univr.lavoratoristagionali.model.Dao.LoginDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
-public class LoginController extends Controller{
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginController extends Controller implements Initializable {
 
     @FXML
     private MFXTextField usernameField;
@@ -24,9 +31,16 @@ public class LoginController extends Controller{
     @FXML
     private Label errorLabel;
 
+    LoginDao loginDao;
+
 
     public LoginController(){
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loginDao = new LoginDaoImpl();
     }
 
     @FXML
@@ -34,7 +48,6 @@ public class LoginController extends Controller{
         System.out.println("loginEvent fired");
         String username = usernameField.getText();
         String password = passwordField.getText();
-        LoginDao loginDao = new LoginDaoImpl();
         if(loginDao.verificaLogin(new Login(username, password))){
             displayError(false);
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);

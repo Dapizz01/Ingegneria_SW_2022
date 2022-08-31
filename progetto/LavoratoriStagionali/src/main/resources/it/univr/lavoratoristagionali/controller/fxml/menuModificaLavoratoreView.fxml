@@ -5,14 +5,14 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuModificaLavoratoreController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuModificaLavoratoreController">
    <children>
       <MFXButton fx:id="tornaAlMenu" layoutX="47.0" layoutY="32.0" onAction="#onClickTornaAlMenu" text="Torna al menu" />
       <MFXTextField fx:id="nome" floatMode="BORDER" floatingText="Nome" layoutX="307.0" layoutY="100.0" prefHeight="51.0" prefWidth="270.0" />
       <MFXTextField fx:id="cognome" floatMode="BORDER" floatingText="Cognome" layoutX="698.0" layoutY="100.0" prefHeight="51.0" prefWidth="270.0" />
       <MFXButton fx:id="cercaLavoratore" layoutX="614.0" layoutY="183.0" onAction="#onClickCercaLavoratore" text="Cerca" />
       <MFXListView fx:id="listaLavoratori" layoutX="308.0" layoutY="235.0" prefHeight="350.0" prefWidth="665.0" />
-      <MFXButton fx:id="modificaLavoratore" layoutX="798.0" layoutY="617.0" onAction="#onClickModificaLavoratore" text="Modifica" />
-      <MFXButton fx:id="eliminaLavoratore" layoutX="408.0" layoutY="617.0" onAction="#onClickEliminaLavoratore" text="Cancella" />
+      <MFXButton fx:id="modificaLavoratore" layoutX="407.0" layoutY="609.0" onAction="#onClickModificaLavoratore" text="Modifica" />
+      <MFXButton fx:id="eliminaLavoratore" layoutX="799.0" layoutY="609.0" onAction="#onClickEliminaLavoratore" text="Cancella" />
    </children>
 </AnchorPane>

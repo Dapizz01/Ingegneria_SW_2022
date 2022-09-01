@@ -173,59 +173,55 @@ public class MainDemo {
 
         List<Esperienza> esperienze = new ArrayList<Esperienza>();
         esperienze.add(new Esperienza(0, "NST", 50, 1000, 2000, comuniNelDb.get(0), specializzazioniNelDb.get(0)));
-        List<Esperienza> esperienze2 = new ArrayList<Esperienza>();
-        esperienze2.add(new Esperienza(0, "AIA", 50, 1000, 2000, comuniNelDb.get(3), specializzazioniNelDb.get(0)));
-        esperienze2.add(new Esperienza(0, "DBD", 80, 2000, 3000, comuniNelDb.get(3), specializzazioniNelDb.get(1)));
-
         List<Lingua> lingueParlate = new ArrayList<Lingua>();
         lingueParlate.add(lingueNelDb.get(0));
-        List<Lingua> lingueParlate2 = new ArrayList<Lingua>();
-        lingueParlate2.add(lingueNelDb.get(0));
-        lingueParlate2.add(lingueNelDb.get(1));
-
         List<Contatto> contatti = new ArrayList<Contatto>();
         contatti.add(new Contatto(0, "Maurizio", "Merluzzo", "1231234567", "merlu@gmail.com"));
-        List<Contatto> contatti2 = new ArrayList<Contatto>();
-        contatti2.add(new Contatto(0, "Contattino", "Merlu", "1231234567", "merlu@gmail.com"));
-        contatti2.add(new Contatto(0, "Contattone", "Merlo", "1231234567", "merlu@gmail.com"));
-
         List<Patente> patentiPossedute = new ArrayList<Patente>();
         patentiPossedute.add(patentiNelDb.get(0));
-        List<Patente> patentiPossedute2 = new ArrayList<Patente>();
-        patentiPossedute2.add(patentiNelDb.get(0));
-        patentiPossedute2.add(patentiNelDb.get(1));
-
         List<Disponibilita> disponibilitaLista = new ArrayList<Disponibilita>();
-        disponibilitaLista.add(new Disponibilita(8000, 10000,comuniNelDb.get(0)));
-        List<Disponibilita> disponibilitaLista2 = new ArrayList<Disponibilita>();
-        disponibilitaLista2.add(new Disponibilita(5000, 6000, comuniNelDb.get(0)));
-        disponibilitaLista2.add(new Disponibilita(7000, 9000, comuniNelDb.get(1)));
-
+        disponibilitaLista.add(new Disponibilita(1000, 2000,comuniNelDb.get(0)));
 
         LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
         Lavoratore lavoratore = new Lavoratore(0,
                 "Matteo",
-                "De Marchi",
+                "Cognome1",
                 comuniNelDb.get(5),
-                comuniNelDb.get(0),  // Bonavigo
-                5000,
+                comuniNelDb.get(0),  // ComuneAbitazione: Bonavigo
+                200,
                 lingueNelDb.get(0),
                 "prova123@virgilio.it",
                 "1231231231",
                 true,
-                esperienze,
-                lingueParlate,
+                esperienze,         // Specializzazione: Bagnino
+                lingueParlate,      // Italiana
                 contatti,
-                patentiPossedute,
-                disponibilitaLista);
+                patentiPossedute,    // AM
+                disponibilitaLista); //1000-2000
         System.out.println("Primo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore));
+
+        List<Contatto> contatti2 = new ArrayList<Contatto>();
+        contatti2.add(new Contatto(0, "Contattino", "Merlu", "1231234567", "merlu@gmail.com"));
+        contatti2.add(new Contatto(0, "Contattone", "Merlo", "1231234567", "merlu@gmail.com"));
+        List<Lingua> lingueParlate2 = new ArrayList<Lingua>();
+        lingueParlate2.add(lingueNelDb.get(0));
+        lingueParlate2.add(lingueNelDb.get(1));
+        List<Patente> patentiPossedute2 = new ArrayList<Patente>();
+        patentiPossedute2.add(patentiNelDb.get(0));
+        patentiPossedute2.add(patentiNelDb.get(1));
+        List<Disponibilita> disponibilitaLista2 = new ArrayList<Disponibilita>();
+        disponibilitaLista2.add(new Disponibilita(1500, 4000, comuniNelDb.get(0)));
+        disponibilitaLista2.add(new Disponibilita(7000, 9000, comuniNelDb.get(1)));
+        List<Esperienza> esperienze2 = new ArrayList<Esperienza>();
+        esperienze2.add(new Esperienza(0, "AIA", 50, 1000, 2000, comuniNelDb.get(3), specializzazioniNelDb.get(0)));
+        esperienze2.add(new Esperienza(0, "DBD", 80, 2000, 3000, comuniNelDb.get(3), specializzazioniNelDb.get(1)));
 
         Lavoratore lavoratore2 = new Lavoratore(0,
                 "Mirko",
-                "De Marchi",
+                "Cognome2",
                 comuniNelDb.get(2),
                 comuniNelDb.get(1),  //Minerbe
-                5000,
+                1000,
                 lingueNelDb.get(1),
                 "mirko_demarchi@libero.it",
                 "1834567823",
@@ -240,15 +236,7 @@ public class MainDemo {
 
         prova();
 
-
-        List<Lingua> lingueDacercare = new ArrayList<>();
-        lingueDacercare.add(lingueNelDb.get(0)); // Italiana
-        lingueDacercare.add(lingueNelDb.get(1)); // Inglese
-        List<Comune> comuniDacercare = new ArrayList<>();
-        comuniDacercare.add(comuniNelDb.get(0)); // Bonavigo
-        comuniDacercare.add(comuniNelDb.get(1)); // Minerbe
-
-        // -----Ignored
+        // ------------------------------------Ignored
         List<Lingua> lingueVuota = new ArrayList<>();
         List<Comune> comuniVuota = new ArrayList<>();
         List<Patente> patentiVuota = new ArrayList<>();
@@ -259,57 +247,74 @@ public class MainDemo {
         PatentiFilter patentiFilterVuota = new PatentiFilter(patentiVuota, Flag.OR);
         SpecializzazioniFilter specializzazioniFilterVuota = new SpecializzazioniFilter(specializzazioniVuota, Flag.OR);
         AutomunitoFilter automunitoFilterFalse = new AutomunitoFilter(false); // sia automuniti che non
-        DisponibilitaFilter disponibilitaFilterVuota = new DisponibilitaFilter(-1,-1);
+        DisponibilitaFilter disponibilitaFilterVuota = new DisponibilitaFilter(-1,-1, comuniNelDb.get(0));
         DataNascitaFilter dataNascitaFilterVuota = new DataNascitaFilter(-1,Flag.OR);
-        // -------
+        // ------------------------------------------
+
+
+        List<Lingua> lingueDacercare = new ArrayList<>();
+        lingueDacercare.add(lingueNelDb.get(0)); // Italiana
+        lingueDacercare.add(lingueNelDb.get(1)); // Inglese
+        List<Comune> comuniDacercare = new ArrayList<>();
+        comuniDacercare.add(comuniNelDb.get(0)); // Bonavigo
+        comuniDacercare.add(comuniNelDb.get(1)); // Minerbe
+        List<Specializzazione> specializzazioniDacercare = new ArrayList<>();
+        specializzazioniDacercare.add(specializzazioniNelDb.get(0));
+        specializzazioniDacercare.add(specializzazioniNelDb.get(1));
 
         LingueFilter lingueFilterAND = new LingueFilter(lingueDacercare, Flag.AND);
         LingueFilter lingueFilterOR = new LingueFilter(lingueDacercare, Flag.OR);
         ComuniFilter comuniFilterAND = new ComuniFilter(comuniDacercare, Flag.AND);
         ComuniFilter comuniFilterOR = new ComuniFilter(comuniDacercare, Flag.OR);
-        AutomunitoFilter automunitoFilterTRUE = new AutomunitoFilter(true);
+
+        SpecializzazioniFilter specializzazioniFilterOR = new SpecializzazioniFilter(specializzazioniDacercare, Flag.OR);
+        DisponibilitaFilter disponibilitaFilterBonavigo = new DisponibilitaFilter(1600,2000,comuniNelDb.get(0));
+        AutomunitoFilter automunitoFilterTrue = new AutomunitoFilter(true);
 
 
 
         List<Lavoratore> lavoratoriCercati;
-
+        /*
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Prima ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
+
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Seconda ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
+
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Terza ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
 
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Quarta ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
 
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Quinta ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
 
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
         System.out.println("Sesta ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
 
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.OR);
         System.out.println("Settima ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
 
         lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
         System.out.println("Ottava ricerca: ");
         stampaRicerca(lavoratoriCercati);
-        System.out.println();
+
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterVuota,comuniFilterVuota,patentiFilterVuota,specializzazioniFilterOR,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.OR);
+        System.out.println("Ricerca per solo chi ha almeno bagnino: ");
+        stampaRicerca(lavoratoriCercati);
+         */
+
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterVuota,comuniFilterVuota,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterBonavigo, dataNascitaFilterVuota, Flag.OR);
+        System.out.println("Ricerca da 1600 a 2000 per bonavigo ");
+        stampaRicerca(lavoratoriCercati);
     }
 
     public static void prova() { // Per vedere cosa contengono tutte le tabelle del DB
@@ -400,9 +405,14 @@ public class MainDemo {
             while (rs.next()) {
                 int idLavoratore = rs.getInt("ID_Lavoratore");
                 String nomeComune = rs.getString("NomeComune");
+                int inizioPeriodo = rs.getInt("InizioPeriodo");
+                int finePeriodo = rs.getInt("FinePeriodo");
 
                 System.out.println("ID_Lavoratore " + idLavoratore);
                 System.out.println("Da disponibilià nel comune: " + nomeComune);
+                System.out.println("Da: " + inizioPeriodo);
+                System.out.println("A: " + finePeriodo);
+
             }
             rs.close();
 

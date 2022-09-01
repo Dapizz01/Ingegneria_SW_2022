@@ -1,8 +1,6 @@
 I lavoratori non ricoprono un ruolo nel sistema, perchè fanno solo riferimento ai dipendenti dell'agenzia e non fanno accesso diretto al sistema.
 Solo i responsabili possono inserire/modificare dati dei lavoratori(lavoratore nel database), quando il lavoratore ne fa richiesta.
 
-(Assunzione -> si suppone la modifica solo dei dati riguardanti i lavori svolti)
-
 Dati lavoratori:
     - Anagrafica:
         * Nome (Assunzione -> almeno una)
@@ -58,84 +56,17 @@ Esperienze lavoratori passate (5 anni, possono essere modificate):
 
 Ricerca:
     (Assunzione -> non ricerchiamo in base ai campi dell'anagrafica, non costituiscono campi utili per la ricerca di un lavoratore)
-    - Per lingue parlate X
+    - Per lingue parlate
     - Per età
     - Per periodo di disponibilità
     - Per mansioni indicate(per la specializzazione di una sua esperienza)
-    - Per comune di Abitazione X
+    - Per comune di Abitazione
     - Per disponibilità automunito (Assunzione -> basta che ce l'abbia)
     - Per tipo di patente di guida (Assunzione -> si fa ricerca in base al tipo di patente (A1, A2, B, ...))
 
 (Assunzione -> la ricerca viene fatta in AND oppure OR fra i diversi campi, sia interni ad un tipo di dato che esterni)
 Tipo (italiana OR/AND inglese) OR/AND (A1 OR/AND AM)
 
-// Formato classi
-
-class Lavoratore{
-    int ID_Lavoratore;
-    String nomeLavoratore;
-    String cognomeLavoratore;
-    Comune comuneNascita;
-    Comune comuneAbitazione;
-    int dataNascita; // numero di secondi dalla Unix epoch
-    Nazione nazionalità;
-    String email;
-    String telefono;
-    boolean automunito;
-    List<Esperienza> esperienze;
-    List<Lingua> lingueParlate;
-    List<Contatti> contatti;
-    List<Patente> patenti;
-    List<Disponibilita> disponibilita;
-}
-
-class Disponibilita{
-    int inizioPeriodo;
-    int finePeriodo;
-    Comune comune;
-}
-
-class Contatto{
-    int ID_Contatto;
-    String nome;
-    String cognome;
-    String telefono;
-    String email;
-}
-
-class Esperienza{
-    int ID_Esperienza;
-    String nomeAzienda;
-    int retribuzioneGiornaliera;
-    int inizioPeriodo; // numero di secondi dalla Unix epoch
-    int finePeriodo; // numero di secondi dalla Unix epoch
-    int ID_Comune;
-}
-
-class Patente{
-    int ID_Patente;
-    String nomePatente;
-}
-
-class Comune{
-    int ID_Comune;
-    String nomeComune;
-}
-
-class Specializzazione{
-    int ID_Specializzazione;
-    String nomeSpecializzazione;
-}
-
-class Lingua{
-    int ID_Lingua;
-    String nomeLingua;
-}
-
-class Nazione{
-    int ID_Nazione;
-    String nomeNazione;
-}
 
 // APPUNTI INTELLIJ IDEA
 Non importa libreria:
@@ -145,30 +76,9 @@ Non va un modulo:
 Disinstallare e reinstallare modulo
 
 // DA FARE
-Controller:
-    - Sistemare layout inserisci lavoratore (usare più spazio, far si che si vedano bene i label degli errori) [V]
-    - Sistemare la segnalazione di errore nei MFXListView [V] (fatto campo, da implementare funzionalità)
-    - Aggiungere comune di abitazione [V] (fatto FXML, da implementare funzionalità)
-    - Aggiungere specializzazione alle esperienze [V] (fatto FXML, da implementare funzionalità)
-    - Fare controllo data inizio < data fine in disponibilita [V]
-
 Model:
     - getLavoratori() risultatati solo per il nome(tutti cno quel nome o tutti con quel cognome)
 
-Controlli Controller:
-    - Data di nascita almeno 18 anni prima di ora
-    - Nazionalità almeno una
-    - Indirizzo non vuoto
-    - Telefono -> solo numeri, non vuoto, 10 cifre
-    - Email -> controllo non vuoto, contenga @
-    - Lingue -> almeno una lingua
-    - Contatti urgenti
-        - Ogni campo non vuoto, mail e telfono come gli altri, almeno un contatto urgente
-    - Disponibilità
-        - Ogni campo non vuoto all'inserimento, anche nessuna disponibilità
-        - Periodo, per ogni comune non deve sovrapporsi e deve durare almeno un mese
-    - Esperienze
-        - Nome azienda non vuoto
-        - Retribuzione solo numeri
-        - Periodo, controllare che non sia nel futuro (minimo 1 mese, max 2 anni) (ci possono essere più lavori contemporaneamente)
-        - Aggiungere specializzazione
+// NB:
+    Nel seerchLavoratori non ci sono i controlli sui flag delle liste(es Lingue perchè il flag potrebbe essere != AND && != OR)
+    Nel searchLavoratori non c'è il controllo se il flag del comuniFilter è != OR

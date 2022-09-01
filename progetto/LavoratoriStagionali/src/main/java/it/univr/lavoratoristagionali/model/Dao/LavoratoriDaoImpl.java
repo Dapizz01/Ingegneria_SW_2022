@@ -105,7 +105,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 pstmt.setInt(1, idLavoratore);
                 pstmt.setString(2, nuovaDisponibilita.getComune().getNomeComune());
                 pstmt.setInt(3, nuovaDisponibilita.getInizioPeriodo());
-                pstmt.setInt(3, nuovaDisponibilita.getFinePeriodo());
+                pstmt.setInt(4, nuovaDisponibilita.getFinePeriodo());
                 pstmt.executeUpdate();
                 System.out.println("Disponibilità Aggiunta");
             }
@@ -564,15 +564,21 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
             // -----------------------------// Lingue // --------------------------------
 
             //-------------------------------- Comuni ------------------------------------
-            if(comuniFilter.getComuni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori)
-                stmt = c.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
-                while (rs.next()) {
-                    int idLavoratore = rs.getInt("ID_Lavoratore");
+            if(comuniFilter.getComuni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
 
-                    tracciaIdComuni.add(idLavoratore);
+                        tracciaIdComuni.add(idLavoratore);
+                    }
+                    rs.close();
                 }
-                rs.close();
+                else {
+                    // tracciaIdComuni rimane vuota
+                }
+
             }
             else {
                 if(comuniFilter.getFlag() == Flag.OR) {
@@ -588,7 +594,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     }
                 }
                 else { // comuniFilter.getFlag() != Flag.OR
-                    // tracciaIdComuni rimane vuota
+                    // Manca il controllo semplicemente tracciaIdComuni rimane vuota
                 }
             }
             //---------------------------------// Comuni //-------------------------------
@@ -654,7 +660,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
             //-------------------------------// Patenti //---------------------------------
 
             //-------------------------- Specializzazioni ---------------------------------
-            if(specializzazioniFilter.getSpecializzazioni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori)
+            if(specializzazioniFilter.getSpecializzazioni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
                 if(flag == Flag.AND) {
                     stmt = c.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
@@ -668,7 +674,6 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 else {
                     // tracciaIdSpecializzazioni rimane vuota
                 }
-
             }
             else {
                 if(specializzazioniFilter.getFlag() == Flag.AND) {
@@ -696,9 +701,8 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
 
                     hm.clear();
                     and1.clear();
-
                 }
-                else {
+                else { // specializzazioniFilter.getFlag() == Flag.OR
                     for(Specializzazione specializzazione : specializzazioniFilter.getSpecializzazioni()) {
                         stmt = c.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Esperienze WHERE NomeSpecializzazione ='" + specializzazione.getNomeSpecializzazione() + "';");
@@ -744,18 +748,22 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
             //-------------------------// Automunito //--------------------------
 
             //---------------------------- Disponibilità -------------------------------
-            // Se != -1 è un periodo di cui tener traccia(seleziono solo i lavoratori che hanno dispobinilità in quel periodo)
+            // Se != -1 è un periodo di cui tener traccia(seleziono solo i lavoratori che hanno dispobinilità in quel periodo per quel comune indicato)
             if(disponibilitaFilter.getInizioPeriodo() != -1 && disponibilitaFilter.getFinePeriodo() != -1) {
                 stmt = c.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Disponibilita WHERE InizioPeriodo <='" + disponibilitaFilter.getInizioPeriodo() + "' AND FinePeriodo >= '" + disponibilitaFilter.getFinePeriodo() + "';");
+                ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Disponibilita WHERE InizioPeriodo <='" + disponibilitaFilter.getInizioPeriodo() + "' AND FinePeriodo >= '" + disponibilitaFilter.getFinePeriodo() + "' AND NomeComune = '" + disponibilitaFilter.getComune().getNomeComune() + "';");
                 while (rs.next()) {
                     int idLavoratore = rs.getInt("ID_Lavoratore");
 
                     tracciaIdDisponibilita.add(idLavoratore);
                 }
                 rs.close();
+                System.out.println("Dopo la ricerca:");
+                for(Integer i: tracciaIdDisponibilita) {
+                    System.out.println(i);
+                }
             }
-            else { // Se == -1 il periodo di disponibilità è ignorato(vanno bene tutti i lavoratori per l'AND)
+            else { // Se periodo == -1 il periodo di disponibilità è ignorato(vanno bene tutti i lavoratori per l'AND)
                 if(flag == Flag.AND) {
                     stmt = c.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
@@ -798,7 +806,6 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 else {
                     System.out.println("Flag dataNascitaFilter non valido!");
                 }
-
             }
             else { // Se == -1 la data di nascita è ignorata(vanno bene tutti i lavoratori per l'AND)
                 if(flag == Flag.AND) {
@@ -869,6 +876,6 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
             System.exit(0);
         }
 
-        return null;
+        return lavoratoriCercati;
     }
 }

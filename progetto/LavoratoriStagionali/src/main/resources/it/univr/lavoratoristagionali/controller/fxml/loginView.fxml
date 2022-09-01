@@ -3,6 +3,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -15,6 +16,9 @@
    </Label>
    <MFXTextField fx:id="usernameField" floatMode="BORDER" floatingText="Username" layoutX="521.0" layoutY="264.0" prefHeight="50.0" prefWidth="239.0" />
    <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Password" layoutX="520.0" layoutY="344.0" prefHeight="50.0" prefWidth="239.0" />
-   <MFXButton fx:id="submitButton" layoutX="614.0" layoutY="426.0" onAction="#loginEvent" prefHeight="50.0" prefWidth="68.0" rippleAnimateShadow="true" text="Invio" textAlignment="CENTER" />
+   <MFXButton fx:id="submitButton" layoutX="614.0" layoutY="426.0" onAction="#loginEvent" prefHeight="50.0" prefWidth="68.0" rippleAnimateShadow="true" text="Invio" textAlignment="CENTER">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></MFXButton>
    <Label fx:id="errorLabel" layoutX="524.0" layoutY="493.0" prefHeight="50.0" prefWidth="239.0" text="Credenziali non corrette" textAlignment="CENTER" textFill="#cd2424" visible="false" wrapText="true" />
 </Pane>

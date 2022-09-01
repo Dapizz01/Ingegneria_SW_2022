@@ -5,7 +5,10 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.LoginController">
@@ -21,4 +24,16 @@
          <Cursor fx:constant="HAND" />
       </cursor></MFXButton>
    <Label fx:id="errorLabel" layoutX="524.0" layoutY="493.0" prefHeight="50.0" prefWidth="239.0" text="Credenziali non corrette" textAlignment="CENTER" textFill="#cd2424" visible="false" wrapText="true" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="915.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+   <Label alignment="CENTER" layoutX="915.0" layoutY="1.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
+      <font>
+         <Font name="System Bold" size="22.0" />
+      </font>
+   </Label>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1165.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
+   <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1177.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../img/icon.png" />
+      </image>
+   </ImageView>
 </Pane>

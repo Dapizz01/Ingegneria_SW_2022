@@ -30,10 +30,14 @@ public class Controller {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-            // if(fxmlLoader.getController() instanceof ModificaLavoratoreController){
+            if(fxmlLoader.getController() instanceof ModificaLavoratoreController){
                 ModificaLavoratoreController view = fxmlLoader.getController();
                 view.setLavoratoreBase(lavoratore);
-            // }
+            }
+            if(fxmlLoader.getController() instanceof DettagliRicercaLavoratoreController){
+                DettagliRicercaLavoratoreController view = fxmlLoader.getController();
+                view.setLavoratoreBase(lavoratore);
+            }
             stage.setScene(scene);
         }
         catch(IOException ioe){

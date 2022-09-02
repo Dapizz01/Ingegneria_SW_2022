@@ -7,9 +7,11 @@
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import io.github.palexdev.materialfx.controls.MFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,28 +20,121 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuRicercaLavoratoreController">
-   <children>
-      <MFXButton fx:id="ritornaMenu" layoutX="67.0" layoutY="40.0" onAction="#onClickRitornaMenu" text="Indietro">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXDatePicker fx:id="dataNascitaLavoratore" floatMode="BORDER" floatingText="Data nascita" layoutX="472.0" layoutY="413.0" prefHeight="51.0" prefWidth="250.0" />
-      <VBox layoutX="67.0" layoutY="140.0" prefHeight="251.0" prefWidth="145.0">
+<ScrollPane prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuRicercaLavoratoreController">
+   <content>
+      <AnchorPane prefHeight="1499.0" prefWidth="1263.0" stylesheets="@../../css/style.css">
          <children>
-            <MFXCheckListView fx:id="lingueLavoratore" prefHeight="200.0" prefWidth="179.0" />
-            <HBox prefHeight="55.0" prefWidth="145.0">
+            <MFXButton fx:id="ritornaMenu" layoutX="67.0" layoutY="40.0" onAction="#onClickRitornaMenu" text="Indietro">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+            <MFXDatePicker fx:id="dataNascitaLavoratore" floatMode="BORDER" floatingText="Data nascita" layoutX="878.0" layoutY="401.0" prefHeight="51.0" prefWidth="323.0" />
+            <VBox layoutX="67.0" layoutY="140.0" prefHeight="251.0" prefWidth="350.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="100.0">
+                  <MFXCheckListView fx:id="lingueLavoratore" prefHeight="197.0" prefWidth="356.0" />
+                  <HBox prefHeight="55.0" prefWidth="145.0">
                      <children>
-                        <MFXRadioButton fx:id="lingueLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="AND" />
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="lingueLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="AND" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="lingueLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="OR" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="878.0" layoutY="142.0" prefHeight="198.0" prefWidth="323.0">
+               <children>
+                  <MFXDatePicker fx:id="inizioPeriodo" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="51.0" prefWidth="342.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </MFXDatePicker>
+                  <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="51.0" prefWidth="349.0">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </MFXDatePicker>
+                  <MFXFilterComboBox fx:id="comuneDisponibilita" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
+               </children>
+            </VBox>
+            <VBox layoutX="67.0" layoutY="401.0" prefHeight="251.0" prefWidth="350.0">
+               <children>
+                  <MFXCheckListView fx:id="patentiLavoratore" prefHeight="201.0" prefWidth="363.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="patentiLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="AND" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="patentiLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="OR" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutX="472.0" layoutY="402.0" prefHeight="251.0" prefWidth="350.0">
+               <children>
+                  <MFXCheckListView fx:id="specializzazioniLavoratore" prefHeight="201.0" prefWidth="347.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="specializzazioniLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="AND" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="200.0">
+                           <children>
+                              <MFXRadioButton fx:id="specializzazioniLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
+                              <Label text="OR" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" layoutX="878.0" layoutY="527.0" prefHeight="50.0" prefWidth="323.0">
+               <children>
+                  <MFXCheckbox fx:id="automunito" prefHeight="39.0" prefWidth="28.0" />
+                  <Label prefHeight="26.0" prefWidth="80.0" text="Automunito" />
+               </children>
+            </HBox>
+            <HBox layoutX="877.0" layoutY="452.0" prefHeight="41.0" prefWidth="323.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="31.0" prefWidth="200.0">
+                     <children>
+                        <MFXRadioButton fx:id="dataNascitaLavoratoreDa" prefHeight="18.0" prefWidth="9.0" />
+                        <Label text="Da" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="100.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="200.0">
                      <children>
-                        <MFXRadioButton fx:id="lingueLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="OR" />
+                        <MFXRadioButton fx:id="dataNascitaLavoratoreA" prefHeight="18.0" prefWidth="9.0" />
+                        <Label text="A" />
                      </children>
                   </HBox>
                </children>
@@ -47,121 +142,120 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-         </children>
-      </VBox>
-      <VBox layoutX="472.0" layoutY="140.0" prefHeight="198.0" prefWidth="250.0">
-         <children>
-            <MFXDatePicker fx:id="inizioPeriodo" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="51.0" prefWidth="261.0">
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
-            </MFXDatePicker>
-            <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="51.0" prefWidth="264.0">
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
-            </MFXDatePicker>
-            <MFXFilterComboBox fx:id="comuneDisponibilita" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="250.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="266.0" layoutY="413.0" prefHeight="251.0" prefWidth="145.0">
-         <children>
-            <MFXCheckListView fx:id="patentiLavoratore" prefHeight="250.0" prefWidth="145.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="502.0" layoutY="678.0" onAction="#onClickRicercaAND" prefHeight="85.0" prefWidth="130.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </MFXButton>
+            <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="681.0" layoutY="678.0" onAction="#onClickRicercaOR" prefHeight="85.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </MFXButton>
+            <MFXListView fx:id="listaLavoratori" layoutX="69.0" layoutY="822.0" prefHeight="469.0" prefWidth="347.0" />
+            <MFXButton fx:id="visualizzaDettagli" layoutX="170.0" layoutY="1302.0" onAction="#onClickVisualizzaDettagli" prefHeight="41.0" prefWidth="145.0" text="Visualizza dettagli" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+            <MFXCheckListView fx:id="comuneLavoratore" layoutX="472.0" layoutY="141.0" prefHeight="200.0" prefWidth="350.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="898.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+            <Label alignment="CENTER" layoutX="898.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1148.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
+            <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1160.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/icon.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="472.0" layoutY="821.0" prefHeight="206.0" prefWidth="165.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="100.0">
+                  <MFXTextField fx:id="nomeRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Nome" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <MFXTextField fx:id="cognomeRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Cognome" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <HBox alignment="CENTER" prefHeight="51.0" prefWidth="165.0">
                      <children>
-                        <MFXRadioButton fx:id="patentiLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="AND" />
+                        <MFXCheckbox fx:id="automunitoCheckRisultato" disable="true" style="-fx-opacity: 1;" />
+                        <Label text="Automunito" />
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="100.0">
-                     <children>
-                        <MFXRadioButton fx:id="patentiLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="OR" />
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox layoutX="67.0" layoutY="413.0" prefHeight="251.0" prefWidth="145.0">
-         <children>
-            <MFXCheckListView fx:id="specializzazioniLavoratore" prefHeight="250.0" prefWidth="145.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="100.0">
-                     <children>
-                        <MFXRadioButton fx:id="specializzazioniLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="AND" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="100.0">
-                     <children>
-                        <MFXRadioButton fx:id="specializzazioniLavoratoreOR" prefHeight="18.0" prefWidth="9.0" />
-                        <Label text="OR" />
-                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </HBox>
                </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER" layoutX="472.0" layoutY="526.0" prefHeight="26.0" prefWidth="250.0">
-         <children>
-            <MFXCheckbox fx:id="automunito" prefHeight="39.0" prefWidth="28.0" />
-            <Label prefHeight="26.0" prefWidth="80.0" text="Automunito" />
-         </children>
-      </HBox>
-      <HBox layoutX="472.0" layoutY="472.0" prefHeight="41.0" prefWidth="250.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="120.0">
+            </VBox>
+            <VBox layoutX="1051.0" layoutY="821.0" prefHeight="155.0" prefWidth="165.0">
                <children>
-                  <MFXRadioButton fx:id="dataNascitaLavoratoreDa" prefHeight="18.0" prefWidth="9.0" />
-                  <Label text="Da" />
+                  <MFXTextField fx:id="telefonoRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Telefono" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <MFXTextField fx:id="emailRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="E-mail" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="100.0">
+            </VBox>
+            <VBox layoutX="666.0" layoutY="1043.0" prefHeight="442.0" prefWidth="552.0">
                <children>
-                  <MFXRadioButton fx:id="dataNascitaLavoratoreA" prefHeight="18.0" prefWidth="9.0" />
-                  <Label text="A" />
+                  <MFXListView fx:id="contattiUrgentiRisultato" prefHeight="130.0" prefWidth="689.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXListView>
+                  <MFXListView fx:id="disponibilitaRisultato" prefHeight="130.0" prefWidth="689.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXListView>
+                  <MFXListView fx:id="esperienzeRisultato" prefHeight="130.0" prefWidth="689.0" />
                </children>
-            </HBox>
+            </VBox>
+            <VBox layoutX="664.0" layoutY="821.0" prefHeight="155.0" prefWidth="165.0">
+               <children>
+                  <MFXTextField fx:id="dataNascitaRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Data nascita" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <MFXTextField fx:id="comuneNascitaRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Comune nascita" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+               </children>
+            </VBox>
+            <MFXListView fx:id="lingueRisultato" layoutX="472.0" layoutY="1043.0" prefHeight="210.0" prefWidth="165.0" />
+            <MFXListView fx:id="patentiRisultato" layoutX="472.0" layoutY="1275.0" prefHeight="210.0" prefWidth="165.0" />
+            <VBox layoutX="858.0" layoutY="822.0" prefHeight="154.0" prefWidth="165.0">
+               <children>
+                  <MFXTextField fx:id="nazionalitaRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Nazionalità" prefHeight="51.0" prefWidth="165.0">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <MFXTextField fx:id="comuneAbitazioneRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Comune abitazione" prefHeight="51.0" prefWidth="165.0" />
+               </children>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-      <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="472.0" layoutY="575.0" onAction="#onClickRicercaAND" prefHeight="68.0" prefWidth="100.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="622.0" layoutY="575.0" onAction="#onClickRicercaOR" prefHeight="68.0" prefWidth="100.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXListView fx:id="listaLavoratori" layoutX="785.0" layoutY="140.0" prefHeight="469.0" prefWidth="426.0" />
-      <MFXButton fx:id="visualizzaDettagli" layoutX="935.0" layoutY="636.0" onAction="#onClickVisualizzaDettagli" prefHeight="41.0" prefWidth="145.0" text="Visualizza dettagli" textAlignment="CENTER" wrapText="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXCheckListView fx:id="comuneLavoratore" layoutX="266.0" layoutY="140.0" prefHeight="200.0" prefWidth="145.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="915.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-      <Label alignment="CENTER" layoutX="915.0" layoutY="1.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1165.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
-      <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1177.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../img/icon.png" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </content>
+</ScrollPane>

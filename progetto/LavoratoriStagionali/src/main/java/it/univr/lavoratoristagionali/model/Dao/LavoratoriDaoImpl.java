@@ -758,10 +758,6 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     tracciaIdDisponibilita.add(idLavoratore);
                 }
                 rs.close();
-                System.out.println("Dopo la ricerca:");
-                for(Integer i: tracciaIdDisponibilita) {
-                    System.out.println(i);
-                }
             }
             else { // Se periodo == -1 il periodo di disponibilità è ignorato(vanno bene tutti i lavoratori per l'AND)
                 if(flag == Flag.AND) {
@@ -866,7 +862,9 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 lavoratoriCercati.add(lavoratore);                // Lista dei lavoratori cercati completa
             }
 
-            stmt.close();
+            if(stmt != null) { // Perchè se tutti i campi sono ignorati in OR stmt rimane false
+                stmt.close();
+            }
             c.close();
 
             return lavoratoriCercati;

@@ -234,7 +234,7 @@ public class MainDemo {
         System.out.println("Secondo lavoratore inserito?: " + lavoratoriDao.addLavoratore(lavoratore2));
 
 
-        prova();
+        //prova();
 
         // ------------------------------------Ignored
         List<Lingua> lingueVuota = new ArrayList<>();
@@ -261,59 +261,28 @@ public class MainDemo {
         List<Specializzazione> specializzazioniDacercare = new ArrayList<>();
         specializzazioniDacercare.add(specializzazioniNelDb.get(0));
         specializzazioniDacercare.add(specializzazioniNelDb.get(1));
+        List<Patente> patentiDacercare = new ArrayList<>();
+        patentiDacercare.add(patentiNelDb.get(0));
+        patentiDacercare.add(patentiNelDb.get(1));
 
         LingueFilter lingueFilterAND = new LingueFilter(lingueDacercare, Flag.AND);
         LingueFilter lingueFilterOR = new LingueFilter(lingueDacercare, Flag.OR);
         ComuniFilter comuniFilterAND = new ComuniFilter(comuniDacercare, Flag.AND);
         ComuniFilter comuniFilterOR = new ComuniFilter(comuniDacercare, Flag.OR);
+        PatentiFilter patentiFilterAND = new PatentiFilter(patentiDacercare, Flag.AND);
+        PatentiFilter patentiFilterOR = new PatentiFilter(patentiDacercare, Flag.AND);
+
 
         SpecializzazioniFilter specializzazioniFilterOR = new SpecializzazioniFilter(specializzazioniDacercare, Flag.OR);
-        DisponibilitaFilter disponibilitaFilterBonavigo = new DisponibilitaFilter(1600,2000,comuniNelDb.get(0));
+        DisponibilitaFilter disponibilitaFilterBonavigo = new DisponibilitaFilter(999,2001,comuniNelDb.get(0));
         AutomunitoFilter automunitoFilterTrue = new AutomunitoFilter(true);
-
-
+        DataNascitaFilter dataNascitaFilterFROM = new DataNascitaFilter(201,Flag.FROM);
+        DataNascitaFilter dataNascitaFilterTO = new DataNascitaFilter(3000,Flag.TO);
 
         List<Lavoratore> lavoratoriCercati;
-        /*
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
-        System.out.println("Prima ricerca: ");
-        stampaRicerca(lavoratoriCercati);
 
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
-        System.out.println("Seconda ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
-        System.out.println("Terza ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
-        System.out.println("Quarta ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterOR,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
-        System.out.println("Quinta ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterOR,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota,Flag.OR);
-        System.out.println("Sesta ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.OR);
-        System.out.println("Settima ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterAND,comuniFilterAND,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.AND);
-        System.out.println("Ottava ricerca: ");
-        stampaRicerca(lavoratoriCercati);
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterVuota,comuniFilterVuota,patentiFilterVuota,specializzazioniFilterOR,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterVuota, Flag.OR);
-        System.out.println("Ricerca per solo chi ha almeno bagnino: ");
-        stampaRicerca(lavoratoriCercati);
-         */
-
-        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterVuota,comuniFilterVuota,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterBonavigo, dataNascitaFilterVuota, Flag.OR);
-        System.out.println("Ricerca da 1600 a 2000 per bonavigo ");
+        lavoratoriCercati = lavoratoriDao.searchLavoratori(lingueFilterVuota,comuniFilterVuota,patentiFilterVuota,specializzazioniFilterVuota,automunitoFilterFalse, disponibilitaFilterVuota, dataNascitaFilterFROM, Flag.OR);
+        System.out.println("Ricerca Automuniti e patenti ");
         stampaRicerca(lavoratoriCercati);
     }
 
@@ -447,7 +416,7 @@ public class MainDemo {
             System.out.println("ComuneNascita: " + lavoratore1.getComuneNascita().getNomeComune());
             System.out.println();
 
-            /*
+
             System.out.println("Esperienze che ha fatto: ");
             for (Esperienza esperienza : lavoratore1.getEsperienze()) {
                 System.out.println("ID_Esperienza: " + esperienza.getID());
@@ -483,7 +452,7 @@ public class MainDemo {
             }
             System.out.println();
 
-             */
+
         }
     }
 }

@@ -1,12 +1,14 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.font.FontResources;
 import io.github.palexdev.materialfx.utils.others.FunctionalStringConverter;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -151,8 +154,6 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
                         " a " + lavoratore.getComuneNascita();
             return "";
         }));
-
-        // clearRisultato();
     }
 
     public void onClickRitornaMenu(ActionEvent actionEvent) {
@@ -161,20 +162,21 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
 
     public void onClickRicercaAND(ActionEvent actionEvent) {
         refreshFilters();
+        clearResultFields();
         listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
     }
 
     public void onClickRicercaOR(ActionEvent actionEvent) {
         refreshFilters();
+        clearResultFields();
         listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
     }
 
     public void onClickVisualizzaDettagli(ActionEvent actionEvent) {
         /* if(listaLavoratori.getSelectionModel().getSelectedValues() != null)
             switchScene(getStageFromEvent(actionEvent), View.DETTAGLI_RICERCA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0)); */
-
-        if(!listaLavoratori.getSelectionModel().getSelectedValues().isEmpty()){
-            Lavoratore lavoratore = listaLavoratori.getSelectionModel().getSelection().get(0);
+        for(int lavoratoreIndex : listaLavoratori.getSelectionModel().getSelection().keySet()){
+            Lavoratore lavoratore = listaLavoratori.getSelectionModel().getSelection().get(lavoratoreIndex);
             nomeRisultato.setText(lavoratore.getNomeLavoratore());
             cognomeRisultato.setText(lavoratore.getCognomeLavoratore());
             dataNascitaRisultato.setText(Integer.toString(lavoratore.getDataNascita()));
@@ -191,8 +193,6 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
             disponibilitaRisultato.setItems(FXCollections.observableArrayList(lavoratore.getDisponibilita()));
             esperienzeRisultato.setItems(FXCollections.observableArrayList(lavoratore.getEsperienze()));
         }
-
-
     }
 
     private void refreshFilters(){
@@ -207,6 +207,23 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
                 (patentiLavoratoreGroup.getSelectedToggle().equals(patentiLavoratoreAND)) ? Flag.AND : Flag.OR);
         specializzazioniFilter = new SpecializzazioniFilter(specializzazioniLavoratore.getSelectionModel().getSelectedValues(),
                 (specializzazioniLavoratoreGroup.getSelectedToggle().equals(specializzazioniLavoratoreAND)) ? Flag.AND : Flag.OR);
+    }
+
+    private void clearResultFields(){
+        nomeRisultato.clear();
+        cognomeRisultato.clear();
+        dataNascitaRisultato.clear();
+        comuneNascitaRisultato.clear();
+        comuneAbitazioneRisultato.clear();
+        nazionalitaRisultato.clear();
+        telefonoRisultato.clear();
+        emailRisultato.clear();
+        automunito.setSelected(false);
+        patentiRisultato.setItems(FXCollections.observableArrayList());
+        lingueRisultato.setItems(FXCollections.observableArrayList());
+        contattiUrgentiRisultato.setItems(FXCollections.observableArrayList());
+        disponibilitaRisultato.setItems(FXCollections.observableArrayList());
+        esperienzeRisultato.setItems(FXCollections.observableArrayList());
     }
 
     private int getEpochDays(MFXDatePicker datePicker){

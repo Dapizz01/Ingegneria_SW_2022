@@ -217,18 +217,10 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         for(Lingua lingua : lavoratore.getLingue()){
             lingueLavoratore.getSelectionModel().selectItem(lingua);
         }
-        /*if(lavoratore.getLingue().size() >= 2)
-            lingueLavoratore.getSelectionModel().selectItems(lavoratore.getLingue());
-        else if(lavoratore.getLingue().size() == 1)
-            lingueLavoratore.getSelectionModel().selectItem(lavoratore.getLingue().get(0));*/
         contatti.addAll(lavoratore.getContatti());
         for(Patente patente : lavoratore.getPatenti()){
             patentiLavoratore.getSelectionModel().selectItem(patente);
         }
-        /*if(lavoratore.getPatenti().size() >= 2)
-            patentiLavoratore.getSelectionModel().selectItems(lavoratore.getPatenti());
-        else if(lavoratore.getPatenti().size() == 1)
-            patentiLavoratore.getSelectionModel().selectItem(lavoratore.getPatenti().get(0));*/
         disponibilita.addAll(lavoratore.getDisponibilita());
     }
 
@@ -244,7 +236,7 @@ public class ModificaLavoratoreController extends Controller implements Initiali
 
         try{
             lavoratore = new Lavoratore(ID_lavoratore,
-                    nomeLavoratoreValidated.getText(), // TODO: non considerare come errore gli spazi
+                    nomeLavoratoreValidated.getText(),
                     cognomeLavoratoreValidated.getText(),
                     comuneNascitaLavoratoreValidated.getSelectedItem(),
                     comuneAbitazioneLavoratoreValidated.getSelectedItem(),
@@ -284,12 +276,12 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         }
     }
 
-    @FXML
-    private void testEvent(MouseEvent mouseEvent) {
+    // @FXML
+    /* private void testEvent(MouseEvent mouseEvent) {
         // Se è stato cliccato un label del ListView
         if(mouseEvent.getTarget() instanceof Text) {
         }
-    }
+    } */
 
     @FXML
     private void onClickEliminaContatto(ActionEvent actionEvent){
@@ -309,7 +301,6 @@ public class ModificaLavoratoreController extends Controller implements Initiali
 
     @FXML
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
-        boolean periodInvalid = false;
         try{
             if(inizioDisponibilitaValidated.getEpochDays()  >= fineDisponibilitaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine deve essere successiva alla data di inizio");

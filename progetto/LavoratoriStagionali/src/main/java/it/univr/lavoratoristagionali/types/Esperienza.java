@@ -43,11 +43,11 @@ public class Esperienza {
 
     public Comune getComune() { return comune; }
 
-    public Specializzazione getSpecializzazione() {return specializzazione; }
+    public Specializzazione getSpecializzazione() { return specializzazione; }
 
     public String toString(){
         return "Svolta presso " + getNomeAzienda() +
-                " con specializzazione " + getSpecializzazione() +
+                " come " + getSpecializzazione() +
                 ", a " + getComune() +
                 ", dal " + LocalDate.ofEpochDay(getInizioPeriodo()) +
                 " al " + LocalDate.ofEpochDay(getFinePeriodo()) +

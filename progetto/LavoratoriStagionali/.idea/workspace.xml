@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b293c2b-1d61-406d-96ea-13047626f3e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/DettagliRicercaLavoratoreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/dettagliRicercaLavoratoreView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/img/add_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/img/modify_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/img/search_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LavoratoriStagionali.db" beforeDir="false" afterPath="$PROJECT_DIR$/LavoratoriStagionali.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuModificaLavoratoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuModificaLavoratoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuRicercaLavoratoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/MenuRicercaLavoratoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/enums/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/enums/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/ModificaLavoratoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/ModificaLavoratoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXCheckListViewValidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/controller/validated/MFXCheckListViewValidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/univr/lavoratoristagionali/types/Esperienza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/loginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/loginView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuRicercaLavoratoreView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuRicercaLavoratoreView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/it/univr/lavoratoristagionali/controller/fxml/menuView.fxml" afterDir="false" />
     </list>
     <list id="35fc1118-d0cb-40cb-8ed2-90645ff23b40" name="Changes by Manuel" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,6 +182,7 @@
       <workItem from="1662106165405" duration="6282000" />
       <workItem from="1662141104841" duration="61000" />
       <workItem from="1662145442314" duration="6917000" />
+      <workItem from="1662211789221" duration="8847000" />
     </task>
     <servers />
   </component>

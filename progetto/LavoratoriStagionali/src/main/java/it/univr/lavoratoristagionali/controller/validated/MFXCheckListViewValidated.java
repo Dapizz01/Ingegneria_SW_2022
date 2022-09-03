@@ -20,9 +20,7 @@ public class MFXCheckListViewValidated<T> implements MFXValidated {
     }
 
     public List<T> getSelectedItems() throws InputException{
-        if(checkValid())
-            return checkListView.getSelectionModel().getSelectedValues();
-        return null;
+        return checkValid() ? checkListView.getSelectionModel().getSelectedValues() : null;
     }
 
     @Override

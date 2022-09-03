@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -18,27 +20,12 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></MFXButton>
-      <MFXButton fx:id="inserisciLavoratoreButton" layoutX="187.0" layoutY="264.0" onAction="#goToInserisciLavoratore" prefHeight="192.0" prefWidth="191.0" text="Inserisci lavoratore" textAlignment="CENTER" wrapText="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="115.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+      <Label fx:id="loginTitleLabel" layoutX="723.0" layoutY="13.0" prefHeight="92.0" prefWidth="135.0" text="Menu principale" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font size="20.0" />
+            <Font size="25.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXButton fx:id="modificaLavoratoreButton" layoutX="545.0" layoutY="264.0" onAction="#goToMenuModificaLavoratore" prefHeight="192.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXButton fx:id="effettuaRicercaButton" layoutX="896.0" layoutY="264.0" onAction="#goToEffettuaRicerca" prefHeight="192.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
+      </Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="915.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
       <Label alignment="CENTER" layoutX="915.0" layoutY="1.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
          <font>
@@ -51,5 +38,65 @@
             <Image url="@../../img/icon.png" />
          </image>
       </ImageView>
+      <HBox layoutX="502.0" layoutY="196.0" prefHeight="80.0" prefWidth="277.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/add_icon.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <MFXButton fx:id="inserisciLavoratoreButton" onAction="#goToInserisciLavoratore" prefHeight="80.0" prefWidth="191.0" text="Inserisci lavoratore" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+         </children>
+      </HBox>
+      <HBox layoutX="502.0" layoutY="320.0" prefHeight="80.0" prefWidth="277.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/modify_icon.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <MFXButton fx:id="modificaLavoratoreButton" onAction="#goToMenuModificaLavoratore" prefHeight="80.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+         </children>
+      </HBox>
+      <HBox layoutX="502.0" layoutY="445.0" prefHeight="80.0" prefWidth="277.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/search_icon.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <MFXButton fx:id="effettuaRicercaButton" onAction="#goToEffettuaRicerca" prefHeight="80.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

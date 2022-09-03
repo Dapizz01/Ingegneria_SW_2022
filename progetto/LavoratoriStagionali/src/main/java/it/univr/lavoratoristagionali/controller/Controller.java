@@ -20,9 +20,7 @@ public class Controller {
             stage.setScene(scene);
         }
         catch(IOException ioe){
-            ioe.printStackTrace();
-            System.out.println(ioe.getMessage());
-            System.out.println("Failed to locate resource \"" + target.getLabel() + "\" in the project");
+            System.out.println("Failed to view resource \"" + target.getLabel() + "\" in the project");
         }
     }
 
@@ -34,16 +32,17 @@ public class Controller {
                 ModificaLavoratoreController view = fxmlLoader.getController();
                 view.setLavoratoreBase(lavoratore);
             }
-            if(fxmlLoader.getController() instanceof DettagliRicercaLavoratoreController){
+            else if(fxmlLoader.getController() instanceof DettagliRicercaLavoratoreController){
                 DettagliRicercaLavoratoreController view = fxmlLoader.getController();
                 view.setLavoratoreBase(lavoratore);
+            }
+            else{
+                throw new IllegalArgumentException("The target view \"" + target.getLabel() + "\" should not be called by this method, use the other switchScene with only 2 parameters.");
             }
             stage.setScene(scene);
         }
         catch(IOException ioe){
-            ioe.printStackTrace();
-            System.out.println(ioe.getMessage());
-            System.out.println("Failed to locate resource \"" + target.getLabel() + "\" in the project");
+            System.out.println("Failed to locate view \"" + target.getLabel() + "\" in the project");
         }
     }
 

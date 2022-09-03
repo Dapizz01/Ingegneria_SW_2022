@@ -3,7 +3,6 @@ package it.univr.lavoratoristagionali.controller;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.materialfx.utils.others.FunctionalStringConverter;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.model.Dao.LavoratoriDao;
@@ -14,13 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 

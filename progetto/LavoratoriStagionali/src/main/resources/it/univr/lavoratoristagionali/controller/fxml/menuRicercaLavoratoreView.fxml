@@ -117,7 +117,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER" layoutX="878.0" layoutY="527.0" prefHeight="50.0" prefWidth="323.0">
+            <HBox alignment="CENTER" layoutX="877.0" layoutY="493.0" prefHeight="50.0" prefWidth="323.0">
                <children>
                   <MFXCheckbox fx:id="automunito" prefHeight="39.0" prefWidth="28.0" />
                   <Label prefHeight="26.0" prefWidth="80.0" text="Automunito" />
@@ -142,7 +142,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="502.0" layoutY="678.0" onAction="#onClickRicercaAND" prefHeight="85.0" prefWidth="130.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
+            <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="878.0" layoutY="558.0" onAction="#onClickRicercaAND" prefHeight="70.0" prefWidth="130.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -150,7 +150,7 @@
                   <Font size="15.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="681.0" layoutY="678.0" onAction="#onClickRicercaOR" prefHeight="85.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
+            <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="1069.0" layoutY="558.0" onAction="#onClickRicercaOR" prefHeight="70.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -158,8 +158,8 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </MFXButton>
-            <MFXListView fx:id="listaLavoratori" layoutX="69.0" layoutY="822.0" prefHeight="469.0" prefWidth="347.0" />
-            <MFXButton fx:id="visualizzaDettagli" layoutX="170.0" layoutY="1302.0" onAction="#onClickVisualizzaDettagli" prefHeight="41.0" prefWidth="145.0" text="Visualizza dettagli" textAlignment="CENTER" wrapText="true">
+            <MFXListView fx:id="listaLavoratori" layoutX="69.0" layoutY="822.0" prefHeight="600.0" prefWidth="347.0" />
+            <MFXButton fx:id="visualizzaDettagli" layoutX="170.0" layoutY="1444.0" onAction="#onClickVisualizzaDettagli" prefHeight="41.0" prefWidth="145.0" text="Visualizza dettagli" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

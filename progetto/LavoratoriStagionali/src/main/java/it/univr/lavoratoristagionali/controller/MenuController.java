@@ -31,7 +31,6 @@ public class MenuController extends Controller{
     private void goToInserisciLavoratore(ActionEvent actionEvent){
         System.out.println("goToInserisciLavoratore fired");
         switchScene(getStageFromEvent(actionEvent), View.INSERISCI_LAVORATORE);
-        // switchToForm(getStageFromEvent(actionEvent), ControllerMode.INSERT, -1);
     }
 
     @FXML
@@ -43,7 +42,4 @@ public class MenuController extends Controller{
     private void goToEffettuaRicerca(ActionEvent actionEvent) {
         switchScene(getStageFromEvent(actionEvent), View.MENU_RICERCA_LAVORATORE);
     }
-
-
-    // TODO: aggiungere modificaLavoratore e ricercaLavoratore
 }

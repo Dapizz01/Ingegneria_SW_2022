@@ -19,23 +19,23 @@
          <Cursor fx:constant="HAND" />
       </cursor>
       <font>
-         <Font size="17.0" />
+         <Font name="System Bold" size="13.0" />
       </font></MFXButton>
    <Label fx:id="errorLabel" layoutX="524.0" layoutY="493.0" prefHeight="50.0" prefWidth="239.0" text="Credenziali non corrette" textAlignment="CENTER" textFill="#cd2424" visible="false" wrapText="true" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="115.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-   <Label fx:id="loginTitleLabel" layoutX="756.0" layoutY="33.0" prefHeight="50.0" prefWidth="68.0" text="Login" textAlignment="CENTER">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+   <Label fx:id="loginTitleLabel" layoutX="756.0" layoutY="26.0" prefHeight="50.0" prefWidth="68.0" text="Login" textAlignment="CENTER">
       <font>
-         <Font size="25.0" />
+         <Font size="22.0" />
       </font>
    </Label>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="915.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-   <Label alignment="CENTER" layoutX="915.0" layoutY="1.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="100.0" layoutX="915.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+   <Label alignment="CENTER" layoutX="915.0" layoutY="1.0" prefHeight="100.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
       <font>
          <Font name="System Bold" size="22.0" />
       </font>
    </Label>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1165.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
-   <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1177.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="100.0" layoutX="1165.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
+   <ImageView fitHeight="95.0" fitWidth="85.0" layoutX="1180.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../img/icon.png" />
       </image>

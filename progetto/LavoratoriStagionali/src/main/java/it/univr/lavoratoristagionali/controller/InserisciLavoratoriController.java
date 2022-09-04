@@ -1,7 +1,6 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
-import it.univr.lavoratoristagionali.controller.enums.ControllerMode;
 import it.univr.lavoratoristagionali.controller.enums.Errore;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
@@ -23,8 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller dell'inserimento dei lavoratori
+ */
 public class InserisciLavoratoriController extends Controller implements Initializable {
-    // ANAGRAFICA
+    // ------ ANAGRAFICA ------ //
     @FXML
     private MFXTextField nomeLavoratore, cognomeLavoratore;
     private MFXTextFieldValidated nomeLavoratoreValidated, cognomeLavoratoreValidated;
@@ -40,14 +42,14 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private Label nomeLavoratoreError, cognomeLavoratoreError, dataNascitaLavoratoreError, comuneNascitaLavoratoreError, comuneAbitazioneLavoratoreError;
 
-    // CONTATTO LAVORATORE
+    // ------ CONTATTO LAVORATORE ------ //
     @FXML
     private MFXTextField telefonoLavoratore, emailLavoratore;
     private MFXTextFieldValidated telefonoLavoratoreValidated, emailLavoratoreValidated;
     @FXML
     private Label indirizzoLavoratoreError, telefonoLavoratoreError, emailLavoratoreError;
 
-    // INFORMAZIONI GENERALI
+    // ------ INFORMAZIONI GENERALI ------ //
     @FXML
     private MFXCheckListView<Lingua> lingueLavoratore;
     private MFXCheckListViewValidated<Lingua> lingueLavoratoreValidated;
@@ -60,7 +62,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private Label nazionalitaLavoratoreError, patentiLavoratoreError, lingueLavoratoreError;
 
-    // CONTATTI URGENTI
+    // ------ CONTATTI URGENTI ------ //
     @FXML
     private MFXTextField nomeContatto, cognomeContatto, telefonoContatto, emailContatto;
     private MFXTextFieldValidated nomeContattoValidated, cognomeContattoValidated, telefonoContattoValidated, emailContattoValidated;
@@ -72,7 +74,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private Label nomeContattoError, cognomeContattoError, telefonoContattoError, emailContattoError, listaContattoUrgenteError;
 
-    // DISPONIBILITA
+    // ------ DISPONIBILITA ------ //
     @FXML
     private MFXDatePicker inizioDisponibilita, fineDisponibilita;
     private MFXDatePickerValidated inizioDisponibilitaValidated, fineDisponibilitaValidated;
@@ -87,7 +89,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private Label inizioDisponibilitaError, fineDisponibilitaError, comuneDisponibilitaError, listaDisponibilitaError;
 
-    // ESPERIENZE
+    // ------ ESPERIENZE ------ //
     @FXML
     private MFXTextField aziendaEsperienza, retribuzioneEsperienza;
     private MFXTextFieldValidated aziendaEsperienzaValidated, retribuzioneEsperienzaValidated;
@@ -123,6 +125,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     // TODO: aggiungere label di fine inserimento con successo / errore
 
+    // Costanti
     private static final int DAYS_IN_MONTH = 30;
     private static final int DAYS_IN_YEAR = 365;
 
@@ -132,25 +135,25 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(url);
-        System.out.println(resourceBundle);
         /* List<Lingua> lingue = List.of(new Lingua("lingua1"), new Lingua("lingua2"), new Lingua("lingua3"));
         List<Comune> comuni = List.of(new Comune(1, "comune1"), new Comune(2, "comune2"), new Comune(3, "comune3"));
         List<Lingua> nazionalita = List.of(new Lingua(1, "nazionalità1"), new Lingua(2, "nazionalità2"), new Lingua(3, "nazionalità3"));
         List<Patente> patenti = List.of(new Patente(1, "patente1"), new Patente(2, "patente2"), new Patente(3, "patente3"));
         List<Specializzazione> specializzazioni = List.of(new Specializzazione(1, "bagnino"), new Specializzazione(2, "test2"), new Specializzazione(3, "test3")); */
 
+        // Creazione oggetti DAO
         ComuniDao comuniDao = new ComuniDaoImpl();
         LingueDao lingueDao = new LingueDaoImpl();
         PatentiDao patentiDao = new PatentiDaoImpl();
         SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
 
+        // Salvataggio di tutti i dati dei DAO in delle liste
         List<Comune> comuni = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
         List<Lingua> lingue = lingueDao.getLingue();
         List<Patente> patenti = patentiDao.getPatenti();
         List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
 
-
+        // Creazione dei wrapper Validated
         nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
         dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Errore.MUST_BE_ADULT, Errore.NON_EMPTY);
@@ -182,6 +185,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Errore.NON_EMPTY);
         listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Errore) null);
 
+        // Popolazione dei campi a scelta multipla (o delle liste) con i dati salvat
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
         comuneAbitazioneLavoratore.setItems(FXCollections.observableArrayList(comuni));
         lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
@@ -191,6 +195,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
         comuneDisponibilita.setItems(FXCollections.observableArrayList(comuni));
         specializzazioneEsperienza.setItems(FXCollections.observableArrayList(specializzazioni));
 
+        // I dati inseriti in listaContattoUrgente, listaEsperienze, listaDisponibilita vengono automaticamente
+        // messi anche in contatti, esperienze e disponiblità, perchè condividono fra loro una ObservableList
         contatti = FXCollections.observableArrayList(new ArrayList<>());
         listaContattoUrgente.setItems(contatti);
 
@@ -200,6 +206,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         disponibilita = FXCollections.observableArrayList(new ArrayList<>());
         listaDisponibilita.setItems(disponibilita);
 
+        // Settaggi che implementano lo smooth scrolling (solo con trackpad)
         listaDisponibilita.features().enableSmoothScrolling(1.2);
         listaEsperienze.features().enableSmoothScrolling(1.2);
         listaContattoUrgente.features().enableSmoothScrolling(1.2);
@@ -209,12 +216,27 @@ public class InserisciLavoratoriController extends Controller implements Initial
         // https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/TextFields.css
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di ritorno al menu.
+     * Sostituisce la scena corrente con la scena del menu principale.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickRitornaMenu(ActionEvent actionEvent){
         System.out.println("ritornaMenu fired");
         switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di invio lavoratore al DAO.
+     * Raccoglie i dati contenuti nei campi e ne controlla il contenuto.
+     * Se il contenuto non è valido (secondo i parametri impostati alla creazione), viene marcato il campo invalido
+     * e non viene proseguita l'invio.
+     * Se il contenuto è valido, viene inviato il lavoratore al DAO appropriato.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickInviaLavoratore(ActionEvent actionEvent){
         /*System.out.println(lingueParlate.getSelectionModel().getSelectedValues());
@@ -244,16 +266,21 @@ public class InserisciLavoratoriController extends Controller implements Initial
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
             System.out.println(lavoratoriDao.addLavoratore(lavoratore));
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
-
-            // TODO: pulire campi dopo l'inserimento (se è avvenuto correttamente)
         }
         catch (InputException inputException){
             return;
         }
-
-        System.out.println(lavoratore);
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di inserimento contatto urgente.
+     * Raccoglie i dati contenuti nei campi e ne controlla il contenuto.
+     * Se il contenuto non è valido (secondo i parametri impostati alla creazione), viene marcato il campo invalido
+     * e non viene proseguita l'inserimento.
+     * Se il contenuto è valido, viene inserito il contatto nella lista dei contatti urgenti.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickAggiungiContatto(ActionEvent actionEvent) {
         Contatto contatto;
@@ -286,6 +313,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di eliminazione di un contatto urgente.
+     * Se è stato selezionato un contatto dalla lista, esso verrà cancellato, altrimenti ignora l'evento.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickEliminaContatto(ActionEvent actionEvent){
         for(int key : listaContattoUrgente.getSelectionModel().getSelection().keySet()){
@@ -295,6 +328,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
         // System.out.println(contatti);
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di eliminazione di una disponibilità.
+     * Se è stato selezionata una disponibilità dalla lista, esso verrà cancellato, altrimenti ignora l'evento.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickEliminaDisponibilita(ActionEvent actionEvent) {
         for(int key : listaDisponibilita.getSelectionModel().getSelection().keySet()){
@@ -304,9 +343,17 @@ public class InserisciLavoratoriController extends Controller implements Initial
         // System.out.println(contatti);
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di inserimento disponiblità.
+     * Raccoglie i dati contenuti nei campi e ne controlla il contenuto.
+     * Se il contenuto non è valido (secondo i parametri impostati alla creazione più altri controlli locali al metodo), viene marcato il campo invalido
+     * e non viene proseguita l'inserimento.
+     * Se il contenuto è valido, viene inserita la disponibilità nella lista delle disponibilitò.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
-        boolean periodInvalid = false;
         try{
             if(inizioDisponibilitaValidated.getEpochDays()  >= fineDisponibilitaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine deve essere successiva alla data di inizio");
@@ -335,6 +382,15 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di inserimento esperienza.
+     * Raccoglie i dati contenuti nei campi e ne controlla il contenuto.
+     * Se il contenuto non è valido (secondo i parametri impostati alla creazione più altri controlli locali al metodo), viene marcato il campo invalido
+     * e non viene proseguita l'inserimento.
+     * Se il contenuto è valido, viene inserita l'esperienza nella lista delle esperienze.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
         try {
@@ -344,11 +400,9 @@ public class InserisciLavoratoriController extends Controller implements Initial
             }
 
             if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH){
-                System.out.println("test1");
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di almeno un mese");
             }
             if(fineEsperienzaValidated.getEpochDays() >= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR){
-                System.out.println("test2");
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di massimo 2 anni");
             }
 
@@ -374,6 +428,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di eliminazione di un'esperienza.
+     * Se è stato selezionata un'esperienza dalla lista, essa verrà cancellata, altrimenti ignora l'evento.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickEliminaEsperienza(ActionEvent actionEvent) {
         for(int key : listaEsperienze.getSelectionModel().getSelection().keySet()){
@@ -381,47 +441,4 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
         listaEsperienze.getSelectionModel().clearSelection();
     }
-
-    /*private void buildTextFieldValidator(MFXTextField textField, Label errorLabel, Errore ...flags){
-        List<Constraint> constraints = new ArrayList<Constraint>();
-        for(Errore flag : flags){
-            constraints.add(Constraint.Builder.build()
-                    .setSeverity(Severity.ERROR)
-                    .setMessage(flag.getLabel())
-                    .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
-                                case NON_EMPTY:
-                                    yield !textField.getText().equals("");
-                                case NUMBERS_ONLY:
-                                    yield textField.getText().chars().allMatch(Character::isDigit);
-                                case LETTERS_ONLY:
-                                    yield textField.getText().chars().allMatch(Character::isLetter);
-                                default:
-                                    yield true;
-                            }, textField.textProperty())
-                    ).get());
-        }
-
-        for(Constraint constraint : constraints){
-            textField.getValidator().constraint(constraint);
-        }
-
-        textField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(oldValue && !newValue){
-                List<Constraint> currentConstraints = textField.validate();
-                if(!currentConstraints.isEmpty()){
-                    errorLabel.setText(currentConstraints.get(0).getMessage());
-                    errorLabel.setVisible(true);
-                    textField.setStyle("-fx-border-color: -mfx-red");
-                }
-            }
-        });
-
-
-        textField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue){
-                textField.setStyle("-fx-border-color: -mfx-green");
-                errorLabel.setVisible(false);
-            }
-        });
-    }*/
 }

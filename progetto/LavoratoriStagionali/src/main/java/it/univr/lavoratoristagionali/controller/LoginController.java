@@ -4,20 +4,20 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import it.univr.lavoratoristagionali.controller.enums.View;
-import it.univr.lavoratoristagionali.types.Login;
 import it.univr.lavoratoristagionali.model.Dao.LoginDao;
 import it.univr.lavoratoristagionali.model.Dao.LoginDaoImpl;
+import it.univr.lavoratoristagionali.types.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller del login
+ */
 public class LoginController extends Controller implements Initializable {
 
     @FXML
@@ -31,21 +31,33 @@ public class LoginController extends Controller implements Initializable {
     @FXML
     private Label errorLabel;
 
-    LoginDao loginDao;
-
+    private LoginDao loginDao;
 
     public LoginController(){
 
     }
 
+    /**
+     * Metodo chiamato dopo la creazione della scena (e di tutti i suoi elementi) da parte di JavaFX.
+     * Istanzia il DAO login.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginDao = new LoginDaoImpl();
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di login.
+     * Estrae il contenuto di username e password, e li manda al DAO login.
+     * Se le credenziali sono valide, si passa alla vista del menu principale, altrimenti si avvisa l'utente delle credenziali errate.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     protected void loginEvent(ActionEvent actionEvent){
-        System.out.println("loginEvent fired");
         String username = usernameField.getText();
         String password = passwordField.getText();
         if(loginDao.verificaLogin(new Login(username, password))){
@@ -57,6 +69,11 @@ public class LoginController extends Controller implements Initializable {
         }
     }
 
+    /**
+     * Mostra (o nasconde) il label di errore del login.
+     *
+     * @param status valore booleano, indica se mostrare il label di errore (true) oppure no (false)
+     */
     private void displayError(boolean status){
         errorLabel.setVisible(status);
     }

@@ -1,5 +1,8 @@
 package it.univr.lavoratoristagionali.controller.enums;
 
+/**
+ * Enum di possibili errori nei campi, con il corrispettivo messaggio di errore
+ */
 public enum Errore {
     NUMBERS_ONLY("Il campo può contenere solo numeri"),
     LETTERS_ONLY("Il campo può contenere solo lettere"),
@@ -10,7 +13,6 @@ public enum Errore {
     UP_TO_NOW("La data deve essere passata"),
     MUST_BE_ADULT("Il lavoratore deve essere maggiorenne"),
     FROM_NOW("La data deve essere futura");
-
 
     private final String label;
 

@@ -142,6 +142,11 @@ Tasto dx su pom.xml -> analyze dependencies -> reload
 Non va un modulo:
 Disinstallare e reinstallare modulo
 
+Test:
+    - Comando da aggiungere ai parametri dell'esecuzione di java -> https://github.com/TestFX/TestFX/issues/638
+    - Guida su come installare TestFX (+ dependencies) -> https://medium.com/information-and-technology/test-driven-development-in-javafx-with-testfx-66a84cd561e0
+    - Come aggiungere parametri all'esecuzione -> https://stackoverflow.com/questions/2066307/how-do-you-input-command-line-arguments-in-intellij-idea
+
 // DA FARE
 Controller:
     - Sistemare layout inserisci lavoratore (usare più spazio, far si che si vedano bene i label degli errori) [V]

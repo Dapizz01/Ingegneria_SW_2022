@@ -20,14 +20,17 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuRicercaLavoratoreController">
+<ScrollPane prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuRicercaLavoratoreController">
    <content>
-      <AnchorPane prefHeight="1499.0" prefWidth="1263.0" stylesheets="@../../css/style.css">
+      <AnchorPane prefHeight="1499.0" prefWidth="1263.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../../css/style.css">
          <children>
-            <MFXButton fx:id="ritornaMenu" layoutX="67.0" layoutY="40.0" onAction="#onClickRitornaMenu" text="Indietro">
+            <MFXButton fx:id="ritornaMenu" layoutX="40.0" layoutY="27.0" onAction="#onClickRitornaMenu" prefHeight="49.0" prefWidth="80.0" text="Indietro">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </MFXButton>
             <MFXDatePicker fx:id="dataNascitaLavoratore" floatMode="BORDER" floatingText="Data nascita" layoutX="878.0" layoutY="401.0" prefHeight="51.0" prefWidth="323.0" />
             <VBox layoutX="67.0" layoutY="140.0" prefHeight="251.0" prefWidth="350.0">
@@ -147,7 +150,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </MFXButton>
             <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="1069.0" layoutY="558.0" onAction="#onClickRicercaOR" prefHeight="70.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
@@ -163,16 +166,25 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </MFXButton>
             <MFXCheckListView fx:id="comuneLavoratore" layoutX="472.0" layoutY="141.0" prefHeight="200.0" prefWidth="350.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="898.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-            <Label alignment="CENTER" layoutX="898.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="647.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+            <Label fx:id="loginTitleLabel" layoutX="705.0" layoutY="3.0" prefHeight="92.0" prefWidth="135.0" text="Ricerca lavoratore" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="100.0" layoutX="898.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+            <Label alignment="CENTER" layoutX="898.0" prefHeight="100.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1148.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
-            <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1160.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="100.0" layoutX="1148.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
+            <ImageView fitHeight="95.0" fitWidth="85.0" layoutX="1163.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/icon.png" />
                </image>
@@ -255,6 +267,11 @@
                   <MFXTextField fx:id="comuneAbitazioneRisultato" allowEdit="false" editable="false" floatMode="BORDER" floatingText="Comune abitazione" prefHeight="51.0" prefWidth="165.0" />
                </children>
             </VBox>
+            <Label layoutX="149.0" layoutY="794.0" prefHeight="27.0" prefWidth="187.0" text="Lista lavoratori risultato">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </content>

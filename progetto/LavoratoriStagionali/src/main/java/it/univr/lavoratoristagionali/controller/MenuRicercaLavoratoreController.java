@@ -1,26 +1,25 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.font.FontResources;
 import io.github.palexdev.materialfx.utils.others.FunctionalStringConverter;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * E' il controller che si occupa della ricerca dei lavoratori.
+ */
 public class MenuRicercaLavoratoreController extends Controller implements Initializable {
 
     // Ritorno menu
@@ -108,25 +107,36 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
     private LavoratoriDao lavoratoriDao;
 
 
+    /**
+     * Metodo chiamato dopo la creazione della scena (e di tutti i suoi elementi) da parte di JavaFX.
+     * Istanzia i DAO, riempe le liste e i campi a scelta multipla con i dati ottenuti dai DAO.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Creazione DAO
         ComuniDao comuniDao = new ComuniDaoImpl();
         LingueDao lingueDao = new LingueDaoImpl();
         PatentiDao patentiDao = new PatentiDaoImpl();
         SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
         lavoratoriDao = new LavoratoriDaoImpl();
 
+        // Salvataggio di tutti i dati dei DAO in delle liste
         List<Comune> comuni = comuniDao.getComuni();
         List<Lingua> lingue = lingueDao.getLingue();
         List<Patente> patenti = patentiDao.getPatenti();
         List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
 
+        // Popolazione dei campi a scelta multipla (o delle liste) con i dati salvati
         comuneLavoratore.setItems(FXCollections.observableArrayList(comuni));
         lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
         patentiLavoratore.setItems(FXCollections.observableArrayList(patenti));
         specializzazioniLavoratore.setItems(FXCollections.observableArrayList(specializzazioni));
         comuneDisponibilita.setItems(FXCollections.observableArrayList(comuni));
 
+        // Gestione dei radio button in gruppi (in ogni gruppo solo un radio button può essere selezionato)
         lingueLavoratoreGroup = new ToggleGroup();
         patentiLavoratoreGroup = new ToggleGroup();
         specializzazioniLavoratoreGroup = new ToggleGroup();
@@ -141,11 +151,13 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
         dataNascitaLavoratoreDa.setToggleGroup(dataNascitaGroup);
         dataNascitaLavoratoreA.setToggleGroup(dataNascitaGroup);
 
+        // Ogni radio button "AND" viene selezionato di default
         lingueLavoratoreGroup.selectToggle(lingueLavoratoreAND);
         patentiLavoratoreGroup.selectToggle(patentiLavoratoreAND);
         specializzazioniLavoratoreGroup.selectToggle(specializzazioniLavoratoreAND);
         dataNascitaGroup.selectToggle(dataNascitaLavoratoreDa);
 
+        // Impostazione del format di visualizzazione di ogni lavoratore nella lista dei risultati della ricerca
         listaLavoratori.setConverter(FunctionalStringConverter.to(lavoratore -> {
             if(lavoratore != null)
                 return lavoratore.getNomeLavoratore() +
@@ -156,25 +168,51 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
         }));
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di ritorno al menu.
+     * Sostituisce la scena corrente con la scena del menu principale.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     public void onClickRitornaMenu(ActionEvent actionEvent) {
         switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di ricerca con operatore globale AND.
+     * Prende i valori di tutti i filtri, li manda al DAO opportuno con operatore globale AND e mostra il risultato nella lista sottostante.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     public void onClickRicercaAND(ActionEvent actionEvent) {
         refreshFilters();
         clearResultFields();
         listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di ricerca con operatore globale OR.
+     * Prende i valori di tutti i filtri, li manda al DAO opportuno con operatore globale AND e mostra il risultato nella lista sottostante.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     public void onClickRicercaOR(ActionEvent actionEvent) {
         refreshFilters();
         clearResultFields();
         listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
     }
 
+    /**
+     * Evento generato da JavaFX, al click del pulsante di visualizzazione nel dettaglio di un lavoratore nella lista dei risultati.
+     * Popola i campi a destra della lista dei risultati con i dati del lavoratore selezionato nella lista.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     public void onClickVisualizzaDettagli(ActionEvent actionEvent) {
         /* if(listaLavoratori.getSelectionModel().getSelectedValues() != null)
             switchScene(getStageFromEvent(actionEvent), View.DETTAGLI_RICERCA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0)); */
+        // Non è necessario un ciclo, ci sarà sempre al massimo un lavoratore selezionato, ma
+        // JavaFX restituisce il risultato come una Map, quindi è necessario scorrere le chiavi
         for(int lavoratoreIndex : listaLavoratori.getSelectionModel().getSelection().keySet()){
             Lavoratore lavoratore = listaLavoratori.getSelectionModel().getSelection().get(lavoratoreIndex);
             nomeRisultato.setText(lavoratore.getNomeLavoratore());
@@ -195,6 +233,9 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
         }
     }
 
+    /**
+     * Aggiorna i filter locali del controller con quelli modificati nella vista dall'utente.
+     */
     private void refreshFilters(){
         automunitoFilter = new AutomunitoFilter(automunito.isSelected());
         comuniFilter = new ComuniFilter(comuneLavoratore.getSelectionModel().getSelectedValues(), Flag.OR);
@@ -209,6 +250,9 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
                 (specializzazioniLavoratoreGroup.getSelectedToggle().equals(specializzazioniLavoratoreAND)) ? Flag.AND : Flag.OR);
     }
 
+    /**
+     * Pulisce i campi che mostrano nel dettaglio un lavoratore
+     */
     private void clearResultFields(){
         nomeRisultato.clear();
         cognomeRisultato.clear();
@@ -226,6 +270,12 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
         esperienzeRisultato.setItems(FXCollections.observableArrayList());
     }
 
+    /**
+     * Dato un MFXDatePicker ritorna il numero di giorni dalla Unix epoch (01/01/1970)
+     *
+     * @param datePicker è un oggetto di tipo MFXDatePicker
+     * @return il numero di giorni dalla Unix epoch (oppure -1 se il campo non ha valore)
+     */
     private int getEpochDays(MFXDatePicker datePicker){
         return (datePicker.getValue() != null) ? (int) datePicker.getValue().toEpochDay() : -1;
     }

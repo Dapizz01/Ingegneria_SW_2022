@@ -1,5 +1,8 @@
 package it.univr.lavoratoristagionali.controller.enums;
 
+/**
+ * Enum delle view, con il corrispettivo percorso dei file FXML nel progetto
+ */
 public enum View {
     LOGIN("fxml/loginView.fxml"),
     MAIN_MENU("fxml/menuView.fxml"),

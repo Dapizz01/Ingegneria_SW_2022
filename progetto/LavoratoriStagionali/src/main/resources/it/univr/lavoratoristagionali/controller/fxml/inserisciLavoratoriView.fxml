@@ -23,7 +23,7 @@
    <content>
       <AnchorPane prefHeight="2605.0" prefWidth="1264.0">
          <children>
-            <MFXButton fx:id="ritornaMenu" layoutX="45.0" layoutY="25.0" onAction="#onClickRitornaMenu" text="Indietro" wrapText="true">
+            <MFXButton fx:id="ritornaMenu" layoutX="40.0" layoutY="27.0" onAction="#onClickRitornaMenu" prefHeight="49.0" prefWidth="80.0" text="Indietro" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
@@ -34,30 +34,48 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
-            <MFXButton fx:id="aggiungiContatto" layoutX="476.0" layoutY="1390.0" onAction="#onClickAggiungiContatto" text="Aggiungi contatto">
+            <MFXButton fx:id="aggiungiContatto" layoutX="478.0" layoutY="1393.0" onAction="#onClickAggiungiContatto" prefHeight="36.0" prefWidth="155.0" text="Aggiungi contatto">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
-            <MFXButton fx:id="eliminaContatto" layoutX="758.0" layoutY="1390.0" onAction="#onClickEliminaContatto" text="Elimina contatto">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
+            <MFXButton fx:id="eliminaContatto" layoutX="752.0" layoutY="1394.0" onAction="#onClickEliminaContatto" prefHeight="35.0" prefWidth="143.0" text="Elimina contatto">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
-            <MFXButton fx:id="eliminaDisponibilita" layoutX="746.0" layoutY="1865.0" onAction="#onClickEliminaDisponibilita" text="Elimina disponibilita">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
+            <MFXButton fx:id="eliminaDisponibilita" layoutX="746.0" layoutY="1851.0" onAction="#onClickEliminaDisponibilita" prefHeight="35.0" prefWidth="172.0" text="Elimina disponibilita">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
-            <MFXButton fx:id="aggiungiDisponibilita" layoutX="464.0" layoutY="1865.0" onAction="#onClickAggiungiDisponibilita" text="Aggiungi disponibilita">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
+            <MFXButton fx:id="aggiungiDisponibilita" layoutX="464.0" layoutY="1851.0" onAction="#onClickAggiungiDisponibilita" prefHeight="35.0" prefWidth="184.0" text="Aggiungi disponibilita">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
-            <MFXButton fx:id="aggiungiEsperienza" layoutX="468.0" layoutY="2471.0" onAction="#onClickAggiungiEsperienza" text="Aggiungi esperienza">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
+            <MFXButton fx:id="aggiungiEsperienza" layoutX="470.0" layoutY="2454.0" onAction="#onClickAggiungiEsperienza" prefHeight="35.0" text="Aggiungi esperienza">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
-            <MFXButton fx:id="eliminaEsperienza" layoutX="755.0" layoutY="2471.0" onAction="#onClickEliminaEsperienza" text="Elimina esperienza">
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
+            <MFXButton fx:id="eliminaEsperienza" layoutX="752.0" layoutY="2454.0" onAction="#onClickEliminaEsperienza" prefHeight="35.0" text="Elimina esperienza">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
             <VBox layoutX="365.0" layoutY="147.0" prefHeight="420.0" prefWidth="562.0">
                <children>
                   <VBox prefHeight="77.0" prefWidth="359.0">
@@ -227,7 +245,7 @@
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <Label layoutX="601.0" layoutY="87.0" text="Anagrafica">
+            <Label layoutX="601.0" layoutY="112.0" text="Anagrafica">
                <font>
                   <Font size="20.0" />
                </font></Label>
@@ -279,14 +297,20 @@
                   <Label fx:id="listaEsperienzeError" prefHeight="29.0" prefWidth="839.0" text="OK" visible="false" wrapText="true" />
                </children>
             </VBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="115.0" layoutX="903.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-            <Label alignment="CENTER" layoutX="901.0" prefHeight="115.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="655.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+            <Label fx:id="loginTitleLabel" layoutX="713.0" layoutY="5.0" prefHeight="92.0" prefWidth="135.0" text="Inserimento lavoratore" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc107" height="100.0" layoutX="903.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
+            <Label alignment="CENTER" layoutX="901.0" prefHeight="100.0" prefWidth="250.0" text="Lavoratori Stagionali" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="115.0" layoutX="1151.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
-            <ImageView fitHeight="95.0" fitWidth="92.0" layoutX="1162.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffa000" height="100.0" layoutX="1151.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" width="115.0" />
+            <ImageView fitHeight="95.0" fitWidth="85.0" layoutX="1166.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/icon.png" />
                </image>

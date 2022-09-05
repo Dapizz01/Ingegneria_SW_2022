@@ -298,21 +298,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
     }
 
-    @FXML
-    private void testEvent(MouseEvent mouseEvent) {
-        // Se è stato cliccato un label del ListView
-        if(mouseEvent.getTarget() instanceof Text) {
-            /*Contatto contattoSelezionato = listaContattoUrgente.getSelectionModel().getSelectedValues().get(0);
-            // System.out.println(contattoSelezionato);
-            nomeContattoUrgente.setText(contattoSelezionato.getNome());
-            cognomeContattoUrgente.setText(contattoSelezionato.getCognome());
-            telefonoContattoUrgente.setText(contattoSelezionato.getTelefono());
-            emailContattoUrgente.setText(contattoSelezionato.getEmail());
-            ObservableMap<Integer, Contatto> map = listaContattoUrgente.getSelectionModel().getSelection();
-            System.out.println(map);*/
-        }
-    }
-
     /**
      * Mateodo callback richiamato da JavaFX al click del pulsante di eliminazione di un contatto urgente.
      * Se è stato selezionato un contatto dalla lista, esso verrà cancellato, altrimenti ignora l'evento.

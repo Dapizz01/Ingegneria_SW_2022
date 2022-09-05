@@ -5,7 +5,7 @@ import it.univr.lavoratoristagionali.types.Comune;
 public class DisponibilitaFilter {
     private final int inizioPeriodo;
     private final int finePeriodo;
-    private  final Comune comune;
+    private final Comune comune;
 
     public DisponibilitaFilter(int inizioPeriodo, int finePeriodo, Comune comune) {
         this.inizioPeriodo = inizioPeriodo;

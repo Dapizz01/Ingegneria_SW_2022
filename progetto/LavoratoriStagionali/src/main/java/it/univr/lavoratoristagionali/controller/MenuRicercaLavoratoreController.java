@@ -187,7 +187,8 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
     public void onClickRicercaAND(ActionEvent actionEvent) {
         refreshFilters();
         clearResultFields();
-        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
+        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.AND)));
+        // listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Pinco", "Pallino")));
     }
 
     /**
@@ -199,7 +200,8 @@ public class MenuRicercaLavoratoreController extends Controller implements Initi
     public void onClickRicercaOR(ActionEvent actionEvent) {
         refreshFilters();
         clearResultFields();
-        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
+        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.OR)));
+        // listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
     }
 
     /**

@@ -276,13 +276,6 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         }
     }
 
-    // @FXML
-    /* private void testEvent(MouseEvent mouseEvent) {
-        // Se è stato cliccato un label del ListView
-        if(mouseEvent.getTarget() instanceof Text) {
-        }
-    } */
-
     @FXML
     private void onClickEliminaContatto(ActionEvent actionEvent){
         for(int key : listaContattoUrgente.getSelectionModel().getSelection().keySet()){

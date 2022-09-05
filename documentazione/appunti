@@ -87,3 +87,7 @@ Model:
 // NB:
     Nel seerchLavoratori non ci sono i controlli sui flag delle liste(es Lingue perchè il flag potrebbe essere != AND && != OR)
     Nel searchLavoratori non c'è il controllo se il flag del comuniFilter è != OR
+
+// Dubbi:
+    Dove mettere il DB? Al momento ci sono 2 db nel progetto
+    Bug quando si mette una data di inizio / fine ma non un comune, controllo JavaFX o database?

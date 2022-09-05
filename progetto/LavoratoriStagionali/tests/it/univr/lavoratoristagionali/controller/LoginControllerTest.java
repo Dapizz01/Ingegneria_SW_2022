@@ -1,13 +1,19 @@
 package it.univr.lavoratoristagionali.controller;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxAssertContext;
 import org.testfx.framework.junit.ApplicationTest;
+import org.testfx.matcher.base.WindowMatchers;
 
 import static org.junit.Assert.*;
 
@@ -32,10 +38,41 @@ public class LoginControllerTest extends ApplicationTest {
 
     @Test
     public void tryCorrectLogin(){
+        clickOn("#usernameField").write("aaa");
+        clickOn("#passwordField").write("bbb");
+        clickOn("#submitButton");
+        FxAssert.verifyThat("#modificaLavoratoreButton", (Button button) -> button.isVisible());
+    }
+
+    @Test
+    public void tryWrongLogin(){
         clickOn("#usernameField");
-        write("aaa");
+        write("q1097hewur");
+        clickOn("#passwordField");
+        write("q1097hewur");
+        clickOn("#submitButton");
+        FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
+    }
+
+    @Test
+    public void tryMissingUsername(){
         clickOn("#passwordField");
         write("bbb");
         clickOn("#submitButton");
+        FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
+    }
+
+    @Test
+    public void tryMissingPassword(){
+        clickOn("#usernameField");
+        write("aaa");
+        clickOn("#submitButton");
+        FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
+    }
+
+    @Test
+    public void tryEmptyFields(){
+        clickOn("#submitButton");
+        FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
     }
 }

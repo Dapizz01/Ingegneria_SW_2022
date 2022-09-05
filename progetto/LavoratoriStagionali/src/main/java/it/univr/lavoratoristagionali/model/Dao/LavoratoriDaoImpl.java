@@ -1,10 +1,10 @@
 package it.univr.lavoratoristagionali.model.Dao;
 
+import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.types.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LavoratoriDaoImpl implements LavoratoriDao {
     @Override
@@ -105,7 +105,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 pstmt.setInt(1, idLavoratore);
                 pstmt.setString(2, nuovaDisponibilita.getComune().getNomeComune());
                 pstmt.setInt(3, nuovaDisponibilita.getInizioPeriodo());
-                pstmt.setInt(3, nuovaDisponibilita.getFinePeriodo());
+                pstmt.setInt(4, nuovaDisponibilita.getFinePeriodo());
                 pstmt.executeUpdate();
                 System.out.println("Disponibilità Aggiunta");
             }
@@ -331,5 +331,549 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                 return true; // Lavoratore modificato correttamente
 
         return false;
+    }
+
+    @Override
+    public Lavoratore getLavoratore(int idDaCercare) { // Se l'id non esiste ritornerà un Lavoratore a null
+        Lavoratore lavoratore = null;
+
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/getLavoratore>");
+            //------------------------------------------------
+
+            //---------------- Costruisco le 5 liste di Lavoratore -----------------
+            List<Esperienza> esperienze = new ArrayList<>();
+            List<Contatto> contatti = new ArrayList<>();
+            List<Lingua> lingue = new ArrayList<>();
+            List<Patente> patenti = new ArrayList<>();
+            List<Disponibilita> disponibilitaLista = new ArrayList<>();
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Esperienze WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                // l'ID del lavoratore non mi serve nell'esperienza
+                int idEsperienza = rs.getInt("ID_Esperienza");
+                String nomeAzienda = rs.getString("NomeAzienda");
+                int retribuzione = rs.getInt("RetribuzioneGiornaliera");
+                int inizioPeriodo = rs.getInt("InizioPeriodo");
+                int finePeriodo = rs.getInt("FinePeriodo");
+                String nomeComune = rs.getString("NomeComune");
+                String nomeSpecializzazione = rs.getString("NomeSpecializzazione");
+
+                Comune comune = new Comune(nomeComune);
+                Specializzazione specializzazione = new Specializzazione(nomeSpecializzazione);
+
+                Esperienza esperienza = new Esperienza(idEsperienza,nomeAzienda,retribuzione,inizioPeriodo,finePeriodo,comune,specializzazione);
+                esperienze.add(esperienza);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Contatti WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                int idContatto = rs.getInt("ID_Contatto");
+                String nomeContatto = rs.getString("NomeContatto");
+                String cognomeContatto = rs.getString("CognomeContatto");
+                String nTelefono = rs.getString("N_telefono");
+                String email = rs.getString("Email");
+
+                Contatto contatto = new Contatto(idContatto,nomeContatto,cognomeContatto,nTelefono,email);
+                contatti.add(contatto);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM LingueParlate WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) { // cicla in base al numero di lingue parlate dal lavoratore con l'ID ricavato all'inizio
+                String nomeLingua = rs.getString("NomeLingua");
+
+                Lingua lingua = new Lingua(nomeLingua);
+                lingue.add(lingua);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM PatentiPossedute WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) { // cicla in base al numero di patenti possedute dal lavoratore con l'ID ricavato all'inizio
+                String nomePatente = rs.getString("NomePatente");
+
+                Patente patente = new Patente(nomePatente);
+                patenti.add(patente);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Disponibilita WHERE ID_Lavoratore = '" + idDaCercare + "';");
+
+            while (rs.next()) {
+                String nomeComune = rs.getString("NomeComune");
+                int inizioPeriodo = rs.getInt("InizioPeriodo");
+                int finePeriodo = rs.getInt("FinePeriodo");
+
+                Comune comune = new Comune(nomeComune);
+
+                Disponibilita disponibilitaSingola = new Disponibilita(inizioPeriodo, finePeriodo, comune);
+                disponibilitaLista.add(disponibilitaSingola);
+            }
+            rs.close();
+
+            stmt = c.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM Lavoratori WHERE ID_Lavoratore = '" + idDaCercare + "';");
+            while (rs.next()) {
+                String nomeLavoratore = rs.getString("NomeLavoratore");
+                String cognomeLavoratore = rs.getString("CognomeLavoratore");
+                String comune1 = rs.getString("ComuneNascita");
+                String comune2 = rs.getString("ComuneAbitazione");
+                int dataNascita = rs.getInt("DataNascita");
+                String nazionalita1 = rs.getString("Nazionalita");
+                String email = rs.getString("Email");
+                String nTelefono = rs.getString("N_telefono");
+                boolean automunito = rs.getBoolean("Automunito");
+
+                Comune comuneNascita = new Comune(comune1);
+                Comune comuneAbitazione = new Comune(comune2);
+                Lingua nazionalita = new Lingua(nazionalita1);
+
+                lavoratore = new Lavoratore(idDaCercare, nomeLavoratore, cognomeLavoratore, comuneNascita, comuneAbitazione, dataNascita, nazionalita, email, nTelefono, automunito, esperienze, lingue, contatti, patenti, disponibilitaLista);
+            }
+            rs.close();
+
+            stmt.close();
+            c.close();
+
+            return lavoratore;
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return lavoratore;
+    }
+
+
+    @Override
+    public List<Lavoratore> searchLavoratori(LingueFilter lingueFilter, ComuniFilter comuniFilter, PatentiFilter patentiFilter, SpecializzazioniFilter specializzazioniFilter, AutomunitoFilter automunitoFilter, DisponibilitaFilter disponibilitaFilter, DataNascitaFilter dataNascitaFilter, Flag flag) {
+        List<Lavoratore> lavoratoriCercati = new ArrayList<>();
+        Set<Integer> idLavoratori = new TreeSet<>(); // tiene traccia degli id dei lavoratori idonei alla ricerca
+        Set<Integer> tracciaIdLingue = new TreeSet<>();
+        Set<Integer> tracciaIdComuni = new TreeSet<>();
+        Set<Integer> tracciaIdPatenti = new TreeSet<>();
+        Set<Integer> tracciaIdSpecializzazioni = new TreeSet<>();
+        Set<Integer> tracciaIdAutomunito = new TreeSet<>();
+        Set<Integer> tracciaIdDisponibilita = new TreeSet<>();
+        Set<Integer> tracciaIdDataNascita = new TreeSet<>();
+        List<Integer> and1 = new ArrayList<>();
+
+
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            // -------------Connessione database-----------------
+            c = DriverManager.getConnection("jdbc:sqlite:LavoratoriStagionali.db");
+            System.out.println("Opened database successfully<LavoratoriDaoImpl/searchLavoratori>");
+            //---------------------------------------------------
+
+            //------------------ Ricerca -----------------
+
+            // Con lista lingue vuota: ignored
+            // Con Flag.AND ritorno tutti i lavoratori
+            // Con Flag.OR ritorno nessuno
+            // Con lista lingue piena:
+            // Con lingueFilter.getFlag() == Flag.AND ritorno tutti i lavoratori che parlano tutte le lingue della lista
+            // Con lingueFilter.getFlag() == Flag.OR ritorno tutti quelli che parlano almeno una delle lingue della lista
+            // *idem per le altre liste*
+
+            // Con automunito a FALSE: ignored
+            // Con Flag.AND ritorno tutti i lavoratori
+            // Con Flag.OR ritorno nessuno
+            // Con autounito a TRUE:
+            // Ritorno tutti gli automuniti
+            // *idem per disponibilita e data di nascita*
+            //--------------------------------------------
+
+            //---------------------------- Lingue --------------------------------
+            if(lingueFilter.getLingue().isEmpty()) {
+                if(flag == Flag.AND) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdLingue.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else { // Il campo è ignorato nella ricerca(non voglio nessuno per l'OR)
+                    // tracciaIdLingue rimane vuota
+                }
+            }
+            else {
+                if(lingueFilter.getFlag() == Flag.AND) { //Prendo solo gli id dei lavoratori che parlano tutte le lingue nella lista
+                    for(Lingua lingua : lingueFilter.getLingue()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore); // quel lavoratore parla quella lingua
+                        }
+                        rs.close();
+                    }
+
+                    // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di lingue, ovvero parlano tutte le lingue nella lista
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == lingueFilter.getLingue().size())
+                            tracciaIdLingue.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+                }
+                else { // lingueFilter.getFlag() == Flag.OR // Prendo gli id dei lavoratori che parlano almeno una delle lingue nella lista
+                    for(Lingua lingua : lingueFilter.getLingue()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM LingueParlate WHERE NomeLingua ='" + lingua.getNomeLingua() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdLingue.add(idLavoratore);  // set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+            }
+            // -----------------------------// Lingue // --------------------------------
+
+            //-------------------------------- Comuni ------------------------------------
+            if(comuniFilter.getComuni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdComuni.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else {
+                    // tracciaIdComuni rimane vuota
+                }
+
+            }
+            else {
+                if(comuniFilter.getFlag() == Flag.OR) {
+                    for(Comune comune : comuniFilter.getComuni()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE ComuneAbitazione ='" + comune.getNomeComune() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdComuni.add(idLavoratore);  // set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+                else { // comuniFilter.getFlag() != Flag.OR
+                    // Manca il controllo semplicemente tracciaIdComuni rimane vuota
+                }
+            }
+            //---------------------------------// Comuni //-------------------------------
+
+            //-------------------------------- Patenti -----------------------------------
+            if(patentiFilter.getPatenti().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdPatenti.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else { // Il campo è ignorato nella ricerca(non voglio nessun lavoratore per l'OR)
+                    // tracciaIdPatenti rimane vuota
+                }
+
+            }
+            else {
+                if(patentiFilter.getFlag() == Flag.AND) {
+                    for(Patente patente : patentiFilter.getPatenti()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM PatentiPossedute WHERE NomePatente ='" + patente.getNomePatente() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore);
+                        }
+                        rs.close();
+                    }
+
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == patentiFilter.getPatenti().size())
+                            tracciaIdPatenti.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+
+                }
+                else {
+                    for(Patente patente : patentiFilter.getPatenti()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM PatentiPossedute WHERE NomePatente ='" + patente.getNomePatente() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdPatenti.add(idLavoratore);  // set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+            }
+            //-------------------------------// Patenti //---------------------------------
+
+            //-------------------------- Specializzazioni ---------------------------------
+            if(specializzazioniFilter.getSpecializzazioni().isEmpty()) { // Il campo è ignorato nella ricerca(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdSpecializzazioni.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else {
+                    // tracciaIdSpecializzazioni rimane vuota
+                }
+            }
+            else {
+                if(specializzazioniFilter.getFlag() == Flag.AND) {
+                    for(Specializzazione specializzazione : specializzazioniFilter.getSpecializzazioni()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Esperienze WHERE NomeSpecializzazione ='" + specializzazione.getNomeSpecializzazione() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            and1.add(idLavoratore);
+                        }
+                        rs.close();
+                    }
+
+                    Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
+
+                    for (Integer i : and1) {
+                        Integer j = hm.get(i);
+                        hm.put(i, (j == null) ? 1 : j + 1);
+                    }
+                    for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
+                        if(val.getValue() == specializzazioniFilter.getSpecializzazioni().size())
+                            tracciaIdSpecializzazioni.add(val.getValue());
+                    }
+
+                    hm.clear();
+                    and1.clear();
+                }
+                else { // specializzazioniFilter.getFlag() == Flag.OR
+                    for(Specializzazione specializzazione : specializzazioniFilter.getSpecializzazioni()) {
+                        stmt = c.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Esperienze WHERE NomeSpecializzazione ='" + specializzazione.getNomeSpecializzazione() + "';");
+                        while (rs.next()) {
+                            int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                            tracciaIdSpecializzazioni.add(idLavoratore);  // set senza ripetizioni
+                        }
+                        rs.close();
+                    }
+                }
+            }
+            //------------------------// Specializzazioni //-------------------------------
+
+            //-------------------------- Automunito -----------------------------
+            // Se TRUE -> predo solo tutti gli automuniti
+            if(automunitoFilter.isAutomunito()) {
+                stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE Automunito = TRUE;");
+                while (rs.next()) {
+                    int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                    tracciaIdAutomunito.add(idLavoratore);
+                }
+                rs.close();
+            }
+            else { // Se false -> vanno bene sia automuniti che non automuniti(ovvero tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdAutomunito.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else { // Se false -> non voglio nessun lavoratore (per l'OR)
+                    // tracciaIdAutomunito rimane vuota
+                }
+
+            }
+            //-------------------------// Automunito //--------------------------
+
+            //---------------------------- Disponibilità -------------------------------
+            // Se != -1 è un periodo di cui tener traccia(seleziono solo i lavoratori che hanno dispobinilità in quel periodo per quel comune indicato)
+            if(disponibilitaFilter.getInizioPeriodo() != -1 && disponibilitaFilter.getFinePeriodo() != -1) {
+                stmt = c.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Disponibilita WHERE InizioPeriodo <='" + disponibilitaFilter.getInizioPeriodo() + "' AND FinePeriodo >= '" + disponibilitaFilter.getFinePeriodo() + "' AND NomeComune = '" + disponibilitaFilter.getComune().getNomeComune() + "';");
+                while (rs.next()) {
+                    int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                    tracciaIdDisponibilita.add(idLavoratore);
+                }
+                rs.close();
+            }
+            else { // Se periodo == -1 il periodo di disponibilità è ignorato(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdDisponibilita.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else { // Se == -1 il periodo di disponibilità è ignorato(non voglio nessuno per l'OR)
+                    // tracciaIdDisponibilità rimane vuota
+                }
+            }
+            //--------------------------// Disponibilità //-----------------------------
+
+            //---------------------------- DataNascita -----------------------------
+            // Se != -1 è una data di cui tener traccia
+            if(dataNascitaFilter.getDataNascita() != -1) {
+                if(dataNascitaFilter.getFlag() == Flag.TO) { // I lavoratori nati fino al massimo in quella data
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE DataNascita <='" + dataNascitaFilter.getDataNascita() + "';");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdDataNascita.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else if(dataNascitaFilter.getFlag() == Flag.FROM) { // I lavoratori nati al minimo in quella data
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori WHERE DataNascita >='" + dataNascitaFilter.getDataNascita() + "';");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdDataNascita.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else {
+                    System.out.println("Flag dataNascitaFilter non valido!");
+                }
+            }
+            else { // Se == -1 la data di nascita è ignorata(vanno bene tutti i lavoratori per l'AND)
+                if(flag == Flag.AND) {
+                    stmt = c.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT ID_Lavoratore FROM Lavoratori");
+                    while (rs.next()) {
+                        int idLavoratore = rs.getInt("ID_Lavoratore");
+
+                        tracciaIdDataNascita.add(idLavoratore);
+                    }
+                    rs.close();
+                }
+                else { // Se == -1 la data di nascita è ignorata(non voglio nessuno per l'OR)
+                    // tracciaIdDataNascita rimane vuota
+                }
+            }
+            //---------------------------// DataNascita //--------------------------
+
+
+            if(flag == Flag.AND) {
+                //Tengo solo gli id che fanno parte di tutte le liste che tracciano gli ID
+                for(Integer i : tracciaIdLingue) {
+                    if(tracciaIdComuni.contains(i) && tracciaIdPatenti.contains(i) && tracciaIdSpecializzazioni.contains(i) && tracciaIdAutomunito.contains(i) && tracciaIdDisponibilita.contains(i) && tracciaIdDataNascita.contains(i))
+                        idLavoratori.add(i); // Trovato id idoneo alla ricerca
+                }
+            }
+            else if(flag == Flag.OR) {
+                //Tengo tutti gli id che compaiono almeno in una traccia(cioè tutti gli id di tutte le tracce)
+                for(Integer i : tracciaIdLingue) {
+                    idLavoratori.add(i); // set senza ripetizioni
+                }
+                for(Integer i : tracciaIdComuni) {
+                    idLavoratori.add(i);
+                }
+                for(Integer i : tracciaIdPatenti) {
+                    idLavoratori.add(i);
+                }
+                for(Integer i : tracciaIdSpecializzazioni) {
+                    idLavoratori.add(i);
+                }
+                for(Integer i : tracciaIdAutomunito) {
+                    idLavoratori.add(i);
+                }
+                for(Integer i : tracciaIdDisponibilita) {
+                    idLavoratori.add(i);
+                }
+                for(Integer i : tracciaIdDataNascita) {
+                    idLavoratori.add(i);
+                }
+            }
+            else {
+                System.out.println("Flag non valido!");
+            }
+            //----------------------------// Fine ricerca // ------------------------------
+
+            for(Integer idTrovato : idLavoratori) {               // Ogni id trovato corrisponde ad un lavoratore idoneo ai parametri di ricerca
+                Lavoratore lavoratore = getLavoratore(idTrovato); // Restituisce un lavoratore cercato
+                lavoratoriCercati.add(lavoratore);                // Lista dei lavoratori cercati completa
+            }
+
+            if(stmt != null) { // Perchè se tutti i campi sono ignorati in OR stmt rimane false
+                stmt.close();
+            }
+            c.close();
+
+            return lavoratoriCercati;
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+        return lavoratoriCercati;
     }
 }

@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * E' il controller che si occupa della ricerca dei lavoratori.
  */
-public class MenuRicercaLavoratoreController extends Controller implements Initializable {
+public class RicercaLavoratoreController extends Controller implements Initializable {
 
     // Ritorno menu
     @FXML

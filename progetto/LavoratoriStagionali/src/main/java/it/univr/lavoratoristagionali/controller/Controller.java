@@ -49,10 +49,6 @@ public class Controller {
                 ModificaLavoratoreController view = fxmlLoader.getController();
                 view.setLavoratoreBase(lavoratore);
             }
-            else if(fxmlLoader.getController() instanceof DettagliRicercaLavoratoreController){ // TODO: togliere se non serve più
-                DettagliRicercaLavoratoreController view = fxmlLoader.getController();
-                view.setLavoratoreBase(lavoratore);
-            }
             else{
                 throw new IllegalArgumentException("The target view \"" + target.getLabel() + "\" should not be called by this method, use the other switchScene with only 2 parameters.");
             }

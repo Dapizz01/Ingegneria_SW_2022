@@ -20,7 +20,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuRicercaLavoratoreController">
+<ScrollPane prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.RicercaLavoratoreController">
    <content>
       <AnchorPane prefHeight="1499.0" prefWidth="1263.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../../css/style.css">
          <children>

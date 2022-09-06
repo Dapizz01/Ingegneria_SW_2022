@@ -75,6 +75,10 @@ Tasto dx su pom.xml -> analyze dependencies -> reload
 Non va un modulo:
 Disinstallare e reinstallare modulo
 
+Schema DB:
+- DB fuori da LavoratoriStagionali -> controller
+- DB dentro LavoratoriStagionali -> è dei test automatici
+
 Test:
     - Comando da aggiungere ai parametri dell'esecuzione di java -> https://github.com/TestFX/TestFX/issues/638
     - Guida su come installare TestFX (+ dependencies) -> https://medium.com/information-and-technology/test-driven-development-in-javafx-with-testfx-66a84cd561e0
@@ -91,3 +95,16 @@ Model:
 // Dubbi:
     Dove mettere il DB? Al momento ci sono 2 db nel progetto
     Bug quando si mette una data di inizio / fine ma non un comune, controllo JavaFX o database?
+	- Se c'è data inizio o data fine serve anche comune (da fare controllo JavaFX)
+	- Se c'è il comune, basta quello
+
+TEST DA FARE:
+    - Modifica lavoratore
+        * (inizio script, si crea un lavoratore)
+        * Ricerca nome lavoratore, lo si seleziona, e si cambia un campo, poi lo si ricerca di nuovo, lo si riseleziona e poi si controlla che
+            il campo sia effettivamente modificato, si torna indietro, lo si ricerca di nuovo e poi lo si elimina, poi lo si ricerca e si controlla che sia eliminato.
+        * (fine script, lo si elimina con l'ID)
+    - Ricerca lavoratore
+        * (inizio script, si creano un pò di lavoratori)
+        * Fare delle query sensate e controllare il risultato
+        * (fine script, li si elimina)

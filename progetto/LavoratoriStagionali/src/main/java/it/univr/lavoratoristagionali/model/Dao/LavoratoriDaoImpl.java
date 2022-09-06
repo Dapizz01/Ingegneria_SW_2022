@@ -8,7 +8,7 @@ import java.util.*;
 
 public class LavoratoriDaoImpl implements LavoratoriDao {
     @Override
-    public boolean addLavoratore(Lavoratore nuovoLavoratore) {
+    public int addLavoratore(Lavoratore nuovoLavoratore) {
         Connection c = null;
         Statement stmt = null;
 
@@ -116,14 +116,14 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
             c.close();
 
             System.out.println("Lavoratore inserito correttamente nel DB");
-            return true; // Lavoratore aggiunto al DB correttamente
+            return idLavoratore; // Id del Lavoratore aggiunto al DB correttamente
 
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
 
-        return false;
+        return -1;
     }
 
     @Override
@@ -323,14 +323,16 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
     }
 
     @Override
-    public boolean updateLavoratore(Lavoratore lavoratoreDaModificare) {
+    public int updateLavoratore(Lavoratore lavoratoreDaModificare) {
         System.out.println("<LavoratoriDaoImpl/updateLavoratore>");
+        int id = -1;
 
-        if(deleteLavoratore(lavoratoreDaModificare.getID()))
-            if(addLavoratore(lavoratoreDaModificare))
-                return true; // Lavoratore modificato correttamente
+        if(deleteLavoratore(lavoratoreDaModificare.getID())) {
+            id = addLavoratore(lavoratoreDaModificare);
+            return id; // id del Lavoratore modificato correttamente
+        }
 
-        return false;
+        return id;
     }
 
     @Override

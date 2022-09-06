@@ -262,9 +262,9 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     listaContattoUrgenteValidated.getSelectedItems(),
                     patentiLavoratoreValidated.getSelectedItems(),
                     listaDisponibilitaValidated.getSelectedItems());
-            System.out.println(lavoratore);
+            // System.out.println(lavoratore);
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
-            System.out.println(lavoratoriDao.addLavoratore(lavoratore));
+            lavoratoriDao.addLavoratore(lavoratore);
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
         }
         catch (InputException inputException){
@@ -348,10 +348,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){
-                    if((inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && inizioDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo()) ||
+                    /* if((inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && inizioDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo()) ||
                             (fineDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())){
                         throw new InvalidPeriodException(listaDisponibilitaValidated, "Non è possibile inserire questa disponibilità, va in conflitto con altre disponibilità");
-                    }
+                    } */
+                    if(inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())
+                        throw new InvalidPeriodException(listaDisponibilitaValidated, "Non è possibile inserire questa disponibilità, va in conflitto con altre disponibilità");
                 }
             }
 

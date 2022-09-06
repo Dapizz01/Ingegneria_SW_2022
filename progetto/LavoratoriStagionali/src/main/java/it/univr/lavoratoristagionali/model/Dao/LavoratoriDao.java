@@ -8,10 +8,10 @@ import it.univr.lavoratoristagionali.types.Lingua;
 import java.util.List;
 
 public interface LavoratoriDao {
-    boolean addLavoratore(Lavoratore nuovoLavoratore);
+    int addLavoratore(Lavoratore nuovoLavoratore);
     List<Lavoratore> getLavoratori(String nome, String cognome);
     boolean deleteLavoratore(int idDaEliminare);
-    boolean updateLavoratore(Lavoratore lavoratoreDaModificare);
+    int updateLavoratore(Lavoratore lavoratoreDaModificare);
     Lavoratore getLavoratore(int idDacCercare);
     List<Lavoratore> searchLavoratori(LingueFilter lingueFilter, ComuniFilter comuniFilter, PatentiFilter patentiFilter, SpecializzazioniFilter specializzazioniFilter, AutomunitoFilter automunitoFilter, DisponibilitaFilter disponibilitaFilter, DataNascitaFilter dataNascitaFilter, Flag flag);
 }

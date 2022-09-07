@@ -1,9 +1,8 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
-import it.univr.lavoratoristagionali.controller.enums.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
@@ -15,9 +14,9 @@ public class MFXTextFieldValidated implements MFXValidated {
 
     private final MFXTextField textField;
     private final Label errorLabel;
-    private final Errore[] flags;
+    private final Check[] flags;
 
-    public MFXTextFieldValidated(MFXTextField textField, Label errorLabel, Errore ...flags){
+    public MFXTextFieldValidated(MFXTextField textField, Label errorLabel, Check...flags){
         this.textField = textField;
         this.errorLabel = errorLabel;
         this.flags = flags;
@@ -26,9 +25,9 @@ public class MFXTextFieldValidated implements MFXValidated {
     }
 
     private void buildValidator(){
-        List<Constraint> constraints = new ArrayList<Constraint>();
-        for(Errore flag : flags){
-            constraints.add(Constraint.Builder.build()
+        List<io.github.palexdev.materialfx.validation.Constraint> constraints = new ArrayList<io.github.palexdev.materialfx.validation.Constraint>();
+        for(Check flag : flags){
+            constraints.add(io.github.palexdev.materialfx.validation.Constraint.Builder.build()
                     .setSeverity(Severity.ERROR)
                     .setMessage(flag.getLabel())
                     .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
@@ -48,7 +47,7 @@ public class MFXTextFieldValidated implements MFXValidated {
                     ).get());
         }
 
-        for(Constraint constraint : constraints){
+        for(io.github.palexdev.materialfx.validation.Constraint constraint : constraints){
             textField.getValidator().constraint(constraint);
         }
     }
@@ -60,7 +59,7 @@ public class MFXTextFieldValidated implements MFXValidated {
     }
 
     public boolean checkValid() throws InputException{
-        List<Constraint> currentConstraints = textField.validate();
+        List<io.github.palexdev.materialfx.validation.Constraint> currentConstraints = textField.validate();
         if(!currentConstraints.isEmpty()){
             throw new InputException(this, currentConstraints.get(0));
         }
@@ -76,7 +75,7 @@ public class MFXTextFieldValidated implements MFXValidated {
         textField.setStyle("-fx-border-color: -mfx-red");
     }
 
-    private void showError(Constraint constraint){
+    private void showError(io.github.palexdev.materialfx.validation.Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
         // textField.setStyle("-fx-border-color: -mfx-red");

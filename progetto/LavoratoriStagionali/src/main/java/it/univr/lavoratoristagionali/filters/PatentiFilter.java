@@ -20,4 +20,8 @@ public class PatentiFilter {
     public Flag getFlag() {
         return flag;
     }
+
+    public String toString(){
+        return patenti.toString() + ", flag " + flag;
+    }
 }

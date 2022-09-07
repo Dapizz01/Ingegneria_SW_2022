@@ -1,9 +1,8 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
-import it.univr.lavoratoristagionali.controller.enums.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
@@ -15,9 +14,9 @@ import java.util.List;
 public class MFXDatePickerValidated implements MFXValidated{
     private final MFXDatePicker datePicker;
     private final Label errorLabel;
-    private final Errore[] flags;
+    private final Check[] flags;
 
-    public MFXDatePickerValidated(MFXDatePicker datePicker, Label errorLabel, Errore ...flags){
+    public MFXDatePickerValidated(MFXDatePicker datePicker, Label errorLabel, Check...flags){
         this.datePicker = datePicker;
         this.errorLabel = errorLabel;
         this.flags = flags;
@@ -26,9 +25,9 @@ public class MFXDatePickerValidated implements MFXValidated{
     }
 
     private void buildValidator(){
-        List<Constraint> constraints = new ArrayList<Constraint>();
-        for(Errore flag : flags){
-            constraints.add(Constraint.Builder.build()
+        List<io.github.palexdev.materialfx.validation.Constraint> constraints = new ArrayList<io.github.palexdev.materialfx.validation.Constraint>();
+        for(Check flag : flags){
+            constraints.add(io.github.palexdev.materialfx.validation.Constraint.Builder.build()
                     .setSeverity(Severity.ERROR)
                     .setMessage(flag.getLabel())
                     .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
@@ -55,7 +54,7 @@ public class MFXDatePickerValidated implements MFXValidated{
                     ).get());
         }
 
-        for(Constraint constraint : constraints){
+        for(io.github.palexdev.materialfx.validation.Constraint constraint : constraints){
             datePicker.getValidator().constraint(constraint);
         }
     }
@@ -69,7 +68,7 @@ public class MFXDatePickerValidated implements MFXValidated{
     }
 
     public boolean checkValid() throws InputException{
-        List<Constraint> currentConstraints = datePicker.validate();
+        List<io.github.palexdev.materialfx.validation.Constraint> currentConstraints = datePicker.validate();
         if(!currentConstraints.isEmpty()){
             throw new InputException(this, currentConstraints.get(0));
         }
@@ -85,7 +84,7 @@ public class MFXDatePickerValidated implements MFXValidated{
         datePicker.setStyle("-fx-border-color: -mfx-red");
     }
 
-    private void showError(Constraint constraint){
+    private void showError(io.github.palexdev.materialfx.validation.Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
         // datePicker.setStyle("-fx-border-color: -mfx-red");

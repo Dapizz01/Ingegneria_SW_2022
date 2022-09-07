@@ -26,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
 public class InserisciLavoratoriControllerTest extends ApplicationTest {
+
+
+
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.INSERISCI_LAVORATORE.getLabel()));
@@ -93,16 +96,17 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
             comuneAbitazioneLavoratore.selectIndex(0);
             nazionalitaLavoratore.selectIndex(0);
             lingueLavoratore.getSelectionModel().selectIndex(0);
-            lingueLavoratore.getSelectionModel().selectIndex(2);
+            lingueLavoratore.getSelectionModel().selectIndex(4);
         });
 
-        scroll(5, VerticalDirection.DOWN);
+        scroll(8, VerticalDirection.DOWN);
 
         // Inserimento contatto lavoratore
         clickOn("#telefonoLavoratore").write("0123456789");
         clickOn("#emailLavoratore").write("test@test.com");
 
-        scroll(10, VerticalDirection.DOWN);
+        moveTo("#lingueLavoratore");
+        scroll(15, VerticalDirection.DOWN);
 
         // Inserimento contatto urgente
         clickOn("#nomeContatto").write("testNome");
@@ -113,7 +117,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
 
         // Sposta cursore su #nomeContatto per evitare che lo scroll rimanga fermo sulla lista dei contatti urgenti
         moveTo("#nomeContatto");
-        scroll(30, VerticalDirection.DOWN);
+        scroll(35, VerticalDirection.DOWN);
         clickOn("#inviaLavoratore");
 
         // Se il lavoratore è stato effettivamente inserito, la scena dovrebbe cambiare ed essere quella del menù
@@ -126,7 +130,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addValidContattoUrgente(){
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#nomeContatto").write("testNome");
         clickOn("#cognomeContatto").write("testCognome");
         clickOn("#telefonoContatto").write("0123456789");
@@ -138,7 +142,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addEmptyContattoUrgente(){
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#aggiungiContatto");
         FxAssert.verifyThat("#listaContattoUrgente", (MFXListView<Contatto> list) -> list.getItems().isEmpty());
     }
@@ -146,7 +150,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addInvalidPhoneNumberContattoUrgente(){
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#nomeContatto").write("testNome");
         clickOn("#cognomeContatto").write("testCognome");
         clickOn("#telefonoContatto").write("222");
@@ -158,7 +162,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addInvalidEmailContattoUrgente(){
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#nomeContatto").write("testNome");
         clickOn("#cognomeContatto").write("testCognome");
         clickOn("#telefonoContatto").write("0123456789");
@@ -170,7 +174,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addEmptyNameSurnameContattoUrgente(){
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#telefonoContatto").write("0123456789");
         clickOn("#emailContatto").write("aaa@aaa.com");
         clickOn("#aggiungiContatto");
@@ -181,7 +185,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     public void deleteValidContattoUrgente(){
         MFXListView<Contatto> listaContatti = lookup("#listaContattoUrgente").query();
         moveTo("#ritornaMenu");
-        scroll(13, VerticalDirection.DOWN);
+        scroll(20, VerticalDirection.DOWN);
         clickOn("#nomeContatto").write("testNome");
         clickOn("#cognomeContatto").write("testCognome");
         clickOn("#telefonoContatto").write("0123456789");
@@ -200,7 +204,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addValidDisponibilita(){
         moveTo("#ritornaMenu");
-        scroll(25, VerticalDirection.DOWN);
+        scroll(30, VerticalDirection.DOWN);
         MFXDatePicker inizio = lookup("#inizioDisponibilita").query();
         MFXDatePicker fine = lookup("#fineDisponibilita").query();
         MFXFilterComboBox<Comune> listComuni = lookup("#comuneDisponibilita").query();
@@ -216,7 +220,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addEmptyDisponibilita(){
         moveTo("#ritornaMenu");
-        scroll(25, VerticalDirection.DOWN);
+        scroll(30, VerticalDirection.DOWN);
         clickOn("#aggiungiDisponibilita");
         FxAssert.verifyThat("#listaDisponibilita", (MFXListView<Disponibilita> list) -> list.getItems().isEmpty());
     }
@@ -224,7 +228,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addPastDateDisponibilita(){
         moveTo("#ritornaMenu");
-        scroll(25, VerticalDirection.DOWN);
+        scroll(30, VerticalDirection.DOWN);
         MFXDatePicker inizio = lookup("#inizioDisponibilita").query();
         MFXDatePicker fine = lookup("#fineDisponibilita").query();
         MFXFilterComboBox<Comune> listComuni = lookup("#comuneDisponibilita").query();
@@ -241,7 +245,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     public void deleteValidDisponibilita(){
         MFXListView<Contatto> listaDisponibilta = lookup("#listaDisponibilita").query();
         moveTo("#ritornaMenu");
-        scroll(25, VerticalDirection.DOWN);
+        scroll(30, VerticalDirection.DOWN);
         MFXDatePicker inizio = lookup("#inizioDisponibilita").query();
         MFXDatePicker fine = lookup("#fineDisponibilita").query();
         MFXFilterComboBox<Comune> listComuni = lookup("#comuneDisponibilita").query();
@@ -262,7 +266,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     @Test
     public void addInvalidDateDisponiblita(){
         moveTo("#ritornaMenu");
-        scroll(25, VerticalDirection.DOWN);
+        scroll(30, VerticalDirection.DOWN);
         MFXDatePicker inizio = lookup("#inizioDisponibilita").query();
         MFXDatePicker fine = lookup("#fineDisponibilita").query();
         MFXFilterComboBox<Comune> listComuni = lookup("#comuneDisponibilita").query();

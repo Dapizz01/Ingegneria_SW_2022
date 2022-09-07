@@ -544,7 +544,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     }
                     for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
                         if(val.getValue() == lingueFilter.getLingue().size())
-                            tracciaIdLingue.add(val.getValue());
+                            tracciaIdLingue.add(val.getKey());
                     }
 
                     hm.clear();
@@ -639,7 +639,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     }
                     for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
                         if(val.getValue() == patentiFilter.getPatenti().size())
-                            tracciaIdPatenti.add(val.getValue());
+                            tracciaIdPatenti.add(val.getKey());
                     }
 
                     hm.clear();
@@ -698,7 +698,7 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     }
                     for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
                         if(val.getValue() == specializzazioniFilter.getSpecializzazioni().size())
-                            tracciaIdSpecializzazioni.add(val.getValue());
+                            tracciaIdSpecializzazioni.add(val.getKey());
                     }
 
                     hm.clear();

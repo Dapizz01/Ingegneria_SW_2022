@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></MFXButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-      <Label fx:id="loginTitleLabel" layoutX="723.0" layoutY="5.0" prefHeight="92.0" prefWidth="135.0" text="Menu modifica lavoratore" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="723.0" layoutY="5.0" prefHeight="92.0" prefWidth="135.0" text="Menu modifica lavoratore" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>

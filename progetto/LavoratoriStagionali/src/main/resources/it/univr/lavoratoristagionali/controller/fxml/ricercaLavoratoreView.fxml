@@ -57,27 +57,48 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="878.0" layoutY="142.0" prefHeight="198.0" prefWidth="323.0">
+            <VBox layoutX="878.0" layoutY="142.0" prefHeight="229.0" prefWidth="323.0">
                <children>
-                  <MFXDatePicker fx:id="inizioPeriodo" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="51.0" prefWidth="342.0">
-                     <VBox.margin>
+                  <VBox prefHeight="79.0" prefWidth="323.0">
+                     <children>
+                        <MFXDatePicker fx:id="inizioPeriodo" floatMode="BORDER" floatingText="Inizio periodo" prefHeight="51.0" prefWidth="342.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </MFXDatePicker>
+                        <Label fx:id="inizioPeriodoError" text="Label" visible="false" />
+                     </children>
+                     <padding>
                         <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </MFXDatePicker>
-                  <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="51.0" prefWidth="349.0">
-                     <VBox.margin>
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="80.0" prefWidth="323.0">
+                     <children>
+                        <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="51.0" prefWidth="323.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </MFXDatePicker>
+                        <Label fx:id="finePeriodoError" text="Label" visible="false" />
+                     </children>
+                     <padding>
                         <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </MFXDatePicker>
-                  <MFXFilterComboBox fx:id="comuneDisponibilita" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="68.0" prefWidth="323.0">
+                     <children>
+                        <MFXFilterComboBox fx:id="comuneDisponibilita" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
+                        <Label fx:id="comuneDisponibilitaError" text="Label" visible="false" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
             <VBox layoutX="67.0" layoutY="401.0" prefHeight="251.0" prefWidth="350.0">
                <children>
                   <MFXCheckListView fx:id="patentiLavoratore" prefHeight="201.0" prefWidth="363.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="55.0" prefWidth="200.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="44.0" prefWidth="170.0">
                            <children>
                               <MFXRadioButton fx:id="patentiLavoratoreAND" prefHeight="18.0" prefWidth="9.0" />
                               <Label text="AND" />
@@ -99,7 +120,7 @@
             <VBox layoutX="472.0" layoutY="402.0" prefHeight="251.0" prefWidth="350.0">
                <children>
                   <MFXCheckListView fx:id="specializzazioniLavoratore" prefHeight="201.0" prefWidth="347.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="55.0" prefWidth="200.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="200.0">
                            <children>
@@ -120,7 +141,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER" layoutX="877.0" layoutY="493.0" prefHeight="50.0" prefWidth="323.0">
+            <HBox alignment="CENTER" layoutX="877.0" layoutY="503.0" prefHeight="50.0" prefWidth="323.0">
                <children>
                   <MFXCheckbox fx:id="automunito" prefHeight="39.0" prefWidth="28.0" />
                   <Label prefHeight="26.0" prefWidth="80.0" text="Automunito" />
@@ -145,7 +166,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="878.0" layoutY="558.0" onAction="#onClickRicercaAND" prefHeight="70.0" prefWidth="130.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
+            <MFXButton fx:id="ricercaAND" alignment="CENTER" layoutX="877.0" layoutY="582.0" onAction="#onClickRicercaAND" prefHeight="70.0" prefWidth="130.0" text="RIcerca per AND" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -153,7 +174,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="1069.0" layoutY="558.0" onAction="#onClickRicercaOR" prefHeight="70.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
+            <MFXButton fx:id="ricercaOR" alignment="CENTER" layoutX="1069.0" layoutY="583.0" onAction="#onClickRicercaOR" prefHeight="70.0" prefWidth="130.0" text="Ricerca per OR" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -172,7 +193,7 @@
             </MFXButton>
             <MFXCheckListView fx:id="comuneLavoratore" layoutX="472.0" layoutY="141.0" prefHeight="200.0" prefWidth="350.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="647.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
-            <Label fx:id="loginTitleLabel" layoutX="705.0" layoutY="3.0" prefHeight="92.0" prefWidth="135.0" text="Ricerca lavoratore" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="705.0" layoutY="3.0" prefHeight="92.0" prefWidth="135.0" text="Ricerca lavoratore" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="22.0" />
                </font>

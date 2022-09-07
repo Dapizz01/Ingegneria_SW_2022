@@ -1,7 +1,7 @@
 package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
-import it.univr.lavoratoristagionali.controller.enums.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
@@ -10,13 +10,10 @@ import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -144,36 +141,36 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
 
 
-        nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
-        cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
-        dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Errore.MUST_BE_ADULT, Errore.NON_EMPTY);
-        comuneNascitaLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Errore.NON_EMPTY);
-        comuneAbitazioneLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneAbitazioneLavoratore, comuneAbitazioneLavoratoreError, Errore.NON_EMPTY);
-        nazionalitaLavoratoreValidated = new MFXFilterComboBoxValidated<Lingua>(nazionalitaLavoratore, nazionalitaLavoratoreError, Errore.NON_EMPTY);
-        telefonoLavoratoreValidated = new MFXTextFieldValidated(telefonoLavoratore, telefonoLavoratoreError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
-        emailLavoratoreValidated = new MFXTextFieldValidated(emailLavoratore, emailLavoratoreError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
+        nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Check.MUST_BE_ADULT, Check.NON_EMPTY);
+        comuneNascitaLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneNascitaLavoratore, comuneNascitaLavoratoreError, Check.NON_EMPTY);
+        comuneAbitazioneLavoratoreValidated = new MFXFilterComboBoxValidated<Comune>(comuneAbitazioneLavoratore, comuneAbitazioneLavoratoreError, Check.NON_EMPTY);
+        nazionalitaLavoratoreValidated = new MFXFilterComboBoxValidated<Lingua>(nazionalitaLavoratore, nazionalitaLavoratoreError, Check.NON_EMPTY);
+        telefonoLavoratoreValidated = new MFXTextFieldValidated(telefonoLavoratore, telefonoLavoratoreError, Check.TELEPHONE_FORMAT, Check.NON_EMPTY);
+        emailLavoratoreValidated = new MFXTextFieldValidated(emailLavoratore, emailLavoratoreError, Check.EMAIL_FORMAT, Check.NON_EMPTY);
 
-        lingueLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(lingueLavoratore, lingueLavoratoreError, Errore.NON_EMPTY);
-        patentiLavoratoreValidated = new MFXCheckListViewValidated<Patente>(patentiLavoratore, patentiLavoratoreError, (Errore) null);
+        lingueLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(lingueLavoratore, lingueLavoratoreError, Check.NON_EMPTY);
+        patentiLavoratoreValidated = new MFXCheckListViewValidated<Patente>(patentiLavoratore, patentiLavoratoreError, (Check) null);
 
-        nomeContattoValidated = new MFXTextFieldValidated(nomeContatto, nomeContattoError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
-        cognomeContattoValidated = new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
-        emailContattoValidated = new MFXTextFieldValidated(emailContatto, emailContattoError, Errore.EMAIL_FORMAT, Errore.NON_EMPTY);
-        telefonoContattoValidated = new MFXTextFieldValidated(telefonoContatto, telefonoContattoError, Errore.TELEPHONE_FORMAT, Errore.NON_EMPTY);
-        listaContattoUrgenteValidated = new MFXListViewValidated<Contatto>(listaContattoUrgente, listaContattoUrgenteError, Errore.NON_EMPTY);
+        nomeContattoValidated = new MFXTextFieldValidated(nomeContatto, nomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        cognomeContattoValidated = new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        emailContattoValidated = new MFXTextFieldValidated(emailContatto, emailContattoError, Check.EMAIL_FORMAT, Check.NON_EMPTY);
+        telefonoContattoValidated = new MFXTextFieldValidated(telefonoContatto, telefonoContattoError, Check.TELEPHONE_FORMAT, Check.NON_EMPTY);
+        listaContattoUrgenteValidated = new MFXListViewValidated<Contatto>(listaContattoUrgente, listaContattoUrgenteError, Check.NON_EMPTY);
 
-        inizioDisponibilitaValidated = new MFXDatePickerValidated(inizioDisponibilita, inizioDisponibilitaError, Errore.FROM_NOW, Errore.NON_EMPTY);
-        fineDisponibilitaValidated = new MFXDatePickerValidated(fineDisponibilita, fineDisponibilitaError, Errore.FROM_NOW, Errore.NON_EMPTY);
-        comuneDisponibilitaValidated = new MFXFilterComboBoxValidated<Comune>(comuneDisponibilita, comuneDisponibilitaError, Errore.NON_EMPTY);
-        listaDisponibilitaValidated = new MFXListViewValidated<Disponibilita>(listaDisponibilita, listaDisponibilitaError, (Errore) null);
+        inizioDisponibilitaValidated = new MFXDatePickerValidated(inizioDisponibilita, inizioDisponibilitaError, Check.FROM_NOW, Check.NON_EMPTY);
+        fineDisponibilitaValidated = new MFXDatePickerValidated(fineDisponibilita, fineDisponibilitaError, Check.FROM_NOW, Check.NON_EMPTY);
+        comuneDisponibilitaValidated = new MFXFilterComboBoxValidated<Comune>(comuneDisponibilita, comuneDisponibilitaError, Check.NON_EMPTY);
+        listaDisponibilitaValidated = new MFXListViewValidated<Disponibilita>(listaDisponibilita, listaDisponibilitaError, (Check) null);
 
-        aziendaEsperienzaValidated = new MFXTextFieldValidated(aziendaEsperienza, aziendaEsperienzaError, Errore.LETTERS_ONLY, Errore.NON_EMPTY);
-        retribuzioneEsperienzaValidated = new MFXTextFieldValidated(retribuzioneEsperienza, retribuzioneEsperienzaError, Errore.NUMBERS_ONLY, Errore.NON_EMPTY);
-        inizioEsperienzaValidated = new MFXDatePickerValidated(inizioEsperienza, inizioEsperienzaError, Errore.UP_TO_NOW, Errore.NON_EMPTY);
-        fineEsperienzaValidated = new MFXDatePickerValidated(fineEsperienza, fineEsperienzaError, Errore.UP_TO_NOW, Errore.NON_EMPTY);
-        comuneEsperienzaValidated = new MFXFilterComboBoxValidated<Comune>(comuneEsperienza, comuneEsperienzaError, Errore.NON_EMPTY);
-        specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Errore.NON_EMPTY);
-        listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Errore) null);
+        aziendaEsperienzaValidated = new MFXTextFieldValidated(aziendaEsperienza, aziendaEsperienzaError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        retribuzioneEsperienzaValidated = new MFXTextFieldValidated(retribuzioneEsperienza, retribuzioneEsperienzaError, Check.NUMBERS_ONLY, Check.NON_EMPTY);
+        inizioEsperienzaValidated = new MFXDatePickerValidated(inizioEsperienza, inizioEsperienzaError, Check.UP_TO_NOW, Check.NON_EMPTY);
+        fineEsperienzaValidated = new MFXDatePickerValidated(fineEsperienza, fineEsperienzaError, Check.UP_TO_NOW, Check.NON_EMPTY);
+        comuneEsperienzaValidated = new MFXFilterComboBoxValidated<Comune>(comuneEsperienza, comuneEsperienzaError, Check.NON_EMPTY);
+        specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Check.NON_EMPTY);
+        listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Check) null);
 
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
         comuneAbitazioneLavoratore.setItems(FXCollections.observableArrayList(comuni));
@@ -196,10 +193,6 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         listaDisponibilita.features().enableSmoothScrolling(1.2);
         listaEsperienze.features().enableSmoothScrolling(1.2);
         listaContattoUrgente.features().enableSmoothScrolling(1.2);
-
-        // TODO: aggiungere stili css errori con label di errore associata
-        // Link utili: https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/java/io/github/palexdev/materialfx/demo/controllers/TextFieldsController.java
-        // https://github.com/palexdev/MaterialFX/blob/main/demo/src/main/resources/io/github/palexdev/materialfx/demo/css/TextFields.css
     }
 
     public void setLavoratoreBase(Lavoratore lavoratore){
@@ -226,7 +219,6 @@ public class ModificaLavoratoreController extends Controller implements Initiali
 
     @FXML
     private void onClickRitornaMenu(ActionEvent actionEvent){
-        System.out.println("ritornaMenu fired");
         switchScene(getStageFromEvent(actionEvent), View.MENU_MODIFICA_LAVORATORE);
     }
 
@@ -255,7 +247,7 @@ public class ModificaLavoratoreController extends Controller implements Initiali
             switchScene(getStageFromEvent(actionEvent), View.MENU_MODIFICA_LAVORATORE);
         }
         catch (InputException inputException){
-            return; // TODO: mostrare errore
+            return;
         }
     }
 
@@ -303,10 +295,8 @@ public class ModificaLavoratoreController extends Controller implements Initiali
 
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){
-                    if((inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && inizioDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo()) ||
-                            (fineDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())){
+                    if(inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())
                         throw new InvalidPeriodException(listaDisponibilitaValidated, "Non è possibile inserire questa disponibilità, va in conflitto con altre disponibilità");
-                    }
                 }
             }
 
@@ -327,16 +317,14 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         try {
 
             if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays()){
-                throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine deve essere successiva alla data di inizio");
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine è antecedente alla data di inizio");
             }
 
             if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH){
-                System.out.println("test1");
-                throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di almeno un mese");
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La durata deve essere di almeno un mese");
             }
             if(fineEsperienzaValidated.getEpochDays() >= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR){
-                System.out.println("test2");
-                throw new InvalidPeriodException(fineEsperienzaValidated, "La esperienza passata deve avere durata di massimo 2 anni");
+                throw new InvalidPeriodException(fineEsperienzaValidated, "La durata deve essere di massimo 2 anni");
             }
 
 

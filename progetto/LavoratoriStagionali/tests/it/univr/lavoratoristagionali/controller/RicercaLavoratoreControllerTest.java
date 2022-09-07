@@ -21,12 +21,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RicercaLavoratoreControllerTest extends ApplicationTest {
 
     private Lavoratore lavoratore1, lavoratore2, lavoratore3;
+    private int id1, id2, id3;
 
     @Override
     public void start(Stage stage) throws Exception{
@@ -46,8 +48,8 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
 
         lavoratore1 = new Lavoratore(
                 -1,
-                "nomeLavoratore1",
-                "cognomeLavoratore1",
+                "testUno",
+                "testUno",
                 comuniDao.getComuni().get(0),
                 comuniDao.getComuni().get(0),
                 (int) LocalDate.of(1979, 1, 1).toEpochDay(),
@@ -78,8 +80,8 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
 
         lavoratore2 = new Lavoratore(
                 -1,
-                "nomeLavoratore2",
-                "cognomeLavoratore2",
+                "testDue",
+                "testDue",
                 comuniDao.getComuni().get(0),
                 comuniDao.getComuni().get(1),
                 (int) LocalDate.of(1989, 1, 1).toEpochDay(),
@@ -114,8 +116,8 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
 
         lavoratore3 = new Lavoratore(
                 -1,
-                "nomeLavoratore3",
-                "cognomeLavoratore3",
+                "testTre",
+                "testTre",
                 comuniDao.getComuni().get(0),
                 comuniDao.getComuni().get(1),
                 (int) LocalDate.of(1995, 1, 1).toEpochDay(),
@@ -140,22 +142,31 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
                 ))
         );
 
-        lavoratoriDao.addLavoratore(lavoratore1);
-        lavoratoriDao.addLavoratore(lavoratore2);
-        lavoratoriDao.addLavoratore(lavoratore3);
+        id1 = lavoratoriDao.addLavoratore(lavoratore1);
+        id2 = lavoratoriDao.addLavoratore(lavoratore2);
+        id3 = lavoratoriDao.addLavoratore(lavoratore3);
     }
 
     @After
     public void tearDown() {
+        LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+        lavoratoriDao.deleteLavoratore(id1);
+        lavoratoriDao.deleteLavoratore(id2);
+        lavoratoriDao.deleteLavoratore(id3);
     }
 
+    /*
+    Query:
+        - 2 lingue AND
+        - 1 comune
+        - automunito
+        Tutto in AND
+     */
     @Test
     public void tryQuery1(){
         MFXCheckListView<Lingua> lingueLavoratore = lookup("#lingueLavoratore").query();
         MFXCheckListView<Comune> comuneLavoratore = lookup("#comuneLavoratore").query();
         MFXCheckbox automunito = lookup("#automunito").query();
-        MFXButton ricercaAND = lookup("#ricercaAND").query();
-        MFXListView<Lavoratore> listaLavoratori = lookup("#listaLavoratori").query();
 
         interact(() -> {
             lingueLavoratore.getSelectionModel().selectIndex(1);
@@ -172,11 +183,120 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
             if(list.getItems().isEmpty())
                 return false;
             for(Lavoratore lavoratore : list.getItems()){
+                if(!lavoratore.getNomeLavoratore().equals(lavoratore1.getNomeLavoratore()))
+                    return false;
+            }
+            return true;
+        });
+    }
+
+    /*
+    Query:
+        - 2 patenti in OR
+        - 1 specializzazione
+        Tutto in AND
+     */
+    @Test
+    public void tryQuery2(){
+        MFXCheckListView<Lingua> patentiLavoratore = lookup("#patentiLavoratore").query();
+        MFXCheckListView<Comune> specializzazioniLavoratore = lookup("#specializzazioniLavoratore").query();
+
+        interact(() -> {
+            patentiLavoratore.getSelectionModel().selectIndex(3);
+            patentiLavoratore.getSelectionModel().selectIndex(5);
+            specializzazioniLavoratore.getSelectionModel().selectIndex(1);
+        });
+
+        clickOn("#patentiLavoratoreOR");
+        clickOn("#ricercaAND");
+        moveTo("#automunito");
+        scroll(20, VerticalDirection.DOWN);
+
+        FxAssert.verifyThat("#listaLavoratori", (MFXListView<Lavoratore> list) -> {
+            if(list.getItems().isEmpty())
+                return false;
+            for(Lavoratore lavoratore : list.getItems()){
                 if(!lavoratore.getNomeLavoratore().equals(lavoratore1.getNomeLavoratore()) && !lavoratore.getNomeLavoratore().equals(lavoratore2.getNomeLavoratore()))
                     return false;
             }
             return true;
         });
+    }
 
+    @Test
+    public void tryQuery3(){
+        MFXDatePicker inizioPeriodo = lookup("#inizioPeriodo").query();
+        MFXDatePicker finePeriodo = lookup("#finePeriodo").query();
+        MFXFilterComboBox<Comune> comuneDisponibilita = lookup("#comuneDisponibilita").query();
+        MFXDatePicker dataNascitaLavoratore = lookup("#dataNascitaLavoratore").query();
+
+
+        interact(() -> {
+            inizioPeriodo.setValue(LocalDate.of(2040, 1, 1));
+            finePeriodo.setValue(LocalDate.of(2040, 12, 30));
+            comuneDisponibilita.selectIndex(2);
+            dataNascitaLavoratore.setValue(LocalDate.of(1980, 1, 1));
+        });
+
+        clickOn("#dataNascitaLavoratoreA");
+        clickOn("#ricercaOR");
+        moveTo("#automunito");
+        scroll(20, VerticalDirection.DOWN);
+
+        FxAssert.verifyThat("#listaLavoratori", (MFXListView<Lavoratore> list) -> {
+            if(list.getItems().isEmpty())
+                return false;
+            for(Lavoratore lavoratore : list.getItems()){
+                if(!lavoratore.getNomeLavoratore().equals(lavoratore1.getNomeLavoratore()) && !lavoratore.getNomeLavoratore().equals(lavoratore3.getNomeLavoratore()))
+                    return false;
+            }
+            return true;
+        });
+    }
+
+    @Test
+    public void tryQuery4() {
+        MFXCheckListView<Lingua> patentiLavoratore = lookup("#patentiLavoratore").query();
+        MFXDatePicker dataNascitaLavoratore = lookup("#dataNascitaLavoratore").query();
+
+        interact(() -> {
+            patentiLavoratore.getSelectionModel().selectIndex(5);
+            dataNascitaLavoratore.setValue(LocalDate.of(1985, 1, 1));
+        });
+
+        clickOn("#dataNascitaLavoratoreDa");
+        clickOn("#ricercaAND");
+        moveTo("#automunito");
+        scroll(20, VerticalDirection.DOWN);
+
+        FxAssert.verifyThat("#listaLavoratori", (MFXListView<Lavoratore> list) -> {
+            if (list.getItems().isEmpty())
+                return false;
+            for (Lavoratore lavoratore : list.getItems()) {
+                if (!lavoratore.getNomeLavoratore().equals(lavoratore2.getNomeLavoratore()) && !lavoratore.getNomeLavoratore().equals(lavoratore3.getNomeLavoratore()))
+                    return false;
+            }
+            return true;
+        });
+    }
+
+    @Test
+    public void tryQuery5() {
+        MFXCheckListView<Lingua> lingueLavoratore = lookup("#lingueLavoratore").query();
+        MFXCheckListView<Comune> comuneLavoratore = lookup("#comuneLavoratore").query();
+
+        interact(() -> {
+            lingueLavoratore.getSelectionModel().selectIndex(2);
+            lingueLavoratore.getSelectionModel().selectIndex(3);
+            comuneLavoratore.getSelectionModel().selectIndex(1);
+        });
+
+        clickOn("#automunito");
+        clickOn("#lingueLavoratoreOR");
+        clickOn("#ricercaOR");
+        moveTo("#automunito");
+        scroll(20, VerticalDirection.DOWN);
+
+        FxAssert.verifyThat("#listaLavoratori", (MFXListView<Lavoratore> list) -> list.getItems().size() == 3);
     }
 }

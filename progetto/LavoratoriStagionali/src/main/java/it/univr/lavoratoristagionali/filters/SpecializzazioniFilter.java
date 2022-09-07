@@ -21,4 +21,8 @@ public class SpecializzazioniFilter {
     public Flag getFlag() {
         return flag;
     }
+
+    public String toString(){
+        return specializzazioni.toString() + ", flag " + flag;
+    }
 }

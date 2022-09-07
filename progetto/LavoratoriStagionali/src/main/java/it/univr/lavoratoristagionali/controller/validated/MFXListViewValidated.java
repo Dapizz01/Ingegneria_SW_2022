@@ -1,7 +1,7 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
 import io.github.palexdev.materialfx.controls.MFXListView;
-import it.univr.lavoratoristagionali.controller.enums.Errore;
+import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.scene.control.Label;
 
@@ -10,9 +10,9 @@ import java.util.List;
 public class MFXListViewValidated<T> implements MFXValidated{
     private final MFXListView<T> listView;
     private final Label errorLabel;
-    private final Errore[] flags;
+    private final Check[] flags;
 
-    public MFXListViewValidated(MFXListView<T> listView, Label errorLabel, Errore ...flags){
+    public MFXListViewValidated(MFXListView<T> listView, Label errorLabel, Check...flags){
         this.listView = listView;
         this.errorLabel = errorLabel;
         this.flags = flags;
@@ -26,10 +26,10 @@ public class MFXListViewValidated<T> implements MFXValidated{
 
     // Non ci sono constraint e validate sulle MFXListView
     public boolean checkValid() throws InputException{
-        for(Errore flag : flags){
+        for(Check flag : flags){
             // Ignora qualsiasi flag che non sia Errore.NON_EMPTY
-            if(flag == Errore.NON_EMPTY && listView.getItems().isEmpty()){
-                throw new InputException(this, Errore.NON_EMPTY.getLabel());
+            if(flag == Check.NON_EMPTY && listView.getItems().isEmpty()){
+                throw new InputException(this, Check.NON_EMPTY.getLabel());
             }
         }
         showDefault();

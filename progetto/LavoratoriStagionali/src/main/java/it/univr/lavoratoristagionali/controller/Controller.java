@@ -28,6 +28,7 @@ public class Controller {
             stage.setScene(scene);
         }
         catch(IOException ioe){
+            ioe.printStackTrace();
             System.out.println("Failed to view resource \"" + target.getLabel() + "\" in the project");
         }
     }
@@ -55,6 +56,7 @@ public class Controller {
             stage.setScene(scene);
         }
         catch(IOException ioe){
+            ioe.printStackTrace();
             System.out.println("Failed to locate view \"" + target.getLabel() + "\" in the project");
         }
     }

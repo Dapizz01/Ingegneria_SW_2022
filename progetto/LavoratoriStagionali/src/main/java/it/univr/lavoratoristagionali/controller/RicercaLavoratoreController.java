@@ -3,6 +3,7 @@ package it.univr.lavoratoristagionali.controller;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.utils.others.FunctionalStringConverter;
 import it.univr.lavoratoristagionali.controller.enums.View;
+import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.filters.*;
 import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
@@ -43,6 +45,8 @@ public class RicercaLavoratoreController extends Controller implements Initializ
     private MFXDatePicker inizioPeriodo, finePeriodo;
     @FXML
     private MFXFilterComboBox<Comune> comuneDisponibilita;
+    @FXML
+    private Label inizioPeriodoError, finePeriodoError, comuneDisponibilitaError;
 
     // Ricerca per patente
     @FXML
@@ -185,10 +189,16 @@ public class RicercaLavoratoreController extends Controller implements Initializ
      * @param actionEvent parametro evento JavaFX
      */
     public void onClickRicercaAND(ActionEvent actionEvent) {
-        refreshFilters();
-        clearResultFields();
-        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.AND)));
-        // listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Pinco", "Pallino")));
+        try{
+            refreshFilters();
+            clearResultFields();
+            /* System.out.println(patentiFilter);
+            System.out.println(specializzazioniFilter); */
+            listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.AND)));
+        }
+        catch (InputException inputException){
+            return;
+        }
     }
 
     /**
@@ -198,10 +208,16 @@ public class RicercaLavoratoreController extends Controller implements Initializ
      * @param actionEvent parametro evento JavaFX
      */
     public void onClickRicercaOR(ActionEvent actionEvent) {
-        refreshFilters();
-        clearResultFields();
-        listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.OR)));
-        // listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.getLavoratori("Mirko", "DeMarchi")));
+        try{
+            refreshFilters();
+            clearResultFields();
+            /* System.out.println(patentiFilter);
+            System.out.println(specializzazioniFilter); */
+            listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.OR)));
+        }
+        catch (InputException inputException){
+            return;
+        }
     }
 
     /**
@@ -219,7 +235,7 @@ public class RicercaLavoratoreController extends Controller implements Initializ
             Lavoratore lavoratore = listaLavoratori.getSelectionModel().getSelection().get(lavoratoreIndex);
             nomeRisultato.setText(lavoratore.getNomeLavoratore());
             cognomeRisultato.setText(lavoratore.getCognomeLavoratore());
-            dataNascitaRisultato.setText(Integer.toString(lavoratore.getDataNascita()));
+            dataNascitaRisultato.setText(LocalDate.ofEpochDay(Long.parseLong(Integer.toString(lavoratore.getDataNascita()))).toString());
             comuneAbitazioneRisultato.setText(lavoratore.getComuneAbitazione().toString());
             comuneNascitaRisultato.setText(lavoratore.getComuneNascita().toString());
             nazionalitaRisultato.setText(lavoratore.getNazionalita().toString());
@@ -238,12 +254,26 @@ public class RicercaLavoratoreController extends Controller implements Initializ
     /**
      * Aggiorna i filter locali del controller con quelli modificati nella vista dall'utente.
      */
-    private void refreshFilters(){
+    private void refreshFilters() throws InputException{
         automunitoFilter = new AutomunitoFilter(automunito.isSelected());
         comuniFilter = new ComuniFilter(comuneLavoratore.getSelectionModel().getSelectedValues(), Flag.OR);
         dataNascitaFilter = new DataNascitaFilter(getEpochDays(dataNascitaLavoratore),
                 (dataNascitaGroup.getSelectedToggle().equals(dataNascitaLavoratoreDa)) ? Flag.FROM : Flag.TO);
-        disponibilitaFilter = new DisponibilitaFilter(getEpochDays(inizioPeriodo), getEpochDays(finePeriodo), comuneDisponibilita.getSelectedItem());
+
+        resetErrorLabels();
+        if(getEpochDays(inizioPeriodo) == -1 && getEpochDays(finePeriodo) == -1 && comuneDisponibilita.getSelectedItem() == null)
+            disponibilitaFilter = new DisponibilitaFilter(-1, -1, null);
+        else if(getEpochDays(inizioPeriodo) != -1 && getEpochDays(finePeriodo) != -1 && comuneDisponibilita.getSelectedItem() != null)
+            disponibilitaFilter = new DisponibilitaFilter(getEpochDays(inizioPeriodo), getEpochDays(finePeriodo), comuneDisponibilita.getSelectedItem());
+        else{
+            if(getEpochDays(inizioPeriodo) == -1)
+                throw new InputException(inizioPeriodoError, "Indicare inizio periodo");
+            else if (getEpochDays(finePeriodo) == -1)
+                throw new InputException(finePeriodoError, "Indicare fine periodo");
+            else
+                throw new InputException(comuneDisponibilitaError, "Selezionare un comune");
+        }
+
         lingueFilter = new LingueFilter(lingueLavoratore.getSelectionModel().getSelectedValues(),
                 (lingueLavoratoreGroup.getSelectedToggle().equals(lingueLavoratoreAND)) ? Flag.AND : Flag.OR);
         patentiFilter = new PatentiFilter(patentiLavoratore.getSelectionModel().getSelectedValues(),
@@ -280,5 +310,11 @@ public class RicercaLavoratoreController extends Controller implements Initializ
      */
     private int getEpochDays(MFXDatePicker datePicker){
         return (datePicker.getValue() != null) ? (int) datePicker.getValue().toEpochDay() : -1;
+    }
+
+    private void resetErrorLabels(){
+        inizioPeriodoError.setVisible(false);
+        finePeriodoError.setVisible(false);
+        comuneDisponibilitaError.setVisible(false);
     }
 }

@@ -87,7 +87,7 @@
                   </VBox>
                   <VBox prefHeight="68.0" prefWidth="323.0">
                      <children>
-                        <MFXFilterComboBox fx:id="comuneDisponibilita" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
+                        <MFXFilterComboBox fx:id="comuneDisponibilita" floatMode="BORDER" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
                         <Label fx:id="comuneDisponibilitaError" text="Label" visible="false" />
                      </children>
                   </VBox>

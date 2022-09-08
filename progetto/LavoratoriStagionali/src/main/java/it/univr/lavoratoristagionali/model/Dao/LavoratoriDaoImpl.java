@@ -466,16 +466,16 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
 
     @Override
     public List<Lavoratore> searchLavoratori(LingueFilter lingueFilter, ComuniFilter comuniFilter, PatentiFilter patentiFilter, SpecializzazioniFilter specializzazioniFilter, AutomunitoFilter automunitoFilter, DisponibilitaFilter disponibilitaFilter, DataNascitaFilter dataNascitaFilter, Flag flag) {
-        List<Lavoratore> lavoratoriCercati = new ArrayList<>();
-        Set<Integer> idLavoratori = new TreeSet<>(); // tiene traccia degli id dei lavoratori idonei alla ricerca
-        Set<Integer> tracciaIdLingue = new TreeSet<>();
-        Set<Integer> tracciaIdComuni = new TreeSet<>();
-        Set<Integer> tracciaIdPatenti = new TreeSet<>();
-        Set<Integer> tracciaIdSpecializzazioni = new TreeSet<>();
-        Set<Integer> tracciaIdAutomunito = new TreeSet<>();
-        Set<Integer> tracciaIdDisponibilita = new TreeSet<>();
-        Set<Integer> tracciaIdDataNascita = new TreeSet<>();
-        List<Integer> and1 = new ArrayList<>();
+        List<Lavoratore> lavoratoriCercati = new ArrayList<>();     // Lista dei lavoratori ideonei alla ricerca
+        Set<Integer> idLavoratori = new TreeSet<>();                // tiene traccia degli id dei lavoratori idonei alla ricerca
+        Set<Integer> tracciaIdLingue = new TreeSet<>();             // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro delle lingue
+        Set<Integer> tracciaIdComuni = new TreeSet<>();             // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro dei comuni
+        Set<Integer> tracciaIdPatenti = new TreeSet<>();            // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro delle patenti
+        Set<Integer> tracciaIdSpecializzazioni = new TreeSet<>();   // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro delle specializzazioni
+        Set<Integer> tracciaIdAutomunito = new TreeSet<>();         // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro degli automuniti
+        Set<Integer> tracciaIdDisponibilita = new TreeSet<>();      // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro delle disponibilità
+        Set<Integer> tracciaIdDataNascita = new TreeSet<>();        // tiene traccia degli id dei lavoratori che superano positivamente il controllo nel filtro della data di nascita
+        List<Integer> and1 = new ArrayList<>();                     // Lista ausiliaria utilizzata nelle parti in cui flag = AND all'interno dei filtri
 
 
         Connection c = null;
@@ -538,15 +538,22 @@ public class LavoratoriDaoImpl implements LavoratoriDao {
                     // Devo tenere gli id di and1 che compaiono esattamente n volte pari alla lunghezza di lingue, ovvero parlano tutte le lingue nella lista
                     Map<Integer, Integer> hm = new HashMap<Integer, Integer>();
 
+                    // Assegno a ogni ID di presente in and1(lavoratori che parlano almeno una lingua) il numero di lingue a lui associate(quelle che parla)
+                    // es: Key: ID lav 1  Val: 1 -> il lavoratore con id 1 parla una sola lingua(compare solo una volta in and1)
+                    // es2: Key: ID Lav 1 Val: 3 -> il lavoratore con id 1 parla 3 lingue diverse(compare tre volte in and1)
                     for (Integer i : and1) {
                         Integer j = hm.get(i);
-                        hm.put(i, (j == null) ? 1 : j + 1);
+                        hm.put(i, (j == null) ? 1 : j + 1); 
                     }
+                    // Se il valore di una chiave arriva a essere uguale al numero di lingue contenute nella lista del filtro
+                    // vuol dire che quel lavoratore(che ha come id la chiave) parla contemporaneamente tutte le lingue presenti nel filtro
+                    // quindi è idoneo alla ricerca in AND
                     for (Map.Entry<Integer, Integer> val : hm.entrySet()) {
                         if(val.getValue() == lingueFilter.getLingue().size())
-                            tracciaIdLingue.add(val.getKey());
+                            tracciaIdLingue.add(val.getKey());      // set senza ripetizioni
                     }
 
+                    // pulizia valori per le eventuali prossime ricerche in AND
                     hm.clear();
                     and1.clear();
                 }

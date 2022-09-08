@@ -23,18 +23,16 @@ public class MFXFilterComboBoxValidated<T> implements MFXValidated{
         buildValidator();
     }
 
+    /**
+     * Costruisce e applica i Constraint indicati dal costruttore al campo filterComboBox
+     */
     private void buildValidator(){
         List<io.github.palexdev.materialfx.validation.Constraint> constraints = new ArrayList<io.github.palexdev.materialfx.validation.Constraint>();
         for(Check flag : flags){
             constraints.add(io.github.palexdev.materialfx.validation.Constraint.Builder.build()
                     .setSeverity(Severity.ERROR)
                     .setMessage(flag.getLabel())
-                    .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
-                                case NON_EMPTY:
-                                    yield filterComboBox.getValue() != null;
-                                default:
-                                    yield true;
-                            }, filterComboBox.textProperty())
+                    .setCondition(Bindings.createBooleanBinding(() -> flag == Check.NON_EMPTY ? filterComboBox.getValue() != null : true, filterComboBox.textProperty())
                     ).get());
         }
 
@@ -43,6 +41,13 @@ public class MFXFilterComboBoxValidated<T> implements MFXValidated{
         }
     }
 
+    /**
+     * Restituisce gli elementi selezionati dall'utente di checkListView. Se checkListView non rispetta i Constraint,
+     * viene lanciata una InputException (con valore di ritorno null)
+     *
+     * @return Elementi di checkListView flaggati se list si trova in uno stato valido, altrimenti null
+     * @throws InputException Lanciato quando checkListView si trova in uno stato invalido
+     */
     public T getSelectedItem() throws InputException {
         if(checkValid())
             return filterComboBox.getSelectedItem();

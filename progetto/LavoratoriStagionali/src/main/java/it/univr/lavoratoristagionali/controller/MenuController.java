@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
  * Classe controller del menu principale
  */
 public class MenuController extends Controller{
+    // Elementi FXML
     @FXML
     private MFXButton modificaLavoratoreButton;
     @FXML
@@ -19,8 +20,6 @@ public class MenuController extends Controller{
     private MFXButton inserisciLavoratoreButton;
 
     public MenuController(){}
-
-    // TODO: aggiungere icone alla UI (https://github.com/palexdev/MaterialFX/blob/main/materialfx/src/main/java/io/github/palexdev/materialfx/font/FontResources.java)
 
     /**
      * Evento generato da JavaFX, al click del pulsante di ritorno al login.

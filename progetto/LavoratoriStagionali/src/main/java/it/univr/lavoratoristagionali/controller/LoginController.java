@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
  */
 public class LoginController extends Controller implements Initializable {
 
+    // Elementi FXML
     @FXML
     private MFXTextField usernameField;
     @FXML

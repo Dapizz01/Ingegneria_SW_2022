@@ -44,6 +44,12 @@ public class MenuModificaLavoratoreController extends Controller implements Init
         // Non mettere niente qui, altrimenti FXMLoader non fa caricare questo controller
     }
 
+    /**
+     * Funzione chiamata da JavaFX non appena la scena è caricata. Setta come visualizzare i lavoratori su listaLavoratori e istanzia LavoratoriDAO
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listaLavoratori.setConverter(FunctionalStringConverter.to(lavoratore -> {
@@ -61,29 +67,50 @@ public class MenuModificaLavoratoreController extends Controller implements Init
         lavoratoriDao = new LavoratoriDaoImpl();
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di ritorno al menu.
+     * Carica la scena del menu principale.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
     private void onClickTornaAlMenu(ActionEvent actionEvent) {
         switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di ricerca lavoratore.
+     * Ricerca i lavoratori tramite LavoratoriDAO con i valori dei textField e li mostra sulla lista di lavoratori.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
-    public void onClickCercaLavoratore(ActionEvent actionEvent) {
+    private void onClickCercaLavoratore(ActionEvent actionEvent) {
         lavoratori.setAll(lavoratoriDao.getLavoratori(nome.getText(), cognome.getText()));
-        /*for(Lavoratore lavoratore : lavoratoriDao.getLavoratori(nome.getText(), cognome.getText())){
-            lavoratori.add(lavoratore);
-        }
-        System.out.println(lavoratoriDao.getLavoratori(nome.getText(), cognome.getText()));
-        System.out.println(lavoratori.isEmpty());*/
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di modifica lavoratore.
+     * Carica la scena modificaLavoratore con i dati del lavoratore selezionato sulla lista.
+     * Se sulla lista non è selezionato alcun lavoratore, non fa nulla.
+     *
+     * @param actionEvent parametro evento JavaFX
+     */
     @FXML
-    public void onClickModificaLavoratore(ActionEvent actionEvent) {
+    private void onClickModificaLavoratore(ActionEvent actionEvent) {
         // TODO: aggiungere validated
         switchScene(getStageFromEvent(actionEvent), View.MODIFICA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0));
     }
 
+    /**
+     * Mateodo callback richiamato da JavaFX al click del pulsante di elimina lavoratore.
+     * Elimina il lavoratore selezionato sulla lista.
+     * Se sulla lista non è selezionato alcun lavoratore, non fa nulla.
+     *
+     * @param actionEvent
+     */
     @FXML
-    public void onClickEliminaLavoratore(ActionEvent actionEvent) {
+    private void onClickEliminaLavoratore(ActionEvent actionEvent) {
         LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
         if(!listaLavoratori.getSelectionModel().getSelectedValues().isEmpty()){
             lavoratoriDao.deleteLavoratore(listaLavoratori.getSelectionModel().getSelectedValues().get(0).getID());

@@ -18,13 +18,19 @@ public class MFXListViewValidated<T> implements MFXValidated{
         this.flags = flags;
     }
 
+    /**
+     * Restituisce gli elementi selezionati dall'utente di list. Se list non rispetta i Constraint,
+     * viene lanciata una InputException (con valore di ritorno null)
+     *
+     * @return Elementi di list selezionati se list si trova in uno stato valido, altrimenti null
+     * @throws InputException Lanciato quando list si trova in uno stato invalido
+     */
     public List<T> getSelectedItems() throws InputException{
         if(checkValid())
             return listView.getItems();
         return null;
     }
 
-    // Non ci sono constraint e validate sulle MFXListView
     public boolean checkValid() throws InputException{
         for(Check flag : flags){
             // Ignora qualsiasi flag che non sia Errore.NON_EMPTY
@@ -39,7 +45,7 @@ public class MFXListViewValidated<T> implements MFXValidated{
     public void showError(String message){
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        // listView.setStyle("-fx-border-color: -mfx-red"); // TODO: non funzionano, generano warnings
+        // listView.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){

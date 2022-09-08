@@ -36,7 +36,8 @@ public class Controller {
     /**
      * Cambia la scena attualmente mostrata, e passa alla nuova scena un oggetto di tipo Lavoratore
      *
-     * @warning
+     * Se target non è una scena che necessita di un oggetto di tipo lavoratore (ovvero non implementa .setLavoratoreBase(Lavoratore)),
+     * allora viene caricata ignorando il lavoratore passato come parametro
      *
      * @param stage stage sul quale viene sostituita la scena
      * @param target indica la vista che si vuole mettere come scena

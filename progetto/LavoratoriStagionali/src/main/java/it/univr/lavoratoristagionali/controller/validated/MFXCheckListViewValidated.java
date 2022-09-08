@@ -37,12 +37,6 @@ public class MFXCheckListViewValidated<T> implements MFXValidated {
         return checkValid() ? checkListView.getSelectionModel().getSelectedValues() : null;
     }
 
-    /**
-     * Controlla lo stato di questo oggetto, in base ai Constraint con il quale è stato costruito.
-     *
-     * @return true se l'oggetto rispetta i Check, altrimenti false
-     * @throws InputException Lanciata se l'oggetto non rispetta i Check
-     */
     @Override
     public boolean checkValid() throws InputException {
         for(Check flag : flags){
@@ -55,36 +49,22 @@ public class MFXCheckListViewValidated<T> implements MFXValidated {
         return true;
     }
 
-    /**
-     * Setta un messaggio su Label di errore e rende visibile tale label
-     *
-     * @param message Messaggio da mettere su Label di errore
-     */
     @Override
     public void showError(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
 
-    /**
-     * Nasconde il Label di errore
-     */
     @Override
     public void showCorrect() {
         errorLabel.setVisible(false);
     }
 
-    /**
-     * Nasconde il Label di errore
-     */
     @Override
     public void showDefault() {
         errorLabel.setVisible(false);
     }
 
-    /**
-     * Effettua il reset degli elementi selezionati su MFXCheckListView
-     */
     @Override
     public void reset() {
         checkListView.getSelectionModel().clearSelection();

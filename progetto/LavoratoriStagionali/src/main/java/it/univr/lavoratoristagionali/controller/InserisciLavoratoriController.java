@@ -232,11 +232,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickInviaLavoratore(ActionEvent actionEvent){
-        /*System.out.println(lingueParlate.getSelectionModel().getSelectedValues());
-        System.out.println(nazionalitaLavoratore.getSelectionModel().getSelectedValues());
-        System.out.println(patentiPossedute.getSelectionModel().getSelectedValues());
-        System.out.println(comuneNascita.getSelectionModel().getSelectedItem());*/
-
         Lavoratore lavoratore;
 
         try{

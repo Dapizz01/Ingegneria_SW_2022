@@ -58,7 +58,7 @@ public class LoginController extends Controller implements Initializable {
      * @param actionEvent parametro evento JavaFX
      */
     @FXML
-    protected void loginEvent(ActionEvent actionEvent){
+    private void loginEvent(ActionEvent actionEvent){
         String username = usernameField.getText();
         String password = passwordField.getText();
         if(loginDao.verificaLogin(new Login(username, password))){

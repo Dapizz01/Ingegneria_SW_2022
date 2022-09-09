@@ -34,6 +34,7 @@ public class MFXCheckListViewValidated<T> implements MFXValidated {
      * @throws InputException Lanciata se MFXCheckListView non rispetta i Check
      */
     public List<T> getSelectedItems() throws InputException{
+        // Se la checkList si trova in uno stato valido ritorna i suoi elementi selezionati, altrimenti viene lanciata una InputException
         return checkValid() ? checkListView.getSelectionModel().getSelectedValues() : null;
     }
 
@@ -41,6 +42,7 @@ public class MFXCheckListViewValidated<T> implements MFXValidated {
     public boolean checkValid() throws InputException {
         for(Check flag : flags){
             // Ignora qualsiasi flag che non sia Errore.NON_EMPTY
+            // Se c'è la flag NON_EMPTY e la checkList non ha alcun checkbox selezionato
             if(flag == Check.NON_EMPTY && checkListView.getSelectionModel().getSelectedValues().isEmpty()){
                 throw new InputException(this, Check.NON_EMPTY.getLabel());
             }

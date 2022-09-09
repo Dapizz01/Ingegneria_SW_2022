@@ -1,23 +1,10 @@
 /*
-    Questo file va aggiunto agli FXML da Scene Builder.
-    Da fare / idee:
-        - Mettere in rosso i button in cui si eliminano cose
-        - Inserire il titolo del programma come header (?)
+    Questo file CSS va aggiunto agli FXML da Scene Builder.
  */
 * {
     /*
         Palette colore 1
      */
-    /* -fx-background-1: "F7ECDE";
-    -fx-background-2: "E9DAC1";
-    -fx-active-1: "54BAB9";
-    -fx-active-2: "E9DAC1"; */
-
-    /* -fx-background: "#FFFFFF";
-    -fx-active-1: "00ADB5";
-    -fx-active-2: "7F5283";
-    -fx-dark: "222831"; */
-
     -fx-light-blue: "#BBDEFB";
     -fx-blue: "#2196F3";
     -fx-dark-blue: "#1976D2";
@@ -94,57 +81,20 @@
     -mfx-ripple-opacity: 0.9;
 }
 
-/*.mfx-check-list-view{
-    -fx-background-color: -fx-background;
-    -fx-border-color: -fx-dark;
+.errorLabel{
+    -fx-text-fill: #F44336;
+    -fx-font-weight: bold;
 }
 
-.virtual-flow{
-    -fx-background-color: transparent;
+.mfx-radio-button:selected .dot{
+    -fx-fill: -fx-blue;
 }
 
-.virtual-flow .mfx-check-list-cell{
-    -fx-background-color: transparent;
-} */
-
-/*.mfx-check-list-view {
-    -fx-background-color: "#7a0ed9";
-    -fx-background-radius: 10;
-    -fx-border-color: "#7a0ed9";
-    -fx-border-radius: 10;
-    -fx-padding: 4;
+.mfx-radio-button:selected .radio{
+    -fx-stroke: -fx-blue;
 }
 
-.mfx-check-list-view .virtual-flow {
-    -fx-background-color: transparent;
+.mfx-checkbox:selected .box{
+    -fx-background-color: -fx-blue;
+    -fx-border-color: -fx-blue;
 }
-
-.mfx-check-list-view:focused {
-    -fx-border-color: "#7a0ed9";
-}
-
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell {
-    -fx-background-color: "#B3E5FC";
-    -fx-border-color: "#B3E5FC";
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
-}
-
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell .data-label {
-    -fx-text-fill: white;
-    -fx-background-color: "#B3E5FC";
-}
-
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell:hover,
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell:selected {
-    -fx-background-color: rgba(255, 255, 255, 0.3);
-}
-
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell .mfx-ripple-generator {
-    -mfx-auto-clip: true;
-}
-
-.mfx-check-list-view .virtual-flow .mfx-check-list-cell:selected .mfx-ripple-generator {
-    -mfx-paused: true;
-}
-*/

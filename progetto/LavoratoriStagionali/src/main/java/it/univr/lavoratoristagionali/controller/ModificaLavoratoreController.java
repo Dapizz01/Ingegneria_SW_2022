@@ -117,8 +117,6 @@ public class ModificaLavoratoreController extends Controller implements Initiali
     private ObservableList<Esperienza> esperienze;
     private ObservableList<Disponibilita> disponibilita;
 
-    // TODO: aggiungere label di fine inserimento con successo / errore
-
     private static final int DAYS_IN_MONTH = 30;
     private static final int DAYS_IN_YEAR = 365;
     private int ID_lavoratore = -1;

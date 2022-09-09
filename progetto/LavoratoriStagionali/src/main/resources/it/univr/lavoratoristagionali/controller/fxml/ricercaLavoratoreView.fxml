@@ -57,7 +57,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="878.0" layoutY="142.0" prefHeight="229.0" prefWidth="323.0">
+            <VBox layoutX="878.0" layoutY="142.0" prefHeight="240.0" prefWidth="323.0">
                <children>
                   <VBox prefHeight="79.0" prefWidth="323.0">
                      <children>
@@ -66,29 +66,23 @@
                               <Insets />
                            </VBox.margin>
                         </MFXDatePicker>
-                        <Label fx:id="inizioPeriodoError" text="Label" visible="false" />
+                        <Label fx:id="inizioPeriodoError" prefHeight="29.0" prefWidth="323.0" styleClass="errorLabel" text="Label" visible="false" />
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
                   </VBox>
-                  <VBox prefHeight="80.0" prefWidth="323.0">
+                  <VBox prefHeight="79.0" prefWidth="323.0">
                      <children>
-                        <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="51.0" prefWidth="323.0">
+                        <MFXDatePicker fx:id="finePeriodo" floatMode="BORDER" floatingText="Fine periodo" prefHeight="47.0" prefWidth="323.0">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </MFXDatePicker>
-                        <Label fx:id="finePeriodoError" text="Label" visible="false" />
+                        <Label fx:id="finePeriodoError" prefHeight="29.0" prefWidth="323.0" styleClass="errorLabel" text="Label" visible="false" />
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
                   </VBox>
                   <VBox prefHeight="68.0" prefWidth="323.0">
                      <children>
                         <MFXFilterComboBox fx:id="comuneDisponibilita" floatMode="BORDER" floatingText="Comune disponibilità" prefHeight="51.0" prefWidth="347.0" />
-                        <Label fx:id="comuneDisponibilitaError" text="Label" visible="false" />
+                        <Label fx:id="comuneDisponibilitaError" prefHeight="28.0" prefWidth="323.0" styleClass="errorLabel" text="Label" visible="false" />
                      </children>
                   </VBox>
                </children>

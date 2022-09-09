@@ -21,7 +21,7 @@
       <font>
          <Font name="System Bold" size="13.0" />
       </font></MFXButton>
-   <Label fx:id="errorLabel" alignment="CENTER" layoutX="524.0" layoutY="493.0" prefHeight="50.0" prefWidth="239.0" text="Credenziali non corrette" textAlignment="CENTER" textFill="#cd2424" visible="false" wrapText="true" />
+   <Label fx:id="errorLabel" alignment="CENTER" layoutX="524.0" layoutY="493.0" prefHeight="50.0" prefWidth="239.0" styleClass="errorLabel" text="Credenziali non corrette" textAlignment="CENTER" visible="false" wrapText="true" />
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
    <Label layoutX="756.0" layoutY="26.0" prefHeight="50.0" prefWidth="68.0" text="Login" textAlignment="CENTER">
       <font>

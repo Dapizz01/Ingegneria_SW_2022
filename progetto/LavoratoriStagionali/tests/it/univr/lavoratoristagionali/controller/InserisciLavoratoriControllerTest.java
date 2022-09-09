@@ -1,11 +1,9 @@
 package it.univr.lavoratoristagionali.controller;
 
-import com.sun.javafx.scene.control.ContextMenuContent;
 import io.github.palexdev.materialfx.controls.*;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.geometry.VerticalDirection;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,15 +13,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.service.query.PointQuery;
-import org.testfx.util.NodeQueryUtils;
 
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.*;
 
 public class InserisciLavoratoriControllerTest extends ApplicationTest {
 

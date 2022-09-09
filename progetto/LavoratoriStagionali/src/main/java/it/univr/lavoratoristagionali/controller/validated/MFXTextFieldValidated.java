@@ -83,7 +83,7 @@ public class MFXTextFieldValidated implements MFXValidated {
     public void showError(String message){
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        textField.setStyle("-fx-border-color: -mfx-red");
+        // textField.setStyle("-fx-border-color: -mfx-red");
     }
 
     private void showError(Constraint constraint){
@@ -99,7 +99,7 @@ public class MFXTextFieldValidated implements MFXValidated {
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        // textField.setStyle("-fx-border-color: -common-gradient");
+        // textField.setStyle("-fx-border-color: lightgray");
     }
 
     /**

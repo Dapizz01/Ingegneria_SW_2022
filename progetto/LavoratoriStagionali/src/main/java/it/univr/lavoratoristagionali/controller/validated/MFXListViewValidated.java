@@ -26,18 +26,21 @@ public class MFXListViewValidated<T> implements MFXValidated{
      * @throws InputException Lanciato quando list si trova in uno stato invalido
      */
     public List<T> getSelectedItems() throws InputException{
-        if(checkValid())
-            return listView.getItems();
-        return null;
+        // Se la lista si trova in uno stato valido ritorna i suoi elementi, altrimenti viene lanciata una InputException
+        return checkValid() ? listView.getItems() : null;
     }
 
     public boolean checkValid() throws InputException{
+        // Controlla ogni flag
         for(Check flag : flags){
             // Ignora qualsiasi flag che non sia Errore.NON_EMPTY
+            // Se c'è la flag NON_EMPTY e la lista è vuota
             if(flag == Check.NON_EMPTY && listView.getItems().isEmpty()){
+                // Lancia una nuova InputException
                 throw new InputException(this, Check.NON_EMPTY.getLabel());
             }
         }
+        // Lo stato è valido, reset del messaggio di errore
         showDefault();
         return true;
     }
@@ -45,17 +48,14 @@ public class MFXListViewValidated<T> implements MFXValidated{
     public void showError(String message){
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        // listView.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        // listView.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        // listView.setStyle("-fx-border-color: -common-gradient");
     }
 
     @Override

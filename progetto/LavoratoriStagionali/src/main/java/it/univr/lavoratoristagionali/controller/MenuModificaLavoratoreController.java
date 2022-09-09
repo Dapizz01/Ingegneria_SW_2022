@@ -52,6 +52,7 @@ public class MenuModificaLavoratoreController extends Controller implements Init
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Impostazione del formato della stringa da mostrare per ogni cella di listaLavoratori
         listaLavoratori.setConverter(FunctionalStringConverter.to(lavoratore -> {
             if(lavoratore != null)
                 return lavoratore.getNomeLavoratore() +
@@ -61,6 +62,9 @@ public class MenuModificaLavoratoreController extends Controller implements Init
             return "";
         }));
 
+        // Creazione di un ObservableArrayList
+        // listaLavoratori prende gli elementi direttamente da questo ObservableArrayList, quindi ogni modifica fatta
+        // a questo oggetto si ripercuote su listaLavoratori (ogni elemento di questo oggetto è una cella su listaLavoratori)
         lavoratori = FXCollections.observableArrayList(new ArrayList<Lavoratore>());
         listaLavoratori.setItems(lavoratori);
 
@@ -98,8 +102,10 @@ public class MenuModificaLavoratoreController extends Controller implements Init
      */
     @FXML
     private void onClickModificaLavoratore(ActionEvent actionEvent) {
-        // TODO: aggiungere validated
-        switchScene(getStageFromEvent(actionEvent), View.MODIFICA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0));
+        // Se è stato selezionato un lavoratore su listaLavoratori
+        if(!listaLavoratori.getSelectionModel().getSelectedValues().isEmpty())
+            // Cambia scena in modificaLavoratore, passando come parametro il lavoratore scelto dall'utente
+            switchScene(getStageFromEvent(actionEvent), View.MODIFICA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0));
     }
 
     /**
@@ -112,8 +118,11 @@ public class MenuModificaLavoratoreController extends Controller implements Init
     @FXML
     private void onClickEliminaLavoratore(ActionEvent actionEvent) {
         LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+        // Se è stato selezionato un lavoratore su listaLavoratori
         if(!listaLavoratori.getSelectionModel().getSelectedValues().isEmpty()){
+            // Elimina dal database il lavoratore
             lavoratoriDao.deleteLavoratore(listaLavoratori.getSelectionModel().getSelectedValues().get(0).getID());
+            // Pulisci i risultati di listaLavoratori
             lavoratori.clear();
         }
     }

@@ -61,6 +61,7 @@ public class LoginController extends Controller implements Initializable {
     private void loginEvent(ActionEvent actionEvent){
         String username = usernameField.getText();
         String password = passwordField.getText();
+        // Se le credenziali sono valide
         if(loginDao.verificaLogin(new Login(username, password))){
             displayError(false);
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);

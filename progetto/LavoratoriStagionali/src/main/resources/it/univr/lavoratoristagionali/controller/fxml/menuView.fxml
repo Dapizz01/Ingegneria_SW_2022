@@ -50,7 +50,7 @@
             </ImageView>
             <MFXButton fx:id="inserisciLavoratoreButton" onAction="#goToInserisciLavoratore" prefHeight="80.0" prefWidth="191.0" text="Inserisci lavoratore" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -70,7 +70,7 @@
             </ImageView>
             <MFXButton fx:id="modificaLavoratoreButton" onAction="#goToMenuModificaLavoratore" prefHeight="80.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -90,7 +90,7 @@
             </ImageView>
             <MFXButton fx:id="effettuaRicercaButton" onAction="#goToEffettuaRicerca" prefHeight="80.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

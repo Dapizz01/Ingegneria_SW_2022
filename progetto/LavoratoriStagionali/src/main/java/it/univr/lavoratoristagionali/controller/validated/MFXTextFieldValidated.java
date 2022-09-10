@@ -34,23 +34,26 @@ public class MFXTextFieldValidated implements MFXValidated {
             constraints.add(Constraint.Builder.build()
                     .setSeverity(Severity.ERROR)
                     .setMessage(flag.getLabel())
+                    // Vengono definite le condizioni del constraint creato. Se la funzione ritorna true il constraint viene considerato rispettato
+                    // altrimenti no, e viene considerato uno stato invalido del textField
                     .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
                         case NON_EMPTY:
                             yield !this.textField.getText().equals("");
-                            case NUMBERS_ONLY:
-                                yield this.textField.getText().chars().allMatch(Character::isDigit);
-                                case LETTERS_ONLY:
-                                    yield this.textField.getText().chars().allMatch(c -> Character.isWhitespace(c) || Character.isLetter(c));
-                                    case TELEPHONE_FORMAT:
-                                        yield this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10;
+                        case NUMBERS_ONLY:
+                            yield this.textField.getText().chars().allMatch(Character::isDigit);
+                        case LETTERS_ONLY:
+                            yield this.textField.getText().chars().allMatch(c -> Character.isWhitespace(c) || Character.isLetter(c));
+                        case TELEPHONE_FORMAT:
+                            yield this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10;
                         case EMAIL_FORMAT:
                             yield this.textField.getText().contains("@");
-                            default:
-                                yield true;
-                                }, this.textField.textProperty())
+                        default:
+                            yield true;
+                            }, this.textField.textProperty())
                     ).get());
         }
 
+        // Associa i constraint appena creati al filterComboBox
         for(Constraint constraint : constraints){
             textField.getValidator().constraint(constraint);
         }
@@ -64,16 +67,20 @@ public class MFXTextFieldValidated implements MFXValidated {
      * @throws InputException Lanciata quando il valore di textField non è valido
      */
     public String getText() throws InputException {
-        if(checkValid())
-            return textField.getText();
-        return null;
+        return checkValid() ? textField.getText() : null;
     }
 
     public boolean checkValid() throws InputException{
+        // Ottenimento dei constraint non rispettati
+        // (.validate() ritorna i constraint al momento non rispettati da textField sotto forma di lista)
         List<Constraint> currentConstraints = textField.validate();
+        // Se ci sono constraint non rispettati
         if(!currentConstraints.isEmpty()){
+            // Viene lanciata una InputException con tale constraint
             throw new InputException(this, currentConstraints.get(0));
         }
+        // textField si trova in uno stato valido, e viene resettato il suo aspetto
+        // (nel caso prima fosse mostrato come errato, dato che ora non lo è più)
         else{
             showDefault();
             return true;
@@ -83,23 +90,19 @@ public class MFXTextFieldValidated implements MFXValidated {
     public void showError(String message){
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        // textField.setStyle("-fx-border-color: -mfx-red");
     }
 
     private void showError(Constraint constraint){
         errorLabel.setText(constraint.getMessage());
         errorLabel.setVisible(true);
-        // textField.setStyle("-fx-border-color: -mfx-red");
     }
 
     public void showCorrect(){
         errorLabel.setVisible(false);
-        // textField.setStyle("-fx-border-color: -mfx-green");
     }
 
     public void showDefault(){
         errorLabel.setVisible(false);
-        // textField.setStyle("-fx-border-color: lightgray");
     }
 
     /**

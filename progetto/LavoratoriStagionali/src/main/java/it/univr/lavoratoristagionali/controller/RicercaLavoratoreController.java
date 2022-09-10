@@ -192,12 +192,10 @@ public class RicercaLavoratoreController extends Controller implements Initializ
         try{
             refreshFilters();
             clearResultFields();
-            /* System.out.println(patentiFilter);
-            System.out.println(specializzazioniFilter); */
             listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.AND)));
         }
         catch (InputException inputException){
-            return;
+            return; // Non serve indicare istruzioni, la label di errore viene resa visibile direttamente da InputException
         }
     }
 
@@ -211,12 +209,10 @@ public class RicercaLavoratoreController extends Controller implements Initializ
         try{
             refreshFilters();
             clearResultFields();
-            /* System.out.println(patentiFilter);
-            System.out.println(specializzazioniFilter); */
             listaLavoratori.setItems(FXCollections.observableArrayList(lavoratoriDao.searchLavoratori(lingueFilter, comuniFilter, patentiFilter, specializzazioniFilter, automunitoFilter, disponibilitaFilter, dataNascitaFilter, Flag.OR)));
         }
         catch (InputException inputException){
-            return;
+            return; // Non serve indicare istruzioni, la label di errore viene resa visibile direttamente da InputException
         }
     }
 
@@ -227,14 +223,13 @@ public class RicercaLavoratoreController extends Controller implements Initializ
      * @param actionEvent parametro evento JavaFX
      */
     public void onClickVisualizzaDettagli(ActionEvent actionEvent) {
-        /* if(listaLavoratori.getSelectionModel().getSelectedValues() != null)
-            switchScene(getStageFromEvent(actionEvent), View.DETTAGLI_RICERCA_LAVORATORE, listaLavoratori.getSelectionModel().getSelectedValues().get(0)); */
         // Non è necessario un ciclo, ci sarà sempre al massimo un lavoratore selezionato, ma
         // JavaFX restituisce il risultato come una Map, quindi è necessario scorrere le chiavi
         for(int lavoratoreIndex : listaLavoratori.getSelectionModel().getSelection().keySet()){
             Lavoratore lavoratore = listaLavoratori.getSelectionModel().getSelection().get(lavoratoreIndex);
             nomeRisultato.setText(lavoratore.getNomeLavoratore());
             cognomeRisultato.setText(lavoratore.getCognomeLavoratore());
+            // lavoratore.getDataNascita() contiene il numero di giorni dalla Unix Epoch, quindi viene usato LocalDate per convertirlo in una data standard
             dataNascitaRisultato.setText(LocalDate.ofEpochDay(Long.parseLong(Integer.toString(lavoratore.getDataNascita()))).toString());
             comuneAbitazioneRisultato.setText(lavoratore.getComuneAbitazione().toString());
             comuneNascitaRisultato.setText(lavoratore.getComuneNascita().toString());
@@ -260,16 +255,23 @@ public class RicercaLavoratoreController extends Controller implements Initializ
         dataNascitaFilter = new DataNascitaFilter(getEpochDays(dataNascitaLavoratore),
                 (dataNascitaGroup.getSelectedToggle().equals(dataNascitaLavoratoreDa)) ? Flag.FROM : Flag.TO);
 
+        // Pulisce label di errore ancora visibili dalla scorsa ricerca
         resetErrorLabels();
+        // Se tutti i campi disponibilità sono vuoti, disponibilitaFilter viene creato con valori nulli
         if(getEpochDays(inizioPeriodo) == -1 && getEpochDays(finePeriodo) == -1 && comuneDisponibilita.getSelectedItem() == null)
             disponibilitaFilter = new DisponibilitaFilter(-1, -1, null);
+        // Se tutti i campi disponibilità sono riempiti, disponibilitaFilter viene creato con i valori dei campi
         else if(getEpochDays(inizioPeriodo) != -1 && getEpochDays(finePeriodo) != -1 && comuneDisponibilita.getSelectedItem() != null)
             disponibilitaFilter = new DisponibilitaFilter(getEpochDays(inizioPeriodo), getEpochDays(finePeriodo), comuneDisponibilita.getSelectedItem());
+        // In questo caso c'è almeno un campo disponibilità compilato, e almeno un campo non compilato
         else{
+            // Se inizioPeriodo non è compilato, viene lanciata una InputException su inizioPeriodo
             if(getEpochDays(inizioPeriodo) == -1)
                 throw new InputException(inizioPeriodoError, "Indicare inizio periodo");
+            // Se finePeriodo non è compilato, viene lanciata una InputException su finePeriodo
             else if (getEpochDays(finePeriodo) == -1)
                 throw new InputException(finePeriodoError, "Indicare fine periodo");
+            // Se comuneDisponibilita non ha un valore selezionato, viene lanciata una InputException su comuneDisponibilita
             else
                 throw new InputException(comuneDisponibilitaError, "Selezionare un comune");
         }
@@ -312,6 +314,9 @@ public class RicercaLavoratoreController extends Controller implements Initializ
         return (datePicker.getValue() != null) ? (int) datePicker.getValue().toEpochDay() : -1;
     }
 
+    /**
+     * Resetta i label di errore di inizioPeriodo, finePeriodo e comuneDisponibilità
+     */
     private void resetErrorLabels(){
         inizioPeriodoError.setVisible(false);
         finePeriodoError.setVisible(false);

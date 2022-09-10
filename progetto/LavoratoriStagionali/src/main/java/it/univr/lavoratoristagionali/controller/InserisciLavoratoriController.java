@@ -121,8 +121,6 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     private ObservableList<Disponibilita> disponibilita;
 
-    // TODO: aggiungere label di fine inserimento con successo / errore
-
     // Costanti
     private static final int DAYS_IN_MONTH = 30;
     private static final int DAYS_IN_YEAR = 365;
@@ -131,14 +129,15 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
     }
 
+    /**
+     * Metodo chiamato dopo la creazione della scena (e di tutti i suoi elementi) da parte di JavaFX.
+     * Crea gli oggetti Dao e i decorator Validated. Inoltre popola i campi a scelta multipla con i dati ottenuti dai Dao.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /* List<Lingua> lingue = List.of(new Lingua("lingua1"), new Lingua("lingua2"), new Lingua("lingua3"));
-        List<Comune> comuni = List.of(new Comune(1, "comune1"), new Comune(2, "comune2"), new Comune(3, "comune3"));
-        List<Lingua> nazionalita = List.of(new Lingua(1, "nazionalità1"), new Lingua(2, "nazionalità2"), new Lingua(3, "nazionalità3"));
-        List<Patente> patenti = List.of(new Patente(1, "patente1"), new Patente(2, "patente2"), new Patente(3, "patente3"));
-        List<Specializzazione> specializzazioni = List.of(new Specializzazione(1, "bagnino"), new Specializzazione(2, "test2"), new Specializzazione(3, "test3")); */
-
         // Creazione oggetti DAO
         ComuniDao comuniDao = new ComuniDaoImpl();
         LingueDao lingueDao = new LingueDaoImpl();
@@ -151,7 +150,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         List<Patente> patenti = patentiDao.getPatenti();
         List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
 
-        // Creazione dei wrapper Validated
+        // Creazione dei decorator Validated
         nomeLavoratoreValidated = new MFXTextFieldValidated(nomeLavoratore, nomeLavoratoreError, Check.LETTERS_ONLY, Check.NON_EMPTY);
         cognomeLavoratoreValidated = new MFXTextFieldValidated(cognomeLavoratore, cognomeLavoratoreError, Check.LETTERS_ONLY, Check.NON_EMPTY);
         dataNascitaLavoratoreValidated = new MFXDatePickerValidated(dataNascitaLavoratore, dataNascitaLavoratoreError, Check.MUST_BE_ADULT, Check.NON_EMPTY);
@@ -183,7 +182,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Check.NON_EMPTY);
         listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Check) null);
 
-        // Popolazione dei campi a scelta multipla (o delle liste) con i dati salvat
+        // Popolazione dei campi a scelta multipla (o delle liste) con i dati salvati
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
         comuneAbitazioneLavoratore.setItems(FXCollections.observableArrayList(comuni));
         lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
@@ -235,6 +234,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
         Lavoratore lavoratore;
 
         try{
+            // Viene creato un nuovo lavoratore.
+            // I vari metodi get dei decorator Validated richiamano checkValid() e
+            // controllano lo stato attuale dell'elemento. Se non è valido viene lanciata
+            // una InputException, e non viene terminato l'inserimento del lavoratore.
             lavoratore = new Lavoratore(-1,
                     nomeLavoratoreValidated.getText(),
                     cognomeLavoratoreValidated.getText(),
@@ -250,9 +253,10 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     listaContattoUrgenteValidated.getSelectedItems(),
                     patentiLavoratoreValidated.getSelectedItems(),
                     listaDisponibilitaValidated.getSelectedItems());
-            // System.out.println(lavoratore);
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
+            // Inserimento lavoratore attraverso Dao
             lavoratoriDao.addLavoratore(lavoratore);
+            // L'inserimento è avvenuto con successo, cambio di scena al menù principale
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
         }
         catch (InputException inputException){
@@ -273,9 +277,21 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private void onClickAggiungiContatto(ActionEvent actionEvent) {
         Contatto contatto;
         try {
-            contatto = new Contatto(-1, nomeContattoValidated.getText(), cognomeContattoValidated.getText(), telefonoContattoValidated.getText(), emailContattoValidated.getText());
+            // Viene creato un nuovo contatto.
+            // I vari metodi get dei decorator Validated richiamano checkValid() e
+            // controllano lo stato attuale dell'elemento. Se non è valido viene lanciata
+            // una InputException, e non viene terminato l'inserimento del contatto.
+            contatto = new Contatto(-1,
+                    nomeContattoValidated.getText(),
+                    cognomeContattoValidated.getText(),
+                    telefonoContattoValidated.getText(),
+                    emailContattoValidated.getText());
+
+            // Ora il contatto è stato validato, e viene aggiunto alla lista dei contatti
             contatti.add(contatto);
 
+            // Reset di tutti i campi del form dei contatti, per eliminare
+            // eventuali errori precedenti
             nomeContattoValidated.reset();
             cognomeContattoValidated.reset();
             telefonoContattoValidated.reset();
@@ -294,11 +310,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaContatto(ActionEvent actionEvent){
+        // Per ogni elemento selezionato dall'utente su listaContattoUrgente (al massimo 1 alla volta)
         for(int key : listaContattoUrgente.getSelectionModel().getSelection().keySet()){
+            // Rimuovi contatto urgente dalla lista dei contatti (ObservableList)
             contatti.remove(listaContattoUrgente.getSelectionModel().getSelection().get(key));
         }
+        // Rimuovi la precedente selezione
         listaContattoUrgente.getSelectionModel().clearSelection();
-        // System.out.println(contatti);
     }
 
     /**
@@ -309,11 +327,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaDisponibilita(ActionEvent actionEvent) {
+        // Per ogni elemento selezionato dall'utente su listaDisponibilita (al massimo 1 alla volta)
         for(int key : listaDisponibilita.getSelectionModel().getSelection().keySet()){
+            // Rimuovi disponibilità dalla lista dei contatti (ObservableList)
             disponibilita.remove(listaDisponibilita.getSelectionModel().getSelection().get(key));
         }
+        // Rimuovi la precedente selezione
         listaDisponibilita.getSelectionModel().clearSelection();
-        // System.out.println(contatti);
     }
 
     /**
@@ -328,22 +348,39 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
         try{
+            // Controllo che la data di inizio disponibilità non sia successiva alla data di fine disponibilità
             if(inizioDisponibilitaValidated.getEpochDays()  >= fineDisponibilitaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine è antecedente alla data di inizio");
 
+            // Controllo che il periodo indicato dall'utente sia di almeno un mese (periodo minimo di disponibilità)
             if(fineDisponibilitaValidated.getEpochDays() <= inizioDisponibilitaValidated.getEpochDays() + DAYS_IN_MONTH)
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La durata deve essere di almeno un mese");
 
+            // Controllo dei conflitti con le disponibilità già presenti
+            // Due disponibilità sono in conflitto se riguardano lo stesso comune e si sovrappongono per un certo periodo temporale
+
+            // Per ogni disponibilità già presente
             for(Disponibilita disponibilita : listaDisponibilita.getItems()){
+                // Se tale disponibilità riguarda lo stesso comune della disponibilità da inserire
                 if(disponibilita.getComune() == comuneDisponibilita.getValue()){
+                    // Se hanno un periodo in comune, viene lanciata una InputException, e viene impedito di aggiungerla alla lista delle disponibilità
                     if(inizioDisponibilitaValidated.getEpochDays() <= disponibilita.getFinePeriodo() && fineDisponibilitaValidated.getEpochDays() >= disponibilita.getInizioPeriodo())
                         throw new InvalidPeriodException(listaDisponibilitaValidated, "La disponibilità da inserire è in conflitto con quelle già inserite");
                 }
             }
 
-            Disponibilita nuovaDisponibilita = new Disponibilita(inizioDisponibilitaValidated.getEpochDays(), fineDisponibilitaValidated.getEpochDays(), comuneDisponibilitaValidated.getSelectedItem());
+            // Viene creato una nuova disponibilità.
+            // I vari metodi get dei decorator Validated richiamano checkValid() e
+            // controllano lo stato attuale dell'elemento. Se non è valido viene lanciata
+            // una InputException, e non viene terminato l'inserimento della disponibilità.
+            Disponibilita nuovaDisponibilita = new Disponibilita(inizioDisponibilitaValidated.getEpochDays(),
+                    fineDisponibilitaValidated.getEpochDays(),
+                    comuneDisponibilitaValidated.getSelectedItem());
+
             disponibilita.add(nuovaDisponibilita);
 
+            // Reset di tutti i campi del form delle disponibilità, per eliminare
+            // eventuali errori precedenti
             inizioDisponibilitaValidated.reset();
             fineDisponibilitaValidated.reset();
             comuneDisponibilitaValidated.reset();
@@ -365,19 +402,22 @@ public class InserisciLavoratoriController extends Controller implements Initial
     @FXML
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
         try {
-
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays()){
+            // Controllo che la data di inizio esperienza non sia successiva alla data di fine esperienza
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine è antecedente alla data di inizio");
-            }
 
-            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH){
+            // Controllo che il periodo indicato dall'utente sia di almeno un mese (periodo minimo di esperienza)
+            if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays() + DAYS_IN_MONTH)
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La durata deve essere di almeno un mese");
-            }
-            if(fineEsperienzaValidated.getEpochDays() >= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR){
+
+            // Controllo che l'esperienza abbia durata inferiore a 2 anni (limite massimo per un lavoro stagionale)
+            if(fineEsperienzaValidated.getEpochDays() >= inizioEsperienzaValidated.getEpochDays() + 2 * DAYS_IN_YEAR)
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La durata deve essere di massimo 2 anni");
-            }
 
-
+            // Viene creato una nuova esperienza.
+            // I vari metodi get dei decorator Validated richiamano checkValid() e
+            // controllano lo stato attuale dell'elemento. Se non è valido viene lanciata
+            // una InputException, e non viene terminato l'inserimento dell'esperienza.
             Esperienza nuovaEsperienza = new Esperienza(-1,
                     aziendaEsperienzaValidated.getText(),
                     Integer.parseInt(retribuzioneEsperienzaValidated.getText()),
@@ -388,6 +428,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
 
             esperienze.add(nuovaEsperienza);
 
+            // Reset di tutti i campi del form dell'esperienza, per eliminare
+            // eventuali errori precedenti
             aziendaEsperienzaValidated.reset();
             retribuzioneEsperienzaValidated.reset();
             inizioEsperienzaValidated.reset();
@@ -407,9 +449,12 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaEsperienza(ActionEvent actionEvent) {
+        // Per ogni elemento selezionato dall'utente su listaEsperienza (al massimo 1 alla volta)
         for(int key : listaEsperienze.getSelectionModel().getSelection().keySet()){
+            // Rimuovi disponibilità dalla lista dei contatti (ObservableList)
             esperienze.remove(listaEsperienze.getSelectionModel().getSelection().get(key));
         }
+        // Rimuovi la precedente selezione
         listaEsperienze.getSelectionModel().clearSelection();
     }
 }

@@ -124,6 +124,8 @@ public class MenuModificaLavoratoreController extends Controller implements Init
             lavoratoriDao.deleteLavoratore(listaLavoratori.getSelectionModel().getSelectedValues().get(0).getID());
             // Pulisci i risultati di listaLavoratori
             lavoratori.clear();
+            // Togli la selezione precedente (rimasta come residuo)
+            listaLavoratori.getSelectionModel().clearSelection();
         }
     }
 }

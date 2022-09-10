@@ -27,7 +27,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
-            <MFXButton fx:id="modificaLavoratore" layoutX="655.0" layoutY="2532.0" onAction="#onClickModificaLavoratore" text="Modifica">
+            <MFXButton fx:id="modificaLavoratore" layoutX="655.0" layoutY="2532.0" onAction="#onClickModificaLavoratore" text="Salva">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -80,8 +80,8 @@
                <children>
                   <VBox prefHeight="70.0" prefWidth="532.0">
                      <children>
-                        <MFXTextField fx:id="nomeLavoratore" floatMode="BORDER" floatingText="Nome" prefHeight="45.0" prefWidth="541.0" styleClass="errorLabel" />
-                        <Label fx:id="nomeLavoratoreError" prefHeight="25.0" prefWidth="532.0" text="OK" visible="false" />
+                        <MFXTextField fx:id="nomeLavoratore" floatMode="BORDER" floatingText="Nome" prefHeight="45.0" prefWidth="541.0" />
+                        <Label fx:id="nomeLavoratoreError" prefHeight="25.0" prefWidth="532.0" styleClass="errorLabel" text="OK" visible="false" />
                      </children>
                   </VBox>
                   <VBox layoutX="25.0" layoutY="10.0" prefHeight="68.0" prefWidth="532.0">
@@ -138,7 +138,7 @@
                   <Insets left="15.0" right="15.0" />
                </padding>
             </VBox>
-            <VBox layoutX="66.0" layoutY="1024.0" prefHeight="345.0" prefWidth="340.0">
+            <VBox layoutX="66.0" layoutY="1033.0" prefHeight="345.0" prefWidth="340.0">
                <children>
                   <VBox prefHeight="87.0" prefWidth="243.0">
                      <children>
@@ -260,13 +260,15 @@
                </font></Label>
             <VBox layoutX="306.0" layoutY="645.0" prefHeight="310.0" prefWidth="200.0">
                <children>
-                  <MFXCheckListView fx:id="patentiLavoratore" prefHeight="271.0" prefWidth="200.0" />
+                  <Label alignment="CENTER" prefHeight="36.0" prefWidth="200.0" text="Patenti possedute" textAlignment="CENTER" />
+                  <MFXCheckListView fx:id="patentiLavoratore" prefHeight="250.0" prefWidth="200.0" />
                   <Label fx:id="patentiLavoratoreError" prefHeight="39.0" prefWidth="204.0" styleClass="errorLabel" text="OK" visible="false" wrapText="true" />
                </children>
             </VBox>
             <VBox layoutX="82.0" layoutY="645.0" prefHeight="310.0" prefWidth="194.0">
                <children>
-                  <MFXCheckListView fx:id="lingueLavoratore" prefHeight="269.0" prefWidth="196.0" />
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="194.0" text="Patenti possedute" textAlignment="CENTER" />
+                  <MFXCheckListView fx:id="lingueLavoratore" prefHeight="252.0" prefWidth="194.0" />
                   <Label fx:id="lingueLavoratoreError" prefHeight="42.0" prefWidth="229.0" styleClass="errorLabel" text="OK" visible="false" wrapText="true" />
                </children>
             </VBox>

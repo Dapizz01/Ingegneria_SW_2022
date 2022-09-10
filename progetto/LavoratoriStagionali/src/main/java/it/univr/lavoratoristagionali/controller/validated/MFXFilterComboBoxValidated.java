@@ -67,7 +67,7 @@ public class MFXFilterComboBoxValidated<T> implements MFXValidated{
             // Viene lanciata una InputException con tale constraint
             throw new InputException(this, currentConstraints.get(0));
         }
-        // datePicker si trova in uno stato valido, e viene resettato il suo aspetto
+        // filterComboBox si trova in uno stato valido, e viene resettato il suo aspetto
         // (nel caso prima fosse mostrato come errato, dato che ora non lo è più)
         else{
             showDefault();

@@ -47,6 +47,8 @@ public class MFXDatePickerValidated implements MFXValidated{
                             yield datePicker.getValue() != null ? datePicker.getValue().toEpochDay() >= LocalDate.now().toEpochDay() : true;
                         case MUST_BE_ADULT: // Il datePicker indica una data di nascita, e tale deve indicare una data di nascita di una persona maggiorenne rispetto alla data odierna
                             yield datePicker.getValue() != null ? datePicker.getValue().toEpochDay() <= (LocalDate.now().toEpochDay() - (18 * 365)) : true;
+                        case FROM_FIVE_YEARS_AGO: // Il datePicker deve indicare una data vecchia di massimo 5 anni
+                            yield datePicker.getValue() != null ? datePicker.getValue().toEpochDay() >= (LocalDate.now().toEpochDay() - (5 * 365)) : true;
                         default: // Qualsiasi altra flag viene ignorata
                             yield true;
                             }, datePicker.textProperty())

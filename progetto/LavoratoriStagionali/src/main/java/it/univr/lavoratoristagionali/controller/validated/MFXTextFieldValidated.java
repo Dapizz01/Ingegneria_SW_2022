@@ -38,13 +38,13 @@ public class MFXTextFieldValidated implements MFXValidated {
                     // altrimenti no, e viene considerato uno stato invalido del textField
                     .setCondition(Bindings.createBooleanBinding(() -> switch(flag){
                         case NON_EMPTY:
-                            yield !this.textField.getText().equals("");
+                            yield !this.textField.getText().equals("") || this.textField.getLength() != 0;
                         case NUMBERS_ONLY:
                             yield this.textField.getText().chars().allMatch(Character::isDigit);
                         case LETTERS_ONLY:
-                            yield this.textField.getText().chars().allMatch(c -> Character.isWhitespace(c) || Character.isLetter(c));
+                            yield this.textField.getLength() != 0 ? this.textField.getText().chars().allMatch(c -> Character.isWhitespace(c) || Character.isLetter(c)) : true;
                         case TELEPHONE_FORMAT:
-                            yield this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10;
+                            yield this.textField.getLength() != 0 ? this.textField.getText().chars().allMatch(Character::isDigit) && textField.getLength() == 10 : true;
                         case EMAIL_FORMAT:
                             yield this.textField.getText().contains("@");
                         default:

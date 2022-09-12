@@ -12,6 +12,7 @@ public enum Check {
     EMAIL_FORMAT("La e-mail inserita non è corretta"),
     UP_TO_NOW("La data deve essere passata"),
     MUST_BE_ADULT("Il lavoratore deve essere maggiorenne"),
+    FROM_FIVE_YEARS_AGO("La data deve essere passata da meno di 5 anni"),
     FROM_NOW("La data deve essere futura");
 
     private final String label;

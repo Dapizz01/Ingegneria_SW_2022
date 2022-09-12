@@ -138,7 +138,7 @@ public class MainDemo {
             stmt.executeUpdate(sql);
 
             sql = "INSERT INTO Specializzazioni (NomeSpecializzazione)" +
-                    "VALUES ('Bagnino')," + "('Barman')," + "('Istruttore di nuoto')," + "('Viticultore')," + "('Floricultore');";
+                    "VALUES ('Bagnino')," + "('Barman')," + "('Istruttore di nuoto')," + "('Viticoltore')," + "('Floricoltore');";
             stmt.executeUpdate(sql);
 
             System.out.println("Tabelle DB popolate");

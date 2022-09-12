@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.VerticalDirection;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
@@ -103,6 +104,8 @@ public class MenuModificaLavoratoreControllerTest extends ApplicationTest {
         });
 
         clickOn("#eliminaLavoratore");
+
+        clickOn("Conferma");
 
         clickOn("#cercaLavoratore");
 

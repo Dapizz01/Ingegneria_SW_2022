@@ -2,6 +2,7 @@ package it.univr.lavoratoristagionali.controller;
 
 import io.github.palexdev.materialfx.controls.*;
 import it.univr.lavoratoristagionali.controller.enums.View;
+import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.VerticalDirection;
@@ -53,6 +54,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
             - Aggiungi disponibilità e poi eliminarla (controllare lista vuota)
             - Aggiungere esperienza vuota
             - Aggiungere esperienza con retribuzione errata (lettere, spazi, ...)
+            - Aggiungere esperienza più vecchia di 5 anni
             - Aggiungere esperienza con data futura
             - Aggiungere esperienza e poi eliminarla (controllare lista vuota)
      */
@@ -115,6 +117,79 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         // Se il lavoratore è stato effettivamente inserito, la scena dovrebbe cambiare ed essere quella del menù
         // principale, perciò controlla che esista il button ...
         FxAssert.verifyThat("#modificaLavoratoreButton", (Button button) -> button.isVisible());
+    }
+
+    // ------ TEST CONTENUTO COMBOBOX, LISTVIEW, CHECKLISTVIEW ------ //
+
+    @Test
+    public void verifyComuneNascitaItems(){
+        ComuniDao comuniDao = new ComuniDaoImpl();
+        clickOn("#comuneNascitaLavoratore .caret");
+        FxAssert.verifyThat("#comuneNascitaLavoratore", (MFXFilterComboBox<Comune> comuneNascita) -> comuneNascita.getItems().equals(comuniDao.getComuni()));
+    }
+
+    @Test
+    public void verifyComuneAbitazioneItems(){
+        ComuniDao comuniDao = new ComuniDaoImpl();
+        clickOn("#comuneAbitazioneLavoratore .caret");
+        FxAssert.verifyThat("#comuneAbitazioneLavoratore", (MFXFilterComboBox<Comune> comuneAbitazione) -> comuneAbitazione.getItems().equals(comuniDao.getComuni()));
+    }
+
+    @Test
+    public void verifyNazionalitaItems(){
+        LingueDao lingueDao = new LingueDaoImpl();
+        clickOn("#nazionalitaLavoratore .caret");
+        FxAssert.verifyThat("#nazionalitaLavoratore", (MFXFilterComboBox<Lingua> nazionalita) -> nazionalita.getItems().equals(lingueDao.getLingue()));
+    }
+
+    @Test
+    public void verifyLingueItems(){
+        LingueDao lingueDao = new LingueDaoImpl();
+        moveTo("#ritornaMenu");
+        scroll(5, VerticalDirection.DOWN);
+        FxAssert.verifyThat("#lingueLavoratore", (MFXCheckListView<Lingua> lingue) -> lingue.getItems().equals(lingueDao.getLingue()));
+    }
+
+    @Test
+    public void verifyPatentiItems(){
+        PatentiDao patentiDao = new PatentiDaoImpl();
+        moveTo("#ritornaMenu");
+        scroll(5, VerticalDirection.DOWN);
+        FxAssert.verifyThat("#patentiLavoratore", (MFXCheckListView<Patente> patenti) -> patenti.getItems().equals(patentiDao.getPatenti()));
+    }
+
+    @Test
+    public void verifyComuneDisponibilitaItems(){
+        ComuniDao comuniDao = new ComuniDaoImpl();
+        moveTo("#ritornaMenu");
+        scroll(30, VerticalDirection.DOWN);
+        clickOn("#comuneDisponibilita .caret");
+        FxAssert.verifyThat("#comuneDisponibilita", (MFXFilterComboBox<Comune> comuneDisponibilita) -> comuneDisponibilita.getItems().equals(comuniDao.getComuni()));
+    }
+
+    // NOT WORKING, non so perchè, da debuggare
+    /* @Test
+    public void verifySpecializzazioniItems(){
+        SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
+        MFXFilterComboBox<Specializzazione> specializzazioni = lookup("#specializzazioneEsperienza").query();
+        moveTo("#ritornaMenu");
+        scroll(50, VerticalDirection.DOWN);
+        clickOn("#specializzazioneEsperienza .caret");
+        System.out.println(specializzazioniDao.getSpecializzazioni());
+        interact(() -> {
+            System.out.println(specializzazioni.getItems());
+            System.out.println(specializzazioni.getItems().);
+        });
+        FxAssert.verifyThat("#specializzazioneEsperienza", (MFXFilterComboBox<Specializzazione> specializzazioneEsperienza) -> specializzazioneEsperienza.getItems().equals(specializzazioniDao.getSpecializzazioni()));
+    } */
+
+    @Test
+    public void verifyComuneEsperienzaItems(){
+        ComuniDao comuniDao = new ComuniDaoImpl();
+        moveTo("#ritornaMenu");
+        scroll(50, VerticalDirection.DOWN);
+        clickOn("#comuneEsperienza .caret");
+        FxAssert.verifyThat("#comuneEsperienza", (MFXFilterComboBox<Comune> comuneEsperienza) -> comuneEsperienza.getItems().equals(comuniDao.getComuni()));
     }
 
     // ------ TEST CONTATTO URGENTE ------ //
@@ -272,10 +347,10 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
     }
 
     // NON FUNZIONANTE, non rileva l'errore
-    /* @Test
+    @Test
     public void addOverlappingDisponibilita(){
-        point(10, 10);
-        scroll(25, VerticalDirection.DOWN);
+        moveTo("#ritornaMenu");
+        scroll(30, VerticalDirection.DOWN);
         MFXDatePicker inizio = lookup("#inizioDisponibilita").query();
         MFXDatePicker fine = lookup("#fineDisponibilita").query();
         MFXFilterComboBox<Comune> listComuni = lookup("#comuneDisponibilita").query();
@@ -283,19 +358,19 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         interact(() -> {
             inizio.setValue(LocalDate.of(2040, 9, 4));
             fine.setValue(LocalDate.of(2040, 11, 20));
-            listComuni.selectItem(new Comune("Bonavigo"));
+            listComuni.selectIndex(0);
         });
         clickOn("#aggiungiDisponibilita");
         FxAssert.verifyThat("#listaDisponibilita", (MFXListView<Disponibilita> list) -> !list.getItems().isEmpty());
         // Seconda disponiblita
         interact(() -> {
             inizio.setValue(LocalDate.of(2040, 8, 4));
-            fine.setValue(LocalDate.of(2040, 12, 20));
-            listComuni.selectItem(new Comune("Bonavigo"));
+            fine.setValue(LocalDate.of(2040, 10, 20));
+            listComuni.selectIndex(0);
         });
         clickOn("#aggiungiDisponibilita");
         FxAssert.verifyThat("#listaDisponibilita", (MFXListView<Disponibilita> list) -> list.getItems().size() == 1);
-    } */
+    }
 
     // ------ TEST ESPERIENZA ------ //
     @Test
@@ -319,6 +394,30 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         clickOn("#retribuzioneEsperienza").write("3");
 
         interact(() -> {
+            inizio.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 365));
+            fine.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 200));
+            comune.selectIndex(0);
+            specializzazione.selectIndex(0);
+        });
+
+        clickOn("#aggiungiEsperienza");
+
+        FxAssert.verifyThat("#listaEsperienze", (MFXListView<Esperienza> list) -> !list.getItems().isEmpty());
+    }
+
+    @Test
+    public void addOldEsperienza(){
+        MFXDatePicker inizio = lookup("#inizioEsperienza").query();
+        MFXDatePicker fine = lookup("#fineEsperienza").query();
+        MFXFilterComboBox<Comune> comune = lookup("#comuneEsperienza").query();
+        MFXFilterComboBox<Specializzazione> specializzazione = lookup("#specializzazioneEsperienza").query();
+
+        moveTo("#ritornaMenu");
+        scroll(50, VerticalDirection.DOWN);
+        clickOn("#aziendaEsperienza").write("AziendaTest");
+        clickOn("#retribuzioneEsperienza").write("3");
+
+        interact(() -> {
             inizio.setValue(LocalDate.of(2000, 9, 4));
             fine.setValue(LocalDate.of(2001, 5, 4));
             comune.selectIndex(0);
@@ -327,7 +426,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
 
         clickOn("#aggiungiEsperienza");
 
-        FxAssert.verifyThat("#listaEsperienze", (MFXListView<Esperienza> list) -> !list.getItems().isEmpty());
+        FxAssert.verifyThat("#listaEsperienze", (MFXListView<Esperienza> list) -> list.getItems().isEmpty());
     }
 
     @Test
@@ -367,8 +466,8 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         clickOn("#retribuzioneEsperienza").write("3 abc");
 
         interact(() -> {
-            inizio.setValue(LocalDate.of(2040, 9, 4));
-            fine.setValue(LocalDate.of(2041, 5, 4));
+            inizio.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 365));
+            fine.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 200));
             comune.selectIndex(0);
             specializzazione.selectIndex(0);
         });
@@ -392,8 +491,8 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         clickOn("#retribuzioneEsperienza").write("3");
 
         interact(() -> {
-            inizio.setValue(LocalDate.of(2000, 9, 4));
-            fine.setValue(LocalDate.of(2001, 5, 4));
+            inizio.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 365));
+            fine.setValue(LocalDate.ofEpochDay(LocalDate.now().toEpochDay() - 200));
             comune.selectIndex(0);
             specializzazione.selectIndex(0);
         });

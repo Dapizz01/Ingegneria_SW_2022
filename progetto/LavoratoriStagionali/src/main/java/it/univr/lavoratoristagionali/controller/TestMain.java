@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.controller;
 
+import it.univr.lavoratoristagionali.controller.enums.Resolution;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +13,7 @@ public class TestMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.LOGIN.getLabel()));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+        Scene scene = new Scene(fxmlLoader.load(), Resolution.WIDTH.getLabel(), Resolution.HEIGHT.getLabel());
         stage.setTitle("Gestione Lavoratori");
         stage.setScene(scene);
         stage.show();

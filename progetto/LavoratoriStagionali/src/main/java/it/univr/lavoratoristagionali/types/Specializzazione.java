@@ -14,4 +14,9 @@ public class Specializzazione {
     public String toString(){
         return nomeSpecializzazione;
     }
+
+    @Override
+    public boolean equals(Object object){
+        return (object instanceof Specializzazione) ? nomeSpecializzazione.equals(((Specializzazione) object).nomeSpecializzazione) : false;
+    }
 }

@@ -1,8 +1,10 @@
 package it.univr.lavoratoristagionali.controller.validated;
 
 import io.github.palexdev.materialfx.controls.MFXListView;
+import io.github.palexdev.materialfx.selection.base.IMultipleSelectionModel;
 import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
 import java.util.List;
@@ -43,6 +45,18 @@ public class MFXListViewValidated<T> implements MFXValidated{
         // Lo stato è valido, reset del messaggio di errore
         showDefault();
         return true;
+    }
+
+    public void setItems(ObservableList<T> list){
+        listView.setItems(list);
+    }
+
+    public List<T> getItems(){
+        return listView.getItems();
+    }
+
+    public IMultipleSelectionModel<T> getSelectionModel(){
+        return listView.getSelectionModel();
     }
 
     public void showError(String message){

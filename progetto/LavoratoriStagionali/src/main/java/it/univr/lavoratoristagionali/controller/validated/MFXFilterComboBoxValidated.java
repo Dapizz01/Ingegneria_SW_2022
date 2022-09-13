@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.validation.Severity;
 import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
@@ -73,6 +74,10 @@ public class MFXFilterComboBoxValidated<T> implements MFXValidated{
             showDefault();
             return true;
         }
+    }
+
+    public void setItems(ObservableList<T> list){
+        filterComboBox.setItems(list);
     }
 
     public void showError(String message){

@@ -1,0 +1,10 @@
+module:it.univr.lavoratoristagionali
+it.univr.lavoratoristagionali.controller
+it.univr.lavoratoristagionali.controller.enums
+it.univr.lavoratoristagionali.controller.exception
+it.univr.lavoratoristagionali.controller.forms
+it.univr.lavoratoristagionali.controller.validated
+it.univr.lavoratoristagionali.filters
+it.univr.lavoratoristagionali.model
+it.univr.lavoratoristagionali.model.Dao
+it.univr.lavoratoristagionali.types

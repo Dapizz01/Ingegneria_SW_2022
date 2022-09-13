@@ -27,9 +27,6 @@ public class LoginDaoImpl implements LoginDao {
             while (rs.next()) {
                 String user = rs.getString("User");
                 String password = rs.getString("Password");
-                //System.out.println("User = " + user);
-                //System.out.println("Password = " + password);
-                //System.out.println();
 
                 if ( (login.getUser().equals(user) && login.getPassword().equals(password)) && verifica == false) {
                     verifica = true;

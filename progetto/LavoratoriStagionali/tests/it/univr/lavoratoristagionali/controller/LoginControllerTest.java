@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +37,11 @@ public class LoginControllerTest extends ApplicationTest {
 
     }
 
+    /**
+     * Inserimento di credenziali corrette
+     *
+     * Comportamento aspettato: cambio di scena al menù principale
+     */
     @Test
     public void tryCorrectLogin(){
         clickOn("#usernameField").write("aaa");
@@ -44,6 +50,11 @@ public class LoginControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#modificaLavoratoreButton", (Button button) -> button.isVisible());
     }
 
+    /**
+     * Inserimento di credenziali errate
+     *
+     * Comportamento aspettato: nessun cambio di scena, comparsa label errore
+     */
     @Test
     public void tryWrongLogin(){
         clickOn("#usernameField");
@@ -54,6 +65,11 @@ public class LoginControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
     }
 
+    /**
+     * Compilazione del campo password, ma non del campo username
+     *
+     * Comportamento aspettato: nessun cambio di scena
+     */
     @Test
     public void tryMissingUsername(){
         clickOn("#passwordField");
@@ -62,6 +78,11 @@ public class LoginControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
     }
 
+    /**
+     * Compilazione del campo username, ma non del campo password
+     *
+     * Comportamento aspettato: nessun cambio di scena
+     */
     @Test
     public void tryMissingPassword(){
         clickOn("#usernameField");
@@ -70,6 +91,11 @@ public class LoginControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#errorLabel", (Label label) -> label.isVisible());
     }
 
+    /**
+     * Nessun campo compilato
+     *
+     * Comportamento aspettato: nessun cambio di scena
+     */
     @Test
     public void tryEmptyFields(){
         clickOn("#submitButton");

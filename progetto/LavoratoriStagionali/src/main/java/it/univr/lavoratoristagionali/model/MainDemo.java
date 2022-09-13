@@ -120,8 +120,8 @@ public class MainDemo {
             // Gli autoincrement non vengono inseriti
             sql = "INSERT INTO Dipendenti (Nome,Cognome,DataNascita,N_telefono,Email,User,Password,ComuneNascita) " +
                     "VALUES ('Mario', 'Rossi', '2999', '1234567890', 'mariorossi@gmail.com', 'aaa', 'bbb', 'Legnago'), " +
-                    "('Marco', 'Dp', '1000', '1234567899', 'ciao123@gmail.com', 'ccc', 'ddd', 'Verona'), " +
-                    "('Nico', 'Modenese', '12000', '1231231231', 'ciao12345@gmail.com', 'eee', 'fff', 'Verona');";
+                    "('Mattia', 'Gialli', '1000', '1234567899', 'ciao123@gmail.com', 'username', 'password', 'Verona'), " +
+                    "('Piero', 'Neri', '12000', '1231231231', 'ciao12345@gmail.com', 'eee', 'fff', 'Verona');";
             stmt.executeUpdate(sql);
 
             sql = "INSERT INTO Patenti (NomePatente)" +

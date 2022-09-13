@@ -1,5 +1,6 @@
 package it.univr.lavoratoristagionali.controller;
 
+import it.univr.lavoratoristagionali.controller.enums.Resolution;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.types.Lavoratore;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ public class Controller {
     public void switchScene(Stage stage, View target){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
-            Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+            Scene scene = new Scene(fxmlLoader.load(), Resolution.WIDTH.getLabel(), Resolution.HEIGHT.getLabel());
             stage.setScene(scene);
         }
         catch(IOException ioe){
@@ -46,7 +47,7 @@ public class Controller {
     public void switchScene(Stage stage, View target, Lavoratore lavoratore){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(target.getLabel()));
-            Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+            Scene scene = new Scene(fxmlLoader.load(), Resolution.WIDTH.getLabel(), Resolution.HEIGHT.getLabel());
             if(fxmlLoader.getController() instanceof ModificaLavoratoreController){
                 ModificaLavoratoreController view = fxmlLoader.getController();
                 view.setLavoratoreBase(lavoratore);

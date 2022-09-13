@@ -5,6 +5,9 @@ import it.univr.lavoratoristagionali.controller.enums.Check;
 import it.univr.lavoratoristagionali.controller.enums.View;
 import it.univr.lavoratoristagionali.controller.exception.InputException;
 import it.univr.lavoratoristagionali.controller.exception.InvalidPeriodException;
+import it.univr.lavoratoristagionali.controller.forms.ContattiUrgentiForm;
+import it.univr.lavoratoristagionali.controller.forms.DisponibilitaForm;
+import it.univr.lavoratoristagionali.controller.forms.EsperienzeForm;
 import it.univr.lavoratoristagionali.controller.validated.*;
 import it.univr.lavoratoristagionali.model.Dao.*;
 import it.univr.lavoratoristagionali.types.*;
@@ -70,6 +73,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXListViewValidated<Contatto> listaContattoUrgenteValidated;
     @FXML
     private Label nomeContattoError, cognomeContattoError, telefonoContattoError, emailContattoError, listaContattoUrgenteError;
+    private ContattiUrgentiForm contattiUrgentiForm;
 
     // ------ DISPONIBILITA ------ //
     @FXML
@@ -85,6 +89,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXListViewValidated<Disponibilita> listaDisponibilitaValidated;
     @FXML
     private Label inizioDisponibilitaError, fineDisponibilitaError, comuneDisponibilitaError, listaDisponibilitaError;
+    private DisponibilitaForm disponibilitaForm;
 
     // ------ ESPERIENZE ------ //
     @FXML
@@ -106,6 +111,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXListViewValidated<Esperienza> listaEsperienzeValidated;
     @FXML
     private Label aziendaEsperienzaError, retribuzioneEsperienzaError, inizioEsperienzaError, fineEsperienzaError, comuneEsperienzaError, specializzazioneEsperienzaError, listaEsperienzeError;
+    private EsperienzeForm esperienzeForm;
 
     // ... il resto
     @FXML
@@ -114,15 +120,11 @@ public class InserisciLavoratoriController extends Controller implements Initial
     private MFXScrollPane scrollPane;
 
     // Variabili del controller non legate ad FXML
-    private ObservableList<Contatto> contatti;
+    /* private ObservableList<Contatto> contatti;
 
     private ObservableList<Esperienza> esperienze;
 
-    private ObservableList<Disponibilita> disponibilita;
-
-    // Costanti
-    private static final int DAYS_IN_MONTH = 30;
-    private static final int DAYS_IN_YEAR = 365;
+    private ObservableList<Disponibilita> disponibilita; */
 
     public InserisciLavoratoriController(){
 
@@ -144,7 +146,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
 
         // Salvataggio di tutti i dati dei DAO in delle liste
-        List<Comune> comuni = comuniDao.getComuni(); // Ritorna la lista dei comuni nel DB da 0=Bonavigo a 5=Casaleone
+        List<Comune> comuni = comuniDao.getComuni();
         List<Lingua> lingue = lingueDao.getLingue();
         List<Patente> patenti = patentiDao.getPatenti();
         List<Specializzazione> specializzazioni = specializzazioniDao.getSpecializzazioni();
@@ -162,7 +164,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         lingueLavoratoreValidated = new MFXCheckListViewValidated<Lingua>(lingueLavoratore, lingueLavoratoreError, Check.NON_EMPTY);
         patentiLavoratoreValidated = new MFXCheckListViewValidated<Patente>(patentiLavoratore, patentiLavoratoreError, (Check) null);
 
-        nomeContattoValidated = new MFXTextFieldValidated(nomeContatto, nomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY);
+        /* nomeContattoValidated = new MFXTextFieldValidated(nomeContatto, nomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY);
         cognomeContattoValidated = new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY);
         emailContattoValidated = new MFXTextFieldValidated(emailContatto, emailContattoError, Check.EMAIL_FORMAT, Check.NON_EMPTY);
         telefonoContattoValidated = new MFXTextFieldValidated(telefonoContatto, telefonoContattoError, Check.TELEPHONE_FORMAT, Check.NON_EMPTY);
@@ -179,7 +181,32 @@ public class InserisciLavoratoriController extends Controller implements Initial
         fineEsperienzaValidated = new MFXDatePickerValidated(fineEsperienza, fineEsperienzaError, Check.UP_TO_NOW, Check.NON_EMPTY, Check.FROM_FIVE_YEARS_AGO);
         comuneEsperienzaValidated = new MFXFilterComboBoxValidated<Comune>(comuneEsperienza, comuneEsperienzaError, Check.NON_EMPTY);
         specializzazioneEsperienzaValidated = new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Check.NON_EMPTY);
-        listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Check) null);
+        listaEsperienzeValidated = new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Check) null); */
+
+        contattiUrgentiForm = new ContattiUrgentiForm(
+                new MFXTextFieldValidated(nomeContatto, nomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY),
+                new MFXTextFieldValidated(cognomeContatto, cognomeContattoError, Check.LETTERS_ONLY, Check.NON_EMPTY),
+                new MFXTextFieldValidated(emailContatto, emailContattoError, Check.EMAIL_FORMAT, Check.NON_EMPTY),
+                new MFXTextFieldValidated(telefonoContatto, telefonoContattoError, Check.TELEPHONE_FORMAT, Check.NON_EMPTY),
+                new MFXListViewValidated<Contatto>(listaContattoUrgente, listaContattoUrgenteError, Check.NON_EMPTY)
+        );
+
+        disponibilitaForm = new DisponibilitaForm(
+                new MFXDatePickerValidated(inizioDisponibilita, inizioDisponibilitaError, Check.FROM_NOW, Check.NON_EMPTY),
+                new MFXDatePickerValidated(fineDisponibilita, fineDisponibilitaError, Check.FROM_NOW, Check.NON_EMPTY),
+                new MFXFilterComboBoxValidated<Comune>(comuneDisponibilita, comuneDisponibilitaError, Check.NON_EMPTY),
+                new MFXListViewValidated<Disponibilita>(listaDisponibilita, listaDisponibilitaError, (Check) null)
+        );
+
+        esperienzeForm = new EsperienzeForm(
+                new MFXTextFieldValidated(aziendaEsperienza, aziendaEsperienzaError, Check.LETTERS_ONLY, Check.NON_EMPTY),
+                new MFXTextFieldValidated(retribuzioneEsperienza, retribuzioneEsperienzaError, Check.NUMBERS_ONLY, Check.NON_EMPTY),
+                new MFXDatePickerValidated(inizioEsperienza, inizioEsperienzaError, Check.UP_TO_NOW, Check.NON_EMPTY),
+                new MFXDatePickerValidated(fineEsperienza, fineEsperienzaError, Check.UP_TO_NOW, Check.NON_EMPTY, Check.FROM_FIVE_YEARS_AGO),
+                new MFXFilterComboBoxValidated<Comune>(comuneEsperienza, comuneEsperienzaError, Check.NON_EMPTY, Check.FROM_FIVE_YEARS_AGO),
+                new MFXFilterComboBoxValidated<Specializzazione>(specializzazioneEsperienza, specializzazioneEsperienzaError, Check.NON_EMPTY),
+                new MFXListViewValidated<Esperienza>(listaEsperienze, listaEsperienzeError, (Check) null)
+        );
 
         // Popolazione dei campi a scelta multipla (o delle liste) con i dati salvati
         comuneNascitaLavoratore.setItems(FXCollections.observableArrayList(comuni));
@@ -187,20 +214,20 @@ public class InserisciLavoratoriController extends Controller implements Initial
         lingueLavoratore.setItems(FXCollections.observableArrayList(lingue));
         nazionalitaLavoratore.setItems(FXCollections.observableArrayList(lingue));
         patentiLavoratore.setItems(FXCollections.observableArrayList(patenti));
-        comuneEsperienza.setItems(FXCollections.observableArrayList(comuni));
+        /* comuneEsperienza.setItems(FXCollections.observableArrayList(comuni));
         comuneDisponibilita.setItems(FXCollections.observableArrayList(comuni));
-        specializzazioneEsperienza.setItems(FXCollections.observableArrayList(specializzazioni));
+        specializzazioneEsperienza.setItems(FXCollections.observableArrayList(specializzazioni)); */
 
         // I dati inseriti in listaContattoUrgente, listaEsperienze, listaDisponibilita vengono automaticamente
         // messi anche in contatti, esperienze e disponiblità, perchè condividono fra loro una ObservableList
-        contatti = FXCollections.observableArrayList(new ArrayList<>());
+        /* contatti = FXCollections.observableArrayList(new ArrayList<>());
         listaContattoUrgente.setItems(contatti);
 
         esperienze = FXCollections.observableArrayList(new ArrayList<>());
         listaEsperienze.setItems(esperienze);
 
         disponibilita = FXCollections.observableArrayList(new ArrayList<>());
-        listaDisponibilita.setItems(disponibilita);
+        listaDisponibilita.setItems(disponibilita); */
 
         // Settaggi che implementano lo smooth scrolling (solo con trackpad)
         listaDisponibilita.features().enableSmoothScrolling(1.2);
@@ -220,7 +247,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
     }
 
     /**
-     * Evento generato da JavaFX, al click del pulsante di invio lavoratore al DAO.
+     * Evento generato da JavaFX, al click del pulsante di invio lavoratore.
      * Raccoglie i dati contenuti nei campi e ne controlla il contenuto.
      * Se il contenuto non è valido (secondo i parametri impostati alla creazione), viene marcato il campo invalido
      * e non viene proseguita l'invio.
@@ -247,15 +274,18 @@ public class InserisciLavoratoriController extends Controller implements Initial
                     emailLavoratoreValidated.getText(),
                     telefonoLavoratoreValidated.getText(),
                     automunito.isSelected(),
-                    listaEsperienzeValidated.getSelectedItems(),
+                    // listaEsperienzeValidated.getSelectedItems(),
+                    esperienzeForm.getEsperienze(),
                     lingueLavoratoreValidated.getSelectedItems(),
-                    listaContattoUrgenteValidated.getSelectedItems(),
+                    // listaContattoUrgenteValidated.getSelectedItems(),
+                    contattiUrgentiForm.getContatti(),
                     patentiLavoratoreValidated.getSelectedItems(),
-                    listaDisponibilitaValidated.getSelectedItems());
+                    // listaDisponibilitaValidated.getSelectedItems());
+                    disponibilitaForm.getDisponibilita());
             LavoratoriDao lavoratoriDao = new LavoratoriDaoImpl();
             // Inserimento lavoratore attraverso Dao
             lavoratoriDao.addLavoratore(lavoratore);
-            // L'inserimento è avvenuto con successo, cambio di scena al menù principale
+            // L'inserimento è avvenuto con successo (no exception), cambio di scena al menù principale
             switchScene(getStageFromEvent(actionEvent), View.MAIN_MENU);
         }
         catch (InputException inputException){
@@ -274,7 +304,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickAggiungiContatto(ActionEvent actionEvent) {
-        Contatto contatto;
+        contattiUrgentiForm.addContatto();
+        /* Contatto contatto;
         try {
             // Viene creato un nuovo contatto.
             // I vari metodi get dei decorator Validated richiamano checkValid() e
@@ -298,24 +329,25 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
         catch (InputException inputException) {
             return;
-        }
+        } */
     }
 
     /**
-     * Mateodo callback richiamato da JavaFX al click del pulsante di eliminazione di un contatto urgente.
+     * Metodo callback richiamato da JavaFX al click del pulsante di eliminazione di un contatto urgente.
      * Se è stato selezionato un contatto dalla lista, esso verrà cancellato, altrimenti ignora l'evento.
      *
      * @param actionEvent parametro evento JavaFX
      */
     @FXML
     private void onClickEliminaContatto(ActionEvent actionEvent){
-        // Per ogni elemento selezionato dall'utente su listaContattoUrgente (al massimo 1 alla volta)
+        contattiUrgentiForm.deleteSelectedContatto();
+        /* // Per ogni elemento selezionato dall'utente su listaContattoUrgente (al massimo 1 alla volta)
         for(int key : listaContattoUrgente.getSelectionModel().getSelection().keySet()){
             // Rimuovi contatto urgente dalla lista dei contatti (ObservableList)
             contatti.remove(listaContattoUrgente.getSelectionModel().getSelection().get(key));
         }
         // Rimuovi la precedente selezione
-        listaContattoUrgente.getSelectionModel().clearSelection();
+        listaContattoUrgente.getSelectionModel().clearSelection(); */
     }
 
     /**
@@ -326,13 +358,14 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaDisponibilita(ActionEvent actionEvent) {
-        // Per ogni elemento selezionato dall'utente su listaDisponibilita (al massimo 1 alla volta)
+        disponibilitaForm.removeDisponibilita();
+        /* // Per ogni elemento selezionato dall'utente su listaDisponibilita (al massimo 1 alla volta)
         for(int key : listaDisponibilita.getSelectionModel().getSelection().keySet()){
             // Rimuovi disponibilità dalla lista dei contatti (ObservableList)
             disponibilita.remove(listaDisponibilita.getSelectionModel().getSelection().get(key));
         }
         // Rimuovi la precedente selezione
-        listaDisponibilita.getSelectionModel().clearSelection();
+        listaDisponibilita.getSelectionModel().clearSelection(); */
     }
 
     /**
@@ -346,7 +379,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickAggiungiDisponibilita(ActionEvent actionEvent) {
-        try{
+        disponibilitaForm.addDisponibilita();
+        /* try{
             // Controllo che la data di inizio disponibilità non sia successiva alla data di fine disponibilità
             if(inizioDisponibilitaValidated.getEpochDays()  >= fineDisponibilitaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineDisponibilitaValidated, "La data di fine è antecedente alla data di inizio");
@@ -386,7 +420,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
         catch (InputException inputException){
             return;
-        }
+        } */
     }
 
     /**
@@ -400,7 +434,8 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickAggiungiEsperienza(ActionEvent actionEvent) {
-        try {
+        esperienzeForm.addEsperienza();
+        /* try {
             // Controllo che la data di inizio esperienza non sia successiva alla data di fine esperienza
             if(fineEsperienzaValidated.getEpochDays() <= inizioEsperienzaValidated.getEpochDays())
                 throw new InvalidPeriodException(fineEsperienzaValidated, "La data di fine è antecedente alla data di inizio");
@@ -437,7 +472,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
         }
         catch(InputException inputException) {
             return;
-        }
+        } */
     }
 
     /**
@@ -448,12 +483,13 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaEsperienza(ActionEvent actionEvent) {
-        // Per ogni elemento selezionato dall'utente su listaEsperienza (al massimo 1 alla volta)
+        esperienzeForm.deleteSelectedEsperienza();
+        /* // Per ogni elemento selezionato dall'utente su listaEsperienza (al massimo 1 alla volta)
         for(int key : listaEsperienze.getSelectionModel().getSelection().keySet()){
             // Rimuovi disponibilità dalla lista dei contatti (ObservableList)
             esperienze.remove(listaEsperienze.getSelectionModel().getSelection().get(key));
         }
         // Rimuovi la precedente selezione
-        listaEsperienze.getSelectionModel().clearSelection();
+        listaEsperienze.getSelectionModel().clearSelection(); */
     }
 }

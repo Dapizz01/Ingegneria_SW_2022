@@ -62,7 +62,7 @@ public class DisponibilitaForm {
         try{
             // Controllo che la data di inizio disponibilità non sia successiva alla data di fine disponibilità
             if(inizioPeriodo.getEpochDays()  >= finePeriodo.getEpochDays())
-                throw new InvalidPeriodException(finePeriodo, "La data di fine è antecedente alla data di inizio");
+                throw new InvalidPeriodException(finePeriodo, "La data di fine è antecedente all'inizio");
 
             // Controllo che il periodo indicato dall'utente sia di almeno un mese (periodo minimo di disponibilità)
             if(finePeriodo.getEpochDays() <= inizioPeriodo.getEpochDays() + 30)

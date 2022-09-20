@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller del menù di modifica (ed eliminazione) di un lavoratore già esistente nel sistema.
+ */
 public class MenuModificaLavoratoreController extends Controller implements Initializable {
     // Inserimento ricerca
     @FXML

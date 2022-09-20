@@ -78,7 +78,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
      *
      * @throws InterruptedException
      */
-    /* @Test
+    @Test
     public void addValidLavoratore() throws InterruptedException {
         MFXDatePicker dataNascitaLavoratore = lookup("#dataNascitaLavoratore").query();
         MFXFilterComboBox<Comune> comuneNascitaLavoratore = lookup("#comuneNascitaLavoratore").query();
@@ -121,9 +121,9 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         clickOn("#inviaLavoratore");
 
         // Se il lavoratore è stato effettivamente inserito, la scena dovrebbe cambiare ed essere quella del menù
-        // principale, perciò controlla che esista il button ...
+        // principale, perciò controlla che esista il button "Modifica lavoratore" appartenente solo al menù principale
         FxAssert.verifyThat("#modificaLavoratoreButton", (Button button) -> button.isVisible());
-    } */
+    }
 
     // ------ TEST CONTENUTO COMBOBOX, LISTVIEW, CHECKLISTVIEW ------ //
 
@@ -173,9 +173,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         clickOn("#specializzazioneEsperienza .caret");
     }
 
-    /**
-     * Viene testato che il filterComboBox del comune di nascita abbia effettivamente tutti i comuni forniti da ComuniDao
-     */
     /* @Test
     public void verifyComuneNascitaItems(){
         ComuniDao comuniDao = new ComuniDaoImpl();
@@ -183,9 +180,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#comuneNascitaLavoratore", (MFXFilterComboBox<Comune> comuneNascita) -> comuneNascita.getItems().equals(comuniDao.getComuni()));
     } */
 
-    /**
-     * Viene testato che il filterComboBox del comune di abitazione abbia effettivamente tutti i comuni forniti da ComuniDao
-     */
     /* @Test
     public void verifyComuneAbitazioneItems(){
         ComuniDao comuniDao = new ComuniDaoImpl();
@@ -193,9 +187,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#comuneAbitazioneLavoratore", (MFXFilterComboBox<Comune> comuneAbitazione) -> comuneAbitazione.getItems().equals(comuniDao.getComuni()));
     } */
 
-    /**
-     * Viene testato che il filterComboBox della nazionalità abbia effettivamente tutte le nazionalità in LingueDao
-     */
     /* @Test
     public void verifyNazionalitaItems(){
         LingueDao lingueDao = new LingueDaoImpl();
@@ -203,9 +194,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#nazionalitaLavoratore", (MFXFilterComboBox<Lingua> nazionalita) -> nazionalita.getItems().equals(lingueDao.getLingue()));
     } */
 
-    /**
-     * Viene testato che il checkListView delle lingue parlate da un lavoratore abbia effettivamente tutte le lingue forniti da LingueDao
-     */
     /* @Test
     public void verifyLingueItems(){
         LingueDao lingueDao = new LingueDaoImpl();
@@ -214,9 +202,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#lingueLavoratore", (MFXCheckListView<Lingua> lingue) -> lingue.getItems().equals(lingueDao.getLingue()));
     } */
 
-    /**
-     * Viene testato che il checkListView delle patenti possedute abbia effettivamente tutte le patenti forniti da PatentiDao
-     */
     /* @Test
     public void verifyPatentiItems(){
         PatentiDao patentiDao = new PatentiDaoImpl();
@@ -225,9 +210,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#patentiLavoratore", (MFXCheckListView<Patente> patenti) -> patenti.getItems().equals(patentiDao.getPatenti()));
     } */
 
-    /**
-     * Viene testato che il filterComboBox del comune di disponibilità abbia effettivamente tutti i comuni forniti da ComuniDao
-     */
     /* @Test
     public void verifyComuneDisponibilitaItems(){
         ComuniDao comuniDao = new ComuniDaoImpl();
@@ -237,9 +219,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#comuneDisponibilita", (MFXFilterComboBox<Comune> comuneDisponibilita) -> comuneDisponibilita.getItems().equals(comuniDao.getComuni()));
     } */
 
-    /**
-     * Viene testato che il filterComboBox delle specializzazioni abbia effettivamente tutte le specializzazioni forniti da SpecializzazioniDao
-     */
     /* @Test
     public void verifySpecializzazioniItems(){
         SpecializzazioniDao specializzazioniDao = new SpecializzazioniDaoImpl();
@@ -249,9 +228,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#specializzazioneEsperienza", (MFXFilterComboBox<Specializzazione> specializzazioneEsperienza) -> specializzazioneEsperienza.getItems().equals(specializzazioniDao.getSpecializzazioni()));
     } */
 
-    /**
-     * Viene testato che il filterComboBox del comune dell'esperienza lavorativa abbia effettivamente tutti i comuni forniti da ComuniDao
-     */
     /* @Test
     public void verifyComuneEsperienzaItems(){
         ComuniDao comuniDao = new ComuniDaoImpl();
@@ -263,9 +239,6 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
 
     // ------ TEST CONTATTO URGENTE ------ //
 
-    /**
-     * Verifica l'inserimento di un nuovo contatto urgente
-     */
     /* @Test
     public void addValidContattoUrgente(){
         moveTo("#ritornaMenu");
@@ -437,8 +410,7 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         FxAssert.verifyThat("#listaDisponibilita", (MFXListView<Disponibilita> list) -> list.getItems().isEmpty());
     }
 
-    // NON FUNZIONANTE, non rileva l'errore
-    /* @Test
+    @Test
     public void addOverlappingDisponibilita(){
         moveTo("#ritornaMenu");
         scroll(30, VerticalDirection.DOWN);
@@ -456,12 +428,12 @@ public class InserisciLavoratoriControllerTest extends ApplicationTest {
         // Seconda disponiblita
         interact(() -> {
             inizio.setValue(LocalDate.of(2040, 8, 4));
-            fine.setValue(LocalDate.of(2040, 10, 20));
+            fine.setValue(LocalDate.of(2040, 12, 20));
             listComuni.selectIndex(0);
         });
         clickOn("#aggiungiDisponibilita");
         FxAssert.verifyThat("#listaDisponibilita", (MFXListView<Disponibilita> list) -> list.getItems().size() == 1);
-    } */
+    }
 
     // ------ TEST ESPERIENZA ------ //
     @Test

@@ -358,7 +358,7 @@ public class InserisciLavoratoriController extends Controller implements Initial
      */
     @FXML
     private void onClickEliminaDisponibilita(ActionEvent actionEvent) {
-        disponibilitaForm.removeDisponibilita();
+        disponibilitaForm.deleteSelectedDisponibilita();
         /* // Per ogni elemento selezionato dall'utente su listaDisponibilita (al massimo 1 alla volta)
         for(int key : listaDisponibilita.getSelectionModel().getSelection().keySet()){
             // Rimuovi disponibilità dalla lista dei contatti (ObservableList)

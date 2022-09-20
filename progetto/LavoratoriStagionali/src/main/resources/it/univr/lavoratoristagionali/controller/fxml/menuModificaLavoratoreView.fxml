@@ -16,22 +16,34 @@
       <MFXButton fx:id="tornaAlMenu" layoutX="40.0" layoutY="27.0" onAction="#onClickTornaAlMenu" prefHeight="49.0" prefWidth="80.0" text="Indietro">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></MFXButton>
       <MFXTextField fx:id="nome" floatMode="BORDER" floatingText="Nome" layoutX="374.0" layoutY="126.0" prefHeight="51.0" prefWidth="206.0" />
       <MFXTextField fx:id="cognome" floatMode="BORDER" floatingText="Cognome" layoutX="696.0" layoutY="126.0" prefHeight="51.0" prefWidth="206.0" />
-      <MFXButton fx:id="cercaLavoratore" layoutX="614.0" layoutY="192.0" onAction="#onClickCercaLavoratore" text="Cerca">
+      <MFXButton fx:id="cercaLavoratore" layoutX="606.0" layoutY="190.0" onAction="#onClickCercaLavoratore" prefHeight="35.0" prefWidth="69.0" text="Cerca">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></MFXButton>
       <MFXListView fx:id="listaLavoratori" layoutX="308.0" layoutY="235.0" prefHeight="350.0" prefWidth="665.0" />
-      <MFXButton fx:id="modificaLavoratore" layoutX="442.0" layoutY="609.0" onAction="#onClickModificaLavoratore" text="Modifica">
+      <MFXButton fx:id="modificaLavoratore" layoutX="435.0" layoutY="609.0" onAction="#onClickModificaLavoratore" prefHeight="35.0" prefWidth="85.0" text="Modifica">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
-      <MFXButton fx:id="eliminaLavoratore" layoutX="765.0" layoutY="609.0" onAction="#onClickEliminaLavoratore" text="Cancella">
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></MFXButton>
+      <MFXButton fx:id="eliminaLavoratore" layoutX="757.0" layoutY="609.0" onAction="#onClickEliminaLavoratore" prefHeight="35.0" prefWidth="85.0" text="Cancella">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></MFXButton>
+         </cursor>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></MFXButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffecb3" height="100.0" layoutX="665.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" width="250.0" />
       <Label layoutX="723.0" layoutY="5.0" prefHeight="92.0" prefWidth="135.0" text="Menu modifica lavoratore" textAlignment="CENTER" wrapText="true">
          <font>

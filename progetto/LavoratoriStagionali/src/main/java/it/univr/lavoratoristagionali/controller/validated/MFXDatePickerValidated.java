@@ -12,6 +12,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe wrapper di MFXDatePicker, comprende un MFXDatePicker e il suo label di errore.
+ * Permette di ottenere il valore di MFXDatePicker in modo sicuro, lanciando un'eccezione
+ * se MFXDatePicker non rispetta le condizioni (Check) specificate nel costruttore
+ */
 public class MFXDatePickerValidated implements MFXValidated{
     private final MFXDatePicker datePicker;
     private final Label errorLabel;

@@ -9,6 +9,11 @@ import javafx.scene.control.Label;
 
 import java.util.List;
 
+/**
+ * Classe wrapper di MFXListView, comprende un MFXListView e il suo label di errore.
+ * Permette di ottenere il valore selezionato di MFXListView in modo sicuro, lanciando un'eccezione
+ * se MFXListView non rispetta le condizioni (Check) specificate nel costruttore
+ */
 public class MFXListViewValidated<T> implements MFXValidated{
     private final MFXListView<T> listView;
     private final Label errorLabel;

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * E' il controller che si occupa della ricerca dei lavoratori.
+ * Classe controller del form di ricerca dei lavoratori già inseriti nel sistema.
  */
 public class RicercaLavoratoreController extends Controller implements Initializable {
 

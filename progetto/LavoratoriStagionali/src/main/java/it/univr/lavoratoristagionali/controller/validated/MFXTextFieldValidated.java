@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe wrapper di MFXTextField, comprende un MFXTextField e il suo label di errore.
+ * Permette di ottenere il valore selezionato di MFXTextField in modo sicuro, lanciando un'eccezione
+ * se MFXTextField non rispetta le condizioni (Check) specificate nel costruttore
+ */
 public class MFXTextFieldValidated implements MFXValidated {
 
     private final MFXTextField textField;

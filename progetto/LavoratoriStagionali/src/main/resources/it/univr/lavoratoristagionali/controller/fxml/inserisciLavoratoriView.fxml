@@ -23,10 +23,13 @@
    <content>
       <AnchorPane prefHeight="2605.0" prefWidth="1264.0">
          <children>
-            <MFXButton fx:id="ritornaMenu" layoutX="40.0" layoutY="27.0" onAction="#onClickRitornaMenu" prefHeight="49.0" prefWidth="80.0" text="Indietro" wrapText="true">
+            <MFXButton fx:id="ritornaMenu" layoutX="40.0" layoutY="27.0" onAction="#onClickRitornaMenu" prefHeight="49.0" prefWidth="85.0" text="Indietro" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></MFXButton>
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></MFXButton>
             <MFXButton fx:id="inviaLavoratore" layoutX="657.0" layoutY="2533.0" onAction="#onClickInviaLavoratore" text="Salva">
                <font>
                   <Font name="System Bold" size="20.0" />

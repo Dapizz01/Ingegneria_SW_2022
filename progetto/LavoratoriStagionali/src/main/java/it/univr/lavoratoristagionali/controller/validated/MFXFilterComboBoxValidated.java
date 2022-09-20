@@ -12,6 +12,11 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe wrapper di MFXFilterComboBox, comprende un MFXFilterComboBox e il suo label di errore.
+ * Permette di ottenere il valore selezionato di MFXFilterComboBox in modo sicuro, lanciando un'eccezione
+ * se MFXFilterComboBox non rispetta le condizioni (Check) specificate nel costruttore
+ */
 public class MFXFilterComboBoxValidated<T> implements MFXValidated{
     private final MFXFilterComboBox<T> filterComboBox;
     private final Label errorLabel;

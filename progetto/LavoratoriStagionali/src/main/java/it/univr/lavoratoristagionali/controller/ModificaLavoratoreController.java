@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller del form di modifica dei dati di un lavoratore già inserito nel sistema.
+ */
 public class ModificaLavoratoreController extends Controller implements Initializable {
     // ------ ANAGRAFICA ------ //
     @FXML
@@ -394,7 +397,7 @@ public class ModificaLavoratoreController extends Controller implements Initiali
         }
         // Rimuovi la precedente selezione
         listaDisponibilita.getSelectionModel().clearSelection(); */
-        disponibilitaForm.removeDisponibilita();
+        disponibilitaForm.deleteSelectedDisponibilita();
     }
 
     /**

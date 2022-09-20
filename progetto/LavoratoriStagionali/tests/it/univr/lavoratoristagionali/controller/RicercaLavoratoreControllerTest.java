@@ -160,7 +160,7 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
         - 2 lingue AND
         - 1 comune
         - automunito
-        Tutto in AND
+        - Ricerca totale
      */
     @Test
     public void tryQuery1(){
@@ -194,7 +194,7 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
     Query:
         - 2 patenti in OR
         - 1 specializzazione
-        Tutto in AND
+        - Ricerca totale
      */
     @Test
     public void tryQuery2(){
@@ -223,6 +223,12 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
         });
     }
 
+    /*
+    Query:
+        - Disponibilità 2040, comune 2
+        - Data nascita fino al 1980
+        - Ricerca parziale
+     */
     @Test
     public void tryQuery3(){
         MFXDatePicker inizioPeriodo = lookup("#inizioPeriodo").query();
@@ -254,6 +260,12 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
         });
     }
 
+    /*
+    Query 4:
+        - Data nascita dal 1985
+        - Patente 5
+        - Ricerca totale
+     */
     @Test
     public void tryQuery4() {
         MFXCheckListView<Lingua> patentiLavoratore = lookup("#patentiLavoratore").query();
@@ -280,6 +292,13 @@ public class RicercaLavoratoreControllerTest extends ApplicationTest {
         });
     }
 
+    /*
+    Query 5:
+        - Comune di abitazione 1
+        - automunito
+        - Lingue 2 o 3
+        - Ricerca parziale
+     */
     @Test
     public void tryQuery5() {
         MFXCheckListView<Lingua> lingueLavoratore = lookup("#lingueLavoratore").query();

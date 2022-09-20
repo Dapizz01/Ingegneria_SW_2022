@@ -13,9 +13,9 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.univr.lavoratoristagionali.controller.MenuController">
    <children>
-      <MFXButton fx:id="esciButton" layoutX="40.0" layoutY="27.0" onAction="#exitEvent" prefHeight="49.0" prefWidth="80.0" text="Esci">
+      <MFXButton fx:id="esciButton" layoutX="40.0" layoutY="27.0" onAction="#exitEvent" prefHeight="49.0" prefWidth="85.0" text="Esci">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -50,7 +50,7 @@
             </ImageView>
             <MFXButton fx:id="inserisciLavoratoreButton" onAction="#goToInserisciLavoratore" prefHeight="80.0" prefWidth="191.0" text="Inserisci lavoratore" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -70,7 +70,7 @@
             </ImageView>
             <MFXButton fx:id="modificaLavoratoreButton" onAction="#goToMenuModificaLavoratore" prefHeight="80.0" prefWidth="191.0" text="Modifica lavoratore" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -90,7 +90,7 @@
             </ImageView>
             <MFXButton fx:id="effettuaRicercaButton" onAction="#goToEffettuaRicerca" prefHeight="80.0" prefWidth="191.0" text="Effettua ricerca" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
